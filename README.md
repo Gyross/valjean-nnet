@@ -12,6 +12,7 @@ To create a neural network:
 nnet new filename 4 4 4
 
 This will create a network with one hidden layer and 4 neurons in each layer.
+Filename does nothing as files haven't been implemented yet.
 
 To forward pass in the terminal interface:
 
