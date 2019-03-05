@@ -122,11 +122,12 @@ int main( int argc, char* argv[] ) {
         return 1;
     }
 
-    if ( strcmp(argv[2], "new") == 0 ) {
+    if ( strcmp(argv[1], "new") == 0 ) {
         int n = argc - 3;
         if ( n < 2 ) {
             printf("You must specify at least two layers.\n");
             printf(usage_message);
+            return 1;
         }
 
         int i;
@@ -140,11 +141,67 @@ int main( int argc, char* argv[] ) {
     } else if ( strcmp(argv[2], "load") == 0 ) {
         // TODO implement loading from file
         printf("Loading and saving to file not yet implemented\n");
+        return 1;
     } else {
         printf(usage_message);
+        return 1;
     }
 
-    // TODO Wait on user input
+    char *command_str = NULL;
+    char *command_old = NULL;
+    char *command_tok = NULL;
+    size_t command_len;
+    int loop_flag = 1;
+
+    while(loop_flag) {
+        printf("> ");
+
+        // get a line from console
+        getline(&command_str, &command_len, stdin);
+        command_old = command_str;
+        command_tok = strsep(&command_str, " ");
+
+        if ( strcmp(command_tok, "fp") == 0 ) {
+
+            // Forward Pass
+            float input_vec[MAX_LAYER_SIZE];
+            float output_vec[MAX_LAYER_SIZE];
+
+            int i;
+            for ( i = 0; i < layer_size[0]; i++ ) {
+                command_tok = strsep(&command_str, " ");
+                while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
+                    command_tok = strsep(&command_str, " ");
+                }
+
+                if ( command_tok == NULL ) {
+                    printf("Too few inputs\n");
+                }
+
+                sscanf(command_tok, "%f", input_vec+i);
+            }
+
+            forward_pass(input_vec, output_vec);
+            for ( i = 0; i < layer_size[num_layers-1]; i++ ) {
+                printf("%f ", output_vec[i]);
+            }
+            printf("\n");
+
+        } 
+        else if ( strcmp(command_tok, "exit") == 0 ||
+                  strcmp(command_tok, "quit") == 0 ) {
+            loop_flag = 0;
+        }
+        else {
+            printf("Invalid command\n");
+            printf("Forward Pass:\n");
+            printf(" fp <float input>...\n");
+            printf("Quit nnet:\n");
+            printf(" quit\n");
+        }
+
+        free(command_old);
+    }
 
     nnet_free();
     return 0;
