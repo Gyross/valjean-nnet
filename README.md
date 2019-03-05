@@ -15,6 +15,6 @@ This will create a network with one hidden layer and 4 neurons in each layer.
 
 To forward pass in the terminal interface:
 
-> fp 2.0 1.0 -2.0 1.5
+\> fp 2.0 1.0 -2.0 1.5
 
 This will pass the listed values into the input layer of the network.
