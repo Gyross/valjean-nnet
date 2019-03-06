@@ -19,30 +19,24 @@ int layer_size[MAX_NUM_LAYERS];
 float* weight[MAX_NUM_LAYERS - 1];
 float* bias[MAX_NUM_LAYERS - 1];
 
-void forward_pass(float* input_layer, float* output_layer) {
-    float array1[MAX_LAYER_SIZE];
-    float array2[MAX_LAYER_SIZE];
+// Activations for a forward pass have to be stored so we can
+// do a back propagation
+float* activation[MAX_NUM_LAYERS];
 
-    float* prev_layer = array1;
-    float* next_layer = array2;
+void forward_pass(float* input_layer, float* output_layer) {
 
     int m;
 
-    memcpy(prev_layer, input_layer, sizeof(float) * layer_size[0]);
+    memcpy(activation[0], input_layer, sizeof(float) * layer_size[0]);
 
     // There are num_layers-1 forward pass steps
     for ( int m = 0; m < num_layers - 1; m++ ) {
-        matrix_multiply(weight[m], prev_layer, next_layer, layer_size[m], layer_size[m+1]);
-        vector_add_inplace(next_layer, bias[m], layer_size[m+1]);
-        vector_relu(next_layer, layer_size[m+1]);
-
-        // switch layers
-        float* temp = prev_layer;
-        prev_layer = next_layer;
-        next_layer = temp;
+        matrix_multiply(weight[m], activation[m], activation[m+1], layer_size[m], layer_size[m+1]);
+        vector_add_inplace(activation[m+1], bias[m], layer_size[m+1]);
+        vector_relu(activation[m+1], layer_size[m+1]);
     }
 
-    memcpy(output_layer, prev_layer, sizeof(float) * layer_size[num_layers-1]);
+    memcpy(output_layer, activation[num_layers-1], sizeof(float) * layer_size[num_layers-1]);
     
 }
 
@@ -55,15 +49,27 @@ int nnet_allocate() {
     for ( i = 0; i < MAX_NUM_LAYERS - 1; i++ ) {
         weight[i] = NULL;
         bias[i] = NULL;
+        activation[i] = NULL;
     }
 
+    activation[num_layers - 1] = NULL;
+
     for ( i = 0; i < num_layers - 1; i++ ) {
-        weight[i] = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
-        bias[i]   = malloc(layer_size[i+1] * sizeof(float));
-        if ( weight[i] == NULL || bias[i] == NULL ) {
+        weight[i]     = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
+        bias[i]       = malloc(layer_size[i+1] * sizeof(float));
+        activation[i] = malloc(layer_size[i] * sizeof(float));
+        if ( weight[i] == NULL || bias[i] == NULL || activation[i] == NULL ) {
             fprintf(stderr, "NOT ENOUGH MEMORY!\n");
             return 1;
         }
+    }
+
+    // Activation stores for every layer, so we need an extra one
+    activation[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
+
+    if ( activation[num_layers - 1] == NULL ) {
+        fprintf(stderr, "NOT ENOUGH MEMORY!\n");
+        return 1;
     }
 
     return 0;
@@ -80,6 +86,15 @@ void nnet_free() {
             free(bias[i]);
             bias[i] = NULL;
         }
+        if ( activation[i] != NULL ) {
+            free(activation[i]);
+            activation[i] = NULL;
+        }
+    }
+
+    if ( activation[num_layers - 1] != NULL ) {
+        free(activation[num_layers - 1]);
+        activation[i] = NULL;
     }
 }
 
