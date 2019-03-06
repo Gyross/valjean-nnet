@@ -135,7 +135,7 @@ int nnet_read_file(char* filename) {
     }
 
     if ( fscanf( fp, "%d", &num_layers ) == EOF ) {
-        fprintf( stderr, "File incomplete!" );
+        fprintf( stderr, "File incomplete!\n" );
         return 1;
     }
 
@@ -147,7 +147,7 @@ int nnet_read_file(char* filename) {
     int i;
     for ( i = 0; i < num_layers; i++ ) {
         if ( fscanf( fp, "%d", (layer_size+i) ) == EOF ) {
-            fprintf( stderr, "File incomplete!" );
+            fprintf( stderr, "File incomplete!\n" );
             return 1;
         }
         
@@ -167,7 +167,7 @@ int nnet_read_file(char* filename) {
         // Scan weights
         for ( i = 0; i < layer_size[m]*layer_size[m+1]; i++ ) {
             if ( fscanf( fp, "%f", (weight[m]+i) ) == EOF ) {
-                fprintf( stderr, "File incomplete!" );
+                fprintf( stderr, "File incomplete!\n" );
                 nnet_free();
                 return 1;
             }
@@ -176,7 +176,7 @@ int nnet_read_file(char* filename) {
         // Scan biases
         for ( i = 0; i < layer_size[m+1]; i++ ) {
             if ( fscanf( fp, "%f", (bias[m]+i) ) == EOF ) {
-                fprintf( stderr, "File incomplete!" );
+                fprintf( stderr, "File incomplete!\n" );
                 nnet_free();
                 return 1;
             }
@@ -185,6 +185,43 @@ int nnet_read_file(char* filename) {
 
     fclose(fp);
 
+    return 0;
+}
+
+
+int nnet_write_file(char* filename) {
+    FILE* fp = fopen( filename, "w" );
+
+    if ( fp == NULL ) {
+        fprintf( stderr, "Could not open file!\n" );
+        return 1;
+    }
+
+    fprintf( fp, "%d\n\n", num_layers );
+
+    int m,i,j;
+
+    for ( i = 0; i < num_layers; i++ ) {
+        fprintf( fp, "%d ", layer_size[i] );
+    }
+
+    for ( m = 0; m < num_layers-1; m++ ) {
+        fprintf( fp, "\n\n");
+
+        for ( i = 0; i < layer_size[m+1]; i++ ) {
+            for ( j = 0; j < layer_size[m]; j++ ) {
+                fprintf( fp, "%f ", *(weight[m]+(i*layer_size[m+1])+j) );
+            }
+            fprintf( fp, "\n" );
+        }
+        fprintf( fp, "\n" );
+
+        for ( i = 0; i < layer_size[m+1]; i++ ) {
+            fprintf( fp, "%f ", *(bias[m]+i) );
+        }
+    }
+
+    fclose(fp);
     return 0;
 }
 
@@ -219,7 +256,13 @@ int main( int argc, char* argv[] ) {
             temp_layer_size[i-3] = atoi(argv[i]);
         }
         
-        nnet_new(n, temp_layer_size);
+        if ( nnet_new(n, temp_layer_size) ) {
+            return 1;
+        }
+
+        if ( nnet_write_file(argv[2]) ) {
+            return 1;
+        }
 
     } else if ( strcmp(argv[1], "load") == 0 ) {
         if ( nnet_read_file(argv[2]) ) {
