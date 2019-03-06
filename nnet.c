@@ -106,6 +106,89 @@ int nnet_new(int arg_num_layers, int* arg_layer_size) {
     return 0;
 }
 
+/*
+ * File format:
+ * num_layers
+ * layer_size
+ * weight[0] ( in row major order )
+ * bias[0]
+ * weight[1]
+ * bias[1]
+ * etc.
+ *
+ * It doesn't matter at this stage where line breaks are as long as the
+ * data is stored in this order. So you can write input files that
+ * have matricies stored like:
+ *
+ * 1.0 1.0
+ * 2.0 3.0
+ *
+ * for example.
+ */
+
+int nnet_read_file(char* filename) {
+    FILE* fp = fopen(filename, "r");
+
+    if ( fp == NULL ) {
+        fprintf( stderr, "Could not open file!\n");
+        return 1;
+    }
+
+    if ( fscanf( fp, "%d", &num_layers ) == EOF ) {
+        fprintf( stderr, "File incomplete!" );
+        return 1;
+    }
+
+    if ( num_layers < 2 ) {
+        fprintf( stderr, "File does not specify enough layers!\n" );
+        return 1;
+    }
+
+    int i;
+    for ( i = 0; i < num_layers; i++ ) {
+        if ( fscanf( fp, "%d", (layer_size+i) ) == EOF ) {
+            fprintf( stderr, "File incomplete!" );
+            return 1;
+        }
+        
+        if ( layer_size[i] < 1 ) {
+            fprintf( stderr, "Layers must all have at least one neuron!\n" );
+            return 1;
+        }
+    }
+
+    // Allocate for arrays
+    // Remember to free if there is an error after this point!
+    nnet_allocate();
+
+    int m;
+    for ( m = 0; m < num_layers - 1; m++ ) {
+
+        // Scan weights
+        for ( i = 0; i < layer_size[m]*layer_size[m+1]; i++ ) {
+            if ( fscanf( fp, "%f", (weight[m]+i) ) == EOF ) {
+                fprintf( stderr, "File incomplete!" );
+                nnet_free();
+                return 1;
+            }
+        }
+
+        // Scan biases
+        for ( i = 0; i < layer_size[m+1]; i++ ) {
+            if ( fscanf( fp, "%f", (bias[m]+i) ) == EOF ) {
+                fprintf( stderr, "File incomplete!" );
+                nnet_free();
+                return 1;
+            }
+        }
+    }
+
+    fclose(fp);
+
+    return 0;
+}
+
+
 
 /*
  * Usage:
@@ -138,10 +221,10 @@ int main( int argc, char* argv[] ) {
         
         nnet_new(n, temp_layer_size);
 
-    } else if ( strcmp(argv[2], "load") == 0 ) {
-        // TODO implement loading from file
-        printf("Loading and saving to file not yet implemented\n");
-        return 1;
+    } else if ( strcmp(argv[1], "load") == 0 ) {
+        if ( nnet_read_file(argv[2]) ) {
+            return 1;
+        }
     } else {
         printf(usage_message);
         return 1;
@@ -158,7 +241,11 @@ int main( int argc, char* argv[] ) {
 
         // get a line from console
         getline(&command_str, &command_len, stdin);
+        // store the original string pointer so we can free it later
         command_old = command_str;
+        // trim the '\n' at the end of the string
+        command_str = strsep(&command_str, "\n");
+        // Seperate by spaces
         command_tok = strsep(&command_str, " ");
 
         if ( strcmp(command_tok, "fp") == 0 ) {
