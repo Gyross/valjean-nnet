@@ -112,15 +112,17 @@ void nnet_free() {
             free(bias[i]);
             bias[i] = NULL;
         }
+    }
+
+    for ( i = 0; i < num_layers; i++ ) {
         if ( activation[i] != NULL ) {
             free(activation[i]);
             activation[i] = NULL;
         }
-    }
-
-    if ( activation[num_layers - 1] != NULL ) {
-        free(activation[num_layers - 1]);
-        activation[num_layers - 1] = NULL;
+        if ( cost_derivative[i] != NULL ) {
+            free(cost_derivative[i]);
+            cost_derivative[i] == NULL;
+        }
     }
 }
 
