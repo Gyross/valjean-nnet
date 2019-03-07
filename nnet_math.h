@@ -25,6 +25,11 @@ void vector_add_inplace(float* vec_a, float* vec_b, int vec_size);
 void vector_relu(float* vec, int vec_size);
 
 /*
+ * Computes the cost of a given output
+ */
+float cost_func(float* output_vec, float* expected_vec, int vec_size);
+
+/*
  * generates normally distributed random numbers
  */
 void normal_rand(float* values, int n);

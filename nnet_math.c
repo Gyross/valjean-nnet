@@ -74,6 +74,18 @@ void vector_relu(float* vec, int vec_size) {
 }
 
 
+float cost_func(float* output_vec, float* expected_vec, int vec_size) {
+    float cost = 0;
+    int i; 
+    for ( i = 0; i < vec_size; i++ ) {
+        float diff = expected_vec[i] - output_vec[i];
+        cost += 0.5*diff*diff;
+    }
+
+    return cost;
+}
+
+
 /*
  * Normal random numbers generator - Marsaglia algorithm.
  * Generates n floats ~ N(0,1)
