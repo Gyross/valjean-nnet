@@ -24,8 +24,8 @@ int layer_size[MAX_NUM_LAYERS];
  * the interface between layers, this way the indicies make
  * more sense.
  */
-float* weight[MAX_NUM_LAYERS - 1];
-float* bias[MAX_NUM_LAYERS - 1];
+float* weight[MAX_NUM_LAYERS];
+float* bias[MAX_NUM_LAYERS];
 
 // Activations for a forward pass have to be stored so we can
 // do a back propagation
@@ -146,15 +146,6 @@ void nnet_free() {
 int nnet_allocate() {
     // Set all to NULL first
     int i;
-    for ( i = 0; i < MAX_NUM_LAYERS - 1; i++ ) {
-        weight[i] = NULL;
-        bias[i] = NULL;
-        activation[i] = NULL;
-        cost_derivative[i] = NULL;
-    }
-
-    activation[MAX_NUM_LAYERS - 1] = NULL;
-    cost_derivative[MAX_NUM_LAYERS - 1] = NULL;
 
     for ( i = 0; i < num_layers - 1; i++ ) {
         weight[i]          = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
@@ -260,7 +251,7 @@ int nnet_read_file(char* filename) {
 
 
 int nnet_write_file(char* filename) {
-    FILE* fp = fopen( filename, "w" );
+    FILE* fp = fopen( filename, "wb" );
 
     if ( fp == NULL ) {
         fprintf( stderr, "Could not open file!\n" );
@@ -362,6 +353,7 @@ int nnet_op(FILE* fp, int op_type) {
 
 
 int main( int argc, char* argv[] ) {
+
     const char usage_message[] = 
         "Usage:\n \
          nnet new <filename> <layer size>...\n \
@@ -372,7 +364,21 @@ int main( int argc, char* argv[] ) {
 
     // fix the learning rate
     // TODO change this later
-    learning_rate = 0.01;
+    learning_rate = 0.001;
+
+
+    // Initialize globals
+    num_layers = 0;
+
+    int i;
+    for ( i = 0; i < MAX_NUM_LAYERS; i++ ) {
+        layer_size[i] = 0;
+        weight[i] = NULL;
+        bias[i] = NULL;
+        activation[i] = NULL;
+        cost_derivative[i] = NULL;
+    }
+
 
     if ( argc < 3 ) {
         printf(usage_message);
