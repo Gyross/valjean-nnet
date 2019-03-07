@@ -6,6 +6,11 @@
 #define MAX_LAYER_SIZE 1000
 #define MAX_NUM_LAYERS 100
 
+// This has to be larger than the maximum size of a training
+// example, else the program will not be able to train the
+// network.
+#define READ_BUF_SIZE 4096
+
 int num_layers;
 int layer_size[MAX_NUM_LAYERS];
 
@@ -192,55 +197,29 @@ int nnet_new(int arg_num_layers, int* arg_layer_size) {
     return 0;
 }
 
-/*
- * File format:
- * num_layers
- * layer_size
- * weight[0] ( in row major order )
- * bias[0]
- * weight[1]
- * bias[1]
- * etc.
- *
- * It doesn't matter at this stage where line breaks are as long as the
- * data is stored in this order. So you can write input files that
- * have matricies stored like:
- *
- * 1.0 1.0
- * 2.0 3.0
- *
- * for example.
- */
-
 int nnet_read_file(char* filename) {
-    FILE* fp = fopen(filename, "r");
+    int amt_read;
+    FILE* fp = fopen(filename, "rb");
 
     if ( fp == NULL ) {
         fprintf( stderr, "Could not open file!\n");
         return 1;
     }
 
-    if ( fscanf( fp, "%d", &num_layers ) == EOF ) {
-        fprintf( stderr, "File incomplete!\n" );
+    amt_read = fread( &num_layers, sizeof(int), 1, fp );
+
+    if ( num_layers < 2 ) { 
+        fprintf( stderr, "Not enough layers specified!\n" );
+        return 1;
+    } else if ( amt_read != 1 ) { 
+        fprintf( stderr, "File empty!\n" );
         return 1;
     }
 
-    if ( num_layers < 2 ) {
-        fprintf( stderr, "File does not specify enough layers!\n" );
-        return 1;
-    }
+    amt_read = fread( layer_size, sizeof(int), num_layers, fp );
 
-    int i;
-    for ( i = 0; i < num_layers; i++ ) {
-        if ( fscanf( fp, "%d", (layer_size+i) ) == EOF ) {
-            fprintf( stderr, "File incomplete!\n" );
-            return 1;
-        }
-        
-        if ( layer_size[i] < 1 ) {
-            fprintf( stderr, "Layers must all have at least one neuron!\n" );
-            return 1;
-        }
+    if ( amt_read != num_layers ) {
+        fprintf( stderr, "File corrupted!\n" );
     }
 
     // Allocate for arrays
@@ -250,22 +229,18 @@ int nnet_read_file(char* filename) {
     int m;
     for ( m = 0; m < num_layers - 1; m++ ) {
 
-        // Scan weights
-        for ( i = 0; i < layer_size[m]*layer_size[m+1]; i++ ) {
-            if ( fscanf( fp, "%f", (weight[m]+i) ) == EOF ) {
-                fprintf( stderr, "File incomplete!\n" );
-                nnet_free();
-                return 1;
-            }
+        amt_read = fread( weight[m], sizeof(float), layer_size[m]*layer_size[m+1], fp );
+        if ( amt_read != layer_size[m]*layer_size[m+1] ) {
+            fprintf( stderr, "File corrupted!\n" );
+            nnet_free();
+            return 1;
         }
 
-        // Scan biases
-        for ( i = 0; i < layer_size[m+1]; i++ ) {
-            if ( fscanf( fp, "%f", (bias[m]+i) ) == EOF ) {
-                fprintf( stderr, "File incomplete!\n" );
-                nnet_free();
-                return 1;
-            }
+        amt_read = fread( bias[m], sizeof(float), layer_size[m+1], fp );
+        if ( amt_read != layer_size[m+1] ) {
+            fprintf( stderr, "File corrupted!\n" );
+            nnet_free();
+            return 1;
         }
     }
 
@@ -283,32 +258,78 @@ int nnet_write_file(char* filename) {
         return 1;
     }
 
-    fprintf( fp, "%d\n\n", num_layers );
+    fwrite( &num_layers, sizeof(int), 1, fp );
+    fwrite( layer_size, sizeof(int), num_layers, fp);
 
-    int m,i,j;
-
-    for ( i = 0; i < num_layers; i++ ) {
-        fprintf( fp, "%d ", layer_size[i] );
-    }
-
+    int m;    
     for ( m = 0; m < num_layers-1; m++ ) {
-        fprintf( fp, "\n\n");
-
-        for ( i = 0; i < layer_size[m+1]; i++ ) {
-            for ( j = 0; j < layer_size[m]; j++ ) {
-                fprintf( fp, "%f ", *(weight[m]+(i*layer_size[m+1])+j) );
-            }
-            fprintf( fp, "\n" );
-        }
-        fprintf( fp, "\n" );
-
-        for ( i = 0; i < layer_size[m+1]; i++ ) {
-            fprintf( fp, "%f ", *(bias[m]+i) );
-        }
+        fwrite( weight[m], sizeof(float), layer_size[m]*layer_size[m+1], fp);
+        fwrite( bias[m], sizeof(float), layer_size[m+1], fp);
     }
 
     fclose(fp);
     return 0;
+}
+
+// If something goes wrong while reading the file, all the training up to that
+// point will still have taken place, provided the nnet is saved back to file.
+int nnet_train(FILE* fp) {
+    int n_inputs, n_outputs, amt_read, buf_offset;
+    float read_buf[READ_BUF_SIZE];
+    float output_vec[MAX_LAYER_SIZE];
+
+    // Read number of inputs and outputs expected by file and do some checking
+    amt_read = fread( &n_inputs, sizeof(int), 1, fp );
+
+    if ( amt_read != 1 ) {
+        fprintf( stderr, "File corrupted!\n" );
+        return 1;
+    }
+
+    amt_read = fread( &n_outputs, sizeof(int), 1, fp );
+
+    if ( amt_read != 1 ) {
+        fprintf( stderr, "File corrupted!\n" );
+        return 1;
+    }
+
+    // n_inputs and n_outpus have to be the same as the number of input and
+    // output layers in the network, otherwise the training data is
+    // incompatible with the network.
+    if ( n_inputs != layer_size[0] ) {
+        fprintf( stderr, "Incorrect number of inputs!\n" );
+        return 1;
+    }
+
+    if ( n_outputs != layer_size[num_layers-1] ) {
+        fprintf( stderr, "Incorrect number of outputs!\n" );
+        return 1;
+    }
+
+    if ( n_inputs + n_outputs > READ_BUF_SIZE ) {
+        fprintf( stderr, "Not enough buffer space to train this network!\n\
+                          Try increasing READ_BUF_SIZE in nnet.c\n");
+        return 1;
+    }
+
+
+    // Perform the training
+    int amt_to_read = READ_BUF_SIZE - (READ_BUF_SIZE % (n_inputs+n_outputs));
+    do {
+        buf_offset = 0;
+        amt_read = fread( read_buf, sizeof(float), amt_to_read, fp );
+        if ( amt_read % (n_inputs+n_outputs) != 0 ) {
+            fprintf( stderr, "Incorrect number of bytes!\n" );
+        } 
+
+        
+        while ( buf_offset < amt_read ) { 
+            forward_pass(read_buf + buf_offset, output_vec);
+            buf_offset += n_inputs;
+            backpropagate(read_buf + buf_offset);
+            buf_offset += n_outputs;
+        }
+    } while ( amt_read > 0 );
 }
 
 
@@ -318,6 +339,8 @@ int nnet_write_file(char* filename) {
  *  nnet new <filename> <layer size>...
  *  nnet load <filename>
  */
+
+/*
 
 int main( int argc, char* argv[] ) {
     const char usage_message[] = 
@@ -462,3 +485,5 @@ int main( int argc, char* argv[] ) {
     nnet_free();
     return 0;
 }
+
+*/
