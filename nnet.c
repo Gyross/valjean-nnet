@@ -444,6 +444,12 @@ int main( int argc, char* argv[] ) {
             printf("Invalid command\n");
             printf("Forward Pass:\n");
             printf(" fp <float input>...\n");
+            printf("Set Learning Rate:\n");
+            printf(" slr <float learning rate>\n");
+            printf("Backpropagate:\n");
+            printf(" bp <float expected input>...\n");
+            printf("Save File:\n");
+            printf(" save <filename>\n");
             printf("Quit nnet:\n");
             printf(" quit\n");
         }
