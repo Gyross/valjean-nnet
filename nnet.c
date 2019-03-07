@@ -65,21 +65,26 @@ void backpropagate(float* expected_output) {
 
     // Note on indicies
     //
-    // i will refer to the previous layer
-    // j will refer to the next layer
+    // i will refer to the layer "on the left"
+    // j will refer to the layer "on the right"
     
     // compute (dCost/dNeuron) for all neurons in the network
     // don't need to compute for the input layer since we never need the cost
     // derivative of the input
     for ( m = num_layers-2; m > 0; m-- ) {
         for ( j = 0; j < layer_size[m+1]; j++ ) {
-            for ( i = 0; i < layer_size[m]; i++ ) {
 
-                // reLU derivative
-                if ( activation[m+1][j] > 0 ) {
-                    cost_derivative[m][i] += 
-                        cost_derivative[m+1][j] * *(weight[m] + i + j*(layer_size[m+1]));
-                }
+            // reLU derivative
+            float relu_factor;
+            if ( activation[m+1][j] > 0.0 ) {
+                relu_factor = 1.0;
+            } else {
+                relu_factor = 0.01;
+            }
+
+            for ( i = 0; i < layer_size[m]; i++ ) {
+                cost_derivative[m][i] += cost_derivative[m+1][j] * 
+                    relu_factor * *(weight[m] + i + j*(layer_size[m+1]));
             }
         }
     }
@@ -88,21 +93,22 @@ void backpropagate(float* expected_output) {
     for ( m = 0; m < num_layers-1; m++ ) {
         for ( j = 0; j < layer_size[m+1]; j++ ) {
 
-            // the if statement encodes the derivative of
-            // the reLU function. If the activation is
-            // less than zero there is no training to do
-            // for this neuron
-            if ( activation[m+1][j] > 0 ) {
 
-                // train weights
-                for ( i = 0; i < layer_size[m]; i++ ) {
-                    *(weight[m] + i + j*(layer_size[m+1])) -= 
-                        learning_rate * activation[m][i] * cost_derivative[m+1][j];
-                }
-
-                // train bias
-                bias[m][j] -= learning_rate * cost_derivative[m+1][j];
+            float relu_factor;
+            if ( activation[m+1][j] > 0.0 ) {
+                relu_factor = 1.0;
+            } else {
+                relu_factor = 0.01;
             }
+
+            // train weights
+            for ( i = 0; i < layer_size[m]; i++ ) {
+                *(weight[m] + i + j*(layer_size[m+1])) -= relu_factor *
+                    learning_rate * activation[m][i] * cost_derivative[m+1][j];
+            }
+
+            // train bias
+            bias[m][j] -= learning_rate * relu_factor * cost_derivative[m+1][j];
         }
     }
     
@@ -426,6 +432,7 @@ int main( int argc, char* argv[] ) {
             }
         }
 
+        // Only save the nnet if we were training it
         if ( op_type == NNET_TRAIN ) {
             nnet_write_file(argv[2]);
         }

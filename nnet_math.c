@@ -68,7 +68,7 @@ void vector_relu(float* vec, int vec_size) {
     int i;
     for ( i = 0; i < vec_size; i++ ) {
         if ( vec[i] < 0.0 ) {
-            vec[i] = 0.0;
+            vec[i] = 0.01*vec[i];
         }
     }
 }
