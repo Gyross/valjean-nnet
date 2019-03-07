@@ -326,7 +326,10 @@ int nnet_op(FILE* fp, int op_type) {
         
         while ( buf_offset < amt_read ) { 
             forward_pass(read_buf + buf_offset, output_vec);
-            printf("%f -> %f should be %f\n", *(read_buf + buf_offset), output_vec[0], *(read_buf + buf_offset + 1));
+            printf("%f, %f -> %f, %f should be %f, %f\n", 
+                    *(read_buf+buf_offset), *(read_buf+buf_offset+1), 
+                    output_vec[0], output_vec[1], 
+                    *(read_buf+buf_offset+2), *(read_buf+buf_offset+3));
             buf_offset += n_inputs;
             if ( op_type == NNET_TRAIN ) {
                 backpropagate(read_buf + buf_offset);
