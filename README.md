@@ -23,11 +23,20 @@ nnet test nnetfile inputfile
 Tests the network against inputfile
 
 Training set files are binary files with the format:
-number of inputs (integer)
-number of outputs (integer)
-example1
-example2
-etc.
+- number of inputs (integer)
+- number of outputs (integer)
+- example1
+- example2
+- etc.
 
 where each example consists of the list of inputs (floats) followed by the
 list of expected outputs (floats).
+
+To generate the example training set:
+
+make generator
+
+./generator test_data
+
+then test_data will contain the testing data. Use a neural network
+with 2 inputs and 2 outputs to use this training set.
