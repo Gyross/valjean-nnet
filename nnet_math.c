@@ -88,16 +88,12 @@ float cost_func(float* output_vec, float* expected_vec, int vec_size) {
 
 
 /*
- * Normal random numbers generator - Marsaglia algorithm.
  * Generates n floats ~ N(0,1)
- *
- * Blatantly ripped & modified from rosettacode.org
  *
  */
 void normal_rand(float* values, int n)
 {
-    int i;
-    int m = n + n % 2;
+    const int nsum = 25;
 
     assert(values != NULL);
     assert(n != 0);
@@ -109,17 +105,19 @@ void normal_rand(float* values, int n)
     fread(&seed, sizeof(int), 1, urandom);
     fclose(urandom);
     srand(seed);
- 
-    for ( i = 0; i < m; i += 2 )
-    {
-        float x,y,rsq,f;
-        do {
-            x = 2.0 * rand() / (float)RAND_MAX - 1.0;
-            y = 2.0 * rand() / (float)RAND_MAX - 1.0;
-            rsq = x * x + y * y;
-        }while( rsq >= 1. || rsq == 0. );
-        f = sqrt( -2.0 * log(rsq) / rsq );
-        values[i]   = x * f;
-        values[i+1] = y * f;
+
+    int i;
+    for ( i = 0; i < n; i++ ) {
+	float x = 0;
+	int j;
+        for(j = 0; j < nsum; j++) {
+            x += (double)rand() / RAND_MAX;
+        }
+
+	x -= nsum / 2.0;
+	x /= sqrt(nsum / 12.0);
+
+        values[i] = x;
     }
+
 }
