@@ -23,6 +23,10 @@ float* bias[MAX_NUM_LAYERS - 1];
 // do a back propagation
 float* activation[MAX_NUM_LAYERS];
 
+float* cost_derivative[MAX_NUM_LAYERS];
+
+float learning_rate;
+
 void forward_pass(float* input_layer, float* output_layer) {
 
     int m;
@@ -40,40 +44,62 @@ void forward_pass(float* input_layer, float* output_layer) {
     
 }
 
-/*
- *  DONT CALL UNTIL num_layers AND layer_size HAVE BEEN SPECIFIED
- */
-int nnet_allocate() {
-    // Set all to NULL first
-    int i;
-    for ( i = 0; i < MAX_NUM_LAYERS - 1; i++ ) {
-        weight[i] = NULL;
-        bias[i] = NULL;
-        activation[i] = NULL;
+void backpropagate(float* expected_output) {
+    // we use the normal cost function: sum of 1/2 * (ex_out - out)^2
+    // NB: All derivatives are partial
+
+    // output layer derivatives (dCost/dOut)
+    int i, j, m;
+    for ( i = 0; i < layer_size[num_layers-1]; i++ ) {
+        cost_derivative[num_layers-1][i] = activation[num_layers-1][i] - expected_output[i];
     }
 
-    activation[num_layers - 1] = NULL;
 
-    for ( i = 0; i < num_layers - 1; i++ ) {
-        weight[i]     = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
-        bias[i]       = malloc(layer_size[i+1] * sizeof(float));
-        activation[i] = malloc(layer_size[i] * sizeof(float));
-        if ( weight[i] == NULL || bias[i] == NULL || activation[i] == NULL ) {
-            fprintf(stderr, "NOT ENOUGH MEMORY!\n");
-            return 1;
+    // Note on indicies
+    //
+    // i will refer to the previous layer
+    // j will refer to the next layer
+    
+    // compute (dCost/dNeuron) for all neurons in the network
+    // don't need to compute for the input layer since we never need the cost
+    // derivative of the input
+    for ( m = num_layers-2; m > 0; m-- ) {
+        for ( j = 0; j < layer_size[m+1]; j++ ) {
+            for ( i = 0; i < layer_size[m]; i++ ) {
+
+                // reLU derivative
+                if ( activation[m+1][j] > 0 ) {
+                    cost_derivative[m][i] += 
+                        cost_derivative[m+1][j] * *(weight[m] + i + j*(layer_size[m+1]));
+                }
+            }
         }
     }
 
-    // Activation stores for every layer, so we need an extra one
-    activation[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
+    // Update weights and biases
+    for ( m = 0; m < num_layers-1; m++ ) {
+        for ( j = 0; j < layer_size[m+1]; j++ ) {
 
-    if ( activation[num_layers - 1] == NULL ) {
-        fprintf(stderr, "NOT ENOUGH MEMORY!\n");
-        return 1;
+            // the if statement encodes the derivative of
+            // the reLU function. If the activation is
+            // less than zero there is no training to do
+            // for this neuron
+            if ( activation[m+1][j] > 0 ) {
+
+                // train weights
+                for ( i = 0; i < layer_size[m]; i++ ) {
+                    *(weight[m] + i + j*(layer_size[m+1])) -= 
+                        learning_rate * activation[m][i] * cost_derivative[m+1][j];
+                }
+
+                // train bias
+                bias[m][j] -= learning_rate * cost_derivative[m+1][j];
+            }
+        }
     }
-
-    return 0;
+    
 }
+
 
 void nnet_free() {
     int i;
@@ -94,9 +120,52 @@ void nnet_free() {
 
     if ( activation[num_layers - 1] != NULL ) {
         free(activation[num_layers - 1]);
-        activation[i] = NULL;
+        activation[num_layers - 1] = NULL;
     }
 }
+
+/*
+ *  DONT CALL UNTIL num_layers AND layer_size HAVE BEEN SPECIFIED
+ */
+int nnet_allocate() {
+    // Set all to NULL first
+    int i;
+    for ( i = 0; i < MAX_NUM_LAYERS - 1; i++ ) {
+        weight[i] = NULL;
+        bias[i] = NULL;
+        activation[i] = NULL;
+        cost_derivative[i] = NULL;
+    }
+
+    activation[MAX_NUM_LAYERS - 1] = NULL;
+    cost_derivative[MAX_NUM_LAYERS - 1] = NULL;
+
+    for ( i = 0; i < num_layers - 1; i++ ) {
+        weight[i]          = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
+        bias[i]            = malloc(layer_size[i+1] * sizeof(float));
+        activation[i]      = malloc(layer_size[i] * sizeof(float));
+        cost_derivative[i] = malloc(layer_size[i] * sizeof(float));
+        if ( weight[i] == NULL || bias[i] == NULL || 
+             activation[i] == NULL || cost_derivative[i] == NULL ) {
+            fprintf(stderr, "NOT ENOUGH MEMORY!\n");
+            nnet_free();
+            return 1;
+        }
+    }
+
+    // Activation stores for every layer, so we need an extra one
+    activation[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
+    cost_derivative[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
+
+    if ( activation[num_layers - 1] == NULL || cost_derivative[num_layers - 1] == NULL ) {
+        fprintf(stderr, "NOT ENOUGH MEMORY!\n");
+        nnet_free();
+        return 1;
+    }
+
+    return 0;
+}
+
 
 int nnet_new(int arg_num_layers, int* arg_layer_size) {
     // Set the global num_layers and layer_size variables
@@ -333,6 +402,40 @@ int main( int argc, char* argv[] ) {
             printf("\n");
 
         } 
+        else if ( strcmp(command_tok, "slr" ) == 0 ) {
+            command_tok = strsep(&command_str, " " );
+            while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
+                command_tok = strsep(&command_str, " ");
+            }
+
+            if ( command_tok == NULL ) {
+                printf("Too few inputs\n");
+            }
+
+            sscanf(command_tok, "%f", &learning_rate);
+        }
+        else if ( strcmp(command_tok, "bp" ) == 0 ) {
+            float expected_vec[MAX_LAYER_SIZE];
+
+            int i;
+            for ( i = 0; i < layer_size[0]; i++ ) {
+                command_tok = strsep(&command_str, " ");
+                while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
+                    command_tok = strsep(&command_str, " ");
+                }
+
+                if ( command_tok == NULL ) {
+                    printf("Too few inputs\n");
+                }
+
+                sscanf(command_tok, "%f", expected_vec+i);
+            }
+
+            backpropagate(expected_vec);
+        }
+        else if ( strcmp(command_tok, "save") == 0 ) {
+            nnet_write_file(command_str);
+        }
         else if ( strcmp(command_tok, "exit") == 0 ||
                   strcmp(command_tok, "quit") == 0 ) {
             loop_flag = 0;
