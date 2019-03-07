@@ -1,5 +1,6 @@
 #include "nnet_math.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 #include <assert.h>
 
@@ -100,6 +101,14 @@ void normal_rand(float* values, int n)
 
     assert(values != NULL);
     assert(n != 0);
+
+
+    // Get a new random seed (probably won't be able to do this on zedboard)
+    unsigned int seed;
+    FILE* urandom = fopen("/dev/urandom", "r");
+    fread(&seed, sizeof(int), 1, urandom);
+    fclose(urandom);
+    srand(seed);
  
     for ( i = 0; i < m; i += 2 )
     {
