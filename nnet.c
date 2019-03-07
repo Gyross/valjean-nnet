@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define NNET_TRAIN 1
+#define NNET_TEST  0 
+
 #define MAX_LAYER_SIZE 1000
 #define MAX_NUM_LAYERS 100
 
@@ -271,12 +274,11 @@ int nnet_write_file(char* filename) {
     return 0;
 }
 
-// If something goes wrong while reading the file, all the training up to that
-// point will still have taken place, provided the nnet is saved back to file.
-int nnet_train(FILE* fp) {
+int nnet_op(FILE* fp, int op_type) {
     int n_inputs, n_outputs, amt_read, buf_offset;
     float read_buf[READ_BUF_SIZE];
     float output_vec[MAX_LAYER_SIZE];
+    float total_cost;
 
     // Read number of inputs and outputs expected by file and do some checking
     amt_read = fread( &n_inputs, sizeof(int), 1, fp );
@@ -294,7 +296,7 @@ int nnet_train(FILE* fp) {
     }
 
     // n_inputs and n_outpus have to be the same as the number of input and
-    // output layers in the network, otherwise the training data is
+    // output layers in the network, otherwise the data is
     // incompatible with the network.
     if ( n_inputs != layer_size[0] ) {
         fprintf( stderr, "Incorrect number of inputs!\n" );
@@ -307,7 +309,7 @@ int nnet_train(FILE* fp) {
     }
 
     if ( n_inputs + n_outputs > READ_BUF_SIZE ) {
-        fprintf( stderr, "Not enough buffer space to train this network!\n\
+        fprintf( stderr, "Not enough buffer space allocated!\n\
                           Try increasing READ_BUF_SIZE in nnet.c\n");
         return 1;
     }
@@ -321,15 +323,24 @@ int nnet_train(FILE* fp) {
         if ( amt_read % (n_inputs+n_outputs) != 0 ) {
             fprintf( stderr, "Incorrect number of bytes!\n" );
         } 
-
         
         while ( buf_offset < amt_read ) { 
             forward_pass(read_buf + buf_offset, output_vec);
+            printf("%f -> %f should be %f\n", *(read_buf + buf_offset), output_vec[0], *(read_buf + buf_offset + 1));
             buf_offset += n_inputs;
-            backpropagate(read_buf + buf_offset);
+            if ( op_type == NNET_TRAIN ) {
+                backpropagate(read_buf + buf_offset);
+            } else if ( op_type == NNET_TEST ) {                
+                /*
+                float cost = cost_func(output_vec, read_buf + buf_offset, n_outputs);
+                printf("%f\n", cost);
+                */
+            }
             buf_offset += n_outputs;
         }
     } while ( amt_read > 0 );
+
+    return 0;
 }
 
 
@@ -340,11 +351,19 @@ int nnet_train(FILE* fp) {
  *  nnet load <filename>
  */
 
-/*
 
 int main( int argc, char* argv[] ) {
     const char usage_message[] = 
-        "Usage:\n nnet new <filename> <layer size>...\n nnet load <filename>\n";
+        "Usage:\n \
+         nnet new <filename> <layer size>...\n \
+         nnet train <nnet filename> <training set filename>...\n \
+         nnet test <nnet filename> <testing set filename>\n \
+         nnet run <nnet filename> <run set filename>\n";
+
+
+    // fix the learning rate
+    // TODO change this later
+    learning_rate = 0.01;
 
     if ( argc < 3 ) {
         printf(usage_message);
@@ -373,117 +392,49 @@ int main( int argc, char* argv[] ) {
             return 1;
         }
 
-    } else if ( strcmp(argv[1], "load") == 0 ) {
+    } else if ( strcmp(argv[1], "train") == 0 ||
+                strcmp(argv[1], "test") == 0 ) {
+        if ( argc < 4 ) {
+            fprintf(stderr, "Not enough arguments!\n");
+            fprintf(stderr, usage_message);
+        }
         if ( nnet_read_file(argv[2]) ) {
             return 1;
         }
+
+        int op_type;
+        if ( strcmp(argv[1], "train" )  == 0 ) {
+            op_type = NNET_TRAIN;
+        } else {
+            op_type = NNET_TEST;
+        }
+
+        int i;
+        FILE* fp = NULL;
+        for ( i = 3; i < argc; i++ ) {
+            FILE* fp = fopen(argv[i], "rb");
+            if ( fp == NULL ) {
+                fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[i]);
+                nnet_free();
+                return 1;
+            } else {
+                nnet_op(fp, op_type);
+                printf("%s on \"%s\" completed.\n", op_type?"Training":"Testing", argv[i]);
+            }
+        }
+
+        if ( op_type == NNET_TRAIN ) {
+            nnet_write_file(argv[2]);
+        }
+
+        printf("All done.\n");
+
     } else {
         printf(usage_message);
         return 1;
     }
 
-    char *command_str = NULL;
-    char *command_old = NULL;
-    char *command_tok = NULL;
-    size_t command_len;
-    int loop_flag = 1;
-
-    while(loop_flag) {
-        printf("> ");
-
-        // get a line from console
-        getline(&command_str, &command_len, stdin);
-        // store the original string pointer so we can free it later
-        command_old = command_str;
-        // trim the '\n' at the end of the string
-        command_str = strsep(&command_str, "\n");
-        // Seperate by spaces
-        command_tok = strsep(&command_str, " ");
-
-        if ( strcmp(command_tok, "fp") == 0 ) {
-
-            // Forward Pass
-            float input_vec[MAX_LAYER_SIZE];
-            float output_vec[MAX_LAYER_SIZE];
-
-            int i;
-            for ( i = 0; i < layer_size[0]; i++ ) {
-                command_tok = strsep(&command_str, " ");
-                while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
-                    command_tok = strsep(&command_str, " ");
-                }
-
-                if ( command_tok == NULL ) {
-                    printf("Too few inputs\n");
-                }
-
-                sscanf(command_tok, "%f", input_vec+i);
-            }
-
-            forward_pass(input_vec, output_vec);
-            for ( i = 0; i < layer_size[num_layers-1]; i++ ) {
-                printf("%f ", output_vec[i]);
-            }
-            printf("\n");
-
-        } 
-        else if ( strcmp(command_tok, "slr" ) == 0 ) {
-            command_tok = strsep(&command_str, " " );
-            while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
-                command_tok = strsep(&command_str, " ");
-            }
-
-            if ( command_tok == NULL ) {
-                printf("Too few inputs\n");
-            }
-
-            sscanf(command_tok, "%f", &learning_rate);
-        }
-        else if ( strcmp(command_tok, "bp" ) == 0 ) {
-            float expected_vec[MAX_LAYER_SIZE];
-
-            int i;
-            for ( i = 0; i < layer_size[0]; i++ ) {
-                command_tok = strsep(&command_str, " ");
-                while ( command_tok != NULL && strcmp(command_tok, "") == 0 ) {
-                    command_tok = strsep(&command_str, " ");
-                }
-
-                if ( command_tok == NULL ) {
-                    printf("Too few inputs\n");
-                }
-
-                sscanf(command_tok, "%f", expected_vec+i);
-            }
-
-            backpropagate(expected_vec);
-        }
-        else if ( strcmp(command_tok, "save") == 0 ) {
-            nnet_write_file(command_str);
-        }
-        else if ( strcmp(command_tok, "exit") == 0 ||
-                  strcmp(command_tok, "quit") == 0 ) {
-            loop_flag = 0;
-        }
-        else {
-            printf("Invalid command\n");
-            printf("Forward Pass:\n");
-            printf(" fp <float input>...\n");
-            printf("Set Learning Rate:\n");
-            printf(" slr <float learning rate>\n");
-            printf("Backpropagate:\n");
-            printf(" bp <float expected input>...\n");
-            printf("Save File:\n");
-            printf(" save <filename>\n");
-            printf("Quit nnet:\n");
-            printf(" quit\n");
-        }
-
-        free(command_old);
-    }
 
     nnet_free();
     return 0;
 }
-
-*/
