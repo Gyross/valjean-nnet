@@ -11,11 +11,23 @@ To create a neural network:
 
 nnet new filename 4 4 4
 
-This will create a network with one hidden layer and 4 neurons in each layer.
-Filename does nothing as files haven't been implemented yet.
+This will create a network with one hidden layer and 4 neurons in each layer
+and store it in the file.
 
-To forward pass in the terminal interface:
+nnet train nnetfile inputfile
 
-\> fp 2.0 1.0 -2.0 1.5
+Trains the network against the data in inputfile
 
-This will pass the listed values into the input layer of the network.
+nnet test nnetfile inputfile
+
+Tests the network against inputfile
+
+Training set files are binary files with the format:
+number of inputs (integer)
+number of outputs (integer)
+example1
+example2
+etc.
+
+where each example consists of the list of inputs (floats) followed by the
+list of expected outputs (floats).
