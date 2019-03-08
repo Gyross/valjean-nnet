@@ -10,7 +10,7 @@
  * Main will handle file IO etc.
  */
 
-#define NUM_CASES 1000
+#define NUM_CASES 100000
 
 #define NUM_INPUTS 2
 #define NUM_OUTPUTS 2
@@ -28,23 +28,30 @@ void map(float* x, float* y) {
 // -------------------------------------------
 
 int main(int argc, char* argv[]) {
+    float input_vec[NUM_INPUTS];
+    float output_vec[NUM_OUTPUTS];
     float write_buf[NUM_CASES*4];
+
     FILE* fp = fopen(argv[1], "wb");
 
     if ( fp != NULL ) {
         int n_inputs  = NUM_INPUTS;
         int n_outputs = NUM_OUTPUTS;
+        float range = INPUT_MAX - INPUT_MIN;
 
         fwrite( &n_inputs, sizeof(int), 1, fp );
         fwrite( &n_outputs, sizeof(int), 1, fp );
 
-        float input_vec[NUM_INPUTS];
-        float output_vec[NUM_OUTPUTS];
-        float range = INPUT_MAX - INPUT_MIN;
+        // Generate new random seed
+        unsigned int seed;
+        FILE* urandom = fopen("/dev/urandom", "r");
+        fread(&seed, sizeof(int), 1, urandom);
+        fclose(urandom);
+        srand(seed);
 
         for ( int i = 0; i < NUM_CASES; i++ ) {
-            for ( int j = 0; i < NUM_INPUTS; i++ ) {
-                input_vec[i] = ((float)rand()/(float)(RAND_MAX))*range + INPUT_MIN;
+            for ( int j = 0; j < NUM_INPUTS; j++ ) {
+                input_vec[j] = ((float)rand()/(float)(RAND_MAX))*range + INPUT_MIN;
             }
 
             map(input_vec, output_vec);
