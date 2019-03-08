@@ -365,8 +365,7 @@ int main( int argc, char* argv[] ) {
         "Usage:\n \
          nnet new <filename> <layer size>...\n \
          nnet train <nnet filename> <training set filename>...\n \
-         nnet test <nnet filename> <testing set filename>\n \
-         nnet run <nnet filename> <run set filename>\n";
+         nnet test <nnet filename> <testing set filename>\n";
 
 
     // fix the learning rate
