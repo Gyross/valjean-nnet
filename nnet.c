@@ -56,8 +56,15 @@ void backpropagate(float* expected_output) {
     // we use the normal cost function: sum of 1/2 * (ex_out - out)^2
     // NB: All derivatives are partial
 
-    // output layer derivatives (dCost/dOut)
+
     int i, j, m;
+
+    // first we need to zero all the cost derivatives
+    for ( i = 0; i < num_layers; i++ ) {
+        memset(cost_derivative[i], 0, layer_size[i]*sizeof(float));
+    }
+
+    // output layer derivatives (dCost/dOut)
     for ( i = 0; i < layer_size[num_layers-1]; i++ ) {
         cost_derivative[num_layers-1][i] = activation[num_layers-1][i] - expected_output[i];
     }
@@ -119,12 +126,10 @@ void nnet_free() {
     int i;
     for ( i = 0; i < num_layers - 1; i++ ) {
         if ( weight[i] != NULL ) {
-            fprintf(stderr, "Freeing weight %p\n", weight[i]);
             free(weight[i]);
             weight[i] = NULL;
         }
         if ( bias[i] != NULL ) {
-            fprintf(stderr, "Freeing bias %p\n", bias[i]);
             free(bias[i]);
             bias[i] = NULL;
         }
@@ -132,12 +137,10 @@ void nnet_free() {
 
     for ( i = 0; i < num_layers; i++ ) {
         if ( activation[i] != NULL ) {
-            fprintf(stderr, "Freeing activation %p\n", activation[i]);
             free(activation[i]);
             activation[i] = NULL;
         }
         if ( cost_derivative[i] != NULL ) {
-            fprintf(stderr, "Freeing cd %p\n", cost_derivative[i]);
             free(cost_derivative[i]);
             cost_derivative[i] = NULL;
         }
@@ -148,30 +151,26 @@ void nnet_free() {
  *  DONT CALL UNTIL num_layers AND layer_size HAVE BEEN SPECIFIED
  */
 int nnet_allocate() {
-    // Set all to NULL first
     int i;
 
     for ( i = 0; i < num_layers - 1; i++ ) {
-        weight[i]          = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
-        bias[i]            = malloc(layer_size[i+1] * sizeof(float));
-        activation[i]      = malloc(layer_size[i] * sizeof(float));
-        cost_derivative[i] = malloc(layer_size[i] * sizeof(float));
-        if ( weight[i] == NULL || bias[i] == NULL || 
-             activation[i] == NULL || cost_derivative[i] == NULL ) {
+        weight[i] = malloc(layer_size[i] * layer_size[i+1] * sizeof(float));
+        bias[i]   = malloc(layer_size[i+1] * sizeof(float));
+        if ( weight[i] == NULL || bias[i] == NULL ) {
             fprintf(stderr, "NOT ENOUGH MEMORY!\n");
             nnet_free();
             return 1;
         }
     }
 
-    // Activation stores for every layer, so we need an extra one
-    activation[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
-    cost_derivative[num_layers - 1] = malloc(layer_size[num_layers - 1] * sizeof(float));
-
-    if ( activation[num_layers - 1] == NULL || cost_derivative[num_layers - 1] == NULL ) {
-        fprintf(stderr, "NOT ENOUGH MEMORY!\n");
-        nnet_free();
-        return 1;
+    for ( i = 0; i < num_layers; i++ ) {
+        activation[i]      = malloc(layer_size[i] * sizeof(float));
+        cost_derivative[i] = malloc(layer_size[i] * sizeof(float));
+        if ( activation[i] == NULL || cost_derivative[i] == NULL ) {
+            fprintf(stderr, "NOT ENOUGH MEMORY!\n");
+            nnet_free();
+            return 1;
+        }
     }
 
     return 0;
@@ -279,7 +278,13 @@ int nnet_op(FILE* fp, int op_type) {
     int n_inputs, n_outputs, amt_read, buf_offset;
     float read_buf[READ_BUF_SIZE];
     float output_vec[MAX_LAYER_SIZE];
-    // float total_cost;
+
+    float total_cost = 0.0;
+    int n_cases = 0;
+    
+    // Initialize read_buf and output_vec
+    memset( read_buf, 0, READ_BUF_SIZE*sizeof(float) );
+    memset( output_vec, 0, MAX_LAYER_SIZE*sizeof(float) );
 
     // Read number of inputs and outputs expected by file and do some checking
     amt_read = fread( &n_inputs, sizeof(int), 1, fp );
@@ -327,24 +332,20 @@ int nnet_op(FILE* fp, int op_type) {
         
         while ( buf_offset < amt_read ) { 
             forward_pass(read_buf + buf_offset, output_vec);
-            /*
-            printf("%f, %f -> %f, %f should be %f, %f\n", 
-                    *(read_buf+buf_offset), *(read_buf+buf_offset+1), 
-                    output_vec[0], output_vec[1], 
-                    *(read_buf+buf_offset+2), *(read_buf+buf_offset+3));
-            */
             buf_offset += n_inputs;
             if ( op_type == NNET_TRAIN ) {
                 backpropagate(read_buf + buf_offset);
             } else if ( op_type == NNET_TEST ) {                
-                /*
-                float cost = cost_func(output_vec, read_buf + buf_offset, n_outputs);
-                printf("%f\n", cost);
-                */
+                total_cost += cost_func(output_vec, read_buf + buf_offset, n_outputs);
             }
             buf_offset += n_outputs;
+            n_cases++;
         }
     } while ( amt_read > 0 );
+
+    if ( op_type == NNET_TEST ) {
+        printf("Avg cost: %f\n", total_cost/((float)n_cases) );
+    }
 
     return 0;
 }
@@ -374,8 +375,6 @@ int main( int argc, char* argv[] ) {
 
 
     // Initialize globals
-    num_layers = 0;
-
     int i;
     for ( i = 0; i < MAX_NUM_LAYERS; i++ ) {
         layer_size[i] = 0;
@@ -384,6 +383,8 @@ int main( int argc, char* argv[] ) {
         activation[i] = NULL;
         cost_derivative[i] = NULL;
     }
+    num_layers = 0;
+
 
 
     if ( argc < 3 ) {

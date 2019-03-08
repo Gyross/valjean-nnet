@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define NUM_CASES 2
+#define NUM_CASES 1000
 #define NUM_INPUTS 2
 #define NUM_OUTPUTS 2
 
