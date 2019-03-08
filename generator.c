@@ -2,12 +2,12 @@
 #include <stdio.h>
 
 /*
- * Edit the function f()
+ * Edit the function map()
  * and the NUM_* defines to change what
  * function to train the neural network
  * on.
  *
- * Main function will handle file IO etc.
+ * Main will handle file IO etc.
  */
 
 #define NUM_CASES 1000
