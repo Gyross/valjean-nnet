@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define NUM_CASES 100000
+#define NUM_CASES 2
 #define NUM_INPUTS 2
 #define NUM_OUTPUTS 2
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
             write_buf[4*i + 3] = y2;
         }
 
-        fwrite(write_buf, sizeof(float), NUM_CASES*2, fp);
+        fwrite(write_buf, sizeof(float), NUM_CASES*4, fp);
     }
 
     fclose(fp);

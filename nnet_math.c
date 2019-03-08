@@ -28,11 +28,8 @@ void matrix_multiply(float* matrix, float* in_vec, float* out_vec,
 
         for ( j = 0; j < in_size; j++ ) {
 
-            accumulator += (*matrix) * in_vec[j];
+            accumulator += (*(matrix+j+i*in_size)) * in_vec[j];
 
-            // Since C matricies are stored in row major order
-            // this works
-            matrix++; 
         }
 
         out_vec[i] = accumulator;

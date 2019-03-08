@@ -42,7 +42,7 @@ void forward_pass(float* input_layer, float* output_layer) {
     memcpy(activation[0], input_layer, sizeof(float) * layer_size[0]);
 
     // There are num_layers-1 forward pass steps
-    for ( int m = 0; m < num_layers - 1; m++ ) {
+    for ( m = 0; m < num_layers - 1; m++ ) {
         matrix_multiply(weight[m], activation[m], activation[m+1], layer_size[m], layer_size[m+1]);
         vector_add_inplace(activation[m+1], bias[m], layer_size[m+1]);
         vector_relu(activation[m+1], layer_size[m+1]);
@@ -84,7 +84,7 @@ void backpropagate(float* expected_output) {
 
             for ( i = 0; i < layer_size[m]; i++ ) {
                 cost_derivative[m][i] += cost_derivative[m+1][j] * 
-                    relu_factor * *(weight[m] + i + j*(layer_size[m+1]));
+                    relu_factor * *(weight[m] + i + j*(layer_size[m]));
             }
         }
     }
@@ -103,7 +103,7 @@ void backpropagate(float* expected_output) {
 
             // train weights
             for ( i = 0; i < layer_size[m]; i++ ) {
-                *(weight[m] + i + j*(layer_size[m+1])) -= relu_factor *
+                *(weight[m] + i + j*(layer_size[m])) -= relu_factor *
                     learning_rate * activation[m][i] * cost_derivative[m+1][j];
             }
 
@@ -119,10 +119,12 @@ void nnet_free() {
     int i;
     for ( i = 0; i < num_layers - 1; i++ ) {
         if ( weight[i] != NULL ) {
+            fprintf(stderr, "Freeing weight %p\n", weight[i]);
             free(weight[i]);
             weight[i] = NULL;
         }
         if ( bias[i] != NULL ) {
+            fprintf(stderr, "Freeing bias %p\n", bias[i]);
             free(bias[i]);
             bias[i] = NULL;
         }
@@ -130,12 +132,14 @@ void nnet_free() {
 
     for ( i = 0; i < num_layers; i++ ) {
         if ( activation[i] != NULL ) {
+            fprintf(stderr, "Freeing activation %p\n", activation[i]);
             free(activation[i]);
             activation[i] = NULL;
         }
         if ( cost_derivative[i] != NULL ) {
+            fprintf(stderr, "Freeing cd %p\n", cost_derivative[i]);
             free(cost_derivative[i]);
-            cost_derivative[i] == NULL;
+            cost_derivative[i] = NULL;
         }
     }
 }
@@ -275,7 +279,7 @@ int nnet_op(FILE* fp, int op_type) {
     int n_inputs, n_outputs, amt_read, buf_offset;
     float read_buf[READ_BUF_SIZE];
     float output_vec[MAX_LAYER_SIZE];
-    float total_cost;
+    // float total_cost;
 
     // Read number of inputs and outputs expected by file and do some checking
     amt_read = fread( &n_inputs, sizeof(int), 1, fp );
@@ -323,10 +327,12 @@ int nnet_op(FILE* fp, int op_type) {
         
         while ( buf_offset < amt_read ) { 
             forward_pass(read_buf + buf_offset, output_vec);
+            /*
             printf("%f, %f -> %f, %f should be %f, %f\n", 
                     *(read_buf+buf_offset), *(read_buf+buf_offset+1), 
                     output_vec[0], output_vec[1], 
                     *(read_buf+buf_offset+2), *(read_buf+buf_offset+3));
+            */
             buf_offset += n_inputs;
             if ( op_type == NNET_TRAIN ) {
                 backpropagate(read_buf + buf_offset);
@@ -425,17 +431,17 @@ int main( int argc, char* argv[] ) {
         }
 
         int i;
-        FILE* fp = NULL;
         for ( i = 3; i < argc; i++ ) {
             FILE* fp = fopen(argv[i], "rb");
             if ( fp == NULL ) {
                 fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[i]);
                 nnet_free();
                 return 1;
-            } else {
-                nnet_op(fp, op_type);
-                printf("%s on \"%s\" completed.\n", op_type?"Training":"Testing", argv[i]);
             }
+
+            nnet_op(fp, op_type);
+            printf("%s on \"%s\" completed.\n", op_type?"Training":"Testing", argv[i]);
+            fclose(fp);
         }
 
         // Only save the nnet if we were training it
