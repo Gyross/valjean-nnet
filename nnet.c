@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #define NNET_TRAIN 1
 #define NNET_TEST  0 
@@ -9,13 +10,8 @@
 #define MAX_LAYER_SIZE 1000
 #define MAX_NUM_LAYERS 100
 
-// This has to be larger than the maximum size of a training
-// example, else the program will not be able to train the
-// network.
-#define READ_BUF_SIZE 4096
-
-int num_layers;
-int layer_size[MAX_NUM_LAYERS];
+unsigned int num_layers;
+unsigned int layer_size[MAX_NUM_LAYERS];
 
 /* 
  * Weights and biases indicies correspond to a forward pass step
@@ -53,7 +49,7 @@ void forward_pass(float* input_layer, float* output_layer) {
 }
 
 void backpropagate(float* expected_output) {
-    // we use the normal cost function: sum of 1/2 * (ex_out - out)^2
+    // we use the normal cost function: sum of (ex_out - out)^2
     // NB: All derivatives are partial
 
 
@@ -177,10 +173,10 @@ int nnet_allocate() {
 }
 
 
-int nnet_new(int arg_num_layers, int* arg_layer_size) {
+int nnet_new(unsigned int arg_num_layers, unsigned int* arg_layer_size) {
     // Set the global num_layers and layer_size variables
     num_layers = arg_num_layers;
-    memcpy(layer_size, arg_layer_size, sizeof(int) * num_layers);
+    memcpy(layer_size, arg_layer_size, sizeof(unsigned int) * num_layers);
 
     // Allocate weights and biases
     // Return 1 in event of error
@@ -201,7 +197,7 @@ int nnet_new(int arg_num_layers, int* arg_layer_size) {
 }
 
 int nnet_read_file(char* filename) {
-    int amt_read;
+    size_t amt_read;
     FILE* fp = fopen(filename, "rb");
 
     if ( fp == NULL ) {
@@ -209,7 +205,7 @@ int nnet_read_file(char* filename) {
         return 1;
     }
 
-    amt_read = fread( &num_layers, sizeof(int), 1, fp );
+    amt_read = fread( &num_layers, sizeof(unsigned int), 1, fp );
 
     if ( num_layers < 2 ) { 
         fprintf( stderr, "Not enough layers specified!\n" );
@@ -219,7 +215,7 @@ int nnet_read_file(char* filename) {
         return 1;
     }
 
-    amt_read = fread( layer_size, sizeof(int), num_layers, fp );
+    amt_read = fread( layer_size, sizeof(unsigned int), num_layers, fp );
 
     if ( amt_read != num_layers ) {
         fprintf( stderr, "File corrupted!\n" );
@@ -261,8 +257,8 @@ int nnet_write_file(char* filename) {
         return 1;
     }
 
-    fwrite( &num_layers, sizeof(int), 1, fp );
-    fwrite( layer_size, sizeof(int), num_layers, fp);
+    fwrite( &num_layers, sizeof(unsigned int), 1, fp );
+    fwrite( layer_size, sizeof(unsigned int), num_layers, fp);
 
     int m;    
     for ( m = 0; m < num_layers-1; m++ ) {
@@ -275,28 +271,22 @@ int nnet_write_file(char* filename) {
 }
 
 int nnet_op(FILE* fp, int op_type) {
-    int n_inputs, n_outputs, amt_read, buf_offset;
-    float read_buf[READ_BUF_SIZE];
+    unsigned int n_inputs, n_outputs;
+    size_t amt_read;
+    float input_vec[MAX_LAYER_SIZE];
+    float expected_vec[MAX_LAYER_SIZE];
     float output_vec[MAX_LAYER_SIZE];
 
     float total_cost = 0.0;
     int n_cases = 0;
-    
-    // Initialize read_buf and output_vec
-    memset( read_buf, 0, READ_BUF_SIZE*sizeof(float) );
-    memset( output_vec, 0, MAX_LAYER_SIZE*sizeof(float) );
 
     // Read number of inputs and outputs expected by file and do some checking
-    amt_read = fread( &n_inputs, sizeof(int), 1, fp );
-
-    if ( amt_read != 1 ) {
+    if (fread( &n_inputs, sizeof(unsigned int), 1, fp ) != 1) {
         fprintf( stderr, "File corrupted!\n" );
         return 1;
     }
-
-    amt_read = fread( &n_outputs, sizeof(int), 1, fp );
-
-    if ( amt_read != 1 ) {
+    
+    if ( fread( &n_outputs, sizeof(unsigned int), 1, fp ) != 1 ) {
         fprintf( stderr, "File corrupted!\n" );
         return 1;
     }
@@ -314,38 +304,40 @@ int nnet_op(FILE* fp, int op_type) {
         return 1;
     }
 
-    if ( n_inputs + n_outputs > READ_BUF_SIZE ) {
-        fprintf( stderr, "Not enough buffer space allocated!\n\
-                          Try increasing READ_BUF_SIZE in nnet.c\n");
-        return 1;
-    }
-
-
-    // Perform the training
-    int amt_to_read = READ_BUF_SIZE - (READ_BUF_SIZE % (n_inputs+n_outputs));
-    do {
-        buf_offset = 0;
-        amt_read = fread( read_buf, sizeof(float), amt_to_read, fp );
-        if ( amt_read % (n_inputs+n_outputs) != 0 ) {
+    // Loop until we reach the end of the file
+    while( ( amt_read = fread( input_vec, sizeof(float), n_inputs, fp ) ) != 0 ) {
+        if ( amt_read != n_inputs) {
             fprintf( stderr, "Incorrect number of bytes!\n" );
+            return 1;
         } 
-        
-        while ( buf_offset < amt_read ) { 
-            forward_pass(read_buf + buf_offset, output_vec);
-            buf_offset += n_inputs;
-            if ( op_type == NNET_TRAIN ) {
-                backpropagate(read_buf + buf_offset);
-            } else if ( op_type == NNET_TEST ) {                
-                total_cost += cost_func(output_vec, read_buf + buf_offset, n_outputs);
-            }
-            buf_offset += n_outputs;
-            n_cases++;
-        }
-    } while ( amt_read > 0 );
 
-    if ( op_type == NNET_TEST ) {
-        printf("Avg cost: %f\n", total_cost/((float)n_cases) );
+        if ( fread( expected_vec, sizeof(float), n_outputs, fp ) != n_outputs ) {
+            fprintf( stderr, "Incorrect number of bytes!\n" );
+            return 1;
+        }
+
+        forward_pass(input_vec, output_vec);
+
+        /*
+        printf("%f, %f -> %f, %f should be %f, %f\n",
+                read_buf[buf_offset], read_buf[buf_offset+1],
+                output_vec[0], output_vec[1],
+                read_buf[buf_offset+2], read_buf[buf_offset+3]);
+        */
+
+        if ( op_type == NNET_TRAIN ) {
+            backpropagate(expected_vec);
+        } 
+
+        total_cost += cost_func(output_vec, expected_vec, n_outputs);
+
+        n_cases++;
     }
+
+    float avg_cost = total_cost/((float)n_cases);
+    float rms_err  = sqrt(avg_cost);
+    printf("Average cost: %f\n", avg_cost );
+    printf("RMS error:    %f\n", rms_err );
 
     return 0;
 }
@@ -370,12 +362,11 @@ int main( int argc, char* argv[] ) {
 
     // fix the learning rate
     // TODO change this later
-    learning_rate = 0.001;
+    learning_rate = 0.0003;
 
 
     // Initialize globals
-    int i;
-    for ( i = 0; i < MAX_NUM_LAYERS; i++ ) {
+    for ( int i = 0; i < MAX_NUM_LAYERS; i++ ) {
         layer_size[i] = 0;
         weight[i] = NULL;
         bias[i] = NULL;
@@ -392,16 +383,15 @@ int main( int argc, char* argv[] ) {
     }
 
     if ( strcmp(argv[1], "new") == 0 ) {
-        int n = argc - 3;
+        unsigned int n = argc - 3;
         if ( n < 2 ) {
             printf("You must specify at least two layers.\n");
             printf(usage_message);
             return 1;
         }
 
-        int i;
-        int temp_layer_size[MAX_NUM_LAYERS];
-        for ( i = 3; i < argc; i++ ) {
+        unsigned int temp_layer_size[MAX_NUM_LAYERS];
+        for ( int i = 3; i < argc; i++ ) {
             temp_layer_size[i-3] = atoi(argv[i]);
         }
         
@@ -430,8 +420,7 @@ int main( int argc, char* argv[] ) {
             op_type = NNET_TEST;
         }
 
-        int i;
-        for ( i = 3; i < argc; i++ ) {
+        for ( int i = 3; i < argc; i++ ) {
             FILE* fp = fopen(argv[i], "rb");
             if ( fp == NULL ) {
                 fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[i]);
