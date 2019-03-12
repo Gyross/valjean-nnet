@@ -77,7 +77,7 @@ float cost_func(float* output_vec, float* expected_vec, int vec_size) {
     int i; 
     for ( i = 0; i < vec_size; i++ ) {
         float diff = expected_vec[i] - output_vec[i];
-        cost += 0.5*diff*diff;
+        cost += diff*diff;
     }
 
     return cost;
