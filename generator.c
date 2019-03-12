@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 /*
  * Edit the function map()
@@ -20,8 +21,8 @@
 
 
 void map(float* x, float* y) {
-    y[0] = 0.5*x[0] + 0.2*x[1] - 0.1;
-    y[1] = 0.7*x[0] - 0.5*x[1] + 0.8;
+    y[0] = sin(x[0])*cos(x[1]);
+    y[1] = cos(x[0])*sin(x[1]);
 }
 
 
@@ -30,7 +31,6 @@ void map(float* x, float* y) {
 int main(int argc, char* argv[]) {
     float input_vec[NUM_INPUTS];
     float output_vec[NUM_OUTPUTS];
-    float write_buf[NUM_CASES*4];
 
     FILE* fp = fopen(argv[1], "wb");
 
