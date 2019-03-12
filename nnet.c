@@ -400,6 +400,7 @@ int main( int argc, char* argv[] ) {
         }
 
         if ( nnet_write_file(argv[2]) ) {
+            nnet_free();
             return 1;
         }
 
@@ -435,7 +436,10 @@ int main( int argc, char* argv[] ) {
 
         // Only save the nnet if we were training it
         if ( op_type == NNET_TRAIN ) {
-            nnet_write_file(argv[2]);
+            if ( nnet_write_file(argv[2]) ) {
+                nnet_free();
+                return 1;
+            }
         }
 
         printf("All done.\n");
