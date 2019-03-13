@@ -383,19 +383,24 @@ int main( int argc, char* argv[] ) {
     }
 
     if ( strcmp(argv[1], "new") == 0 ) {
-        unsigned int n = argc - 3;
-        if ( n < 2 ) {
+        // If we are at this point we are guaranteed that argc > 3, so this
+        // subtraction is valid.
+        unsigned int new_num_layers = argc - 3;
+
+        if ( new_num_layers < 2 ) {
             printf("You must specify at least two layers.\n");
             printf(usage_message);
             return 1;
         }
 
-        unsigned int temp_layer_size[MAX_NUM_LAYERS];
-        for ( int i = 3; i < argc; i++ ) {
-            temp_layer_size[i-3] = atoi(argv[i]);
+        unsigned int new_layer_size[MAX_NUM_LAYERS];
+        for ( int i = 0; i < new_num_layers; i++ ) {
+            // Layer input layer sizes start at argv[3], hence we use an 
+            // offset of 3 when indexing argv[]
+            new_layer_size[i] = (unsigned int)strtoul(argv[i+3], NULL, 0);
         }
         
-        if ( nnet_new(n, temp_layer_size) ) {
+        if ( nnet_new(new_num_layers, new_layer_size) ) {
             return 1;
         }
 
