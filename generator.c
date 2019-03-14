@@ -35,12 +35,12 @@ int main(int argc, char* argv[]) {
     FILE* fp = fopen(argv[1], "wb");
 
     if ( fp != NULL ) {
-        int n_inputs  = NUM_INPUTS;
-        int n_outputs = NUM_OUTPUTS;
+        unsigned int n_inputs  = NUM_INPUTS;
+        unsigned int n_outputs = NUM_OUTPUTS;
         float range = INPUT_MAX - INPUT_MIN;
 
-        fwrite( &n_inputs, sizeof(int), 1, fp );
-        fwrite( &n_outputs, sizeof(int), 1, fp );
+        fwrite( &n_inputs, sizeof(unsigned int), 1, fp );
+        fwrite( &n_outputs, sizeof(unsigned int), 1, fp );
 
         // Generate new random seed
         unsigned int seed;
@@ -49,8 +49,8 @@ int main(int argc, char* argv[]) {
         fclose(urandom);
         srand(seed);
 
-        for ( int i = 0; i < NUM_CASES; i++ ) {
-            for ( int j = 0; j < NUM_INPUTS; j++ ) {
+        for ( long int i = 0; i < NUM_CASES; i++ ) {
+            for ( unsigned int j = 0; j < NUM_INPUTS; j++ ) {
                 input_vec[j] = ((float)rand()/(float)(RAND_MAX))*range + INPUT_MIN;
             }
 
