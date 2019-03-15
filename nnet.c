@@ -270,7 +270,7 @@ int nnet_write_file(char* filename) {
     return 0;
 }
 
-int nnet_op(FILE* fp, int op_type) {
+int nnet_op(FILE* fp_input, FILE* fp_label, int op_type) {
     unsigned int n_inputs, n_outputs;
     size_t amt_read;
     float input_vec[MAX_LAYER_SIZE];
@@ -281,12 +281,12 @@ int nnet_op(FILE* fp, int op_type) {
     int n_cases = 0;
 
     // Read number of inputs and outputs expected by file and do some checking
-    if (fread( &n_inputs, sizeof(unsigned int), 1, fp ) != 1) {
+    if (fread( &n_inputs, sizeof(unsigned int), 1, fp_input ) != 1) {
         fprintf( stderr, "File corrupted!\n" );
         return 1;
     }
     
-    if ( fread( &n_outputs, sizeof(unsigned int), 1, fp ) != 1 ) {
+    if ( fread( &n_outputs, sizeof(unsigned int), 1, fp_label ) != 1 ) {
         fprintf( stderr, "File corrupted!\n" );
         return 1;
     }
@@ -305,13 +305,13 @@ int nnet_op(FILE* fp, int op_type) {
     }
 
     // Loop until we reach the end of the file
-    while( ( amt_read = fread( input_vec, sizeof(float), n_inputs, fp ) ) != 0 ) {
+    while( ( amt_read = fread( input_vec, sizeof(float), n_inputs, fp_input ) ) != 0 ) {
         if ( amt_read != n_inputs) {
             fprintf( stderr, "Incorrect number of bytes!\n" );
             return 1;
         } 
 
-        if ( fread( expected_vec, sizeof(float), n_outputs, fp ) != n_outputs ) {
+        if ( fread( expected_vec, sizeof(float), n_outputs, fp_label ) != n_outputs ) {
             fprintf( stderr, "Incorrect number of bytes!\n" );
             return 1;
         }
@@ -356,8 +356,8 @@ int main( int argc, char* argv[] ) {
     const char usage_message[] = 
         "Usage:\n \
          nnet new <filename> <layer size>...\n \
-         nnet train <nnet filename> <training set filename>...\n \
-         nnet test <nnet filename> <testing set filename>\n";
+         nnet train <nnet filename> <input file> <label file>...\n \
+         nnet test <nnet filename> <input file> <label file>\n";
 
 
     // fix the learning rate
@@ -411,8 +411,8 @@ int main( int argc, char* argv[] ) {
 
     } else if ( strcmp(argv[1], "train") == 0 ||
                 strcmp(argv[1], "test") == 0 ) {
-        if ( argc < 4 ) {
-            fprintf(stderr, "Not enough arguments!\n");
+        if ( argc != 5 ) {
+            fprintf(stderr, "Incorrect number of arguments!\n");
             fprintf(stderr, usage_message);
         }
         if ( nnet_read_file(argv[2]) ) {
@@ -426,18 +426,27 @@ int main( int argc, char* argv[] ) {
             op_type = NNET_TEST;
         }
 
-        for ( int i = 3; i < argc; i++ ) {
-            FILE* fp = fopen(argv[i], "rb");
-            if ( fp == NULL ) {
-                fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[i]);
-                nnet_free();
-                return 1;
-            }
-
-            nnet_op(fp, op_type);
-            printf("%s on \"%s\" completed.\n", op_type?"Training":"Testing", argv[i]);
-            fclose(fp);
+        FILE* fp_input = fopen(argv[3], "rb");
+        if ( fp_input == NULL ) {
+            fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[3]);
+            nnet_free();
+            return 1;
         }
+
+        FILE* fp_label = fopen(argv[4], "rb");
+        if ( fp_label == NULL ) {
+            fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[4]);
+            fclose(fp_input);
+            nnet_free();
+            return 1;
+        }
+
+        nnet_op(fp_input, fp_label, op_type);
+
+        printf("%s completed.\n", op_type?"Training":"Testing");
+
+        fclose(fp_input);
+        fclose(fp_label);
 
         // Only save the nnet if we were training it
         if ( op_type == NNET_TRAIN ) {
