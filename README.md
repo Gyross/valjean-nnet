@@ -7,7 +7,7 @@ Download the minist data files:
 
 https://www.dropbox.com/s/c1ls5dd6owgq6cw/minist-valjean.tar.gz?dl=0
 
-Use a network with 724 inputs and 10 outputs
+Use a network with 784 inputs and 10 outputs
 
 To train:
 
