@@ -1,7 +1,24 @@
 # valjean-nnet
 Valjean Neural Network
 
-Basic instructions
+# Instructions for MINIST
+
+Download the minist data files:
+
+https://www.dropbox.com/s/c1ls5dd6owgq6cw/minist-valjean.tar.gz?dl=0
+
+Use a network with 724 inputs and 10 outputs
+
+To train:
+
+nnet train mynet minist/train_image_float minist/train_label_float
+
+To test:
+
+nnet test mynet minist/test_image_float minist/test_label_float
+
+
+# Instructions For Master Branch
 
 To compile:
 
