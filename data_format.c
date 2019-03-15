@@ -6,10 +6,13 @@
 #define BUF_SIZE 4096
 
 
-// Specifying the output type
-// Comment out all execpt the one you want
-typedef float out_t;
-// typedef int8_t out_t;
+#define OUTPUT_FLOAT
+
+#ifdef OUTPUT_FLOAT
+    typedef float out_t;
+#else
+    typedef int8_t out_t;
+#endif
 
 int main(int argc, char* argv[]) {
     uint8_t in_buf[BUF_SIZE];
@@ -38,6 +41,10 @@ int main(int argc, char* argv[]) {
             // Convert ints in buffer
             for ( int i = 0; i < amt; i++ ) {
                 out_buf[i] = (out_t)(in_buf[i] - 128);
+
+                #ifdef OUTPUT_FLOAT
+                    out_buf[i] = out_buf[1] / 128.0;
+                #endif
             }
 
             assert( amt == fwrite( out_buf, sizeof(out_t), amt, fp_out ) );
