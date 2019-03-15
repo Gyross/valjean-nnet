@@ -318,16 +318,28 @@ int nnet_op(FILE* fp_input, FILE* fp_label, int op_type) {
 
         forward_pass(input_vec, output_vec);
 
-        /*
-        printf("%f, %f -> %f, %f should be %f, %f\n",
-                read_buf[buf_offset], read_buf[buf_offset+1],
-                output_vec[0], output_vec[1],
-                read_buf[buf_offset+2], read_buf[buf_offset+3]);
-        */
-
         if ( op_type == NNET_TRAIN ) {
             backpropagate(expected_vec);
         } 
+
+        // CODE FOR PRINTING OUTPUTS
+        if ( op_type == NNET_TEST ) {
+            int expected_category = -1;
+
+            // First let's find which category the input
+            // should lie in.
+            for ( int i = 0; i < n_outputs; i++ ) {
+                if ( expected_vec[i] == 1.0 ) {
+                    expected_category = i;
+                }
+            }
+
+            printf("Category: %d, Out: ", expected_category);
+            for ( int i = 0; i < n_outputs; i++ ) {
+                 printf("%0.2f ", output_vec[i] );
+            }
+            printf("\n");
+        }
 
         total_cost += cost_func(output_vec, expected_vec, n_outputs);
 
@@ -362,7 +374,7 @@ int main( int argc, char* argv[] ) {
 
     // fix the learning rate
     // TODO change this later
-    learning_rate = 0.0003;
+    learning_rate = 0.01;
 
 
     // Initialize globals
