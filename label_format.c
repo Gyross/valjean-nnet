@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
         fseek(fp_in, 8, SEEK_SET);
 
         // Put the correct header in the output file
-        int n_inputs = 10;
-        assert(fwrite( &n_inputs, sizeof(int), 1, fp_out ));
+        uint32_t n_inputs = 10;
+        assert(fwrite( &n_inputs, sizeof(uint32_t), 1, fp_out ));
 
 
         uint8_t label; 
