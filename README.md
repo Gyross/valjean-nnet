@@ -1,21 +1,21 @@
 # valjean-nnet
 Valjean Neural Network
 
-# Instructions for MINIST
+# Instructions for MNIST
 
-Download the minist data files:
+Download the MNIST data files:
 
-https://www.dropbox.com/s/c1ls5dd6owgq6cw/minist-valjean.tar.gz?dl=0
+https://www.dropbox.com/s/ed90pf5v3mzzhb3/valjean-mnist.tar.gz?dl=0
 
 Use a network with 784 inputs and 10 outputs
 
 To train:
 
-nnet train mynet minist/train_image_float minist/train_label_float
+nnet train mynet mnist/train_image_float mnist/train_label_float
 
 To test:
 
-nnet test mynet minist/test_image_float minist/test_label_float
+nnet test mynet mnist/test_image_float mnist/test_label_float
 
 
 # Instructions For Master Branch
