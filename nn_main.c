@@ -51,7 +51,7 @@ int main( int argc, char* argv[] ) {
             layer_sizes[i] = (unsigned)size;
         }
 
-        bnn = bnn_new(layers, layer_sizes);
+        bnn_new(bnn, layers, layer_sizes);
 
         if ( bnn_write(bnn, argv[2]) ) {
             return 1;
@@ -84,21 +84,21 @@ int main( int argc, char* argv[] ) {
             return 1;
         }
 
-        bnn_op(bnn, fp_input, fp_label, op);
+        if (!bnn_op(bnn, fp_input, fp_label, op)) {
+            printf("%s completed.\n", op == OP_TRAIN ? "Training" : "Testing");
 
-        printf("%s completed.\n", op == OP_TRAIN ? "Training" : "Testing");
+            // Only save the nnet if we were training it
+            if ( op == OP_TRAIN ) {
+                if ( bnn_write(bnn, argv[2]) ) {
+                    return 1;
+                }
+            }
+
+            printf("All done.\n");
+        }
 
         fclose(fp_input);
         fclose(fp_label);
-
-        // Only save the nnet if we were training it
-        if ( op == OP_TRAIN ) {
-            if ( bnn_write(bnn, argv[2]) ) {
-                return 1;
-            }
-        }
-
-        printf("All done.\n");
 
     } else {
         printf(usage_message);

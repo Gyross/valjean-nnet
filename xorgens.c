@@ -17,6 +17,8 @@
 
    For type definitions see xorgens.h */
 
+#include "xorgens.h"
+
 UINT xor4096i(UINT seed)
 
   {

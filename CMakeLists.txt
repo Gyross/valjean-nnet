@@ -5,9 +5,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-file( GLOB LIB_SOURCES bnn.c )
-file( GLOB LIB_HEADERS bnn.h )
-add_library( bnn ${LIB_SOURCES} ${LIB_HEADERS} constants.h)
+file( GLOB BNN_SOURCES bnn.c xorgens.c )
+file( GLOB BNN_HEADERS bnn.h xorgens.h )
+add_library( bnn ${BNN_SOURCES} ${BNN_HEADERS} constants.h)
+target_link_libraries( bnn m )
 
-add_executable( nn_main nn_main.c constants.h)
+add_executable( nn_main nn_main.c constants.h )
 target_link_libraries( nn_main bnn )
