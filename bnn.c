@@ -26,7 +26,7 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     // Remember number of forward pass steps is one less than number of layers.
     for (BNNS i = 0; i < layers; i++) {
         for (BNNS j = 0; j < layer_sizes[i]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], sizeof(BNNW)); k++) {
+            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNNW)); k++) {
                 bnn->weight[i][j][k] = xor4096i(0);
             }
         }
@@ -59,7 +59,7 @@ int bnn_read(BNN bnn, const char* filename) {
     }
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], sizeof(BNNW));
+        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], SIZE(BNNW));
         amt_read = fread( bnn->weight[m], sizeof(BNNW), wm_size, fp );
         if ( amt_read != wm_size ) {
             fprintf( stderr, "File corrupted!\n" );
@@ -92,7 +92,7 @@ int bnn_write(BNN bnn, const char* filename) {
     fwrite( bnn->layer_sizes, sizeof(BNNS), bnn->layers, fp);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], sizeof(BNNW));
+        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], SIZE(BNNW));
         BNNS bv_size = bnn->layer_sizes[m+1];
         fwrite( bnn->weight[m], sizeof(BNNW), wm_size, fp);
         fwrite( bnn->bias[m], sizeof(BNNB), bv_size, fp);
@@ -105,7 +105,7 @@ int bnn_write(BNN bnn, const char* filename) {
 int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, int op_type) {
     BNNS n_inputs, n_outputs;
     size_t amt_read;
-    BNNI input_vec[CEIL_DIV(LAYER_MAX, sizeof(BNNI))];
+    BNNI input_vec[CEIL_DIV(LAYER_MAX, SIZE(BNNI))];
     BNNO expected_vec[LAYER_MAX];
     BNNO output_vec[LAYER_MAX];
 
@@ -137,7 +137,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, int op_type) {
     }
 
     // Loop until we reach the end of the file
-    size_t n_input_blocks = CEIL_DIV(n_inputs, sizeof(BNNI));
+    size_t n_input_blocks = CEIL_DIV(n_inputs, SIZE(BNNI));
     while( ( amt_read = fread( input_vec, sizeof(BNNI), n_input_blocks, fp_input ) ) != 0 ) {
         if ( amt_read != n_input_blocks ) {
             fprintf( stderr, "Incorrect number of bytes!\n" );

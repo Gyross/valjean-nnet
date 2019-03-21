@@ -8,9 +8,10 @@
 #include <stdint.h>
 
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
+#define SIZE(x) (sizeof(x) * 8)
 
 #define LAYER_MAX 100
-#define NODE_MAX 1000
+#define NODE_MAX 500
 
 #define ABS_BIAS_MAX 3
 
@@ -26,7 +27,7 @@ typedef int32_t BNNO;
 struct bnn {
     BNNS layers;
     BNNS layer_sizes[LAYER_MAX];
-    BNNW weight[LAYER_MAX][NODE_MAX][CEIL_DIV(NODE_MAX, sizeof(BNNW))];
+    BNNW weight[LAYER_MAX][NODE_MAX][CEIL_DIV(NODE_MAX, SIZE(BNNW))];
     BNNB bias[LAYER_MAX][NODE_MAX];
 };
 
