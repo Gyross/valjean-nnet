@@ -10,8 +10,11 @@
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
 #define SIZE(x) (sizeof(x) * 8)
 
-#define LAYER_MAX 100
-#define NODE_MAX 500
+#define LAYER_MAX 50
+#define NODE_MAX 1024 // just make it a multiple of 32
+
+#define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
+#define WGT_VEC_SIZE INP_VEC_SIZE
 
 #define ABS_BIAS_MAX 3
 
@@ -27,7 +30,7 @@ typedef int32_t BNNO;
 struct bnn {
     BNNS layers;
     BNNS layer_sizes[LAYER_MAX];
-    BNNW weight[LAYER_MAX][NODE_MAX][CEIL_DIV(NODE_MAX, SIZE(BNNW))];
+    BNNW weight[LAYER_MAX][NODE_MAX][WGT_VEC_SIZE];
     BNNB bias[LAYER_MAX][NODE_MAX];
 };
 

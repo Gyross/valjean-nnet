@@ -6,6 +6,7 @@
 #include <math.h>
 #include "xorgens.h"
 #include "bnn.h"
+#include "binarised_fp.h"
 
 
 void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
@@ -98,9 +99,9 @@ int bnn_write(BNN bnn, const char* filename) {
 int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, int op_type) {
     BNNS n_inputs, n_outputs;
     size_t amt_read;
-    BNNI input_vec[CEIL_DIV(LAYER_MAX, SIZE(BNNI))];
-    BNNO expected_vec[LAYER_MAX];
-    BNNO output_vec[LAYER_MAX];
+    BNNI input_vec[INP_VEC_SIZE];
+    BNNO expected_vec[NODE_MAX];
+    BNNO output_vec[NODE_MAX];
 
     BNNO total_cost = 0;
     int n_cases = 0;
@@ -142,7 +143,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, int op_type) {
             return 1;
         }
 
-        //forward_pass(bnn, input_vec, output_vec);
+        forward_pass(bnn, input_vec, output_vec);
 
         if ( op_type == OP_TRAIN ) {
             //backpropagate(expected_vec);
