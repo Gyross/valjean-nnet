@@ -9,8 +9,8 @@ include_directories(.)
 
 file( GLOB BNN_SOURCES bnn.c xorgens.c )
 file( GLOB BNN_HEADERS bnn.h xorgens.h )
-add_library( bnn ${BNN_SOURCES} ${BNN_HEADERS} constants.h)
+add_library( bnn ${BNN_SOURCES} ${BNN_HEADERS} )
 target_link_libraries( bnn m )
 
-add_executable( nn_main nn_main.c )
+add_executable( nn_main nn_main.c xorgens.c )
 target_link_libraries( nn_main bnn )

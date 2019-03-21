@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
-#include "constants.h"
+#include <time.h>
+#include "xorgens.h"
 #include "bnn.h"
 
 /*
@@ -13,6 +14,12 @@
 
 
 int main( int argc, char* argv[] ) {
+
+    // prng seeding
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    xor4096i((UINT)ts.tv_nsec);
+
 
     const char usage_message[] =
         "Usage:\n \

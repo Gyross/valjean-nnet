@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include <time.h>
 #include <assert.h>
 #include <math.h>
 #include "xorgens.h"
-#include "constants.h"
 #include "bnn.h"
 
 
@@ -16,11 +14,6 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     // Set the global num_layers and layer_size variables
     bnn->layers = layers;
     memcpy(bnn->layer_sizes, layer_sizes, layers * sizeof(BNNS));
-
-    // prng seeding
-    struct timespec ts;
-    clock_gettime(CLOCK_REALTIME, &ts);
-    xor4096i((UINT)ts.tv_nsec);
 
     // Generate normally distributed weights and biases for each forward pass step.
     // Remember number of forward pass steps is one less than number of layers.
