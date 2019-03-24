@@ -8,8 +8,8 @@ static BNNS packed_ls(BNN bnn, BNNS layer);
 static BNNO xnor_bin_sum(BNNI i, BNNW w);
 static BNNO partial_xnor_bin_sum(BNNI i, BNNW w, uint32_t bits);
 static void matrix_mult(
-    BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size,
-    BNNS out_size, BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc
+    BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size, BNNS out_size,
+    BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
 );
 static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size);
 
@@ -34,8 +34,8 @@ BNNS packed_ls(BNN bnn, BNNS layer) {
 }
 
 static void matrix_mult(
-    BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size,
-    BNNS out_size, BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc
+    BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size, BNNS out_size,
+    BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
 ) {
     BNNS k, j;
     for ( j = 0; j < out_size; j++ ) { // for each output node
@@ -43,6 +43,7 @@ static void matrix_mult(
             output[j] += xnor_bin_sum(input[k], weights[j][k]);
         }
         output[j] += partial_xnor_bin_sum(input[k], weights[j][k], last_trunc);
+        output[j] += bias[j];
     }
 }
 
