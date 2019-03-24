@@ -10,7 +10,7 @@
 
 
 /*
- * Function to create new BNN.
+ * Creates new BNN.
  * 
  * bnn: empty BNN struct (already allocated in memory).
  * layers: number of layers, including input and output layers.
@@ -40,6 +40,12 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     }
 }
 
+/*
+ * Assigns BNN values based on input file.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * filename: file containing bnn layer sizes, weights, and biases.
+ */
 int bnn_read(BNN bnn, const char* filename) {
     size_t amt_read;
     FILE* fp = fopen(filename, "rb");
@@ -86,7 +92,12 @@ int bnn_read(BNN bnn, const char* filename) {
     return 0;
 }
 
-
+/*
+ * Writes BNN values to a file.
+ * 
+ * bnn: non-empty BNN struct.
+ * filename: file to be written to.
+ */
 int bnn_write(BNN bnn, const char* filename) {
     FILE* fp = fopen( filename, "wb" );
 
@@ -109,6 +120,14 @@ int bnn_write(BNN bnn, const char* filename) {
     return 0;
 }
 
+/*
+ * Performs operation - training or testing.
+ *
+ * bnn: initialised bnn struct.
+ * fp_input: input data for operation.
+ * fp_label: data labels i.e. output data.
+ * op_type: either training or testing.
+ */
 int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, int op_type) {
     BNNS n_inputs, n_outputs;
     size_t amt_read;

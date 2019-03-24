@@ -58,9 +58,30 @@ typedef struct bnn bnn_alloc;
  */
 void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]);
 
-
+/*
+ * Writes BNN values to a file.
+ * 
+ * bnn: non-empty BNN struct.
+ * filename: file to be written to.
+ */
 int bnn_write(BNN bnn, const char *filename);
+
+/*
+ * Assigns BNN values based on input file.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * filename: file containing bnn layer sizes, weights, and biases.
+ */
 int bnn_read(BNN bnn, const char *filename);
+
+/*
+ * Performs operation - training or testing.
+ *
+ * bnn: initialised bnn struct.
+ * fp_input: input data for operation.
+ * fp_label: data labels i.e. output data.
+ * op_type: either training or testing.
+ */
 int bnn_op(BNN bnn, FILE *fp_input, FILE *fp_label, int op);
 
 #endif //VALJEAN_NNET_BNN_H
