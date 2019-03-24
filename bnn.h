@@ -15,19 +15,26 @@
 #define NODE_MAX 1024 // just make it a multiple of 32
 
 #define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
-#define WGT_VEC_SIZE INP_VEC_SIZE
+#define WGT_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNW))
 
 #define ABS_BIAS_MAX 3
 
 #define OP_TRAIN 0
 #define OP_TEST 1
 
-typedef uint32_t BNNW;
-typedef int32_t BNNB;
-typedef uint32_t BNNS;
-typedef uint32_t BNNI;
-typedef int32_t BNNO;
+typedef uint32_t BNNW; //bnn weight size
+typedef int32_t BNNB; // bnn bias size
+typedef uint32_t BNNS; // bnn shape type
+typedef uint32_t BNNI; // bnn input data type
+typedef int32_t BNNO; // bnn output data type
 
+/*
+ * BNN struct.
+ * layers: number of layers.
+ * layer_sizes[]: number of nodes in each layer.
+ * weight: array of weight matrices in each layer.
+ * bias: array of bias vectors in each layer.
+ */
 struct bnn {
     BNNS layers;
     BNNS layer_sizes[LAYER_MAX];
@@ -38,7 +45,20 @@ struct bnn {
 typedef struct bnn *BNN;
 typedef struct bnn bnn_alloc;
 
+/*
+ * Function to create new BNN.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * layers: number of layers, including input and output layers.
+ * layer_sizes: array of number of nodes in each layer.
+ *		layer_sizes[0] is the number of input nodes.
+ *		layer_sizes[layers-1] is the number of output nodes.
+ *
+ * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
+ */
 void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]);
+
+
 int bnn_write(BNN bnn, const char *filename);
 int bnn_read(BNN bnn, const char *filename);
 int bnn_op(BNN bnn, FILE *fp_input, FILE *fp_label, int op);

@@ -9,6 +9,18 @@
 #include "binarised_fp.h"
 
 
+/*
+ * Function to create new BNN.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * layers: number of layers, including input and output layers.
+ * layer_sizes: array of number of nodes in each layer.
+ *		layer_sizes[0] is the number of input nodes.
+ *		layer_sizes[layers-1] is the number of output nodes.
+ *
+ * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
+ */
+
 void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     static_assert(sizeof(BNNW) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
 
@@ -18,11 +30,12 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
 
     // Generate normally distributed weights and biases for each forward pass step.
     // Remember number of forward pass steps is one less than number of layers.
-    for (BNNS i = 0; i < layers; i++) {
+    for (BNNS i = 0; i < layers - 1; i++) {
         for (BNNS j = 0; j < layer_sizes[i]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNNW)); k++) {
+            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i+1], SIZE(BNNW)); k++) {
                 bnn->weight[i][j][k] = xor4096i(0);
             }
+			bnn->bias[i][j] = xor4096i(0);
         }
     }
 }
