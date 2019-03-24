@@ -19,6 +19,17 @@ static BNNO cost_func(
 );
 static void print_statistics(BNNO total_cost, unsigned n_cases);
 
+/*
+ * Creates new BNN.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * layers: number of layers, including input and output layers.
+ * layer_sizes: array of number of nodes in each layer.
+ *		layer_sizes[0] is the number of input nodes.
+ *		layer_sizes[layers-1] is the number of output nodes.
+ *
+ * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
+ */
 
 void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     static_assert(sizeof(BNNW) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
@@ -38,6 +49,12 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     }
 }
 
+/*
+ * Assigns BNN values based on input file.
+ * 
+ * bnn: empty BNN struct (already allocated in memory).
+ * filename: file containing bnn layer sizes, weights, and biases.
+ */
 int bnn_read(BNN bnn, const char* filename) {
     MSG("BNN file successfully parsed.");
 
@@ -73,7 +90,12 @@ error1:
     RETURN;
 }
 
-
+/*
+ * Writes BNN values to a file.
+ * 
+ * bnn: non-empty BNN struct.
+ * filename: file to be written to.
+ */
 int bnn_write(BNN bnn, const char* filename) {
     MSG("BNN successfully saved to file.");
 
@@ -109,6 +131,14 @@ error1:
     RETURN;
 }
 
+/*
+ * Performs operation - training or testing.
+ *
+ * bnn: initialised bnn struct.
+ * fp_input: input data for operation.
+ * fp_label: data labels i.e. output data.
+ * op_type: either training or testing.
+ */
 int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     MSG("Successfully completed operation.");
 
