@@ -20,7 +20,10 @@ void forward_pass(BNN bnn, BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX]) {
         BNNS out_size = bnn->layer_sizes[i+1];
         memset(output, 0, out_size * sizeof(BNNO));
 
-        matrix_mult(input, output, inp_size, out_size, bnn->weight[i], bnn->layer_sizes[i] % SIZE(BNNI));
+        matrix_mult(
+            input, output, inp_size, out_size, bnn->weight[i],
+            bnn->layer_sizes[i] % SIZE(BNNI), bnn->bias[i]
+        );
 
         // binarise
         if (i != bnn->layers-2) {
