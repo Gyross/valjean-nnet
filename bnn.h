@@ -12,15 +12,15 @@
 #define SIZE(x) (sizeof(x) * 8)
 
 #define LAYER_MAX 50
-#define NODE_MAX 1024 // just make it a multiple of 32
+#define NODE_MAX 1000
 
 #define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
 #define WGT_VEC_SIZE INP_VEC_SIZE
 
-#define ABS_BIAS_MAX 3
-
-#define OP_TRAIN 0
-#define OP_TEST 1
+typedef enum op_t {
+    TEST,
+    TRAIN
+} op_t;
 
 typedef uint32_t BNNW;
 typedef int32_t BNNB;
@@ -41,6 +41,6 @@ typedef struct bnn bnn_alloc;
 void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]);
 int bnn_write(BNN bnn, const char *filename);
 int bnn_read(BNN bnn, const char *filename);
-int bnn_op(BNN bnn, FILE *fp_input, FILE *fp_label, int op);
+int bnn_op(BNN bnn, FILE *fp_input, FILE *fp_label, op_t op);
 
 #endif //VALJEAN_NNET_BNN_H
