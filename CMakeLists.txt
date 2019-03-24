@@ -10,7 +10,7 @@ include_directories(.)
 
 file( GLOB BNN_SOURCES bnn.c xorgens.c binarised_fp.c )
 file( GLOB BNN_HEADERS bnn.h xorgens.h binarised_fp.h )
-add_library( bnn ${BNN_SOURCES} ${BNN_HEADERS} error_handling.h)
+add_library( bnn ${BNN_SOURCES} ${BNN_HEADERS} error_handling.h mnist_int8_input.c mnist_int8_input.h)
 target_link_libraries( bnn m )
 
 add_executable( nn_main nn_main.c xorgens.c error_handling.h)

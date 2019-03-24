@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "binarised_fp.h"
 
 #define PACKED_SIZE (sizeof(BNNI) * 8)
@@ -12,22 +13,26 @@ static void matrix_mult(
     BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
 );
 static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size);
+static void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max);
 
-void forward_pass(BNN bnn, BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX]) {
+void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
+    BNNI input[INP_VEC_SIZE] = {0};
+    binarise_input(nb_input, input, bnn->bias[0], bnn->layer_sizes[0]);
 
     for ( BNNS i = 0; i < bnn->layers-1; i++ ) { // for each layer
         BNNS inp_size = packed_ls(bnn, i);
         BNNS out_size = bnn->layer_sizes[i+1];
-        memset(output, 0, out_size * sizeof(BNNO));
+        memset(output, 0, NODE_MAX * sizeof(BNNO));
 
         matrix_mult(
             input, output, inp_size, out_size, bnn->weight[i],
             bnn->layer_sizes[i] % SIZE(BNNI), bnn->bias[i]
         );
 
-        // binarise
         if (i != bnn->layers-2) {
             binarise(input, output, out_size);
+        } else {
+            clamp(output, bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
     }
 }
@@ -66,5 +71,11 @@ static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS
             input[j / PACKED_SIZE] <<= 1;
             input[j / PACKED_SIZE] += output[j + k] >= 0 ? 1 : 0;
         }
+    }
+}
+
+static void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max) {
+    for (size_t i = 0; i < n_outputs; i++) {
+        output[i] = abs(output[i]) > max ? (max * (output >= 0 ? 1 : -1)) : output[i];
     }
 }

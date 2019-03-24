@@ -25,7 +25,7 @@ static void initPRNG();
 
 // FUNCTIONS
 int main( int argc, char* argv[] ) {
-    MSG("BNN run successful!");
+    MSG("NN operation successful!");
 
     initPRNG();
 
@@ -83,7 +83,7 @@ int main( int argc, char* argv[] ) {
     error2:
         fclose(fp_input);
     } else {
-        CHECK(1, USAGE, 1);
+        CHECK(1, "Invalid arguments." USAGE, 1);
     }
 
 error1:

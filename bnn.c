@@ -8,6 +8,7 @@
 #include "bnn.h"
 #include "binarised_fp.h"
 #include "error_handling.h"
+#include "mnist_int8_input.h"
 
 
 static void print_output(
@@ -42,22 +43,21 @@ int bnn_read(BNN bnn, const char* filename) {
 
     size_t amt_read;
     FILE* fp = fopen(filename, "rb");
-
     CHECK(fp == NULL, "Could not open file!", 1);
 
     amt_read = fread( &(bnn->layers), sizeof(unsigned), 1, fp );
-
     CHECK(amt_read != 1, "File empty!\n", 2);
     CHECK(bnn->layers < 2, "Not enough layers specified!", 2);
 
     amt_read = fread( bnn->layer_sizes, sizeof(unsigned), bnn->layers, fp );
-
     CHECK(amt_read != bnn->layers, "File corrupted!", 2);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], SIZE(BNNW));
-        amt_read = fread( bnn->weight[m], sizeof(BNNW), wm_size, fp );
-        CHECK(amt_read != wm_size, "File corrupted!", 2);
+        for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
+            BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
+            amt_read = fread(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
+            CHECK(amt_read != wv_size, "File corrupted!", 2);
+        }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
@@ -83,21 +83,23 @@ int bnn_write(BNN bnn, const char* filename) {
     CHECK(fp == NULL, "Could not open file!\n", 1);
 
     amt_written = fwrite( &(bnn->layers), sizeof(BNNS), 1, fp );
-    CHECK(amt_written == 1, "Failed to save BNN to file.", 2);
+    CHECK(amt_written != 1, "Failed to save BNN to file.", 2);
 
     amt_written = fwrite( bnn->layer_sizes, sizeof(BNNS), bnn->layers, fp);
-    CHECK(amt_written == bnn->layers, "Failed to save BNN to file.", 2);
+    CHECK(amt_written != bnn->layers, "Failed to save BNN to file.", 2);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wm_size = CEIL_DIV(bnn->layer_sizes[m] * bnn->layer_sizes[m+1], SIZE(BNNW));
-        amt_written = fwrite( bnn->weight[m], sizeof(BNNW), wm_size, fp);
-        CHECK(amt_written == wm_size, "Failed to save BNN to file.", 2);
+        BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
+        for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
+            amt_written = fwrite(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
+            CHECK(amt_written != wv_size, "Failed to save BNN to file.", 2);
+        }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
         BNNS b_size = bnn->layer_sizes[m];
         amt_written = fwrite( bnn->bias[m], sizeof(BNNB), b_size, fp);
-        CHECK(amt_written == b_size, "Failed to save BNN to file.", 2);
+        CHECK(amt_written != b_size, "Failed to save BNN to file.", 2);
     }
 
 error2:
@@ -112,7 +114,8 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
     BNNS n_inputs, n_outputs;
     size_t amt_read;
-    BNNI input_vec[INP_VEC_SIZE];
+    INPT input_vec[NODE_MAX];
+    LBLT _expected_vec[NODE_MAX];
     BNNO expected_vec[NODE_MAX];
     BNNO output_vec[NODE_MAX];
 
@@ -130,14 +133,15 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
 
     // Loop until we reach the end of the file
-    size_t n_input_blocks = CEIL_DIV(n_inputs, SIZE(BNNI));
-    while( ( amt_read = fread( input_vec, sizeof(BNNI), n_input_blocks, fp_input ) ) != 0 ) {
-        CHECK(amt_read != n_input_blocks, "Incorrect number of bytes!", 1);
+    while( ( amt_read = fread( input_vec, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
+        CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
 
         CHECK(
-            fread( expected_vec, sizeof(BNNO), n_outputs, fp_label ) != n_outputs,
+            fread( _expected_vec, sizeof(LBLT), n_outputs, fp_label ) != n_outputs,
             "Incorrect number of bytes!", 1
         );
+
+        convert_labels(_expected_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 
         forward_pass(bnn, input_vec, output_vec);
 
