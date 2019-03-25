@@ -278,7 +278,8 @@ int nnet_op(FILE* fp_input, FILE* fp_label, int op_type) {
     float output_vec[MAX_LAYER_SIZE];
 
     float total_cost = 0.0;
-    int n_cases = 0;
+    int n_correct = 0;
+    int n_cases   = 0;
 
     // Read number of inputs and outputs expected by file and do some checking
     if (fread( &n_inputs, sizeof(unsigned int), 1, fp_input ) != 1) {
@@ -323,17 +324,28 @@ int nnet_op(FILE* fp_input, FILE* fp_label, int op_type) {
         } 
 
         // CODE FOR PRINTING OUTPUTS
-        if ( op_type == NNET_TEST ) {
-            int expected_category = -1;
+        int expected_category = -1;
+        int output_category   = -1;
+        float max_output      = -INFINITY;
 
-            // First let's find which category the input
-            // should lie in.
-            for ( int i = 0; i < n_outputs; i++ ) {
-                if ( expected_vec[i] == 1.0 ) {
-                    expected_category = i;
-                }
+        for ( int i = 0; i < n_outputs; i++ ) {
+            if ( expected_vec[i] == 1.0 ) {
+                expected_category = i;
             }
 
+            if ( output_vec[i] > max_output ) {
+                max_output = output_vec[i];
+                output_category = i;
+            }
+        }
+
+        if ( expected_category == output_category ) {
+            ++n_correct;
+        }
+        
+
+        // If it's a test we print after every input
+        if ( op_type == NNET_TEST ) {
             printf("Category: %d, Out: ", expected_category);
             for ( int i = 0; i < n_outputs; i++ ) {
                  printf("%0.2f ", output_vec[i] );
@@ -343,13 +355,15 @@ int nnet_op(FILE* fp_input, FILE* fp_label, int op_type) {
 
         total_cost += cost_func(output_vec, expected_vec, n_outputs);
 
-        n_cases++;
+        ++n_cases;
     }
 
-    float avg_cost = total_cost/((float)n_cases);
-    float rms_err  = sqrt(avg_cost);
+    float avg_cost  = total_cost/((float)n_cases);
+    float rms_err   = sqrt(avg_cost);
+    float p_correct = 100*n_correct/(float)n_cases;
     printf("Average cost: %f\n", avg_cost );
     printf("RMS error:    %f\n", rms_err );
+    printf("%% correct:    %f\n", p_correct );
 
     return 0;
 }
@@ -374,7 +388,7 @@ int main( int argc, char* argv[] ) {
 
     // fix the learning rate
     // TODO change this later
-    learning_rate = 0.01;
+    learning_rate = 0.0001;
 
 
     // Initialize globals
