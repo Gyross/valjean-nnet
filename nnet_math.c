@@ -76,7 +76,17 @@ float cost_func(float* output_vec, float* expected_vec, int vec_size) {
     float cost = 0;
     int i; 
     for ( i = 0; i < vec_size; i++ ) {
-        float diff = expected_vec[i] - output_vec[i];
+        float output = output_vec[i];
+
+        // If outputs are less than 0 or greater than 1,
+        // treat them the same as 0 or 1 respectively
+        if ( output > 1.0 ) {
+            output = 1.0;
+        } else if ( output < 0.0 ) {
+            output = 0.0;
+        }
+
+        float diff = expected_vec[i] - output;
         cost += diff*diff;
     }
 
