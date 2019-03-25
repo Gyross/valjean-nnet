@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
                 out_buf[i] = (out_t)(in_buf[i] - 128);
 
                 #ifdef OUTPUT_FLOAT
-                    out_buf[i] = out_buf[1] / 128.0;
+                    out_buf[i] = out_buf[i] / 128.0;
                 #endif
             }
 
