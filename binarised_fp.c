@@ -3,18 +3,6 @@
 #include <stdlib.h>
 #include "binarised_fp.h"
 
-#define PACKED_SIZE (sizeof(BNNI) * 8)
-
-static BNNS packed_ls(BNN bnn, BNNS layer);
-static BNNO xnor_bin_sum(BNNI i, BNNW w);
-static BNNO partial_xnor_bin_sum(BNNI i, BNNW w, uint32_t bits);
-static void matrix_mult(
-    BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size, BNNS out_size,
-    BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
-);
-static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size);
-static void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max);
-
 void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
     BNNI input[INP_VEC_SIZE] = {0};
     binarise_input(nb_input, input, bnn->bias[0], bnn->layer_sizes[0]);
@@ -41,7 +29,7 @@ BNNS packed_ls(BNN bnn, BNNS layer) {
     return CEIL_DIV(bnn->layer_sizes[layer], SIZE(BNNI));
 }
 
-static void matrix_mult(
+void matrix_mult(
     BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size, BNNS out_size,
     BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
 ) {
