@@ -11,8 +11,8 @@
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
 #define SIZE(x) (sizeof(x) * 8)
 
-#define LAYER_MAX 50
-#define NODE_MAX 1000
+#define LAYER_MAX 1000
+#define NODE_MAX 8192
 
 #define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
 #define WGT_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNW))
@@ -73,6 +73,8 @@ int bnn_write(BNN bnn, const char *filename);
  * filename: file containing bnn layer sizes, weights, and biases.
  */
 int bnn_read(BNN bnn, const char *filename);
+
+void bnn_print(BNN bnn);
 
 /*
  * Performs operation - training or testing.

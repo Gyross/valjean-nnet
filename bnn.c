@@ -131,6 +131,31 @@ error1:
     RETURN;
 }
 
+void bnn_print(BNN bnn) {
+    printf("LAYERS: %d\n", bnn->layers);
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        printf("%d ", bnn->layer_sizes[i]);
+    }
+    printf("\n");
+    printf("WEIGHTS\n");
+    for (BNNS i = 0; i < bnn->layers-1; i++) {
+        for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
+            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNNW)); k++) {
+                printf("%x ", bnn->weight[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+    /*
+    printf("BIASES\n");
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        for (BNNS j = 0; j < bnn->layer_sizes[i]; j++) {
+            printf("%d ", bnn->bias[i][j]);
+        }
+    }
+    */
+}
+
 /*
  * Performs operation - training or testing.
  *
