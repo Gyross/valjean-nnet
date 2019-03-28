@@ -1,0 +1,17 @@
+//
+// Created by wmpmiles on 25/03/19.
+//
+
+#ifndef VALJEAN_NNET_MNIST_INT8_INPUT_H
+#define VALJEAN_NNET_MNIST_INT8_INPUT_H
+
+#include <stdint.h>
+#include "bnn.h"
+
+typedef int8_t  INPT;
+typedef uint8_t LBLT;
+
+void binarise_input(INPT input[NODE_MAX], BNNI output[INP_VEC_SIZE], BNNB bias[NODE_MAX], BNNS n_inputs);
+void convert_labels(LBLT input[NODE_MAX], BNNO output[NODE_MAX], BNNS n_outputs, BNNS max);
+
+#endif //VALJEAN_NNET_MNIST_INT8_INPUT_H

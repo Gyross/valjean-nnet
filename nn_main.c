@@ -5,112 +5,100 @@
 #include <time.h>
 #include "xorgens.h"
 #include "bnn.h"
+#include "error_handling.h"
 
-/*
- * Usage:
- *  nnet new <filename> <layer size>...
- *  nnet load <filename>
- */
+#define USAGE "\n\
+Usage:\n \
+    nnet new <filename> <layer size>...\n\
+    nnet train <nnet filename> <input file> <label file>...\n\
+    nnet test <nnet filename> <input file> <label file>\
+"
 
 
+// GLOBAL VARIABLES
+bnn_alloc _bnn;
+
+
+// PROTOTYPES
+static void initPRNG();
+
+
+// FUNCTIONS
 int main( int argc, char* argv[] ) {
+    MSG("NN operation successful!");
 
-    // prng seeding
-    struct timespec ts;
-    clock_gettime(CLOCK_REALTIME, &ts);
-    xor4096i((UINT)ts.tv_nsec);
+    initPRNG();
 
+    BNN bnn = &_bnn;
 
-    const char usage_message[] =
-        "Usage:\n \
-         nnet new <filename> <layer size>...\n \
-         nnet train <nnet filename> <input file> <label file>...\n \
-         nnet test <nnet filename> <input file> <label file>\n";
-
-    if ( argc < 3 ) {
-        printf(usage_message);
-        return 1;
+    if (argc == 2) {
+        bnn_read(bnn, argv[1]);
+        bnn_print(bnn);
+        return EXIT_SUCCESS;
     }
 
-    bnn_alloc _bnn;
-    BNN bnn = &_bnn;
+    CHECK(argc < 3, "Invalid arguments." USAGE, 1);
+
     if ( strcmp(argv[1], "new") == 0 ) {
         // If we are at this point we are guaranteed that argc > 3, so this
         // subtraction is valid.
-        unsigned layers = (unsigned)argc - 3;
+        BNNS layers = (BNNS)argc - 3;
 
-        if ( layers < 2 ) {
-            printf("You must specify at least two layers.\n");
-            printf(usage_message);
-            return EXIT_FAILURE;
-        }
+        CHECK(layers < 2, "You must specify at least two layers." USAGE, 1);
 
-        unsigned layer_sizes[LAYER_MAX];
-        for ( int i = 0; i < layers; i++ ) {
+        BNNS layer_sizes[LAYER_MAX];
+        for ( BNNS i = 0; i < layers; i++ ) {
             // Layer input layer sizes start at argv[3], hence we use an
             // offset of 3 when indexing argv[]
             errno = 0;
             long size = strtol(argv[i+3], NULL, 0);
-            if (errno != 0 || size < 1 || size > NODE_MAX) {
-                printf("Invalid layer size: %s\n", argv[i+3]);
-                return EXIT_FAILURE;
-            }
+            CHECK(errno != 0 || size < 1 || size > NODE_MAX, "Invalid layer size!", 1);
             layer_sizes[i] = (unsigned)size;
         }
 
         bnn_new(bnn, layers, layer_sizes);
 
-        if ( bnn_write(bnn, argv[2]) ) {
-            return 1;
-        }
-
+        PASS(bnn_write(bnn, argv[2]), 1);
     } else if
         (strcmp(argv[1], "train") == 0 || strcmp(argv[1], "test") == 0)
     {
-        if ( argc != 5 ) {
-            fprintf(stderr, "Incorrect number of arguments!\n");
-            fprintf(stderr, usage_message);
-        }
+        CHECK(argc != 5, "Incorrect number of arguments!\n" USAGE, 1);
+        PASS(bnn_read(bnn, argv[2]), 1);
 
-        if ( bnn_read(bnn, argv[2]) ) {
-            return 1;
-        }
-
-        int op = strcmp(argv[1], "train" ) ? OP_TEST : OP_TRAIN;
+        int op = strcmp(argv[1], "train" ) ? TEST : TRAIN;
 
         FILE* fp_input = fopen(argv[3], "rb");
-        if ( fp_input == NULL ) {
-            fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[3]);
-            return 1;
-        }
+        CHECK(fp_input == NULL, "Input file could not be opened, aborting!", 1);
 
         FILE* fp_label = fopen(argv[4], "rb");
-        if ( fp_label == NULL ) {
-            fprintf(stderr, "File \"%s\" could not be opened, aborting!\n", argv[4]);
-            fclose(fp_input);
-            return 1;
-        }
+        CHECK(fp_label == NULL, "Label file could not be opened, aborting!\n", 2);
 
-        if (!bnn_op(bnn, fp_input, fp_label, op)) {
-            printf("%s completed.\n", op == OP_TRAIN ? "Training" : "Testing");
+        int ret;
+        if (!(ret = bnn_op(bnn, fp_input, fp_label, op))) {
+            printf("%s completed.\n", op == TRAIN ? "Training" : "Testing");
 
             // Only save the nnet if we were training it
-            if ( op == OP_TRAIN ) {
-                if ( bnn_write(bnn, argv[2]) ) {
-                    return 1;
-                }
+            if ( op == TRAIN ) {
+                PASS(bnn_write(bnn, argv[2]), 3);
             }
-
-            printf("All done.\n");
+        } else {
+            PASS(ret, 3);
         }
 
-        fclose(fp_input);
+    error3:
         fclose(fp_label);
-
+    error2:
+        fclose(fp_input);
     } else {
-        printf(usage_message);
-        return 1;
+        CHECK(1, "Invalid arguments." USAGE, 1);
     }
 
-    return 0;
+error1:
+    RETURN;
+}
+
+static void initPRNG() {
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    xor4096i((UINT)ts.tv_nsec);
 }
