@@ -43,7 +43,11 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     for (BNNS i = 0; i < layers-1; i++) {
         for (BNNS j = 0; j < layer_sizes[i+1]; j++) {
             for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNNW)); k++) {
-                bnn->weight[i][j][k] = xor4096i(0);
+				bnn->weight[i][j][k] = xor4096i(0);
+				for (BNNS m = 0; m < SIZE(BNNW); m++) {
+					sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
+					bnn->weight_true[i][j][k*SIZE(BNNW)+m] = sign * (float)xor4096r(0);
+				}
             }
         }
     }
