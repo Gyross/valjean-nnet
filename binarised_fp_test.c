@@ -37,16 +37,16 @@ void packed_ls_test() {
 	
 }
 
-static void matrix_mult_test() {
+void matrix_mult_test() {
 	BNNI input[INP_VEC_SIZE] = {0};
 	BNNS in_layer_size = 4;
 	input[0]=8+2;
 	BNNS inp_size = CEIL_DIV(in_layer_size, SIZE(BNNI));
 	BNNS out_size = 2;
     BNNO output[NODE_MAX] = {0};
-    BNNW weights[NODE_MAX][WGT_VEC_SIZE] = {0};
+    BNN_bin weights[NODE_MAX][WGT_VEC_SIZE] = {0};
 	BNNS last_trunc = in_layer_size % SIZE(BNNI);
-	BNNB bias[NODE_MAX] = {0};
+	BNN_real bias[NODE_MAX] = {0};
 	BNNO expected_output[NODE_MAX] = {0};
 	
 	matrix_mult(input, output, inp_size, out_size, weights, last_trunc, bias);
@@ -65,15 +65,6 @@ static void matrix_mult_test() {
 	matrix_mult(input, output_new, inp_size, out_size, weights, last_trunc, bias);
 	compare_output(expected_output, output_new, out_size);
 }
-
-static void binarise_test() {
-    
-}
-
-static void clamp() {
-    
-}
-
 
 int main (int argc, char const *argv[])
 {

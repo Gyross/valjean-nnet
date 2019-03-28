@@ -17,7 +17,7 @@ void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
             bnn->layer_sizes[i] % SIZE(BNNI), bnn->bias[i]
         );
 		
-		memcpy(bnn->activations_true[i], (BNNA_S) output, NODE_MAX * sizeof(BNNA_S));
+		memcpy(bnn->activations_true[i], (BNN_real *) output, NODE_MAX * sizeof(BNN_real));
 
 #ifdef DEBUG
         for (int j = 0; j < out_size; j++) {
@@ -28,7 +28,7 @@ void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
 
         if (i != bnn->layers-2) {
             binarise(input, output, out_size);
-			memcpy(bnn->b_activations[i], (BNNA_U) input, INP_VEC_SIZE * sizeof(BNNA_U));
+			memcpy(bnn->b_activations[i], (BNN_bin *) input, INP_VEC_SIZE * sizeof(BNN_bin));
         } else {
             clamp(output, bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
@@ -48,7 +48,7 @@ BNNS packed_ls(BNN bnn, BNNS layer) {
 
 void matrix_mult(
     BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNS inp_size, BNNS out_size,
-    BNNW weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNNB bias[NODE_MAX]
+    BNN_bin weights[NODE_MAX][WGT_VEC_SIZE], BNNS last_trunc, BNN_real bias[NODE_MAX]
 ) {
     BNNS k, j;
     for ( j = 0; j < out_size; j++ ) { // for each output node
@@ -69,7 +69,7 @@ BNNO xnor_bin_sum(BNNI i, BNN_bin w) {
     return __builtin_popcount(~(i^w)) - (PACKED_SIZE / 2);
 }
 
-BNNO partial_xnor_bin_sum(BNNI i, BNNW w, BNNS bits) {
+BNNO partial_xnor_bin_sum(BNNI i, BNN_bin w, BNNS bits) {
     BNNO xnored = ~(i^w);
     BNNO mask = (BNNO)((1 << bits) - 1);
     return 2 * __builtin_popcount(xnored & mask) - bits;

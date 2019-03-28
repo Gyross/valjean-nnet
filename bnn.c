@@ -31,7 +31,7 @@ static void print_statistics(double total_cost, unsigned n_cases);
  * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
  */
 
-void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[], unsigned sim_anneal) {
+void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
     static_assert(sizeof(BNN_bin) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
 
     // Set the global num_layers and layer_size variables
@@ -45,8 +45,8 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[], unsigned sim_anne
             for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNN_bin)); k++) {
 				bnn->weight[i][j][k] = xor4096i(0);
 				for (BNNS m = 0; m < SIZE(BNN_bin); m++) {
-					sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
-					bnn->weight_true[i][j][k*SIZE(BNN_bin)+m] = sign * 0.1 * (float)xor4096r(0);
+					BNN_real sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
+					bnn->weight_true[i][j][k*SIZE(BNN_bin)+m] = sign * (BNN_real)xor4096r(0);
 				}
             }
         }
@@ -83,7 +83,7 @@ int bnn_read(BNN bnn, const char* filename) {
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
         BNNS b_size = bnn->layer_sizes[m];
-        amt_read = fread( bnn->bias[m], sizeof(BNNB), b_size, fp );
+        amt_read = fread( bnn->bias[m], sizeof(BNN_real), b_size, fp );
         CHECK(amt_read != b_size, "File corrupted!", 2);
     }
 
@@ -124,7 +124,7 @@ int bnn_write(BNN bnn, const char* filename) {
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
         BNNS b_size = bnn->layer_sizes[m];
-        amt_written = fwrite( bnn->bias[m], sizeof(BNNB), b_size, fp);
+        amt_written = fwrite( bnn->bias[m], sizeof(BNN_real), b_size, fp);
         CHECK(amt_written != b_size, "Failed to save BNN to file.", 2);
     }
 

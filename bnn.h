@@ -45,6 +45,7 @@ struct bnn {
 	BNN_real weight_true[LAYER_MAX-1][NODE_MAX][NODE_MAX];
     BNN_real bias[LAYER_MAX-1][NODE_MAX];
 	BNN_real activations_true[LAYER_MAX-2][NODE_MAX];
+	BNN_bin b_activations[LAYER_MAX-2][NODE_MAX];
 };
 
 
