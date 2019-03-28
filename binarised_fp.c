@@ -65,7 +65,7 @@ void matrix_mult(
     }
 }
 
-BNNO xnor_bin_sum(BNNI i, BNNW w) {
+BNNO xnor_bin_sum(BNNI i, BNN_bin w) {
     return __builtin_popcount(~(i^w)) - (PACKED_SIZE / 2);
 }
 

@@ -15,7 +15,7 @@
 #define NODE_MAX 8192
 
 #define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
-#define WGT_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNW))
+#define WGT_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNN_bin))
 
 typedef enum op_t {
     TEST,
