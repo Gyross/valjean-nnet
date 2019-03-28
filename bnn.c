@@ -14,10 +14,10 @@
 static void print_output(
     const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
 );
-static BNNO cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+static double cost_func(
+    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
 );
-static void print_statistics(BNNO total_cost, unsigned n_cases);
+static void print_statistics(double total_cost, unsigned n_cases);
 
 /*
  * Creates new BNN.
@@ -135,6 +135,31 @@ error1:
     RETURN;
 }
 
+void bnn_print(BNN bnn) {
+    printf("LAYERS: %d\n", bnn->layers);
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        printf("%d ", bnn->layer_sizes[i]);
+    }
+    printf("\n");
+    printf("WEIGHTS\n");
+    for (BNNS i = 0; i < bnn->layers-1; i++) {
+        for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
+            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNNW)); k++) {
+                printf("%x ", bnn->weight[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+    /*
+    printf("BIASES\n");
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        for (BNNS j = 0; j < bnn->layer_sizes[i]; j++) {
+            printf("%d ", bnn->bias[i][j]);
+        }
+    }
+    */
+}
+
 /*
  * Performs operation - training or testing.
  *
@@ -153,7 +178,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     BNNO expected_vec[NODE_MAX];
     BNNO output_vec[NODE_MAX];
 
-    BNNO total_cost = 0;
+    double total_cost = 0;
     unsigned n_cases = 0;
 
     // Read number of inputs and outputs expected by file and do some checking
@@ -186,7 +211,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
             print_output(expected_vec, output_vec, n_outputs);
         }
 
-        total_cost += cost_func(output_vec, expected_vec, n_outputs);
+        total_cost += cost_func(output_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 
         n_cases++;
     }
@@ -219,21 +244,21 @@ static void print_output(
 
 }
 
-static BNNO cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+static double cost_func(
+    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
 ) {
-    BNNO cost = 0;
+    double cost = 0.0;
 
     for (BNNS i = 0; i < n_outputs; i++) {
-        int diff = output_vec[i] - expected_vec[i];
+        double diff = (double)((output_vec[i] - expected_vec[i])) / (2 * max);
         cost += diff * diff;
     }
 
-    return cost / 2;
+    return cost / 2.0;
 }
 
-static void print_statistics(BNNO total_cost, unsigned n_cases) {
-    double avg_cost = total_cost/((float)n_cases);
+static void print_statistics(double total_cost, unsigned n_cases) {
+    double avg_cost = total_cost / n_cases;
     double rms_err  = sqrt(avg_cost);
     printf("Average cost: %lf\n", avg_cost );
     printf("RMS error:    %lf\n", rms_err );

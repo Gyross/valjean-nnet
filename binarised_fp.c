@@ -19,12 +19,26 @@ void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
 		
 		memcpy(bnn->activations_true[i], (BNNA_S) output, NODE_MAX * sizeof(BNNA_S));
 
+#ifdef DEBUG
+        for (int j = 0; j < out_size; j++) {
+            printf("%d ", output[j]);
+        }
+        printf("\n");
+#endif
+
         if (i != bnn->layers-2) {
             binarise(input, output, out_size);
 			memcpy(bnn->b_activations[i], (BNNA_U) input, INP_VEC_SIZE * sizeof(BNNA_U));
         } else {
             clamp(output, bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
+
+#ifdef DEBUG
+        for (int j = 0; j < CEIL_DIV(out_size, SIZE(BNNI)); j++) {
+            printf("%x ", input[j]);
+        }
+        printf("\n");
+#endif
     }
 }
 
@@ -41,22 +55,27 @@ void matrix_mult(
         for ( k = 0; k < inp_size-1; k++ ) { // for each input node
             output[j] += xnor_bin_sum(input[k], weights[j][k]);
         }
-        output[j] += partial_xnor_bin_sum(input[k], weights[j][k], last_trunc);
+        if (last_trunc == 0) {
+            output[j] += xnor_bin_sum(input[k], weights[j][k]);
+        }
+        else {
+            output[j] += partial_xnor_bin_sum(input[k], weights[j][k], last_trunc);
+        }
         output[j] += bias[j];
     }
 }
 
-static BNNO xnor_bin_sum(BNNI i, BNNW w) {
+BNNO xnor_bin_sum(BNNI i, BNNW w) {
     return __builtin_popcount(~(i^w)) - (PACKED_SIZE / 2);
 }
 
-static BNNO partial_xnor_bin_sum(BNNI i, BNNW w, BNNS bits) {
+BNNO partial_xnor_bin_sum(BNNI i, BNNW w, BNNS bits) {
     BNNO xnored = ~(i^w);
     BNNO mask = (BNNO)((1 << bits) - 1);
     return 2 * __builtin_popcount(xnored & mask) - bits;
 }
 
-static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size) {
+void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size) {
     for (BNNS j = 0; j < out_size; j += PACKED_SIZE) { // for each output value
         for (int k = PACKED_SIZE - 1; k >= 0; k--) { // high to low bits for efficient shifting
             input[j / PACKED_SIZE] <<= 1;
@@ -65,7 +84,7 @@ static void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS
     }
 }
 
-static void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max) {
+void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max) {
     for (size_t i = 0; i < n_outputs; i++) {
         output[i] = abs(output[i]) > max ? (max * (output[i] >= 0 ? 1 : -1)) : output[i];
     }

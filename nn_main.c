@@ -29,9 +29,16 @@ int main( int argc, char* argv[] ) {
 
     initPRNG();
 
+    BNN bnn = &_bnn;
+
+    if (argc == 2) {
+        bnn_read(bnn, argv[1]);
+        bnn_print(bnn);
+        return EXIT_SUCCESS;
+    }
+
     CHECK(argc < 3, "Invalid arguments." USAGE, 1);
 
-    BNN bnn = &_bnn;
     if ( strcmp(argv[1], "new") == 0 ) {
         // If we are at this point we are guaranteed that argc > 3, so this
         // subtraction is valid.

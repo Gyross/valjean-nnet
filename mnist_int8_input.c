@@ -6,12 +6,13 @@
 
 int stochastic_binarise(int val);
 
-// TODO: handle non multiple of 32 input vector properly
+// handles non-multiples of 32 by generating garbage in the upper bits, which is fine as
+// those bits won't be accessed by anything relevant
 void binarise_input(INPT input[NODE_MAX], BNNI output[INP_VEC_SIZE], BNNB bias[NODE_MAX], BNNS n_inputs) {
     for (size_t i = 0; i < n_inputs; i+=SIZE(BNNI)) {
         for (ssize_t k = SIZE(BNNI)-1; k >= 0; k--) {
             output[i/SIZE(BNNI)] <<= 1;
-            output[i/SIZE(BNNI)] += stochastic_binarise(input[i+k]+bias[i+k]); // potentially an overflow issue
+            output[i/SIZE(BNNI)] += stochastic_binarise((BNNO)input[i+k]+bias[i+k]);
         }
     }
 }
