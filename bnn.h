@@ -23,7 +23,7 @@ typedef enum op_t {
 } op_t;
 
 typedef float BNN_real; //bnn real number type
-typedef uint32_t BNNS; // bnn shape type
+typedef uint32_t BNNS; // bnn size type
 typedef uint32_t BNNI; // bnn input data type
 typedef int32_t BNNO; // bnn output data type
 typedef uint32_t BNN_bin; //bnn binarised type
@@ -39,13 +39,15 @@ struct bnn {
     BNNS layers;
     BNNS layer_sizes[LAYER_MAX];
     BNN_bin weight[LAYER_MAX-1][NODE_MAX][WGT_VEC_SIZE];
-	BNN_real weight_true[LAYER_MAX-1][NODE_MAX][NODE_MAX];
-    BNN_real bias[LAYER_MAX-1][NODE_MAX];
-	BNN_real activations_true[LAYER_MAX-2][NODE_MAX];
 	BNNO output[NODE_MAX];
 	BNNI b_input[INP_VEC_SIZE];
 	BNNI input_true[NODE_MAX];
+	BNN_real weight_true[LAYER_MAX-1][NODE_MAX][NODE_MAX];
+    BNN_real bias[LAYER_MAX-1][NODE_MAX];
+	BNN_real activations_true[LAYER_MAX-2][NODE_MAX];
 };
+
+
 
 typedef struct bnn *BNN;
 typedef struct bnn bnn_alloc;

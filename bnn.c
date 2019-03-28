@@ -31,8 +31,8 @@ static void print_statistics(double total_cost, unsigned n_cases);
  * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
  */
 
-void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
-    static_assert(sizeof(BNNW) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
+void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[], unsigned sim_anneal) {
+    static_assert(sizeof(BNN_bin) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
 
     // Set the global num_layers and layer_size variables
     bnn->layers = layers;
@@ -42,11 +42,11 @@ void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
     // There are layers-1 number of weight matrices as they lie between layers
     for (BNNS i = 0; i < layers-1; i++) {
         for (BNNS j = 0; j < layer_sizes[i+1]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNNW)); k++) {
+            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNN_bin)); k++) {
 				bnn->weight[i][j][k] = xor4096i(0);
-				for (BNNS m = 0; m < SIZE(BNNW); m++) {
+				for (BNNS m = 0; m < SIZE(BNN_bin); m++) {
 					sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
-					bnn->weight_true[i][j][k*SIZE(BNNW)+m] = sign * (float)xor4096r(0);
+					bnn->weight_true[i][j][k*SIZE(BNN_bin)+m] = sign * 0.1 * (float)xor4096r(0);
 				}
             }
         }
@@ -75,8 +75,8 @@ int bnn_read(BNN bnn, const char* filename) {
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
-            amt_read = fread(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
+            BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNN_bin));
+            amt_read = fread(bnn->weight[m][n], sizeof(BNN_bin), wv_size, fp);
             CHECK(amt_read != wv_size, "File corrupted!", 2);
         }
     }
@@ -115,9 +115,9 @@ int bnn_write(BNN bnn, const char* filename) {
     CHECK(amt_written != bnn->layers, "Failed to save BNN to file.", 2);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
+        BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNN_bin));
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            amt_written = fwrite(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
+            amt_written = fwrite(bnn->weight[m][n], sizeof(BNN_bin), wv_size, fp);
             CHECK(amt_written != wv_size, "Failed to save BNN to file.", 2);
         }
     }
@@ -144,7 +144,7 @@ void bnn_print(BNN bnn) {
     printf("WEIGHTS\n");
     for (BNNS i = 0; i < bnn->layers-1; i++) {
         for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNNW)); k++) {
+            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNN_bin)); k++) {
                 printf("%x ", bnn->weight[i][j][k]);
             }
             printf("\n");
