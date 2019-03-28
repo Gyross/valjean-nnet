@@ -2,6 +2,7 @@
 #define VALJEAN_NNET_ANNEAL_H
 
 #include "bnn.h"
+#include <stdio.h>
 
 enum anneal_param {
     PARAM_NONE,
@@ -47,7 +48,7 @@ struct anneal_state {
     uint32_t total_parameters;
 };
 
-void anneal( BNN bnn );
+void anneal( BNN bnn, FILE* fp_input, FILE* fp_label );
 void anneal_init( BNN bnn, struct anneal_state* state );
 struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* state );
 void anneal_revert( BNN bnn, struct perturb_list* p );

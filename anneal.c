@@ -10,6 +10,7 @@
 #include <math.h>
 #include "bnn.h"
 #include "xorgens.h"
+#include "energy.h"
 
 struct perturb_list* perturb_list_create() {
     struct perturb_list* new_perturb = malloc( sizeof(struct perturb_list) );
@@ -143,7 +144,6 @@ void anneal_init( BNN bnn, struct anneal_state* state ) {
 
     state->temperature = 1000;
 
-    // TODO really we should do an initial FP
     state->energy      = INFINITY;
 
     state->cooling_factor = 0.99;
@@ -161,9 +161,6 @@ void anneal_init( BNN bnn, struct anneal_state* state ) {
     state->total_weights    = total_weights;
     state->total_parameters = total_weights + total_biases;
 }
-
-// XXX TEMPORARY FORWARD PASS FUNCTION XXX
-double temp_fp( BNN bnn ){ return 0.0; }
 
 enum anneal_decision anneal_decide( struct anneal_state* state, double new_energy ) {
     double boltzmann;
@@ -194,7 +191,7 @@ uint32_t anneal_end( struct anneal_state* state ) {
     return 0;
 }
 
-void anneal( BNN bnn ) {
+void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
     struct anneal_state state;
     struct perturb_list *perturbation = NULL;
     enum anneal_decision decision = DECISION_NONE;
@@ -209,7 +206,7 @@ void anneal( BNN bnn ) {
         perturbation = anneal_perturb( bnn, &state );
 
         // Do a forward pass
-        energy = temp_fp(bnn); // TODO replace this with the actual FP function
+        energy = compute_energy(bnn, fp_input, fp_label);
 
         decision = anneal_decide( &state, energy );
         
