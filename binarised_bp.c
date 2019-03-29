@@ -4,7 +4,7 @@
 #include "binarised_bp.h"
 #include "nnet_math.h"
 
-void back_pass(BNN bnn, BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNO target[NODE_MAX], BNN_real l_r) {
+void back_pass(BNN bnn, BNNO target[NODE_MAX], BNN_real l_r) {
 	
 	BNN_real weight_grads[LAYER_MAX][NODE_MAX][NODE_MAX] = {0};
 	BNN_real act_grads_real[LAYER_MAX][NODE_MAX] = {0};
@@ -12,7 +12,7 @@ void back_pass(BNN bnn, BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNO ta
 	BNNS last_layer = bnn->layers - 1;
 	
 	for (BNNS j = 0; j < bnn->layer_sizes[last_layer]; j++) {
-			act_grads_real[last_layer][j] = output[j] - target[j];
+			act_grads_real[last_layer][j] = bnn->output[j] - target[j];
 		}
 	
 	for (BNNS i = last_layer; i >= 1; i--) {		// for each layer
@@ -36,6 +36,7 @@ void back_pass(BNN bnn, BNNI input[INP_VEC_SIZE], BNNO output[NODE_MAX], BNNO ta
 			binarise( (BNNI *) bnn->weight_true[i][j], (BNNO *) bnn->weight[i][j], bnn->layer_sizes[i]);
 		}
     }
+	
 
 }
 

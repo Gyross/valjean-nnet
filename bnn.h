@@ -41,7 +41,7 @@ struct bnn {
     BNN_bin weight[LAYER_MAX-1][NODE_MAX][WGT_VEC_SIZE];
 	BNNO output[NODE_MAX];
 	BNNI b_input[INP_VEC_SIZE];
-	BNNI input_true[NODE_MAX];
+	BNNI nb_input[NODE_MAX];
 	BNN_real weight_true[LAYER_MAX-1][NODE_MAX][NODE_MAX];
     BNN_real bias[LAYER_MAX-1][NODE_MAX];
 	BNN_real activations_true[LAYER_MAX-2][NODE_MAX];

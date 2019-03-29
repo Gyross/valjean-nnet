@@ -7,6 +7,7 @@
 #include "xorgens.h"
 #include "bnn.h"
 #include "binarised_fp.h"
+#include "binarised_bp.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
 
@@ -173,7 +174,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
     BNNS n_inputs, n_outputs;
     size_t amt_read;
-    INPT input_vec[NODE_MAX];
+    INPT nb_input[NODE_MAX];
     LBLT _expected_vec[NODE_MAX];
     BNNO expected_vec[NODE_MAX];
     BNNO output_vec[NODE_MAX];
@@ -192,7 +193,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
 
     // Loop until we reach the end of the file
-    while( ( amt_read = fread( input_vec, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
+    while( ( amt_read = fread( nb_input, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
         CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
 
         CHECK(
@@ -201,11 +202,18 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
         );
 
         convert_labels(_expected_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
+	    
+		BNNI b_input[INP_VEC_SIZE] = {0};
+	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
+		
+		memcpy(bnn->b_input, b_input, INP_VEC_SIZE * sizeof(BNNI));
+		memcpy(bnn->nb_input, nb_input, NODE_MAX * sizeof(INPT));
 
-        forward_pass(bnn, input_vec, output_vec);
+        forward_pass(bnn, b_input, output_vec);
 
         if ( op_type == TRAIN ) {
-            //backpropagate(expected_vec);
+			// hard code learning rate to 0.001
+            back_pass(bnn, expected_vec, 0.001);
         }
         else if ( op_type == TEST ) {
             print_output(expected_vec, output_vec, n_outputs);

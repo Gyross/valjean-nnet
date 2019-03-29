@@ -3,9 +3,7 @@
 #include <stdlib.h>
 #include "binarised_fp.h"
 
-void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
-    BNNI input[INP_VEC_SIZE] = {0};
-    binarise_input(nb_input, input, bnn->bias[0], bnn->layer_sizes[0]);
+void forward_pass(BNN bnn, BNNI input[NODE_MAX], BNNO output[NODE_MAX]) {
 
     for ( BNNS i = 0; i < bnn->layers-1; i++ ) { // for each layer
         BNNS inp_size = packed_ls(bnn, i);
@@ -40,6 +38,7 @@ void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
         printf("\n");
 #endif
     }
+	memcpy(bnn->output, output, NODE_MAX * sizeof(BNNO));
 }
 
 BNNS packed_ls(BNN bnn, BNNS layer) {
