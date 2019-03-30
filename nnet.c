@@ -62,7 +62,13 @@ void backpropagate(float* expected_output) {
 
     // output layer derivatives (dCost/dOut)
     for ( i = 0; i < layer_size[num_layers-1]; i++ ) {
-        cost_derivative[num_layers-1][i] = activation[num_layers-1][i] - expected_output[i];
+        // First clause for a categorization network only (such as for MNIST)
+        if ( (expected_output[i] == 1.0 && activation[num_layers-1][i] > 1.0) ||
+             (expected_output[i] == 0.0 && activation[num_layers-1][i] < 0.0) ) {
+            cost_derivative[num_layers-1][i] = 0;
+        } else {
+            cost_derivative[num_layers-1][i] = activation[num_layers-1][i] - expected_output[i];
+        }
     }
 
 
