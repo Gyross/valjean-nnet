@@ -41,6 +41,8 @@ struct anneal_state {
     double cooling_factor;
     double end_temperature;
 
+    uint32_t iteration;
+
     // Stored number of parameters
     // Might want to move these to the bnn struct later
     uint32_t total_weights;

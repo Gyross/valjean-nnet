@@ -12,6 +12,8 @@
 #include "xorgens.h"
 #include "energy.h"
 
+#define ANNEAL_PRINT_DEBUG
+
 struct perturb_list* perturb_list_create() {
     struct perturb_list* new_perturb = malloc( sizeof(struct perturb_list) );
     if ( new_perturb != NULL ) {
@@ -35,7 +37,7 @@ void perturb_list_free( struct perturb_list* list ) {
     }
 }
 
-struct perturb_list* anneal_peturb( BNN bnn, struct anneal_state* as ) {
+struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as ) {
     struct perturb_list* list = NULL;
     struct perturb_list* p  = NULL;
 
@@ -146,8 +148,10 @@ void anneal_init( BNN bnn, struct anneal_state* state ) {
 
     state->energy      = INFINITY;
 
-    state->cooling_factor = 0.99;
+    state->cooling_factor = 0.9999;
     state->end_temperature = 0.01;
+
+    state->iteration = 1;
 
     // We will need to know the total number of weights and biases
     // so that we can select which parameters to perturb
@@ -165,6 +169,10 @@ void anneal_init( BNN bnn, struct anneal_state* state ) {
 enum anneal_decision anneal_decide( struct anneal_state* state, double new_energy ) {
     double boltzmann;
 
+    #ifdef ANNEAL_PRINT_DEBUG
+        printf( "Old Energy: %f, New Energy: %f\n", state->energy, new_energy );
+    #endif
+
     if ( new_energy <= state->energy ) {
         state->energy = new_energy;
         return DECISION_ACCEPT;
@@ -180,7 +188,13 @@ enum anneal_decision anneal_decide( struct anneal_state* state, double new_energ
 }
 
 void anneal_cool( struct anneal_state* state ) {
+    #ifdef ANNEAL_PRINT_DEBUG
+        printf("Temp %f -> ", state->temperature);
+    #endif
     state->temperature *= state->cooling_factor;
+    #ifdef ANNEAL_PRINT_DEBUG
+        printf("%f\n", state->temperature);
+    #endif
 }
 
 uint32_t anneal_end( struct anneal_state* state ) {
@@ -192,23 +206,34 @@ uint32_t anneal_end( struct anneal_state* state ) {
 }
 
 void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
-    struct anneal_state state;
+    struct anneal_state _state;
+    struct anneal_state* state = &_state;
     struct perturb_list *perturbation = NULL;
     enum anneal_decision decision = DECISION_NONE;
 
     double energy;
 
-    anneal_init( bnn, &state );
+    anneal_init( bnn, state );
 
     // TODO potentially implement annealing resets
 
-    while ( !anneal_end(&state) ) {
-        perturbation = anneal_perturb( bnn, &state );
+    while ( !anneal_end(state) ) {
+        #ifdef ANNEAL_PRINT_DEBUG
+            printf("\n\n\nIteration: %u\n", state->iteration);
+        #endif
+
+
+        perturbation = anneal_perturb( bnn, state );
 
         // Do a forward pass
         energy = compute_energy(bnn, fp_input, fp_label);
 
-        decision = anneal_decide( &state, energy );
+        decision = anneal_decide( state, energy );
+
+        #ifdef ANNEAL_PRINT_DEBUG
+            printf( "New state %s\n", 
+                    (decision == DECISION_ACCEPT)?"accepted":"rejected" );
+        #endif
         
         if ( decision != DECISION_ACCEPT ) {
             anneal_revert( bnn, perturbation );
@@ -217,7 +242,9 @@ void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
         // Free the perturb_list allocated by anneal_perturb
         perturb_list_free(perturbation);
 
-        anneal_cool(&state);
+        anneal_cool(state);
+
+        ++state->iteration;
     }
 }
 
