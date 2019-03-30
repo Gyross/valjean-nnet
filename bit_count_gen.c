@@ -1,24 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
-/*
- * Edit the function map()
- * and the NUM_* defines to change what
- * function to train the neural network
- * on.
- *
- * Main will handle file IO etc.
- */
+#define NUM_CASES 64
 
-#define NUM_CASES 16
+#define NUM_INPUTS 2
+#define NUM_OUTPUTS 3
 
-#define NUM_INPUTS 4
-#define NUM_OUTPUTS 5
+int get_smallest_index( int* array, int len ) {
+    int smallest = array[0];
+    int index    = 0;
+    for ( int i = 1; i < len; i++ ) {
+        if ( array[i] < smallest ) {
+            index    = i;
+            smallest = array[i];
+        }
+    }
+    return index;
+}
 
 int main(int argc, char* argv[]) {
     int8_t input[NUM_INPUTS];
     uint8_t label;
+
+    int hist[NUM_OUTPUTS];
+    memset( hist, 0, sizeof(hist) );
 
     FILE* fp_input = fopen(argv[1], "wb");
     FILE* fp_label = fopen(argv[2], "wb");
@@ -40,14 +47,19 @@ int main(int argc, char* argv[]) {
         for ( long int i = 0; i < NUM_CASES; i++ ) {
             label = 0;
 
-            for ( unsigned int j = 0; j < NUM_INPUTS; j++ ) {
-                if ( rand() % 2 ) {
-                    input[j] = 127;
-                    ++label;
-                } else {
-                    input[j] = -128;
+            int req_label = get_smallest_index( hist, NUM_OUTPUTS );
+            do {
+                for ( unsigned int j = 0; j < NUM_INPUTS; j++ ) {
+                    if ( rand() % 2 ) {
+                        input[j] = 127;
+                        ++label;
+                    } else {
+                        input[j] = -128;
+                    }
                 }
-            }
+            } while ( label != req_label );
+
+            ++hist[label];
 
             fwrite(input, sizeof(int8_t), NUM_INPUTS, fp_input);
             fwrite(&label, sizeof(uint8_t), 1, fp_label);
