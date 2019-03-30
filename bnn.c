@@ -13,10 +13,10 @@
 
 
 static void print_output(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 );
 static double cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs, BNN_real max
 );
 static void print_statistics(double total_cost, unsigned n_cases);
 
@@ -38,6 +38,12 @@ void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
     // Set the global num_layers and layer_size variables
     bnn->layers = layers;
     memcpy(bnn->layer_sizes, layer_sizes, layers * sizeof(BNNS));
+	
+	memset(bnn->weight, 0, sizeof(BNN_bin) * BIN_VEC_SIZE * NODE_MAX * LAYER_MAX);
+	memset(bnn->weight_true, 0, sizeof(BNN_real) * BIN_VEC_SIZE * NODE_MAX * NODE_MAX);
+	memset(bnn->bias, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+	memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+	memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
 
     // Generate uniformly distributed weights and biases for each forward pass step.
     // There are layers-1 number of weight matrices as they lie between layers
@@ -52,6 +58,7 @@ void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
             }
         }
     }
+	
 }
 
 /*
@@ -176,8 +183,8 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     size_t amt_read;
     INPT nb_input[NODE_MAX];
     LBLT _expected_vec[NODE_MAX];
-    BNNO expected_vec[NODE_MAX];
-    BNNO output_vec[NODE_MAX];
+    BNN_real expected_vec[NODE_MAX];
+    BNN_real output_vec[NODE_MAX];
 
     double total_cost = 0;
     unsigned n_cases = 0;
@@ -203,13 +210,17 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
         convert_labels(_expected_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 	    
-		BNNI b_input[INP_VEC_SIZE] = {0};
+		BNN_bin b_input[BIN_VEC_SIZE];
+		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
 	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
 		
-		memcpy(bnn->b_input, b_input, INP_VEC_SIZE * sizeof(BNNI));
-		memcpy(bnn->nb_input, nb_input, NODE_MAX * sizeof(INPT));
+		printf("b_input copy\n");
+		memcpy(bnn->b_activations[0], (BNN_bin *) b_input, BIN_VEC_SIZE * sizeof(BNN_bin));
+		printf("nb_input copy\n");
+		memcpy(bnn->activations_true[0], (BNN_real *) nb_input, NODE_MAX * sizeof(INPT));
+		
 
-        forward_pass(bnn, b_input, output_vec);
+        forward_pass(bnn);
 
         if ( op_type == TRAIN ) {
 			// hard code learning rate to 0.001
@@ -231,7 +242,7 @@ error1:
 }
 
 static void print_output(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 ) {
     int expected_category = -1;
 
@@ -246,14 +257,14 @@ static void print_output(
 
     printf("Category: %d, Out: ", expected_category);
     for ( BNNS i = 0; i < n_outputs; i++ ) {
-        printf("%d ", output_vec[i] );
+        printf("%f ", output_vec[i] );
     }
     printf("\n");
 
 }
 
 static double cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs, BNN_real max
 ) {
     double cost = 0.0;
 

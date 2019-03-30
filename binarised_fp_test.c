@@ -4,7 +4,7 @@
 #include "binarised_fp.h"
 
 
-static void compare_output(const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs);
+static void compare_output(const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs);
 
 
 void forward_pass_test() {
@@ -38,21 +38,22 @@ void packed_ls_test() {
 }
 
 void matrix_mult_test() {
-	BNNI input[INP_VEC_SIZE] = {0};
+	BNN_bin input[BIN_VEC_SIZE];
+	memset(input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
 	BNNS in_layer_size = 4;
 	input[0]=8+2;
-	BNNS inp_size = CEIL_DIV(in_layer_size, SIZE(BNNI));
+	BNNS inp_size = CEIL_DIV(in_layer_size, SIZE(BNN_bin));
 	BNNS out_size = 2;
-    BNNO output[NODE_MAX] = {0};
-    BNN_bin weights[NODE_MAX][WGT_VEC_SIZE] = {0};
-	BNNS last_trunc = in_layer_size % SIZE(BNNI);
+    BNN_real output[NODE_MAX] = {0};
+    BNN_bin weights[NODE_MAX][BIN_VEC_SIZE] = {0};
+	BNNS last_trunc = in_layer_size % SIZE(BNN_bin);
 	BNN_real bias[NODE_MAX] = {0};
-	BNNO expected_output[NODE_MAX] = {0};
+	BNN_real expected_output[NODE_MAX] = {0};
 	
 	matrix_mult(input, output, inp_size, out_size, weights, last_trunc, bias);
 	compare_output(expected_output, output, out_size);
 	
-	BNNO output_new[NODE_MAX] = {0};
+	BNN_real output_new[NODE_MAX] = {0};
 	weights[0][0] = 2 + 4 + 8;
 	weights[1][0] = 1 + 2;
 	
@@ -73,7 +74,7 @@ int main (int argc, char const *argv[])
 }
 
 
-static void compare_output(const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs) {
+static void compare_output(const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs) {
     int correctness = 1;
 
 	printf("Output:   ");
@@ -81,11 +82,11 @@ static void compare_output(const BNNO expected_vec[NODE_MAX], const BNNO output_
 		if ( expected_vec[i] != output_vec[i] ) {
 			correctness = 0;
 		}
-        printf("%d ", output_vec[i] );
+        printf("%f ", output_vec[i] );
     }
     printf("\nExpected: ");
     for ( BNNS i = 0; i < n_outputs; i++ ) {
-        printf("%d ", expected_vec[i] );
+        printf("%f ", expected_vec[i] );
     }
 	
 	if (correctness == 1) {
