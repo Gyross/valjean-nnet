@@ -3,7 +3,13 @@
 #include <stdlib.h>
 #include "binarised_fp.h"
 
+#include <xparameters.h>
+#include <xil_io.h>
+
+
 void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
+
+    init_platform();
     BNNI input[INP_VEC_SIZE] = {0};
     binarise_input(nb_input, input, bnn->bias[0], bnn->layer_sizes[0]);
 
@@ -63,7 +69,11 @@ void matrix_mult(
 }
 
 BNNO xnor_bin_sum(BNNI i, BNNW w) {
-    return __builtin_popcount(~(i^w)) - (PACKED_SIZE / 2);
+    int val = ~(i^w);
+    Xil_Out32(XPAR_AXI_IP_DEMO_0_s00_AXI_BASEADDR, val);
+    int ret = Xil_In32(XPAR_AXI_IP_DEMO_0_s00_AXI_BASEADDR);
+    return ret - (PACKED_SIZE / 2);
+    //return __builtin_popcount(~(i^w)) - (PACKED_SIZE / 2);
 }
 
 BNNO partial_xnor_bin_sum(BNNI i, BNNW w, BNNS bits) {
