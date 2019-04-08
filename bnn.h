@@ -11,8 +11,8 @@
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
 #define SIZE(x) (sizeof(x) * 8)
 
-#define LAYER_MAX 1000
-#define NODE_MAX 8192
+#define LAYER_MAX 5
+#define NODE_MAX 800
 
 #define BIN_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNN_bin))
 

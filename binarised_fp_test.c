@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "binarised_fp.h"
+#include "bnn.h"
+#include "config.h"
 
 
 static void compare_output(const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs);
+void matrix_mult_test(void);
 
-
-void forward_pass_test() {
+//void forward_pass_test() {
 	// BNN bnn;
 	// INPT nb_input[INP_VEC_SIZE];
 	// BNNO output[NODE_MAX];
@@ -31,13 +33,13 @@ void forward_pass_test() {
 //             clamp(output, bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
 //         }
 //    }
-}
+//}
 
-void packed_ls_test() {
-	
-}
+//void packed_ls_test() {	
+//}
 
 void matrix_mult_test() {
+	printf("mat_mult_test\n");
 	BNN_bin input[BIN_VEC_SIZE];
 	memset(input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
 	BNNS in_layer_size = 4;
@@ -45,8 +47,11 @@ void matrix_mult_test() {
 	BNNS inp_size = CEIL_DIV(in_layer_size, SIZE(BNN_bin));
 	BNNS out_size = 2;
     BNN_real output[NODE_MAX] = {0};
-    BNN_bin weights[NODE_MAX][BIN_VEC_SIZE] = {0};
-	BNNS last_trunc = in_layer_size % SIZE(BNN_bin);
+    
+    BNN_bin  weights[NODE_MAX][BIN_VEC_SIZE];
+    memset(weights, 0, sizeof(BNN_bin) * BIN_VEC_SIZE * NODE_MAX);
+    
+    BNNS last_trunc = in_layer_size % SIZE(BNN_bin);
 	BNN_real bias[NODE_MAX] = {0};
 	BNN_real expected_output[NODE_MAX] = {0};
 	
@@ -65,13 +70,15 @@ void matrix_mult_test() {
 	expected_output[1] = 0;
 	matrix_mult(input, output_new, inp_size, out_size, weights, last_trunc, bias);
 	compare_output(expected_output, output_new, out_size);
-}
 
+}
+#ifdef TESTING
 int main (int argc, char const *argv[])
 {
 	matrix_mult_test();
 	return 0;
 }
+#endif
 
 
 static void compare_output(const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs) {

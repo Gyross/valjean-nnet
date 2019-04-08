@@ -39,9 +39,11 @@ void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
     bnn->layers = layers;
     memcpy(bnn->layer_sizes, layer_sizes, layers * sizeof(BNNS));
 	
-	memset(bnn->weight, 0, sizeof(BNN_bin) * BIN_VEC_SIZE * NODE_MAX * LAYER_MAX);
-	memset(bnn->weight_true, 0, sizeof(BNN_real) * BIN_VEC_SIZE * NODE_MAX * NODE_MAX);
-	memset(bnn->bias, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    for(BNNS ii = 0; ii < LAYER_MAX-1; ii++) {
+        memset(bnn->weight_true, 0, NODE_MAX * NODE_MAX * sizeof(BNN_real));
+        memset(bnn->weight, 0, BIN_VEC_SIZE * NODE_MAX * sizeof(BNN_bin));
+    }
+    memset(bnn->bias, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
 	memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
 	memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
 
@@ -80,20 +82,22 @@ int bnn_read(BNN bnn, const char* filename) {
 
     amt_read = fread( bnn->layer_sizes, sizeof(unsigned), bnn->layers, fp );
     CHECK(amt_read != bnn->layers, "File corrupted!", 2);
+    
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNN_bin));
-            amt_read = fread(bnn->weight[m][n], sizeof(BNN_bin), wv_size, fp);
-            CHECK(amt_read != wv_size, "File corrupted!", 2);
+            amt_read = fread(bnn->weight_true[m][n], sizeof(BNN_real), bnn->layer_sizes[m], fp);
+            CHECK(amt_read != bnn->layer_sizes[m], "File corrupted!", 2);
+            binarise(bnn->weight[m][n], bnn->weight_true[m][n], bnn->layer_sizes[m]);
         }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
-        BNNS b_size = bnn->layer_sizes[m];
+        BNNS b_size = bnn->layer_sizes[m+1];
         amt_read = fread( bnn->bias[m], sizeof(BNN_real), b_size, fp );
         CHECK(amt_read != b_size, "File corrupted!", 2);
     }
+    bnn_print(bnn);
 
 error2:
     fclose(fp);
@@ -123,15 +127,14 @@ int bnn_write(BNN bnn, const char* filename) {
     CHECK(amt_written != bnn->layers, "Failed to save BNN to file.", 2);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNN_bin));
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            amt_written = fwrite(bnn->weight[m][n], sizeof(BNN_bin), wv_size, fp);
-            CHECK(amt_written != wv_size, "Failed to save BNN to file.", 2);
+            amt_written = fwrite(bnn->weight_true[m][n], sizeof(BNN_bin), bnn->layer_sizes[m], fp);
+            CHECK(amt_written != bnn->layer_sizes[m], "Failed to save BNN to file.", 2);
         }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
-        BNNS b_size = bnn->layer_sizes[m];
+        BNNS b_size = bnn->layer_sizes[m+1];
         amt_written = fwrite( bnn->bias[m], sizeof(BNN_real), b_size, fp);
         CHECK(amt_written != b_size, "Failed to save BNN to file.", 2);
     }
@@ -152,8 +155,8 @@ void bnn_print(BNN bnn) {
     printf("WEIGHTS\n");
     for (BNNS i = 0; i < bnn->layers-1; i++) {
         for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNN_bin)); k++) {
-                printf("%x ", bnn->weight[i][j][k]);
+            for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
+                printf("%f ", bnn->weight_true[i][j][k]);
             }
             printf("\n");
         }
@@ -200,8 +203,11 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
 
     // Loop until we reach the end of the file
+    uint32_t total_read = 0;
     while( ( amt_read = fread( nb_input, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
         CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
+        total_read += amt_read;
+        printf("Total:%d\n", total_read);
 
         CHECK(
             fread( _expected_vec, sizeof(LBLT), n_outputs, fp_label ) != n_outputs,
@@ -262,7 +268,6 @@ static void print_output(
     printf("\n");
 
 }
-
 static double cost_func(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs, BNN_real max
 ) {

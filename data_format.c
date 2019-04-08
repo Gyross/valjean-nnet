@@ -14,6 +14,7 @@
     typedef int8_t out_t;
 #endif
 
+#ifdef DATA_FORMAT
 int main(int argc, char* argv[]) {
     uint8_t in_buf[BUF_SIZE];
     out_t  out_buf[BUF_SIZE];
@@ -56,3 +57,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+#endif

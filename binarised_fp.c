@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "binarised_fp.h"
+#include "config.h"
 
 void forward_pass(BNN bnn) {
 
@@ -15,9 +16,9 @@ void forward_pass(BNN bnn) {
             bnn->layer_sizes[i] % SIZE(BNN_bin), bnn->bias[i]
         );
 
-#ifdef DEBUG
+#ifdef DEBUG_FP
         for (int j = 0; j < out_size; j++) {
-            printf("%d ", bnn->activations_true[i+1][j]);
+            printf("%f ", bnn->activations_true[i+1][j]);
         }
         printf("\n");
 #endif
@@ -28,9 +29,9 @@ void forward_pass(BNN bnn) {
             clamp(bnn->activations_true[i+1], bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
 
-#ifdef DEBUG
+#ifdef DEBUG_FP
         for (int j = 0; j < CEIL_DIV(out_size, SIZE(BNN_bin)); j++) {
-            printf("%x ", bnn->activations_true[i+1][j]);
+            printf("%f ", bnn->activations_true[i+1][j]);
         }
         printf("\n");
 #endif

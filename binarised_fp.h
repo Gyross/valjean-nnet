@@ -15,6 +15,8 @@ void matrix_mult(
     BNN_bin input[BIN_VEC_SIZE], BNN_real output[NODE_MAX], BNNS inp_size, BNNS out_size,
     BNN_bin weights[NODE_MAX][BIN_VEC_SIZE], BNNS last_trunc, BNN_real bias[NODE_MAX]
 );
+
+//binarises OUTPUT to be INPUT for next layer (very confusing terminology)
 void binarise(BNN_bin input[BIN_VEC_SIZE], const BNN_real output[NODE_MAX], BNNS out_size);
 void clamp(BNN_real output[NODE_MAX], BNNS n_outputs, BNNS max);
 
