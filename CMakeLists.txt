@@ -3,7 +3,7 @@ project(valjean_nnet)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_compile_options("-Wl,--stack,8388608" "-fstack-usage")
+add_compile_options("-Wl,--stack,8388608" "-fstack-usage" "-Wall" "-Werror")
 #add_compile_definitions("DEBUG")
 
 include_directories(.)
