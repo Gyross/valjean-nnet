@@ -20,16 +20,17 @@ void forward_pass(BNN bnn) {
         for (int j = 0; j < out_size; j++) {
             printf("%f ", bnn->activations_true[i+1][j]);
         }
-        printf("\n");
+        printf("DONE\n");
 #endif
 
         if (i != bnn->layers-2) {
             binarise(bnn->b_activations[i+1], bnn->activations_true[i+1], out_size);
         } else {
-            clamp(bnn->activations_true[i+1], bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
+            //clamp(bnn->activations_true[i+1], bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
 
 #ifdef DEBUG_FP
+        printf("POST CLAMP/BINARISATION\n");
         for (int j = 0; j < CEIL_DIV(out_size, SIZE(BNN_bin)); j++) {
             printf("%f ", bnn->activations_true[i+1][j]);
         }
@@ -58,6 +59,7 @@ void matrix_mult(
             output[j] += partial_xnor_bin_sum(input[k], weights[j][k], last_trunc);
         }
         output[j] += bias[j];
+        
     }
 }
 
@@ -68,7 +70,8 @@ BNN_real xnor_bin_sum(BNN_bin i, BNN_bin w) {
 BNN_real partial_xnor_bin_sum(BNN_bin i, BNN_bin w, BNNS bits) {
     BNN_bin xnored =  (BNN_bin) ~(i^w);
     BNN_bin mask = (BNN_bin)((1 << bits) - 1);
-    return (BNN_real) (2 * __builtin_popcount(xnored & mask) - bits);
+    int out = (2 * __builtin_popcount(xnored & mask) - bits);
+    return (BNN_real) out;
 }
 
 void binarise(BNN_bin input[BIN_VEC_SIZE], const BNN_real output[NODE_MAX], BNNS out_size) {
@@ -82,6 +85,6 @@ void binarise(BNN_bin input[BIN_VEC_SIZE], const BNN_real output[NODE_MAX], BNNS
 
 void clamp(BNN_real output[NODE_MAX], BNNS n_outputs, BNNS max) {
     for (size_t i = 0; i < n_outputs; i++) {
-        output[i] = fabsf(output[i]) > max ? (max * (output[i] >= 0 ? 1 : -1)) : output[i];
+        output[i] = fabsf(output[i]) > max ? ((BNN_real)max * (output[i] >= 0 ? 1 : -1)) : output[i];
     }
 }

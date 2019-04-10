@@ -4,7 +4,7 @@
 #define MIN -128
 #define MAX 127
 
-int stochastic_binarise(int val);
+BNN_bin stochastic_binarise(int val);
 
 // handles non-multiples of 32 by generating garbage in the upper bits, which is fine as
 // those bits won't be accessed by anything relevant
@@ -17,13 +17,13 @@ void binarise_input(INPT input[NODE_MAX], BNN_bin output[BIN_VEC_SIZE], BNN_real
     }
 }
 
-int stochastic_binarise(int val) {
+BNN_bin stochastic_binarise(int val) {
     int decider = (xor4096i(0) % (MAX - MIN)) + MIN;
     int ret = val >= decider ? 1 : 0;
-    return ret;
+    return (BNN_bin)ret;
 }
 
-void convert_labels(LBLT input[NODE_MAX], BNN_real output[NODE_MAX], BNNS n_outputs, BNNS max) {
+void convert_labels(LBLT input[NODE_MAX], BNN_real output[NODE_MAX], BNNS n_outputs, BNN_real max) {
     for (size_t i = 0; i < n_outputs; i++) {
         output[i] = (BNN_real)input[i] == 1 ? max : -max;
     }

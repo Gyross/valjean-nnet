@@ -10,6 +10,7 @@
 #include "binarised_bp.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
+#include "config.h"
 
 
 static void print_output(
@@ -56,6 +57,7 @@ void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
 				for (BNNS m = 0; m < SIZE(BNN_bin); m++) {
 					BNN_real sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
 					bnn->weight_true[i][j][k*SIZE(BNN_bin)+m] = sign * (BNN_real)xor4096r(0);
+                    printf("%f\n", bnn->weight_true[i][j][k*SIZE(BNN_bin)+m]);
 				}
             }
         }
@@ -154,13 +156,19 @@ void bnn_print(BNN bnn) {
     printf("\n");
     printf("WEIGHTS\n");
     for (BNNS i = 0; i < bnn->layers-1; i++) {
+        printf("LAYER: %d\n", i);
         for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
+            printf("OUTPUTNODE: %d\n", j);
             for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
                 printf("%f ", bnn->weight_true[i][j][k]);
             }
+            printf("%u\n", bnn->weight[i][j][0]);
             printf("\n");
         }
     }
+    printf("DONE PRINTING\n");
+    printf("DONE PRINTING\n");
+    printf("DONE PRINTING\n");
     /*
     printf("BIASES\n");
     for (BNNS i = 0; i < bnn->layers; i++) {
@@ -187,7 +195,6 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     INPT nb_input[NODE_MAX];
     LBLT _expected_vec[NODE_MAX];
     BNN_real expected_vec[NODE_MAX];
-    BNN_real output_vec[NODE_MAX];
 
     double total_cost = 0;
     unsigned n_cases = 0;
@@ -199,6 +206,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     // n_inputs and n_outpus have to be the same as the number of input and
     // output layers in the network, otherwise the data is
     // incompatible with the network.
+    printf("%d\n", n_inputs);
     CHECK(n_inputs != bnn->layer_sizes[0], "Incorrect number of inputs!", 1);
     CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
 
@@ -214,29 +222,50 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
             "Incorrect number of bytes!", 1
         );
 
-        convert_labels(_expected_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
-	    
+        BNN_real maxsize = (bnn->layer_sizes[bnn->layers-2]);
+        convert_labels(_expected_vec, expected_vec, n_outputs,maxsize);
+        
+#ifdef DEBUG_OPT
+        printf("PRINTING EXPECTED OUTPUT\n");
+        for (BNNS i = 0; i < n_outputs; i++) {
+            printf("%d\n", _expected_vec[i]);
+            printf("%f\n", expected_vec[i]);
+        }
+#endif
+        
 		BNN_bin b_input[BIN_VEC_SIZE];
 		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
 	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
 		
-		printf("b_input copy\n");
 		memcpy(bnn->b_activations[0], (BNN_bin *) b_input, BIN_VEC_SIZE * sizeof(BNN_bin));
-		printf("nb_input copy\n");
-		memcpy(bnn->activations_true[0], (BNN_real *) nb_input, NODE_MAX * sizeof(INPT));
-		
-
+        for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+            bnn->activations_true[0][i] = (BNN_real)nb_input[i];
+        }
+        
+#ifdef DEBUG_IPT
+        printf("nbinput:\n");
+        for (BNNS i = 0; i < n_inputs; i++) {
+            printf("%d\n", nb_input[i]);
+            printf("%f\n", (BNN_real)nb_input[i]);
+        }
+        printf("binput:\n");
+        for (BNNS i = 0; i < n_inputs; i++) {
+            printf("%u\n", (BNN_bin)b_input[i]);
+        }
+#endif
+        printf("");
         forward_pass(bnn);
 
         if ( op_type == TRAIN ) {
 			// hard code learning rate to 0.001
-            back_pass(bnn, expected_vec, 0.001);
+            back_pass(bnn, expected_vec, 0.0001);
+            print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
         else if ( op_type == TEST ) {
-            print_output(expected_vec, output_vec, n_outputs);
+            print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
 
-        total_cost += cost_func(output_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
+        total_cost += cost_func(bnn->activations_true[bnn->layers-1], expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 
         n_cases++;
     }

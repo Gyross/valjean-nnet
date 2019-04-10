@@ -9,10 +9,11 @@
 #ifndef config_h
 #define config_h
 
-#define RUN
-//#define TESTING
+#define RUN 112
+//#define TESTING 113
 //#define DEBUG_FP
 //#define DATA_FORMAT
 //#define LABEL_FORMAT
+//#define DEBUG_IPT 111
 
 #endif /* config_h */
