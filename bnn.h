@@ -19,7 +19,8 @@
 
 typedef enum op_t {
     TEST,
-    TRAIN
+    TRAIN,
+    ANNEAL
 } op_t;
 
 typedef uint32_t BNNW; //bnn weight size

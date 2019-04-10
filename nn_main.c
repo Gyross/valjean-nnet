@@ -10,8 +10,7 @@
 #define USAGE "\n\
 Usage:\n \
     nnet new <filename> <layer size>...\n\
-    nnet train <nnet filename> <input file> <label file>...\n\
-    nnet test <nnet filename> <input file> <label file>\
+    nnet {test, train, anneal} <nnet filename> <input file> <label file>\
 "
 
 
@@ -59,13 +58,21 @@ int main( int argc, char* argv[] ) {
         bnn_new(bnn, layers, layer_sizes);
 
         PASS(bnn_write(bnn, argv[2]), 1);
-    } else if
-        (strcmp(argv[1], "train") == 0 || strcmp(argv[1], "test") == 0)
+    } else if ( strcmp(argv[1], "test")   == 0 || 
+                strcmp(argv[1], "train")  == 0 ||
+                strcmp(argv[1], "anneal") == 0 )
     {
         CHECK(argc != 5, "Incorrect number of arguments!\n" USAGE, 1);
         PASS(bnn_read(bnn, argv[2]), 1);
 
-        int op = strcmp(argv[1], "train" ) ? TEST : TRAIN;
+        int op;
+        if ( strcmp( argv[1], "test" ) == 0 ) {
+            op = TEST;
+        } else if ( strcmp( argv[1], "train" ) == 0 ) {
+            op = TRAIN;
+        } else {
+            op = ANNEAL;
+        }
 
         FILE* fp_input = fopen(argv[3], "rb");
         CHECK(fp_input == NULL, "Input file could not be opened, aborting!", 1);
@@ -75,10 +82,12 @@ int main( int argc, char* argv[] ) {
 
         int ret;
         if (!(ret = bnn_op(bnn, fp_input, fp_label, op))) {
-            printf("%s completed.\n", op == TRAIN ? "Training" : "Testing");
+            printf("%s completed.\n", 
+                    op == TEST ? "Testing" : 
+                    op == TRAIN ? "Training" : "Annealing" );
 
-            // Only save the nnet if we were training it
-            if ( op == TRAIN ) {
+            // Only save the nnet if we were training or annealing
+            if ( op == TRAIN || op == ANNEAL ) {
                 PASS(bnn_write(bnn, argv[2]), 3);
             }
         } else {

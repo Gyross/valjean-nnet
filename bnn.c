@@ -7,6 +7,7 @@
 #include "xorgens.h"
 #include "bnn.h"
 #include "binarised_fp.h"
+#include "anneal.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
 
@@ -165,6 +166,14 @@ void bnn_print(BNN bnn) {
  * op_type: either training or testing.
  */
 int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
+
+    // Skip operation and go straight to annealing
+    // TODO clean up te implementation of this
+    if ( op_type == ANNEAL ) {
+        anneal(bnn, fp_input, fp_label);
+        return 0;
+    }
+
     MSG("Successfully completed operation.");
 
     BNNS n_inputs, n_outputs;
