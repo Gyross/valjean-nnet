@@ -27,10 +27,17 @@ void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
 	memset(act_grads_real, 0, LAYER_MAX * NODE_MAX *  sizeof(BNN_real));
 	memset(act_grads_bin, 0, LAYER_MAX * NODE_MAX * sizeof(BNN_real));
 	
+    BNN_real exponents[NODE_MAX];
+    BNN_real exp_sum = 0;
 	
+    for (BNNS j = 0; j < bnn->layer_sizes[last_layer]; j++) {
+        exponents[j] = exp(bnn->activations_true[last_layer][j]);
+        exp_sum += exponents[j];
+    }
+    
 	for (BNNS j = 0; j < bnn->layer_sizes[last_layer]; j++) {
-        act_grads_real[last_layer][j] = target[j] - bnn->activations_true[last_layer][j];
-		}
+        act_grads_real[last_layer][j] = exponents[j]/exp_sum - target[j];
+    }
 	
 	for (BNNS i = last_layer-1; i >= 1; i--) {		// for each layer
 		if (i < last_layer-1) {
@@ -48,7 +55,7 @@ void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
 			
 			//Update:
 			for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-				bnn->weight_true[i][j][k] += l_r * weight_grads[i][j][k];
+				bnn->weight_true[i][j][k] -= l_r * weight_grads[i][j][k];
 			}
 		}
 		for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {

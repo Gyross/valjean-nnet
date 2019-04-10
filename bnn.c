@@ -13,7 +13,7 @@
 #include "config.h"
 
 
-static void print_output(
+static int print_output(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 );
 static double cost_func(
@@ -212,6 +212,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
     // Loop until we reach the end of the file
     uint32_t total_read = 0;
+    uint32_t total_correct = 0;
     while( ( amt_read = fread( nb_input, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
         CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
         total_read += amt_read;
@@ -232,6 +233,8 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
             printf("%f\n", expected_vec[i]);
         }
 #endif
+        memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+        memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
         
 		BNN_bin b_input[BIN_VEC_SIZE];
 		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
@@ -258,17 +261,19 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
         if ( op_type == TRAIN ) {
 			// hard code learning rate to 0.001
-            back_pass(bnn, expected_vec, 0.0001);
-            print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
+            back_pass(bnn, expected_vec, 0.001);
+            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
         else if ( op_type == TEST ) {
-            print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
+            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
 
         total_cost += cost_func(bnn->activations_true[bnn->layers-1], expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 
         n_cases++;
     }
+    
+    printf("NUM CORRECT: %d %d\n", total_correct, n_cases);
 
     print_statistics(total_cost, n_cases);
 
@@ -276,7 +281,7 @@ error1:
     RETURN;
 }
 
-static void print_output(
+static int print_output(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 ) {
     int expected_category = -1;
@@ -291,10 +296,16 @@ static void print_output(
     }
 
     printf("Category: %d, Out: ", expected_category);
+    int predicted_cat = 0;
     for ( BNNS i = 0; i < n_outputs; i++ ) {
         printf("%f ", output_vec[i] );
+        if (output_vec[i] > output_vec[predicted_cat]) {
+            predicted_cat = i;
+        }
     }
-    printf("\n");
+    printf("PREDICT: %d\n", predicted_cat);
+    printf("%d\n", predicted_cat==expected_category ? 1 : 0);
+    return (predicted_cat==expected_category ? 1 : 0);
 
 }
 static double cost_func(

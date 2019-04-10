@@ -26,13 +26,16 @@ void forward_pass(BNN bnn) {
         if (i != bnn->layers-2) {
             binarise(bnn->b_activations[i+1], bnn->activations_true[i+1], out_size);
         } else {
+            /*for(BNNS j = 0; j < bnn->layer_sizes[bnn->layers-2]; j++) {
+                printf("%f\n", bnn->activations_true[i+1][j]);
+            }*/
             //clamp(bnn->activations_true[i+1], bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
 
 #ifdef DEBUG_FP
         printf("POST CLAMP/BINARISATION\n");
         for (int j = 0; j < CEIL_DIV(out_size, SIZE(BNN_bin)); j++) {
-            printf("%f ", bnn->activations_true[i+1][j]);
+            printf("%f ", bnn->bias[i-1][j]);
         }
         printf("\n");
 #endif
