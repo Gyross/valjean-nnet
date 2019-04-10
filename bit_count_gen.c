@@ -3,10 +3,10 @@
 #include <stdint.h>
 #include <string.h>
 
-#define NUM_CASES 64
+#define NUM_CASES 128
 
-#define NUM_INPUTS 2
-#define NUM_OUTPUTS 3
+#define NUM_INPUTS 6
+#define NUM_OUTPUTS 7
 
 int get_smallest_index( int* array, int len ) {
     int smallest = array[0];
@@ -45,10 +45,10 @@ int main(int argc, char* argv[]) {
         srand(seed);
 
         for ( long int i = 0; i < NUM_CASES; i++ ) {
-            label = 0;
 
             int req_label = get_smallest_index( hist, NUM_OUTPUTS );
             do {
+                label = 0;
                 for ( unsigned int j = 0; j < NUM_INPUTS; j++ ) {
                     if ( rand() % 2 ) {
                         input[j] = 127;
