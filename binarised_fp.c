@@ -26,8 +26,6 @@ void forward_pass(BNN bnn, INPT nb_input[NODE_MAX], BNNO output[NODE_MAX]) {
 
         if (i != bnn->layers-2) {
             binarise(input, output, out_size);
-        } else {
-            clamp(output, bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
         }
 
 #ifdef DEBUG
@@ -81,8 +79,3 @@ void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_si
     }
 }
 
-void clamp(BNNO output[NODE_MAX], BNNS n_outputs, BNNS max) {
-    for (size_t i = 0; i < n_outputs; i++) {
-        output[i] = abs(output[i]) > max ? (max * (output >= 0 ? 1 : -1)) : output[i];
-    }
-}
