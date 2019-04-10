@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include "bnn.h"
 
-double compute_energy( BNN bnn, FILE* fp_input, FILE* fp_label );
+double compute_energy( BNN bnn, FILE* fp_input, FILE* fp_label, int print_outputs );
 
 #endif

@@ -44,7 +44,7 @@ struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as ) {
 
     // Set these to one, later we might want to base these on temperature.
     uint32_t n_perturb_weights = 1;
-    uint32_t n_perturb_biases  = 1;
+    uint32_t n_perturb_biases  = 0;
     uint32_t n_perturb_total   = n_perturb_weights + n_perturb_biases;
 
     uint32_t rand_result;
@@ -144,11 +144,11 @@ void anneal_revert( BNN bnn, struct perturb_list* p ) {
 
 void anneal_init( BNN bnn, struct anneal_state* state ) {
 
-    state->temperature = 1000;
+    state->temperature = 20;
 
     state->energy      = INFINITY;
 
-    state->cooling_factor = 0.9999;
+    state->cooling_factor = 0.99999;
     state->end_temperature = 0.01;
 
     state->iteration = 1;
@@ -226,7 +226,7 @@ void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
         perturbation = anneal_perturb( bnn, state );
 
         // Do a forward pass
-        energy = compute_energy(bnn, fp_input, fp_label);
+        energy = compute_energy(bnn, fp_input, fp_label, 0);
 
         decision = anneal_decide( state, energy );
 
@@ -246,6 +246,8 @@ void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
 
         ++state->iteration;
     }
+
+    energy = compute_energy(bnn, fp_input, fp_label, 1);
 }
 
 
