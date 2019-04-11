@@ -3,7 +3,9 @@ project(valjean_nnet)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_compile_options("-Wl,--stack,8388608" "-fstack-usage" "-Wall" "-Werror")
+add_compile_options("-Wl,--stack,8388608" "-fstack-usage" "-Wall" "-Werror" "-O2")
+# For profiling, add "-pg" to compile options and uncomment link option
+#add_link_options("-pg")
 #add_compile_definitions("DEBUG")
 
 include_directories(.)
