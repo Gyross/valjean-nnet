@@ -8,15 +8,17 @@
 #include "bnn.h"
 #include "binarised_fp.h"
 #include "anneal.h"
+#include "binarised_bp.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
+#include "config.h"
 
 
-static void print_output(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+static int print_output(
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 );
 static double cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs, BNN_real max
 );
 static void print_statistics(double total_cost, unsigned n_cases);
 
@@ -32,22 +34,36 @@ static void print_statistics(double total_cost, unsigned n_cases);
  * The function assigns these values to the bnn and generates initialised random values for the weights and biases.
  */
 
-void bnn_new(BNN bnn, unsigned layers, unsigned layer_sizes[]) {
-    static_assert(sizeof(BNNW) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
+void bnn_new(BNN bnn, BNNS layers, BNNS layer_sizes[]) {
+    static_assert(sizeof(BNN_bin) == sizeof(UINT), "UINT and weight bucket size does not match.\n");
 
     // Set the global num_layers and layer_size variables
     bnn->layers = layers;
     memcpy(bnn->layer_sizes, layer_sizes, layers * sizeof(BNNS));
+	
+    for(BNNS ii = 0; ii < LAYER_MAX-1; ii++) {
+        memset(bnn->weight_true, 0, NODE_MAX * NODE_MAX * sizeof(BNN_real));
+        memset(bnn->weight, 0, BIN_VEC_SIZE * NODE_MAX * sizeof(BNN_bin));
+    }
+    memset(bnn->bias, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+	memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+	memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
 
     // Generate uniformly distributed weights and biases for each forward pass step.
     // There are layers-1 number of weight matrices as they lie between layers
     for (BNNS i = 0; i < layers-1; i++) {
         for (BNNS j = 0; j < layer_sizes[i+1]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNNW)); k++) {
-                bnn->weight[i][j][k] = xor4096i(0);
+            for (BNNS k = 0; k < CEIL_DIV(layer_sizes[i], SIZE(BNN_bin)); k++) {
+				bnn->weight[i][j][k] = xor4096i(0);
+				for (BNNS m = 0; m < SIZE(BNN_bin); m++) {
+					BNN_real sign = bnn->weight[i][j][k] & (1 << m) ? 1 : -1;
+					bnn->weight_true[i][j][k*SIZE(BNN_bin)+m] = sign * (BNN_real)xor4096r(0);
+                    printf("%f\n", bnn->weight_true[i][j][k*SIZE(BNN_bin)+m]);
+				}
             }
         }
     }
+	
 }
 
 /*
@@ -69,20 +85,22 @@ int bnn_read(BNN bnn, const char* filename) {
 
     amt_read = fread( bnn->layer_sizes, sizeof(unsigned), bnn->layers, fp );
     CHECK(amt_read != bnn->layers, "File corrupted!", 2);
+    
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
-            amt_read = fread(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
-            CHECK(amt_read != wv_size, "File corrupted!", 2);
+            amt_read = fread(bnn->weight_true[m][n], sizeof(BNN_real), bnn->layer_sizes[m], fp);
+            CHECK(amt_read != bnn->layer_sizes[m], "File corrupted!", 2);
+            binarise(bnn->weight[m][n], bnn->weight_true[m][n], bnn->layer_sizes[m]);
         }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
-        BNNS b_size = bnn->layer_sizes[m];
-        amt_read = fread( bnn->bias[m], sizeof(BNNB), b_size, fp );
+        BNNS b_size = bnn->layer_sizes[m+1];
+        amt_read = fread( bnn->bias[m], sizeof(BNN_real), b_size, fp );
         CHECK(amt_read != b_size, "File corrupted!", 2);
     }
+    bnn_print(bnn);
 
 error2:
     fclose(fp);
@@ -112,16 +130,15 @@ int bnn_write(BNN bnn, const char* filename) {
     CHECK(amt_written != bnn->layers, "Failed to save BNN to file.", 2);
 
     for ( BNNS m = 0; m < bnn->layers-1; m++ ) {
-        BNNS wv_size = CEIL_DIV(bnn->layer_sizes[m], SIZE(BNNW));
         for ( BNNS n = 0; n < bnn->layer_sizes[m+1]; n++ ) {
-            amt_written = fwrite(bnn->weight[m][n], sizeof(BNNW), wv_size, fp);
-            CHECK(amt_written != wv_size, "Failed to save BNN to file.", 2);
+            amt_written = fwrite(bnn->weight_true[m][n], sizeof(BNN_bin), bnn->layer_sizes[m], fp);
+            CHECK(amt_written != bnn->layer_sizes[m], "Failed to save BNN to file.", 2);
         }
     }
 
     for ( BNNS m = 0; m < bnn->layers; m++ ) {
-        BNNS b_size = bnn->layer_sizes[m];
-        amt_written = fwrite( bnn->bias[m], sizeof(BNNB), b_size, fp);
+        BNNS b_size = bnn->layer_sizes[m+1];
+        amt_written = fwrite( bnn->bias[m], sizeof(BNN_real), b_size, fp);
         CHECK(amt_written != b_size, "Failed to save BNN to file.", 2);
     }
 
@@ -140,13 +157,19 @@ void bnn_print(BNN bnn) {
     printf("\n");
     printf("WEIGHTS\n");
     for (BNNS i = 0; i < bnn->layers-1; i++) {
+        printf("LAYER: %d\n", i);
         for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-            for (BNNS k = 0; k < CEIL_DIV(bnn->layer_sizes[i], SIZE(BNNW)); k++) {
-                printf("%x ", bnn->weight[i][j][k]);
+            printf("OUTPUTNODE: %d\n", j);
+            for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
+                printf("%f ", bnn->weight_true[i][j][k]);
             }
+            printf("%u\n", bnn->weight[i][j][0]);
             printf("\n");
         }
     }
+    printf("DONE PRINTING\n");
+    printf("DONE PRINTING\n");
+    printf("DONE PRINTING\n");
     /*
     printf("BIASES\n");
     for (BNNS i = 0; i < bnn->layers; i++) {
@@ -178,10 +201,9 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
     BNNS n_inputs, n_outputs;
     size_t amt_read;
-    INPT input_vec[NODE_MAX];
+    INPT nb_input[NODE_MAX];
     LBLT _expected_vec[NODE_MAX];
-    BNNO expected_vec[NODE_MAX];
-    BNNO output_vec[NODE_MAX];
+    BNN_real expected_vec[NODE_MAX];
 
     double total_cost = 0;
     unsigned n_cases = 0;
@@ -193,33 +215,74 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
     // n_inputs and n_outpus have to be the same as the number of input and
     // output layers in the network, otherwise the data is
     // incompatible with the network.
+    printf("%d\n", n_inputs);
     CHECK(n_inputs != bnn->layer_sizes[0], "Incorrect number of inputs!", 1);
     CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
 
     // Loop until we reach the end of the file
-    while( ( amt_read = fread( input_vec, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
+    uint32_t total_read = 0;
+    uint32_t total_correct = 0;
+    while( ( amt_read = fread( nb_input, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
         CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
+        total_read += amt_read;
+        printf("Total:%d\n", total_read);
 
         CHECK(
             fread( _expected_vec, sizeof(LBLT), n_outputs, fp_label ) != n_outputs,
             "Incorrect number of bytes!", 1
         );
 
-        convert_labels(_expected_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
-
-        forward_pass(bnn, input_vec, output_vec);
+        BNN_real maxsize = (bnn->layer_sizes[bnn->layers-2]);
+        convert_labels(_expected_vec, expected_vec, n_outputs,maxsize);
+        
+#ifdef DEBUG_OPT
+        printf("PRINTING EXPECTED OUTPUT\n");
+        for (BNNS i = 0; i < n_outputs; i++) {
+            printf("%d\n", _expected_vec[i]);
+            printf("%f\n", expected_vec[i]);
+        }
+#endif
+        memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+        memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+        
+		BNN_bin b_input[BIN_VEC_SIZE];
+		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
+	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
+		
+		memcpy(bnn->b_activations[0], (BNN_bin *) b_input, BIN_VEC_SIZE * sizeof(BNN_bin));
+        for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+            bnn->activations_true[0][i] = (BNN_real)nb_input[i];
+        }
+        
+#ifdef DEBUG_IPT
+        printf("nbinput:\n");
+        for (BNNS i = 0; i < n_inputs; i++) {
+            printf("%d\n", nb_input[i]);
+            printf("%f\n", (BNN_real)nb_input[i]);
+        }
+        printf("binput:\n");
+        for (BNNS i = 0; i < n_inputs; i++) {
+            printf("%u\n", (BNN_bin)b_input[i]);
+        }
+#endif
+        printf("");
+        forward_pass(bnn);
 
         if ( op_type == TRAIN ) {
-            //backpropagate(expected_vec);
+			// hard code learning rate to 0.001
+            back_pass(bnn, expected_vec, 0.001);
+            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
         else if ( op_type == TEST ) {
-            print_output(expected_vec, output_vec, n_outputs);
+            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
         }
 
-        total_cost += cost_func(output_vec, expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
+        total_cost += cost_func(bnn->activations_true[bnn->layers-1], expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
 
         n_cases++;
     }
+    
+    printf("NUM CORRECT: %d %d\n", total_correct, n_cases);
 
     print_statistics(total_cost, n_cases);
 
@@ -227,8 +290,8 @@ error1:
     RETURN;
 }
 
-static void print_output(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs
+static int print_output(
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 ) {
     int expected_category = -1;
 
@@ -242,15 +305,20 @@ static void print_output(
     }
 
     printf("Category: %d, Out: ", expected_category);
+    int predicted_cat = 0;
     for ( BNNS i = 0; i < n_outputs; i++ ) {
-        printf("%d ", output_vec[i] );
+        printf("%f ", output_vec[i] );
+        if (output_vec[i] > output_vec[predicted_cat]) {
+            predicted_cat = i;
+        }
     }
-    printf("\n");
+    printf("PREDICT: %d\n", predicted_cat);
+    printf("%d\n", predicted_cat==expected_category ? 1 : 0);
+    return (predicted_cat==expected_category ? 1 : 0);
 
 }
-
 static double cost_func(
-    const BNNO expected_vec[NODE_MAX], const BNNO output_vec[NODE_MAX], BNNS n_outputs, BNNO max
+    const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs, BNN_real max
 ) {
     double cost = 0.0;
 

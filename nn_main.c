@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include <unistd.h>
 #include "xorgens.h"
 #include "bnn.h"
 #include "error_handling.h"
+#include "config.h"
 
 #define USAGE "\n\
 Usage:\n \
@@ -19,10 +21,11 @@ bnn_alloc _bnn;
 
 
 // PROTOTYPES
-static void initPRNG();
+static void initPRNG(void);
 
 
 // FUNCTIONS
+#ifdef RUN
 int main( int argc, char* argv[] ) {
     MSG("NN operation successful!");
 
@@ -73,6 +76,13 @@ int main( int argc, char* argv[] ) {
         } else {
             op = ANNEAL;
         }
+        
+        char *filename = argv[3];
+        if(access(filename, F_OK) != -1) {
+            printf("EXISTS\n");
+        } else {
+            printf("DOES NOT\n");
+        }
 
         FILE* fp_input = fopen(argv[3], "rb");
         CHECK(fp_input == NULL, "Input file could not be opened, aborting!", 1);
@@ -105,6 +115,7 @@ int main( int argc, char* argv[] ) {
 error1:
     RETURN;
 }
+#endif
 
 static void initPRNG() {
     struct timespec ts;

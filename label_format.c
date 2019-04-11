@@ -9,6 +9,7 @@
 typedef float out_t;
 //typedef int8_t out_t;
 
+#ifdef LABEL_FORMAT
 int main(int argc, char* argv[]) {
 
     if ( argc == 3 ) {
@@ -48,3 +49,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+#endif

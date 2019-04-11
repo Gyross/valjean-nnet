@@ -11,11 +11,10 @@
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
 #define SIZE(x) (sizeof(x) * 8)
 
-#define LAYER_MAX 1000
-#define NODE_MAX 8192
+#define LAYER_MAX 5
+#define NODE_MAX 800
 
-#define INP_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNI))
-#define WGT_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNNW))
+#define BIN_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNN_bin))
 
 typedef enum op_t {
     TEST,
@@ -23,11 +22,9 @@ typedef enum op_t {
     ANNEAL
 } op_t;
 
-typedef uint32_t BNNW; //bnn weight size
-typedef int32_t BNNB; // bnn bias size
-typedef uint32_t BNNS; // bnn shape type
-typedef uint32_t BNNI; // bnn input data type
-typedef int32_t BNNO; // bnn output data type
+typedef float BNN_real; //bnn real number type
+typedef uint32_t BNNS; // bnn size type
+typedef uint32_t BNN_bin; //bnn binarised type
 
 /*
  * BNN struct.
@@ -39,9 +36,14 @@ typedef int32_t BNNO; // bnn output data type
 struct bnn {
     BNNS layers;
     BNNS layer_sizes[LAYER_MAX];
-    BNNW weight[LAYER_MAX][NODE_MAX][WGT_VEC_SIZE];
-    BNNB bias[LAYER_MAX][NODE_MAX];
+    BNN_bin weight[LAYER_MAX-1][NODE_MAX][BIN_VEC_SIZE];
+	BNN_real weight_true[LAYER_MAX-1][NODE_MAX][NODE_MAX];
+    BNN_real bias[LAYER_MAX-1][NODE_MAX];
+	BNN_real activations_true[LAYER_MAX][NODE_MAX];
+	BNN_bin b_activations[LAYER_MAX][NODE_MAX];
 };
+
+
 
 typedef struct bnn *BNN;
 typedef struct bnn bnn_alloc;
