@@ -5,6 +5,7 @@
 #include <math.h>
 #include "binarised_bp.h"
 #include "nnet_math.h"
+#include "config.h"
 
 void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
 	
@@ -39,10 +40,10 @@ void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
         act_grads_real[last_layer][j] = exponents[j]/exp_sum - target[j];
     }
 	
-	for (BNNS i = last_layer-1; i >= 1; i--) {		// for each layer
+	for (int i = last_layer-1; i >= 0; i--) {		// for each layer
 		if (i < last_layer-1) {
 			for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-				act_grads_real[i+1][j] = act_grads_bin[i+1][j] * ((fabsf(bnn->activations_true[i][j])<= 1) ? 1 : 0);
+                act_grads_real[i+1][j] = act_grads_bin[i+1][j]; //* ((fabsf(bnn->activations_true[i][j])<= 1) ? 1 : 0);
 			}
 		}
 		for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {		// for each set of weights to a node in the layer below
@@ -61,6 +62,22 @@ void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
 		for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
 			binarise( bnn->weight[i][j],  bnn->weight_true[i][j], bnn->layer_sizes[i]);
 		}
+        
+        #ifdef TESTING_BP
+        for (BNNS i = 0; i < bnn->layers; i++) {
+            printf("LAYER %u\n", i);
+            for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
+                printf("OUTPUT NODE %u\n", j);
+                printf("act grad real: %f\n", act_grads_real[i][j]);
+                printf("act grad bin: %f\n", act_grads_bin[i][j]);
+                printf("WEIGHT GRADS:\n");
+                for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
+                    printf("%f, ", weight_grads[i][j][k]);
+                }
+                printf("\n");
+            }
+        }
+        #endif
     }
     
     
