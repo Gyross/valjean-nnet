@@ -108,7 +108,7 @@ double _pe_exponential_difference( BNN bnn, LBLT label, BNNO* output_vec, BNNS v
 
 double _pe_cross_entropy( BNN bnn, LBLT label, BNNO* output_vec, BNNS vec_size ) {
     // Cross Entropy "energy" function
-    double sum;
+    double sum = 0.0;
     double sm_vec[vec_size];
 
     soft_max(output_vec, sm_vec, vec_size);
@@ -120,7 +120,7 @@ double _pe_cross_entropy( BNN bnn, LBLT label, BNNO* output_vec, BNNS vec_size )
         }
     }
 
-    return  sum;
+    return sum;
 }
 
 
