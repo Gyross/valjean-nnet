@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# 
+# Start of session at: Fri Apr  5 19:26:30 2019
+# Process ID: 13008
+# Current directory: D:/Labs/custom_ip/custom_ip/custom_ip.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: D:/Labs/custom_ip/custom_ip/custom_ip.sdk/webtalk/webtalk.log
+# Journal file: D:/Labs/custom_ip/custom_ip/custom_ip.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Apr 11 12:31:31 2019
+# Process ID: 9752
+# Current directory: D:/Labs/custom_ip/custom_ip/custom_ip.runs/impl_1
+# Command line: vivado.exe -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
+# Log file: D:/Labs/custom_ip/custom_ip/custom_ip.runs/impl_1/design_1_wrapper.vdi
+# Journal file: D:/Labs/custom_ip/custom_ip/custom_ip.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source design_1_wrapper.tcl -notrace

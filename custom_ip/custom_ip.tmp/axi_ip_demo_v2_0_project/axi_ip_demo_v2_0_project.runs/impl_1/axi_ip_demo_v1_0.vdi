@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Apr 11 13:27:45 2019
+# Process ID: 15392
+# Current directory: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1
+# Command line: vivado.exe -log axi_ip_demo_v1_0.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source axi_ip_demo_v1_0.tcl -notrace
+# Log file: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1/axi_ip_demo_v1_0.vdi
+# Journal file: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source axi_ip_demo_v1_0.tcl -notrace
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Netlist 29-17] Analyzing 47 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.2
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+link_design: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 508.223 ; gain = 276.414
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020-clg484'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020-clg484'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+Command: report_drc (run_mandatory_drcs) for: opt_checks
+INFO: [DRC 23-27] Running DRC with 2 threads
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/B2[0] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[0]/Q, and p_count/ones_reg[0]/Q.
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/Q[0] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[1]/Q, and p_count/ones_reg[1]/Q.
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/Q[1] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[2]/Q, and p_count/ones_reg[2]/Q.
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/Q[2] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[3]/Q, and p_count/ones_reg[3]/Q.
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/Q[3] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[4]/Q, and p_count/ones_reg[4]/Q.
+ERROR: [DRC MDRV-1] Multiple Driver Nets: Net p_count/Q[4] has multiple drivers: axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[5]/Q, and p_count/ones_reg[5]/Q.
+WARNING: [DRC HPDR-1] Port direction inconsistency: Hierarchical port axi_ip_demo_v1_0_axi_ip_demo_inst/Q[0] direction INPUT is not consistent with the directions of the cell pins found at that level of the netlist hierarchy. Please review the design and consider changing the port direction. No other driver was expected for the net (axi_ip_demo_v1_0_axi_ip_demo_inst/Q[0]) connected to this Port, but at least one was found.
+WARNING: [DRC HPDR-1] Port direction inconsistency: Hierarchical port axi_ip_demo_v1_0_axi_ip_demo_inst/Q[1] direction INPUT is not consistent with the directions of the cell pins found at that level of the netlist hierarchy. Please review the design and consider changing the port direction. No other driver was expected for the net (axi_ip_demo_v1_0_axi_ip_demo_inst/Q[1]) connected to this Port, but at least one was found.
+WARNING: [DRC HPDR-1] Port direction inconsistency: Hierarchical port axi_ip_demo_v1_0_axi_ip_demo_inst/Q[2] direction INPUT is not consistent with the directions of the cell pins found at that level of the netlist hierarchy. Please review the design and consider changing the port direction. No other driver was expected for the net (axi_ip_demo_v1_0_axi_ip_demo_inst/Q[2]) connected to this Port, but at least one was found.
+WARNING: [DRC HPDR-1] Port direction inconsistency: Hierarchical port axi_ip_demo_v1_0_axi_ip_demo_inst/Q[3] direction INPUT is not consistent with the directions of the cell pins found at that level of the netlist hierarchy. Please review the design and consider changing the port direction. No other driver was expected for the net (axi_ip_demo_v1_0_axi_ip_demo_inst/Q[3]) connected to this Port, but at least one was found.
+WARNING: [DRC HPDR-1] Port direction inconsistency: Hierarchical port axi_ip_demo_v1_0_axi_ip_demo_inst/Q[4] direction INPUT is not consistent with the directions of the cell pins found at that level of the netlist hierarchy. Please review the design and consider changing the port direction. No other driver was expected for the net (axi_ip_demo_v1_0_axi_ip_demo_inst/Q[4]) connected to this Port, but at least one was found.
+report_drc (run_mandatory_drcs) completed successfully
+INFO: [Project 1-461] DRC finished with 6 Errors, 5 Warnings
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado_Tcl 4-78] Error(s) found during DRC. Opt_design not run.
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.380 . Memory (MB): peak = 518.809 ; gain = 10.586
+11 Infos, 5 Warnings, 0 Critical Warnings and 7 Errors encountered.
+opt_design failed
+ERROR: [Common 17-39] 'opt_design' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 11 13:27:54 2019...

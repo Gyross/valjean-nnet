@@ -1,0 +1,216 @@
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr 11 12:37:30 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the conversion of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0 (Rev. 13)) to Vivado generation flows.
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr 11 11:59:28 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 12) to (Rev. 13)
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr 11 11:47:34 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the conversion of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0 (Rev. 12)) to Vivado generation flows.
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr 11 11:43:00 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the conversion of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0 (Rev. 12)) to Vivado generation flows.
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr  4 12:40:57 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 8) to (Rev. 12)
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr  4 11:54:52 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 6) to (Rev. 8)
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr  4 11:37:25 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 5) to (Rev. 6)
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Apr  4 10:18:57 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 4) to (Rev. 5)
+
+2. Interface Information
+------------------------
+
+Detected external interface differences while upgrading 'design_1_axi_ip_demo_0_0'.
+
+
+-Upgrade has added interface 'axi_ip_demo_aclk' (xilinx.com:signal:clock:1.0)
+
+-Upgrade has added interface 'axi_ip_demo_aresetn' (xilinx.com:signal:reset:1.0)
+
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Mar 28 13:55:46 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 (xilinx.com:user:axi_ip_demo:2.0) from (Rev. 2) to (Rev. 4)
+
+
+
+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Thu Mar  7 12:32:40 2019
+| Host         : LAPTOP-HT53QSC4 running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z020clg484-1
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_axi_ip_demo_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_axi_ip_demo_0_0 from xilinx.com:user:axi_ip_demo:1.0 (Rev. 1) to xilinx.com:user:axi_ip_demo:2.0 (Rev. 2)
+

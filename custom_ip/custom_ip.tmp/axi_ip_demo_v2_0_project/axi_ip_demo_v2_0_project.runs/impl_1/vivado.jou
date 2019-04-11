@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Apr 11 13:27:45 2019
+# Process ID: 15392
+# Current directory: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1
+# Command line: vivado.exe -log axi_ip_demo_v1_0.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source axi_ip_demo_v1_0.tcl -notrace
+# Log file: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1/axi_ip_demo_v1_0.vdi
+# Journal file: d:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source axi_ip_demo_v1_0.tcl -notrace

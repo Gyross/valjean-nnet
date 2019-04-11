@@ -1,0 +1,410 @@
+
+*** Running vivado
+    with args -log axi_ip_demo_v1_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source axi_ip_demo_v1_0.tcl
+
+
+****** Vivado v2017.2 (64-bit)
+  **** SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+  **** IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+source axi_ip_demo_v1_0.tcl -notrace
+Command: synth_design -top axi_ip_demo_v1_0 -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 17620 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 309.504 ; gain = 78.270
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'axi_ip_demo_v1_0' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0.vhd:49]
+	Parameter C_axi_ip_demo_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_axi_ip_demo_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'pop_count' declared at 'D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:7' bound to instance 'p_count' of component 'pop_count' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0.vhd:106]
+INFO: [Synth 8-638] synthesizing module 'pop_count' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:15]
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:39]
+INFO: [Synth 8-256] done synthesizing module 'pop_count' (1#1) [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:15]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'axi_ip_demo_v1_0_axi_ip_demo' declared at 'd:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:5' bound to instance 'axi_ip_demo_v1_0_axi_ip_demo_inst' of component 'axi_ip_demo_v1_0_axi_ip_demo' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0.vhd:115]
+INFO: [Synth 8-638] synthesizing module 'axi_ip_demo_v1_0_axi_ip_demo' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:89]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-226] default block is never used [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:233]
+INFO: [Synth 8-226] default block is never used [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:363]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:231]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:362]
+INFO: [Synth 8-256] done synthesizing module 'axi_ip_demo_v1_0_axi_ip_demo' (2#1) [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:89]
+INFO: [Synth 8-256] done synthesizing module 'axi_ip_demo_v1_0' (3#1) [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0.vhd:49]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[0]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 349.582 ; gain = 118.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 349.582 ; gain = 118.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 349.582 ; gain = 118.348
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 349.582 ; gain = 118.348
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	  32 Input      6 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 6     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module pop_count 
+Detailed RTL Component Info : 
++---Adders : 
+	  32 Input      6 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+Module axi_ip_demo_v1_0_axi_ip_demo 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 5     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_awprot[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_awprot[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_awprot[0]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_arprot[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_arprot[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0 has unconnected port axi_ip_demo_arprot[0]
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\axi_ip_demo_v1_0_axi_ip_demo_inst/aw_en_reg )
+INFO: [Synth 8-3886] merging instance 'axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[0]' (FDRE) to 'axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[0]' (FDRE) to 'axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1] )
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[31]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[31] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[31]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[31] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[31] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[30]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[30] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[30]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[30] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[30] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[29]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[29] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[29]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[29] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[29] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[28]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[28] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[28]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[28] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[28] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[27]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[27] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[27]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[27] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[27] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[26]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[26] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[26]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[26] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[26] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[25]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[25] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[25]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[25] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[25] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[24]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[24] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[24]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[24] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[24] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[23]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[23] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[23]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[23] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[23] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[22]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[22] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[22]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[22] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[22] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[21]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[21] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[21]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[21] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[21] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[20]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[20] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[20]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[20] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[20] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[19]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[19] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[19]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[19] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[19] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[18]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[18] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[18]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[18] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[18] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[17]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[17] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[17]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[17] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[17] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[16]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[16] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[16]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[16] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[16] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[15]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[15] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[15]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[15] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[15] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[14]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[14] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[14]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[14] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[14] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[13]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[13] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[13]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[13] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[13] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[12]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[12] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[12]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[12] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[12] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[11]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[11] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[11]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[11] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[11] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[10]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[10] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[10]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[10] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[10] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[9]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[9] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[9]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[9] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[9] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[8]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[8] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[8]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[8] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[8] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[7]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[7] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[7]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[7] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[7] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[6]) is unused and will be removed from module axi_ip_demo_v1_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[6] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[6]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[6] with 2nd driver pin 'GND' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-5559] multi-driven net dataout0[6] is connected to constant driver, other driver is ignored [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_awaddr_reg[1]) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_awaddr_reg[0]) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/aw_en_reg) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1]) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_araddr_reg[1]) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_araddr_reg[0]) is unused and will be removed from module axi_ip_demo_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1]) is unused and will be removed from module axi_ip_demo_v1_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 511.531 ; gain = 280.297
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 511.531 ; gain = 280.297
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[5] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[5]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[5] with 2nd driver pin 'p_count/ones_reg[5]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[0] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[0]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[0] with 2nd driver pin 'p_count/ones_reg[0]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[4] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[4]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[4] with 2nd driver pin 'p_count/ones_reg[4]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[3] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[3]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[3] with 2nd driver pin 'p_count/ones_reg[3]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[2] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[2]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[2] with 2nd driver pin 'p_count/ones_reg[2]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[1] with 1st driver pin 'axi_ip_demo_v1_0_axi_ip_demo_inst/slv_reg0_reg[1]/Q' [d:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:126]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net dataout0[1] with 2nd driver pin 'p_count/ones_reg[1]/Q' [D:/Labs/custom_ip/custom_ip/axi_ip_demo_1.0/hdl/pop_count.vhd:45]
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        6|Failed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |BUFG |     1|
+|2     |LUT1 |     1|
+|3     |LUT2 |     1|
+|4     |LUT3 |    29|
+|5     |LUT4 |    15|
+|6     |LUT5 |    45|
+|7     |LUT6 |    15|
+|8     |FDRE |   179|
+|9     |FDSE |     2|
+|10    |IBUF |    47|
+|11    |OBUF |    41|
++------+-----+------+
+
+Report Instance Areas: 
++------+------------------------------------+-----------------------------+------+
+|      |Instance                            |Module                       |Cells |
++------+------------------------------------+-----------------------------+------+
+|1     |top                                 |                             |   376|
+|2     |  axi_ip_demo_v1_0_axi_ip_demo_inst |axi_ip_demo_v1_0_axi_ip_demo |   196|
+|3     |  p_count                           |pop_count                    |    91|
++------+------------------------------------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 90 critical warnings and 48 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+Synthesis Optimization Complete : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 519.547 ; gain = 288.313
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 47 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+23 Infos, 48 Warnings, 90 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 587.094 ; gain = 363.625
+INFO: [Common 17-1381] The checkpoint 'd:/Labs/custom_ip/custom_ip/custom_ip.tmp/axi_ip_demo_v2_0_project/axi_ip_demo_v2_0_project.runs/synth_1/axi_ip_demo_v1_0.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 587.094 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 11 13:27:32 2019...

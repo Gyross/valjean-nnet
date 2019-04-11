@@ -1,0 +1,10 @@
+
+
+OPTION psf_version = 2.1;
+
+BEGIN DRIVER axi_ip_demo
+	OPTION supported_peripherals = (axi_ip_demo);
+	OPTION copyfiles = all;
+	OPTION VERSION = 1.0;
+	OPTION NAME = axi_ip_demo;
+END DRIVER

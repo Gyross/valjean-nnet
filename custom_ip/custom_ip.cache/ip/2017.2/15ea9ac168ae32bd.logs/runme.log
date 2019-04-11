@@ -1,0 +1,343 @@
+
+*** Running vivado
+    with args -log design_1_axi_ip_demo_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_axi_ip_demo_0_0.tcl
+
+
+****** Vivado v2017.2 (64-bit)
+  **** SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+  **** IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+source design_1_axi_ip_demo_0_0.tcl -notrace
+Command: synth_design -top design_1_axi_ip_demo_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 25876 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 317.848 ; gain = 79.871
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_ip_demo_0_0' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ip/design_1_axi_ip_demo_0_0/synth/design_1_axi_ip_demo_0_0.vhd:82]
+	Parameter C_axi_ip_demo_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_axi_ip_demo_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'axi_ip_demo_v1_0' declared at 'd:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:5' bound to instance 'U0' of component 'axi_ip_demo_v1_0' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ip/design_1_axi_ip_demo_0_0/synth/design_1_axi_ip_demo_0_0.vhd:143]
+INFO: [Synth 8-638] synthesizing module 'axi_ip_demo_v1_0' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:49]
+	Parameter C_axi_ip_demo_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_axi_ip_demo_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-637] synthesizing blackbox instance 'p_count' of component 'pop_count' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:95]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'axi_ip_demo_v1_0_axi_ip_demo' declared at 'd:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:5' bound to instance 'axi_ip_demo_v1_0_axi_ip_demo_inst' of component 'axi_ip_demo_v1_0_axi_ip_demo' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:101]
+INFO: [Synth 8-638] synthesizing module 'axi_ip_demo_v1_0_axi_ip_demo' [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:89]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-226] default block is never used [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:233]
+INFO: [Synth 8-226] default block is never used [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:363]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:231]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:362]
+INFO: [Synth 8-256] done synthesizing module 'axi_ip_demo_v1_0_axi_ip_demo' (1#1) [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0_axi_ip_demo.vhd:89]
+WARNING: [Synth 8-3848] Net popc_in in module/entity axi_ip_demo_v1_0 does not have driver. [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:51]
+INFO: [Synth 8-256] done synthesizing module 'axi_ip_demo_v1_0' (2#1) [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ipshared/78cb/hdl/axi_ip_demo_v1_0.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'design_1_axi_ip_demo_0_0' (3#1) [d:/Labs/custom_ip/custom_ip/custom_ip.srcs/sources_1/bd/design_1/ip/design_1_axi_ip_demo_0_0/synth/design_1_axi_ip_demo_0_0.vhd:82]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design axi_ip_demo_v1_0_axi_ip_demo has unconnected port S_AXI_ARPROT[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 358.926 ; gain = 120.949
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 358.926 ; gain = 120.949
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.061 . Memory (MB): peak = 672.348 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 5     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module axi_ip_demo_v1_0_axi_ip_demo 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 5     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_awprot[2]
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_awprot[1]
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_awprot[0]
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_arprot[2]
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_arprot[1]
+WARNING: [Synth 8-3331] design design_1_axi_ip_demo_0_0 has unconnected port axi_ip_demo_arprot[0]
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\U0/axi_ip_demo_v1_0_axi_ip_demo_inst/aw_en_reg )
+INFO: [Synth 8-3886] merging instance 'U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[0]' (FDRE) to 'U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[0]' (FDRE) to 'U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1] )
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/aw_en_reg) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_bresp_reg[1]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_araddr_reg[1]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_araddr_reg[0]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_awaddr_reg[1]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_awaddr_reg[0]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/axi_ip_demo_v1_0_axi_ip_demo_inst/axi_rresp_reg[1]) is unused and will be removed from module design_1_axi_ip_demo_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[31]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[30]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[29]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[28]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[27]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[26]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[25]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[24]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[23]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[22]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[21]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[20]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[19]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[18]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[17]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[16]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[15]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[14]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[13]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[12]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[11]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[10]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[9]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[8]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module \U0/p_count  has unconnected pin A[0]
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |pop_count     |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+---------------+------+
+|      |Cell           |Count |
++------+---------------+------+
+|1     |pop_count_bbox |     1|
+|2     |LUT1           |     1|
+|3     |LUT2           |     1|
+|4     |LUT3           |     3|
+|5     |LUT4           |    20|
+|6     |LUT5           |     2|
+|7     |LUT6           |    33|
+|8     |FDRE           |   167|
+|9     |FDSE           |     2|
++------+---------------+------+
+
+Report Instance Areas: 
++------+--------------------------------------+-----------------------------+------+
+|      |Instance                              |Module                       |Cells |
++------+--------------------------------------+-----------------------------+------+
+|1     |top                                   |                             |   235|
+|2     |  U0                                  |axi_ip_demo_v1_0             |   235|
+|3     |    axi_ip_demo_v1_0_axi_ip_demo_inst |axi_ip_demo_v1_0_axi_ip_demo |   229|
++------+--------------------------------------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 32 critical warnings and 6 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:20 . Memory (MB): peak = 672.348 ; gain = 120.949
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 672.348 ; gain = 434.371
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+31 Infos, 15 Warnings, 32 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 672.348 ; gain = 434.996
+INFO: [Common 17-1381] The checkpoint 'D:/Labs/custom_ip/custom_ip/custom_ip.runs/design_1_axi_ip_demo_0_0_synth_1/design_1_axi_ip_demo_0_0.dcp' has been generated.
