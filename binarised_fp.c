@@ -72,9 +72,10 @@ BNNO partial_xnor_bin_sum(BNNI i, BNNW w, BNNS bits) {
 
 void binarise(BNNI input[INP_VEC_SIZE], const BNNO output[NODE_MAX], BNNS out_size) {
     for (BNNS j = 0; j < out_size; j += PACKED_SIZE) { // for each output value
+        int input_index = j / PACKED_SIZE;
         for (int k = PACKED_SIZE - 1; k >= 0; k--) { // high to low bits for efficient shifting
-            input[j / PACKED_SIZE] <<= 1;
-            input[j / PACKED_SIZE] += output[j + k] >= 0 ? 1 : 0;
+            input[input_index] <<= 1;
+            input[input_index] += output[j + k] >= 0 ? 1 : 0;
         }
     }
 }
