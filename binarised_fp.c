@@ -42,6 +42,43 @@ void forward_pass(BNN bnn) {
     }
 }
 
+void fp_wrapper( BNN bnn, INPT* input_vec, BNN_real* output_vec ) { 
+
+    fprintf(stderr, "Enetered fp_wrapper\n");
+    // Clear activations fields
+    memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+    
+    // Binarize inputs & put in b_activations
+    binarise_input(input_vec, bnn->b_activations[0], bnn->bias[0], bnn->layer_sizes[0]);
+    
+    // Copy raw inputs into activations_true
+    for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+        bnn->activations_true[0][i] = (BNN_real)(input_vec[i]);
+    }
+
+    #ifdef DEBUG_IPT
+        printf("nbinput:\n");
+        for (BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+            printf("%d\n", input_vec[i]);
+            printf("%f\n", (BNN_real)input_vec[i]);
+        }
+        printf("binput:\n");
+        for (BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+            printf("%u\n", bnn->b_activations[0][i]);
+        }
+    #endif
+
+    // Perform the forward pass
+    forward_pass(bnn);
+
+    // Copy outputs into output_vec
+    memcpy(output_vec, bnn->activations_true[bnn->layers-1], 
+           sizeof(BNN_real) * bnn->layer_sizes[bnn->layers-1]);
+
+    fprintf(stderr, "Left fp_wrapper\n");
+}
+
 BNNS packed_ls(BNN bnn, BNNS layer) {
     return CEIL_DIV(bnn->layer_sizes[layer], SIZE(BNN_bin));
 }

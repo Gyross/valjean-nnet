@@ -203,9 +203,9 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     LBLT label = 0;
     BNN_real expected_vec[NODE_MAX];
 
-    // Input vectors
+    // Input & output vectors
     INPT nb_input[NODE_MAX];
-	BNN_bin b_input[BIN_VEC_SIZE];
+    BNN_real out_activations[NODE_MAX];
 
     BNNS n_inputs  = bnn->layer_sizes[0];
     BNNS n_outputs = bnn->layer_sizes[bnn->layers-1];
@@ -213,6 +213,9 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     double total_cost = 0;
     unsigned n_cases = 0;
 
+    // Initialize vectors
+    memset( nb_input, 0, sizeof(nb_input));
+    memset( out_activations, 0, sizeof(out_activations));
 
     // inputs and outputs specified by dataset must be the same as number
     // of neurons in input and output layers in the network, otherwise the 
@@ -235,44 +238,21 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
             printf("%f\n", expected_vec[i]);
         }
 #endif
-        // Clear activations fields
-        memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
-        memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
-        
-        // Binarize inputs
-		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
-	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
-		
-        // Copy inputs into activations layer
-		memcpy(bnn->b_activations[0], (BNN_bin *) b_input, BIN_VEC_SIZE * sizeof(BNN_bin));
-        for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
-            bnn->activations_true[0][i] = (BNN_real)nb_input[i];
-        }
-        
-#ifdef DEBUG_IPT
-        printf("nbinput:\n");
-        for (BNNS i = 0; i < n_inputs; i++) {
-            printf("%d\n", nb_input[i]);
-            printf("%f\n", (BNN_real)nb_input[i]);
-        }
-        printf("binput:\n");
-        for (BNNS i = 0; i < n_inputs; i++) {
-            printf("%u\n", (BNN_bin)b_input[i]);
-        }
-#endif
-
-        forward_pass(bnn);
+        fp_wrapper( bnn, nb_input, out_activations );
 
         if ( op_type == TRAIN ) {
 			// hard code learning rate to 0.001
             back_pass(bnn, expected_vec, 0.001);
-            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
+            total_correct += print_output(expected_vec, out_activations, n_outputs);
         }
         else if ( op_type == TEST ) {
-            total_correct += print_output(expected_vec, bnn->activations_true[bnn->layers-1], n_outputs);
+            total_correct += print_output(expected_vec, out_activations, n_outputs);
         }
 
-        total_cost += cost_func(bnn->activations_true[bnn->layers-1], expected_vec, n_outputs, bnn->layer_sizes[bnn->layers-2]);
+        total_cost += cost_func( out_activations, 
+                                 expected_vec, 
+                                 n_outputs, 
+                                 bnn->layer_sizes[bnn->layers-2] );
 
         n_cases++;
     }

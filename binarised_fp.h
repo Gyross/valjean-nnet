@@ -6,6 +6,8 @@
 
 void forward_pass(BNN bnn);
 
+void fp_wrapper(BNN bnn, INPT* input_vec, BNN_real* output_vec);
+
 #define PACKED_SIZE (sizeof(BNN_bin) * 8)
 
 BNNS packed_ls(BNN bnn, BNNS layer);
