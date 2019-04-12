@@ -83,6 +83,6 @@ void bnn_print(BNN bnn);
  * fp_label: data labels i.e. output data.
  * op_type: either training or testing.
  */
-int bnn_op(BNN bnn, FILE *fp_input, FILE *fp_label, op_t op);
+int bnn_op(BNN bnn, dataset ds, op_t op);
 
 #endif //VALJEAN_NNET_BNN_H

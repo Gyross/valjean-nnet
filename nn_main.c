@@ -8,6 +8,7 @@
 #include "bnn.h"
 #include "error_handling.h"
 #include "config.h"
+#include "dataset.h"
 
 #define USAGE "\n\
 Usage:\n \
@@ -32,6 +33,7 @@ int main( int argc, char* argv[] ) {
     initPRNG();
 
     BNN bnn = &_bnn;
+    dataset ds = NULL;
 
     if (argc == 2) {
         bnn_read(bnn, argv[1]);
@@ -76,43 +78,29 @@ int main( int argc, char* argv[] ) {
         } else {
             op = ANNEAL;
         }
+
+        CHECK(NULL == (ds = dataset_create(argv[3],argv[4])), "Error creating dataset!\n", 1);
         
-        char *filename = argv[3];
-        if(access(filename, F_OK) != -1) {
-            printf("EXISTS\n");
-        } else {
-            printf("DOES NOT\n");
-        }
-
-        FILE* fp_input = fopen(argv[3], "rb");
-        CHECK(fp_input == NULL, "Input file could not be opened, aborting!", 1);
-
-        FILE* fp_label = fopen(argv[4], "rb");
-        CHECK(fp_label == NULL, "Label file could not be opened, aborting!\n", 2);
-
         int ret;
-        if (!(ret = bnn_op(bnn, fp_input, fp_label, op))) {
+        if (!(ret = bnn_op(bnn, ds, op))) {
             printf("%s completed.\n", 
                     op == TEST ? "Testing" : 
                     op == TRAIN ? "Training" : "Annealing" );
 
             // Only save the nnet if we were training or annealing
             if ( op == TRAIN || op == ANNEAL ) {
-                PASS(bnn_write(bnn, argv[2]), 3);
+                PASS(bnn_write(bnn, argv[2]), 1);
             }
         } else {
-            PASS(ret, 3);
+            PASS(ret, 1);
         }
 
-    error3:
-        fclose(fp_label);
-    error2:
-        fclose(fp_input);
     } else {
         CHECK(1, "Invalid arguments." USAGE, 1);
     }
 
 error1:
+    dataset_destroy(ds);
     RETURN;
 }
 #endif

@@ -7,7 +7,6 @@
 #include "xorgens.h"
 #include "bnn.h"
 #include "binarised_fp.h"
-#include "anneal.h"
 #include "binarised_bp.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
@@ -100,7 +99,7 @@ int bnn_read(BNN bnn, const char* filename) {
         amt_read = fread( bnn->bias[m], sizeof(BNN_real), b_size, fp );
         CHECK(amt_read != b_size, "File corrupted!", 2);
     }
-    bnn_print(bnn);
+    //bnn_print(bnn);
 
 error2:
     fclose(fp);
@@ -184,71 +183,67 @@ void bnn_print(BNN bnn) {
  * Performs operation - training or testing.
  *
  * bnn: initialised bnn struct.
- * fp_input: input data for operation.
- * fp_label: data labels i.e. output data.
+ * dataset: exisitng dataset to operate on
  * op_type: either training or testing.
  */
-int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
+int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
     // Skip operation and go straight to annealing
     // TODO clean up te implementation of this
+    /*
     if ( op_type == ANNEAL ) {
-        anneal(bnn, fp_input, fp_label);
+        anneal(bnn, ds);
         return 0;
     }
+    */
 
     MSG("Successfully completed operation.");
 
-    BNNS n_inputs, n_outputs;
-    size_t amt_read;
-    INPT nb_input[NODE_MAX];
-    LBLT _expected_vec[NODE_MAX];
+    int read_code;
+    LBLT label = 0;
     BNN_real expected_vec[NODE_MAX];
+
+    // Input vectors
+    INPT nb_input[NODE_MAX];
+	BNN_bin b_input[BIN_VEC_SIZE];
+
+    BNNS n_inputs  = bnn->layer_sizes[0];
+    BNNS n_outputs = bnn->layer_sizes[bnn->layers-1];
 
     double total_cost = 0;
     unsigned n_cases = 0;
 
-    // Read number of inputs and outputs expected by file and do some checking
-    CHECK(fread( &n_inputs, sizeof(BNNS), 1, fp_input ) != 1, "File corrupted!", 1);
-    CHECK(fread( &n_outputs, sizeof(BNNS), 1, fp_label ) != 1, "File corrupted!", 1);
 
-    // n_inputs and n_outpus have to be the same as the number of input and
-    // output layers in the network, otherwise the data is
-    // incompatible with the network.
-    printf("%d\n", n_inputs);
-    CHECK(n_inputs != bnn->layer_sizes[0], "Incorrect number of inputs!", 1);
-    CHECK(n_outputs != bnn->layer_sizes[bnn->layers-1], "Incorrect number of outputs!", 1);
+    // inputs and outputs specified by dataset must be the same as number
+    // of neurons in input and output layers in the network, otherwise the 
+    // dataset is incompatible with the network.
+    CHECK( dataset_num_inputs(ds)  != n_inputs, 
+           "Incorrect number of inputs!", 1);
+    CHECK( dataset_num_outputs(ds) != n_outputs, 
+           "Incorrect number of outputs!", 1);
 
-    // Loop until we reach the end of the file
-    uint32_t total_read = 0;
     uint32_t total_correct = 0;
-    while( ( amt_read = fread( nb_input, sizeof(INPT), n_inputs, fp_input ) ) != 0 ) {
-        CHECK(amt_read != n_inputs, "Incorrect number of bytes!", 1);
-        total_read += amt_read;
-        printf("Total:%d\n", total_read);
 
-        CHECK(
-            fread( _expected_vec, sizeof(LBLT), n_outputs, fp_label ) != n_outputs,
-            "Incorrect number of bytes!", 1
-        );
+    // While there are input cases left in the dataset
+    while( 1 == (read_code = dataset_read( ds, nb_input, &label )) ) {
 
-        BNN_real maxsize = (bnn->layer_sizes[bnn->layers-2]);
-        convert_labels(_expected_vec, expected_vec, n_outputs,maxsize);
+        convert_label(label, expected_vec, n_outputs);
         
 #ifdef DEBUG_OPT
         printf("PRINTING EXPECTED OUTPUT\n");
         for (BNNS i = 0; i < n_outputs; i++) {
-            printf("%d\n", _expected_vec[i]);
             printf("%f\n", expected_vec[i]);
         }
 #endif
+        // Clear activations fields
         memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
         memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
         
-		BNN_bin b_input[BIN_VEC_SIZE];
+        // Binarize inputs
 		memset(b_input, 0, BIN_VEC_SIZE * sizeof(BNN_bin));
 	    binarise_input(nb_input, b_input, bnn->bias[0], bnn->layer_sizes[0]);
 		
+        // Copy inputs into activations layer
 		memcpy(bnn->b_activations[0], (BNN_bin *) b_input, BIN_VEC_SIZE * sizeof(BNN_bin));
         for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
             bnn->activations_true[0][i] = (BNN_real)nb_input[i];
@@ -265,7 +260,7 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
             printf("%u\n", (BNN_bin)b_input[i]);
         }
 #endif
-        printf("");
+
         forward_pass(bnn);
 
         if ( op_type == TRAIN ) {
@@ -281,6 +276,8 @@ int bnn_op(BNN bnn, FILE* fp_input, FILE* fp_label, op_t op_type) {
 
         n_cases++;
     }
+
+    CHECK(read_code == -1, "Incorrect number of bytes!", 1);
     
     printf("NUM CORRECT: %d %d\n", total_correct, n_cases);
 

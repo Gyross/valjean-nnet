@@ -23,8 +23,9 @@ BNN_bin stochastic_binarise(int val) {
     return (BNN_bin)ret;
 }
 
-void convert_labels(LBLT input[NODE_MAX], BNN_real output[NODE_MAX], BNNS n_outputs, BNN_real max) {
-    for (size_t i = 0; i < n_outputs; i++) {
-        output[i] = (BNN_real)input[i] == 1 ? 1 : 0;
+void convert_label( LBLT label, BNN_real expected[NODE_MAX], BNNS n_outputs ){
+    for ( BNNS i = 0; i < n_outputs; i++ ) {
+        expected[i] = (label == i) ? 1 : 0;
     }
 }
+
