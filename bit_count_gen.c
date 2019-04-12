@@ -3,10 +3,10 @@
 #include <stdint.h>
 #include <string.h>
 
-#define NUM_CASES 128
+#define NUM_CASES 64
 
-#define NUM_INPUTS 6
-#define NUM_OUTPUTS 7
+#define NUM_INPUTS 3
+#define NUM_OUTPUTS 4
 
 int get_smallest_index( int* array, int len ) {
     int smallest = array[0];

@@ -1,8 +1,7 @@
 #ifndef VALJEAN_NNET_ANNEAL_H
 #define VALJEAN_NNET_ANNEAL_H
 
-#include "bnn.h"
-#include <stdio.h>
+#include "types.h"
 
 enum anneal_param {
     PARAM_NONE,
@@ -25,7 +24,7 @@ struct perturb_list {
     BNNS     l_node_index;
     uint32_t l_node_offset;
     // For biases only
-    BNNB amount;
+    BNN_real amount;
 
     struct perturb_list* next;
 };
@@ -50,7 +49,7 @@ struct anneal_state {
     uint32_t total_parameters;
 };
 
-void anneal( BNN bnn, FILE* fp_input, FILE* fp_label );
+void anneal( BNN bnn, dataset ds );
 void anneal_init( BNN bnn, struct anneal_state* state );
 struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* state );
 void anneal_revert( BNN bnn, struct perturb_list* p );

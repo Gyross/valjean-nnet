@@ -11,7 +11,7 @@
 #include "error_handling.h"
 #include "mnist_int8_input.h"
 #include "config.h"
-
+#include "anneal.h"
 
 static int print_output(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
@@ -190,12 +190,10 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
     // Skip operation and go straight to annealing
     // TODO clean up te implementation of this
-    /*
     if ( op_type == ANNEAL ) {
         anneal(bnn, ds);
         return 0;
     }
-    */
 
     MSG("Successfully completed operation.");
 

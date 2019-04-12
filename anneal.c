@@ -22,7 +22,7 @@ struct perturb_list* perturb_list_create() {
         new_perturb->r_node        = 0;
         new_perturb->l_node_index  = 0;
         new_perturb->l_node_offset = 0;
-        new_perturb->amount        = 0;
+        new_perturb->amount        = 0.0;
         new_perturb->next          = NULL;
     }
     return new_perturb;
@@ -95,12 +95,12 @@ struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as ) {
             // Decode the index and offset of the left node the weight
             // connects to
             rand_result      = rand_result % bnn->layer_sizes[p->fp_step+1];
-            p->l_node_index  = rand_result / SIZE(BNNI);
-            p->l_node_offset = rand_result % SIZE(BNNI);
+            p->l_node_index  = rand_result / SIZE(BNN_bin);
+            p->l_node_offset = rand_result % SIZE(BNN_bin);
 
 
             // Flip the weight
-            BNNW bitmask = 1 << p->l_node_offset;
+            BNN_bin bitmask = 1 << p->l_node_offset;
             bnn->weight[p->fp_step][p->r_node][p->l_node_index] ^= bitmask;
 
         } else {
@@ -118,7 +118,7 @@ struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as ) {
             p->r_node = rand_result;
 
             // Generates either 1 or -1
-            p->amount = (((xor4096i(0) % 2) << 1) - 1);
+            p->amount = (BNN_real)(((xor4096i(0) % 2) << 1) - 1);
 
             // Adjust the bias by the generated amount
             bnn->bias[p->fp_step][p->r_node] += p->amount;
@@ -132,7 +132,7 @@ void anneal_revert( BNN bnn, struct perturb_list* p ) {
     while ( p != NULL ) {
         if ( p->param == PARAM_WEIGHT ) {
             // Flip back the weight we flipped
-            BNNW bitmask = 1 << p->l_node_offset;
+            BNN_bin bitmask = 1 << p->l_node_offset;
             bnn->weight[p->fp_step][p->r_node][p->l_node_index] ^= bitmask;
         } else if ( p->param == PARAM_BIAS ) {
             // Subtract the amount we added
@@ -205,7 +205,7 @@ uint32_t anneal_end( struct anneal_state* state ) {
     return 0;
 }
 
-void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
+void anneal( BNN bnn, dataset ds ) {
     struct anneal_state _state;
     struct anneal_state* state = &_state;
     struct perturb_list *perturbation = NULL;
@@ -226,7 +226,7 @@ void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
         perturbation = anneal_perturb( bnn, state );
 
         // Do a forward pass
-        energy = compute_energy(bnn, fp_input, fp_label, 0);
+        energy = compute_energy(bnn, ds, 0);
 
         decision = anneal_decide( state, energy );
 
@@ -247,7 +247,7 @@ void anneal( BNN bnn, FILE* fp_input, FILE* fp_label ) {
         ++state->iteration;
     }
 
-    energy = compute_energy(bnn, fp_input, fp_label, 1);
+    energy = compute_energy(bnn, ds, 1);
 }
 
 

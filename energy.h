@@ -1,9 +1,8 @@
 #ifndef VALJEAN_ENERGY_H
 #define VALJEAN_ENERGY_H
 
-#include <stdio.h>
-#include "bnn.h"
+#include "types.h"
 
-double compute_energy( BNN bnn, FILE* fp_input, FILE* fp_label, int print_outputs );
+double compute_energy( BNN bnn, dataset ds, int print_outputs );
 
 #endif

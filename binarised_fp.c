@@ -44,7 +44,6 @@ void forward_pass(BNN bnn) {
 
 void fp_wrapper( BNN bnn, INPT* input_vec, BNN_real* output_vec ) { 
 
-    fprintf(stderr, "Enetered fp_wrapper\n");
     // Clear activations fields
     memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
     memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
@@ -75,8 +74,6 @@ void fp_wrapper( BNN bnn, INPT* input_vec, BNN_real* output_vec ) {
     // Copy outputs into output_vec
     memcpy(output_vec, bnn->activations_true[bnn->layers-1], 
            sizeof(BNN_real) * bnn->layer_sizes[bnn->layers-1]);
-
-    fprintf(stderr, "Left fp_wrapper\n");
 }
 
 BNNS packed_ls(BNN bnn, BNNS layer) {
