@@ -4,3 +4,4 @@ testing/
 bnn/bnn.xcodeproj/*
 mnist/*
 *.txt
+vgcore.*
