@@ -5,9 +5,6 @@
 
 #define OFF_VAL 0
 
-// Choose the output data type
-typedef float out_t;
-//typedef int8_t out_t;
 
 int main(int argc, char* argv[]) {
 
@@ -25,21 +22,11 @@ int main(int argc, char* argv[]) {
         uint32_t n_inputs = 10;
         assert(fwrite( &n_inputs, sizeof(uint32_t), 1, fp_out ));
 
-
         uint8_t label; 
-        const out_t on = (out_t)1;
-        const out_t off = (out_t)OFF_VAL;
 
+        // Copy the labels directly
         while( fread( &label, sizeof(uint8_t), 1, fp_in ) ) {
-            for ( int i = 0; i < label; i++ ) {
-                fwrite( &off, sizeof(out_t), 1, fp_out );
-            }
-
-            fwrite( &on, sizeof(out_t), 1, fp_out );
-
-            for ( int i = label+1; i < 10; i++ ) {
-                fwrite( &off, sizeof(out_t), 1, fp_out );
-            }
+            fwrite( &label, sizeof(uint8_t), 1, fp_out );
         }
 
         fclose(fp_in);
