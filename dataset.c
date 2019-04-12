@@ -159,7 +159,7 @@ void dataset_destroy(dataset ds) {
  */
 int dataset_read(dataset ds, INPT* input_vec, LBLT* label_p) {
     size_t if_amt_read, lf_amt_read;
-    INPT temp_input_vec[LAYER_MAX];
+    INPT temp_input_vec[NODE_MAX];
     LBLT temp_label;
 
     // Read inputs into temp_input_vec
@@ -201,6 +201,7 @@ int dataset_read(dataset ds, INPT* input_vec, LBLT* label_p) {
     if ( ds->fp_label != NULL && label_p != NULL ) {
         *label_p = temp_label;
     }
+
     return 1;
 }
 
