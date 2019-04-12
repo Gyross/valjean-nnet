@@ -2,12 +2,7 @@
 #define VALJEAN_DATASET_H
 
 #include <stdio.h>
-#include "bnn.h"
-#include "mnist_int8_input.h"
-
-struct dataset;
-
-typedef struct dataset* dataset;
+#include "types.h"
 
 /*
  * Creates dataset from files
@@ -47,7 +42,7 @@ void dataset_destroy(dataset ds);
  *    0 on EOF
  *   -1 on error
  */
-int dataset_read(dataset ds, INPT* input_vec, LBLT* label);
+int dataset_read(dataset ds, INPT* input_vec, LBLT* label_p);
 
 
 /*

@@ -7,6 +7,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <dataset.h>
+#include <types.h>
 
 #define CEIL_DIV(x, y) ((x + y - 1) / y)
 #define SIZE(x) (sizeof(x) * 8)
@@ -21,10 +23,6 @@ typedef enum op_t {
     TRAIN,
     ANNEAL
 } op_t;
-
-typedef float BNN_real; //bnn real number type
-typedef uint32_t BNNS; // bnn size type
-typedef uint32_t BNN_bin; //bnn binarised type
 
 /*
  * BNN struct.
@@ -45,8 +43,6 @@ struct bnn {
 
 
 
-typedef struct bnn *BNN;
-typedef struct bnn bnn_alloc;
 
 /*
  * Function to create new BNN.
