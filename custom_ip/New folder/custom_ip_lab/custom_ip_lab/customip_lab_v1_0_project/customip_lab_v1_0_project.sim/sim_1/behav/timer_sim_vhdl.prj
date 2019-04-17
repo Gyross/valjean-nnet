@@ -1,0 +1,10 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../../../../ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd"
+vhdl xil_defaultlib  "../../../../../../ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd"
+vhdl xil_defaultlib  "../../../../../../ip_repo/customip_lab_1.0/hdl/timer.vhd"
+vhdl xil_defaultlib  "../../../customip_lab_v1_0_project.ip_user_files/bd/fifo/hdl/fifo.vhd"
+vhdl xil_defaultlib  "../../../../../../ip_repo/customip_lab_1.0/hdl/fifo/hdl/fifo_wrapper.vhd"
+vhdl xil_defaultlib  "../../../../../../ip_repo/customip_lab_1.0/hdl/timer_sim.vhd"
+
+# Do not sort compile order
+nosort

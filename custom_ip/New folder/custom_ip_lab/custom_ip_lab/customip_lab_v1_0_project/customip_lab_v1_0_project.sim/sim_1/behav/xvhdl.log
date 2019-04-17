@@ -1,0 +1,25 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity customip_lab_v1_0_S00_AXI
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity customip_lab_v1_0
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity timer
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.ip_user_files/bd/fifo/hdl/fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/fifo/hdl/fifo_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_wrapper
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity timer_sim
+ERROR: [VRFC 10-91] clk is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:52]
+ERROR: [VRFC 10-283] actual of formal out port count cannot be an expression [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:52]
+ERROR: [VRFC 10-91] clk is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:57]
+ERROR: [VRFC 10-91] clk is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:64]
+ERROR: [VRFC 10-91] clk is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:65]
+ERROR: [VRFC 10-91] reset is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:71]
+ERROR: [VRFC 10-91] enable is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:72]
+ERROR: [VRFC 10-91] reset is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:74]
+ERROR: [VRFC 10-91] count is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:82]
+ERROR: [VRFC 10-91] enable is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:83]
+ERROR: [VRFC 10-91] count is not declared [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:85]
+ERROR: [VRFC 10-1504] unit behavioral ignored due to previous errors [C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd:37]
+INFO: [VRFC 10-240] VHDL file C:/Users/cse/cs4601/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd ignored due to errors
