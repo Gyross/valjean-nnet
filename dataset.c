@@ -16,7 +16,7 @@
 #define DS_ASSERT_INIT(_x) dataset _ds = _x
 
 #define DS_ASSERT(_e, _m)      \
-    if(!(_e)) {                  \
+    if(!(_e)) {                \
         fprintf(stderr, _m);   \
         fprintf(stderr, "\n"); \
         dataset_destroy(_ds);  \
