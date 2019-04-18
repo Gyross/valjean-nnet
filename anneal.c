@@ -142,14 +142,14 @@ void anneal_revert( BNN bnn, struct perturb_list* p ) {
     }
 }
 
-void anneal_init( BNN bnn, struct anneal_state* state ) {
+void anneal_init( BNN bnn, struct anneal_state* state, dataset ds ) {
 
-    state->temperature = 20;
+    state->temperature = 0.1;
 
-    state->energy      = INFINITY;
+    state->energy = compute_energy(bnn, ds, 0);
 
     state->cooling_factor = 0.99999;
-    state->end_temperature = 0.01;
+    state->end_temperature = 0.001;
 
     state->iteration = 1;
 
@@ -213,7 +213,7 @@ void anneal( BNN bnn, dataset ds ) {
 
     double energy;
 
-    anneal_init( bnn, state );
+    anneal_init( bnn, state, ds );
 
     // TODO potentially implement annealing resets
 
