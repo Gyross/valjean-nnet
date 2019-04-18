@@ -53,6 +53,18 @@ void dataset_rewind(dataset ds);
 
 
 /*
+ * Mark the start of a particular batch
+ */
+void dataset_batch_start(dataset ds);
+
+
+/*
+ * Rewind to the point marked by dataset_batch_start
+ */
+void dataset_batch_rewind(dataset ds);
+
+
+/*
  * Returns the number of inputs specified by the input file
  */
 BNNS dataset_num_inputs(dataset ds);
