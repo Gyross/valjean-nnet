@@ -31,8 +31,8 @@ struct dataset {
     BNNS num_outputs; // Not valid if dataset is unlabelled
     int num_cases;    
 
-    fpos_t batch_start_input;
-    fpos_t batch_start_label;
+    fpos_t input_mark;
+    fpos_t label_mark;
 };
 
 
@@ -123,9 +123,9 @@ dataset dataset_create(const char* input_filename, const char* label_filename) {
     // Rewind to beginning of data files
     dataset_rewind(ds);
 
-    // Set the batch start at the beginning of the data file
+    // Set the mark start at the beginning of the data file
     // (needed since fpos_t are non-pointers and so can't be NULL)
-    dataset_batch_start(ds);
+    dataset_mark(ds);
 
     return ds;
 }
@@ -262,32 +262,32 @@ void dataset_rewind(dataset ds) {
     }
 }
 
-void dataset_batch_start(dataset ds) {
+void dataset_mark(dataset ds) {
     if ( ds->fp_input != NULL ) {
-        fgetpos(ds->fp_input, &(ds->batch_start_input));
+        fgetpos(ds->fp_input, &(ds->input_mark));
     } else {
         fprintf( 
             stderr, 
-            "Function dataset_batch_start called on dataset with NULL fp_input!" 
+            "Function dataset_mark called on dataset with NULL fp_input!" 
         );
     }
 
     if ( ds->fp_label != NULL ) {
-        fgetpos(ds->fp_label, &(ds->batch_start_label));
+        fgetpos(ds->fp_label, &(ds->label_mark));
     }
 }
 
-void dataset_batch_rewind(dataset ds) {
+void dataset_mark_rewind(dataset ds) {
     if ( ds->fp_input != NULL ) {
-        fsetpos(ds->fp_input, &(ds->batch_start_input));
+        fsetpos(ds->fp_input, &(ds->input_mark));
     } else {
         fprintf( 
             stderr, 
-            "Function dataset_batch_rewind called on dataset with NULL fp_input!" 
+            "Function dataset_mark_rewind called on dataset with NULL fp_input!" 
         );
     }
 
     if ( ds->fp_label != NULL ) {
-        fsetpos(ds->fp_label, &(ds->batch_start_label));
+        fsetpos(ds->fp_label, &(ds->label_mark));
     }
 }

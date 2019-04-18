@@ -53,15 +53,15 @@ void dataset_rewind(dataset ds);
 
 
 /*
- * Mark the start of a particular batch
+ * Mark a point in the dataset
  */
-void dataset_batch_start(dataset ds);
+void dataset_mark(dataset ds);
 
 
 /*
- * Rewind to the point marked by dataset_batch_start
+ * Rewind to the point marked
  */
-void dataset_batch_rewind(dataset ds);
+void dataset_mark_rewind(dataset ds);
 
 
 /*

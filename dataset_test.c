@@ -19,8 +19,8 @@ int main( int argc, char* argv[]) {
     }
 
 
-    printf("\nTesting batch start/rewind\n");
-    dataset_batch_start(ds);
+    printf("\nTesting mark/rewind\n");
+    dataset_mark(ds);
 
     for ( int i = 0; i < 8; i++ ) {
         dataset_read(ds, input_vec, &label);
@@ -30,7 +30,7 @@ int main( int argc, char* argv[]) {
 
         printf(" --> %3d\n", label);
 
-        dataset_batch_rewind(ds);
+        dataset_mark_rewind(ds);
     }
 
     printf("\n");
