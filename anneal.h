@@ -42,6 +42,8 @@ struct anneal_state {
 
     uint32_t iteration;
 
+    uint32_t batch_size;
+
     // Stored number of parameters
     // Might want to move these to the bnn struct later
     uint32_t total_weights;
