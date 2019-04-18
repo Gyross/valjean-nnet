@@ -12,8 +12,8 @@
 
 #define USAGE "\n\
 Usage:\n \
-    nnet new <filename> <layer size>...\n\
-    nnet {test, train, anneal} <nnet filename> <input file> <label file>\
+    nn_main new <filename> <layer size>...\n\
+    nn_main {test, train, anneal} <nnet filename> <input file> <label file>\
 "
 
 
