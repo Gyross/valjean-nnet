@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "config.h"
 
 #define BUF_SIZE 4096
 

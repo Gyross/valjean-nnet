@@ -51,27 +51,28 @@ void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
 			for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {		// for each node in the layer above
 				weight_grads[i][j][k] = act_grads_real[i+1][j] * bnn->activations_true[i][k];
 			}
-			bin_matrix_mult_fpvec(act_grads_real[i+1], act_grads_bin[i], bnn->layer_sizes[i+1], bnn->layer_sizes[i],
-			bnn->weight[i]);
 			
 			//Update:
 			for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
 				bnn->weight_true[i][j][k] -= l_r * weight_grads[i][j][k];
 			}
-		}
+        }
+        bin_matrix_mult_fpvec(act_grads_real[i+1], act_grads_bin[i], bnn->layer_sizes[i+1], bnn->layer_sizes[i], bnn->weight[i]);
+        
 		for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
 			binarise( bnn->weight[i][j],  bnn->weight_true[i][j], bnn->layer_sizes[i]);
 		}
         
         #ifdef TESTING_BP
+        printf("BACKPASS OUTPUTS\n");
         for (BNNS i = 0; i < bnn->layers; i++) {
             printf("LAYER %u\n", i);
-            for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
-                printf("OUTPUT NODE %u\n", j);
-                printf("act grad real: %f\n", act_grads_real[i][j]);
-                printf("act grad bin: %f\n", act_grads_bin[i][j]);
+            for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
+                printf("OUTPUT NODE %u\n", k);
+                printf("act grad real: %f\n", act_grads_real[i][k]);
+                printf("act grad bin: %f\n", act_grads_bin[i][k]);
                 printf("WEIGHT GRADS:\n");
-                for (BNNS k = 0; k < bnn->layer_sizes[i]; k++) {
+                for (BNNS j = 0; j < bnn->layer_sizes[i+1]; j++) {
                     printf("%f, ", weight_grads[i][j][k]);
                 }
                 printf("\n");
@@ -98,16 +99,18 @@ void bin_matrix_mult_fpvec(
     BNN_real input[NODE_MAX], BNN_real output[NODE_MAX], BNNS inp_size, BNNS out_size,
     BNN_bin weights[NODE_MAX][BIN_VEC_SIZE]
 ) {
-    for ( BNNS j = 0; j < out_size; j++ ) { // for each output node
-        for ( BNNS k = 0; k < CEIL_DIV(inp_size, SIZE(BNN_bin)); k++ ) { // for each input node
-            output[j] = 0;
-			for (BNNS m = 0; m < SIZE(BNN_bin); m++) {
-				BNNS idx = k*SIZE(BNN_bin)+m;
-				if (idx < inp_size) {
-					float sign = weights[j][k] & (1 << m) ? 1 : -1;
-					output[j] += input[idx] * sign;
-				}
-			}
+    for ( BNNS j = 0; j < out_size; j++) {
+        output[j] = 0;
+    }
+    for ( BNNS k = 0; k < inp_size; k++) { // for each input node
+        for (BNNS m = 0; m < CEIL_DIV(out_size, SIZE(BNN_bin)); m++) {
+            for (BNNS j = 0; j < SIZE(BNN_bin); j++) {
+                BNNS idx = m*SIZE(BNN_bin) + j;
+                if (idx < out_size) {
+                    float sign = weights[k][m] & (1 << j) ? 1 : -1;
+                    output[idx] += input[k] * sign;
+                }
+            }
         }
     }
 }

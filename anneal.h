@@ -30,7 +30,7 @@ struct perturb_list {
 };
 
 // Perturb list helper functions
-struct perturb_list* perturb_list_create();
+struct perturb_list* perturb_list_create(void);
 void perturb_list_free( struct perturb_list* list );
 
 struct anneal_state {

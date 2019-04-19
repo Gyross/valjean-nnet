@@ -3,7 +3,9 @@
 #include "dataset.h"
 #include "bnn.h"
 #include "mnist_int8_input.h"
+#include "config.h"
 
+#ifdef DATASET_TEST
 int main( int argc, char* argv[]) {
     
     INPT input_vec[NODE_MAX];
@@ -27,3 +29,4 @@ int main( int argc, char* argv[]) {
     assert(count == dataset_num_cases(ds));
     return 0;
 }
+#endif

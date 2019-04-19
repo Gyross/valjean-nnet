@@ -85,7 +85,7 @@ double _pe_square_error_normalized( BNN bnn, LBLT label, BNN_real* output_vec, B
             sum += diff*diff;
         }
 
-        scaling += abs(output_vec[i]);
+        scaling += fabs(output_vec[i]);
     }
 
     return sum / scaling;

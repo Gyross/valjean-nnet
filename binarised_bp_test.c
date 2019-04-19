@@ -12,7 +12,7 @@
 #include "binarised_fp.h"
 #include "config.h"
 
-static void back_pass_test();
+static void back_pass_test(void);
 void init_bp_test_bnn(BNN bnn);
 
 bnn_alloc _bnnBPTest;
@@ -44,9 +44,49 @@ static void back_pass_test() {
         }
         printf("\n");
     }
-    BNN_real target[NODE_MAX] = {1, 3};
+    BNN_real target[NODE_MAX] = {1, 0};
     
     back_pass(bnn, target, 0.001);
+    
+    printf("\n\n\nFINISHED FIRST BACKPASS\n\n\n");
+    bnn_print(bnn);
+    printf("\n\n\n STARTING NEW ROUND \n\n\n");
+    
+    memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+    forward_pass(bnn);
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        printf("ACTIVATIONS LAYER %u: ", i);
+        printf("bin: %u, ", bnn->b_activations[i][0]);
+        for (BNNS j = 0; j < bnn->layer_sizes[i]; j++) {
+            printf("%f, ", bnn->activations_true[i][j]);
+        }
+        printf("\n");
+    }
+    back_pass(bnn, target, 0.001);
+    memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+    forward_pass(bnn);
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        printf("ACTIVATIONS LAYER %u: ", i);
+        printf("bin: %u, ", bnn->b_activations[i][0]);
+        for (BNNS j = 0; j < bnn->layer_sizes[i]; j++) {
+            printf("%f, ", bnn->activations_true[i][j]);
+        }
+        printf("\n");
+    }
+    back_pass(bnn, target, 0.001);
+    memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+    forward_pass(bnn);
+    for (BNNS i = 0; i < bnn->layers; i++) {
+        printf("ACTIVATIONS LAYER %u: ", i);
+        printf("bin: %u, ", bnn->b_activations[i][0]);
+        for (BNNS j = 0; j < bnn->layer_sizes[i]; j++) {
+            printf("%f, ", bnn->activations_true[i][j]);
+        }
+        printf("\n");
+    }
     
     bnn_print(bnn);
     

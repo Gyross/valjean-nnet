@@ -13,7 +13,7 @@
 #include "config.h"
 #include "anneal.h"
 
-static int print_output(
+static float print_output(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 );
 static double cost_func(
@@ -223,7 +223,7 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     CHECK( dataset_num_outputs(ds) != n_outputs, 
            "Incorrect number of outputs!", 1);
 
-    uint32_t total_correct = 0;
+    float total_correct = 0;
 
     // While there are input cases left in the dataset
     while( 1 == (read_code = dataset_read( ds, nb_input, &label )) ) {
@@ -253,11 +253,12 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
                                  bnn->layer_sizes[bnn->layers-2] );
 
         n_cases++;
+        printf("Running average: %f\n", 100 * total_correct/(float) n_cases);
     }
 
     CHECK(read_code == -1, "Incorrect number of bytes!", 1);
     
-    printf("NUM CORRECT: %d %d\n", total_correct, n_cases);
+    printf("NUM CORRECT: %f %d\n", total_correct, n_cases);
 
     print_statistics(total_cost, n_cases);
 
@@ -265,7 +266,7 @@ error1:
     RETURN;
 }
 
-static int print_output(
+static float print_output(
     const BNN_real expected_vec[NODE_MAX], const BNN_real output_vec[NODE_MAX], BNNS n_outputs
 ) {
     int expected_category = -1;
@@ -286,6 +287,11 @@ static int print_output(
         if (output_vec[i] > output_vec[predicted_cat]) {
             predicted_cat = i;
         }
+    }
+    if (output_vec[predicted_cat] == expected_vec[expected_category] && expected_category != predicted_cat) {
+        printf("PREDICT: %d with equal probability as true\n", predicted_cat);
+        printf("%d\n", predicted_cat==expected_category ? 1 : 0);
+        return (0.5);
     }
     printf("PREDICT: %d\n", predicted_cat);
     printf("%d\n", predicted_cat==expected_category ? 1 : 0);

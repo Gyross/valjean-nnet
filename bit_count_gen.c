@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include "config.h"
 
 #define NUM_CASES 64
 
@@ -20,6 +21,7 @@ int get_smallest_index( int* array, int len ) {
     return index;
 }
 
+#ifdef BIT_COUNT
 int main(int argc, char* argv[]) {
     int8_t input[NUM_INPUTS];
     uint8_t label;
@@ -71,3 +73,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+#endif

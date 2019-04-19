@@ -16,5 +16,7 @@
 //#define LABEL_FORMAT
 //#define DEBUG_IPT 111
 //#define TESTING_BP 114
+//#define BIT_COUNT 3
+//#define DATASET_TEST 83
 
 #endif /* config_h */
