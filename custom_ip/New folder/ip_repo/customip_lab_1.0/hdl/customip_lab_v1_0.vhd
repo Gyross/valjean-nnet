@@ -99,6 +99,51 @@ architecture arch_imp of customip_lab_v1_0 is
                output : out STD_LOGIC_VECTOR(31 DOWNTO 0));
     end component;
     
+    component weight_RAM is
+        port(
+        clk : in std_logic;
+        en : in std_logic;
+        we : in std_logic;
+        rst : in std_logic;
+        addr : in std_logic_vector(10 downto 0);
+        di : in std_logic_vector(15 downto 0);
+        do : out std_logic_vector(15 downto 0)
+        );
+    end component;
+    
+    component IO_RAM is
+        port(
+        clk : in std_logic;
+        en : in std_logic;
+        we : in std_logic;
+        rst : in std_logic;
+        addr : in std_logic_vector(10 downto 0);
+        di : in std_logic_vector(15 downto 0);
+        do : out std_logic_vector(15 downto 0)
+        );
+    end component;
+    
+    component output_RAM is
+            port(
+            clk : in std_logic;
+            en : in std_logic;
+            we : in std_logic;
+            rst : in std_logic;
+            addr : in std_logic_vector(10 downto 0);
+            di : in std_logic_vector(15 downto 0);
+            do : out std_logic_vector(15 downto 0)
+            );
+        end component;
+        
+    component binarised_buffer is
+            Port ( clk : in STD_LOGIC;
+                    enable : in STD_LOGIC;
+                   addr : in std_logic_vector(3 downto 0);
+                   sign : in std_logic;
+                   dataout : out STD_LOGIC_vector(15 downto 0));
+            end component;
+    
+    
 --    component fifo_wrapper is
 --        port (
 --            FIFO_READ_empty : out STD_LOGIC;
@@ -113,9 +158,34 @@ architecture arch_imp of customip_lab_v1_0 is
 	
     signal datain0, datain1, datain2, datain3       : std_logic_vector(31 downto 0);
     signal dataout0, dataout1, dataout2, dataout3   : std_logic_vector(31 downto 0);
+    
+    --Signals for data input multiplexer for IO_RAM
+    signal vecmult_dataout : std_logic_vector(15 downto 0);
+    signal bb_dataout : std_logic_vector(15 downto 0);
+    signal IO_RAM_datain : std_logic_vector(15 downto 0);
+    signal IO_RAM_datain_ctrl : std_logic := '0';
+    
+    --IO_RAM signals
+    signal IO_RAM_addr : std_logic_vector(10 downto 0);
+    signal IO_RAM_dataout : std_logic_vector(15 downto 0);
+    signal IO_RAM_enable, IO_RAM_w_enable, IO_RAM_rst :std_logic;
+    
+    --Weight Ram Signals
+    signal weight_RAM_addr : std_logic_vector(10 downto 0);
+    signal weight_RAM_datain : std_logic_vector(15 downto 0);
+    signal weight_RAM_dataout : std_logic_vector(15 downto 0);
+    signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic;
+    
+    --Weight Ram Signals
+    signal output_RAM_addr : std_logic_vector(10 downto 0);
+    signal output_RAM_datain : std_logic_vector(15 downto 0);
+    signal output_RAM_dataout : std_logic_vector(15 downto 0);
+    signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic;
+    
+    
 
-begin
-
+begin                   
+                    
 -- Instantiation of Axi Bus Interface S00_AXI
 customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI
 	generic map (
@@ -157,8 +227,8 @@ customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI
 	
 vecmult_inst : vecmult
     port map (
-        input => datain0,
-        weight => datain1,
+        input => IO_RAM_dataout,
+        weight => weight_RAM_dataout,
         bits => X"ffffffff",
         bias => 1,
         clk => s00_axi_aclk,
@@ -166,23 +236,52 @@ vecmult_inst : vecmult
         enable =>  datain2(0),
         output => dataout0
     );
-
---fifo_i : fifo_wrapper
---    port map (
---    FIFO_READ_empty => ,
---    FIFO_READ_rd_data => ,
---    FIFO_READ_rd_en => ,
---    FIFO_WRITE_full => ,
---    FIFO_WRITE_wr_data  => ,
---    FIFO_WRITE_wr_en => ,
---    clk => s00_axi_aclk,
---    srst => ,
---  );
-	-- Add user logic here
-    --datain0 <= dataout0;
-    --datain1 <= datain1;
-    --datain2 <= dataout2;
-    --datain3 <= dataout3;
-	-- User logic ends
+     
+         
+--Multiplexer for the data input of the IO RAM
+IO_RAM_datain <= vecmult_dataout when IO_RAM_datain_ctrl = '0' else
+                bb_dataout when IO_RAM_datain_ctrl = '1';
+                     
+ io_ram_inst : IO_RAM
+    port map (
+        clk => s00_axi_aclk,
+        en => IO_RAM_enable,
+        we => IO_RAM_w_enable,
+        rst => IO_RAM_rst,
+        addr => IO_RAM_addr,
+        di => IO_RAM_datain,
+        do => IO_RAM_dataout
+    );
+    
+output_ram_inst : IO_RAM
+    port map (
+        clk => s00_axi_aclk,
+        en => output_RAM_enable,
+        we => output_RAM_w_enable,
+        rst => output_RAM_rst,
+        addr => output_RAM_addr,
+        di => output_RAM_datain,
+        do => output_RAM_dataout
+    );
+    
+weight_ram_inst : weight_RAM
+ port map(
+       clk => s00_axi_aclk,
+       en => weight_RAM_enable,
+       we => weight_RAM_w_enable,
+       rst => weight_RAM_rst,
+       addr => weight_RAM_addr,
+       di => weight_RAM_datain,
+       do => weight_RAM_dataout
+  );
+  
+  binarised_buffer_inst : binarised_buffer
+    port map(
+        clk => s00_axi_aclk,
+        enable => bb_enable
+        addr => bb_addr,
+        sign dataout0(15),
+        dataout => bb_dataout
+    );
 
 end arch_imp;
