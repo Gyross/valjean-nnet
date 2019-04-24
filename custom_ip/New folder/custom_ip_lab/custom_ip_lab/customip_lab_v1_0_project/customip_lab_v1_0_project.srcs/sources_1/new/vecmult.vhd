@@ -32,7 +32,8 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity vecmult is
-    Generic ( bit_width : integer := 32 );
+    Generic ( bit_width : integer := 16;
+            output_width : integer := 16);
     Port ( input : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
            weight : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
            bits : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
@@ -40,7 +41,7 @@ entity vecmult is
            enable : in STD_LOGIC;
            reset : in STD_LOGIC;
            clk : in STD_LOGIC;
-           output : out STD_LOGIC_VECTOR (31 downto 0));
+           output : out STD_LOGIC_VECTOR (output_width-1 downto 0));
 end vecmult;
 
 architecture Behavioral of vecmult is
@@ -49,7 +50,7 @@ signal xnor_output : integer := 0;
 signal acc_output : integer := 0;
 
 component xnor_sum
-    Generic ( bit_width : integer := 32
+    Generic ( bit_width : integer := 16
     );
     Port ( input : in STD_LOGIC_VECTOR(bit_width-1 DOWNTO 0);
            weight : in STD_LOGIC_VECTOR(bit_width-1 DOWNTO 0);
