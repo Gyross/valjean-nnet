@@ -88,7 +88,8 @@ architecture arch_imp of customip_lab_v1_0 is
 	end component customip_lab_v1_0_S00_AXI;
 	
 	component vecmult is
-        Generic ( bit_width : integer := 32 );
+        Generic ( bit_width : integer := 16;
+                  output_width : integer := 16);
         Port ( input : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
                weight : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
                bits : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
@@ -96,7 +97,7 @@ architecture arch_imp of customip_lab_v1_0 is
                enable : in STD_LOGIC;
                reset : in STD_LOGIC;
                clk : in STD_LOGIC;
-               output : out STD_LOGIC_VECTOR(31 DOWNTO 0));
+               output : out STD_LOGIC_VECTOR(output_width-1 DOWNTO 0));
     end component;
     
     component weight_RAM is
@@ -246,7 +247,7 @@ vecmult_inst : vecmult
     port map (
         input => IO_RAM_dataout,
         weight => weight_RAM_dataout,
-        bits => X"ffffffff",
+        bits => X"ffff",
         bias => 0,
         clk => s00_axi_aclk,
         reset =>  acc_reset,

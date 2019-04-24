@@ -76,6 +76,6 @@ xnor_sum_inst: xnor_sum
 acc_inst: accumulator
     port map ( input => xnor_output, enable => enable, clk => clk, reset => reset, output => acc_output );
 
-output <= std_logic_vector(to_signed(acc_output + bias, 32));
+output <= std_logic_vector(to_signed(acc_output + bias, output_width));
 
 end Behavioral;

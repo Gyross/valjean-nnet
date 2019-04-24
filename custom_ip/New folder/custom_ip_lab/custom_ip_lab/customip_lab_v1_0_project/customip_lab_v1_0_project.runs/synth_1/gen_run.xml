@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1555475002">
-  <File Type="PA-TCL" Name="customip_lab_v1_0.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1556103434">
   <File Type="RDS-PROPCONSTRS" Name="customip_lab_v1_0_drc_synth.rpt"/>
+  <File Type="PA-TCL" Name="customip_lab_v1_0.tcl"/>
   <File Type="RDS-RDS" Name="customip_lab_v1_0.vds"/>
   <File Type="RDS-UTIL" Name="customip_lab_v1_0_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="customip_lab_v1_0_utilization_synth.pb"/>
@@ -25,19 +25,6 @@
     <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/component.xml">
       <FileInfo SFType="IPXACT"/>
     </File>
-    <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/hdl/fifo/fifo.bd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/hdl/fifo/hdl/fifo_wrapper.vhd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -51,6 +38,44 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/vecmult.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/IO_RAM.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/IO_RAM.vhd"/>
+        <Attr Name="ImportTime" Val="1556098767"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/binarised_buffer.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/binarised_buffer.vhd"/>
+        <Attr Name="ImportTime" Val="1556098767"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/rams_dist.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/rams_dist.vhd"/>
+        <Attr Name="ImportTime" Val="1556098767"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/Output_Store.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Output_Store.vhd"/>
+        <Attr Name="ImportTime" Val="1556098767"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/control.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -72,5 +97,4 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="fifo_fifo_generator_0_0"/>
 </GenRun>

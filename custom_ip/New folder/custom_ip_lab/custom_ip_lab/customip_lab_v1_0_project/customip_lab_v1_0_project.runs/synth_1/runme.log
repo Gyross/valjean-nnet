@@ -9,24 +9,21 @@
     ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 
 source customip_lab_v1_0.tcl -notrace
-INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0'.
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
 Command: synth_design -top customip_lab_v1_0 -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020-clg484'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020-clg484'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 20960 
+INFO: Helper process launched with PID 13332 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 324.984 ; gain = 76.055
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 310.461 ; gain = 78.383
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'customip_lab_v1_0' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:49]
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
 	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
-INFO: [Synth 8-3491] module 'customip_lab_v1_0_S00_AXI' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:5' bound to instance 'customip_lab_v1_0_S00_AXI_inst' of component 'customip_lab_v1_0_S00_AXI' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
+INFO: [Synth 8-3491] module 'customip_lab_v1_0_S00_AXI' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:5' bound to instance 'customip_lab_v1_0_S00_AXI_inst' of component 'customip_lab_v1_0_S00_AXI' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:208]
 INFO: [Synth 8-638] synthesizing module 'customip_lab_v1_0_S00_AXI' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:96]
 	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
@@ -35,25 +32,58 @@ INFO: [Synth 8-226] default block is never used [C:/Users/X4/Documents/GitHub/va
 WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:231]
 WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:367]
 INFO: [Synth 8-256] done synthesizing module 'customip_lab_v1_0_S00_AXI' (1#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd:96]
-	Parameter bit_width bound to: 32 - type: integer 
-INFO: [Synth 8-3491] module 'vecmult' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:34' bound to instance 'vecmult_inst' of component 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:158]
-INFO: [Synth 8-638] synthesizing module 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:46]
-	Parameter bit_width bound to: 32 - type: integer 
-	Parameter bit_width bound to: 32 - type: integer 
-INFO: [Synth 8-3491] module 'xnor_sum' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:34' bound to instance 'xnor_sum_inst' of component 'xnor_sum' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:71]
+	Parameter bit_width bound to: 16 - type: integer 
+	Parameter output_width bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'vecmult' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:34' bound to instance 'vecmult_inst' of component 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:246]
+INFO: [Synth 8-638] synthesizing module 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:47]
+	Parameter bit_width bound to: 16 - type: integer 
+	Parameter output_width bound to: 16 - type: integer 
+	Parameter bit_width bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'xnor_sum' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:34' bound to instance 'xnor_sum_inst' of component 'xnor_sum' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:72]
 INFO: [Synth 8-638] synthesizing module 'xnor_sum' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:44]
-	Parameter bit_width bound to: 32 - type: integer 
+	Parameter bit_width bound to: 16 - type: integer 
 WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:54]
 INFO: [Synth 8-256] done synthesizing module 'xnor_sum' (2#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:44]
-INFO: [Synth 8-3491] module 'accumulator' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:34' bound to instance 'acc_inst' of component 'accumulator' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:75]
+INFO: [Synth 8-3491] module 'accumulator' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:34' bound to instance 'acc_inst' of component 'accumulator' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:76]
 INFO: [Synth 8-638] synthesizing module 'accumulator' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:42]
 INFO: [Synth 8-256] done synthesizing module 'accumulator' (3#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:42]
-INFO: [Synth 8-256] done synthesizing module 'vecmult' (4#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:46]
-WARNING: [Synth 8-3848] Net datain0 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:114]
-WARNING: [Synth 8-3848] Net datain1 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:114]
-WARNING: [Synth 8-3848] Net datain2 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:114]
-WARNING: [Synth 8-3848] Net datain3 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:114]
-INFO: [Synth 8-256] done synthesizing module 'customip_lab_v1_0' (5#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'vecmult' (4#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:47]
+INFO: [Synth 8-3491] module 'IO_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:7' bound to instance 'io_ram_inst' of component 'IO_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:263]
+INFO: [Synth 8-638] synthesizing module 'IO_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'IO_RAM' (5#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:20]
+INFO: [Synth 8-3491] module 'output_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/Output_Store.vhd:7' bound to instance 'output_ram_inst' of component 'output_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:274]
+INFO: [Synth 8-638] synthesizing module 'output_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/Output_Store.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'output_RAM' (6#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/Output_Store.vhd:20]
+INFO: [Synth 8-3491] module 'weight_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:7' bound to instance 'weight_ram_inst' of component 'weight_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:285]
+INFO: [Synth 8-638] synthesizing module 'weight_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'weight_RAM' (7#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:20]
+INFO: [Synth 8-3491] module 'binarised_buffer' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:34' bound to instance 'binarised_buffer_inst' of component 'binarised_buffer' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:296]
+INFO: [Synth 8-638] synthesizing module 'binarised_buffer' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'binarised_buffer' (8#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:41]
+INFO: [Synth 8-3491] module 'control' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:34' bound to instance 'control_module' of component 'control' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:304]
+INFO: [Synth 8-638] synthesizing module 'control' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:56]
+INFO: [Synth 8-256] done synthesizing module 'control' (9#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:56]
+WARNING: [Synth 8-3848] Net datain0 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:169]
+WARNING: [Synth 8-3848] Net datain1 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:169]
+WARNING: [Synth 8-3848] Net datain2 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:169]
+WARNING: [Synth 8-3848] Net datain3 in module/entity customip_lab_v1_0 does not have driver. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:169]
+INFO: [Synth 8-256] done synthesizing module 'customip_lab_v1_0' (10#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:49]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[31]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[30]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[29]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[28]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[27]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[26]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[25]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[24]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[23]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[22]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[21]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[20]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[19]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[18]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[17]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[16]
 WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
 WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
 WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
@@ -61,157 +91,22 @@ WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_
 WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
 WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 365.063 ; gain = 116.133
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.789 ; gain = 118.711
 ---------------------------------------------------------------------------------
-
-Report Check Netlist: 
-+------+------------------+-------+---------+-------+------------------+
-|      |Item              |Errors |Warnings |Status |Description       |
-+------+------------------+-------+---------+-------+------------------+
-|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
-+------+------------------+-------+---------+-------+------------------+
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[31] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[30] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[29] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[28] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[27] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[26] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[25] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[24] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[23] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[22] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[21] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[20] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[19] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[18] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[17] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[16] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[15] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[14] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[13] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[12] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[11] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[10] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[9] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[8] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[7] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[6] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[5] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[4] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[3] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[2] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[1] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain0[0] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[31] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[30] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[29] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[28] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[27] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[26] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[25] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[24] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[23] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[22] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[21] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[20] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[19] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[18] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[17] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[16] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[15] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[14] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[13] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[12] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[11] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[10] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[9] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[8] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[7] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[6] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[5] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[4] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[3] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[2] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[1] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain1[0] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[31] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[30] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[29] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[28] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[27] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[26] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[25] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[24] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[23] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[22] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[21] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[20] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[19] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[18] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[17] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[16] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[15] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[14] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[13] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[12] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[11] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[10] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[9] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[8] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[7] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[6] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[5] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[4] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[3] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[2] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[1] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain2[0] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain3[31] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain3[30] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain3[29] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-WARNING: [Synth 8-3295] tying undriven pin customip_lab_v1_0_S00_AXI_inst:datain3[28] to constant 0 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:120]
-INFO: [Common 17-14] Message 'Synth 8-3295' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 365.063 ; gain = 116.133
----------------------------------------------------------------------------------
-INFO: [Device 21-403] Loading part xc7z020clg484-1
-INFO: [Project 1-570] Preparing netlist for logic optimization
-
-Processing XDC Constraints
-Initializing timing engine
-Parsing XDC File [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc]
-WARNING: [Vivado 12-180] No cells matched 'get_cells -hier -filter {REF_NAME==fifo || ORIG_REF_NAME==fifo}'. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc:5]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc:5]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-180] No cells matched 'get_cells -hier -filter {REF_NAME==fifo_fifo_generator_0_0 || ORIG_REF_NAME==fifo_fifo_generator_0_0}'. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc:8]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc:8]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-Finished Parsing XDC File [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/dont_touch.xdc]
-Completed Processing XDC Constraints
-
-INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
-
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 687.504 ; gain = 0.000
----------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.789 ; gain = 118.711
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.789 ; gain = 118.711
 ---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:53]
 ---------------------------------------------------------------------------------
-Start Applying 'set_property' XDC Constraints
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 687.504 ; gain = 438.574
----------------------------------------------------------------------------------
-WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:51]
----------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 350.789 ; gain = 118.711
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -219,23 +114,30 @@ Report RTL Partitions:
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
+No constraint files found.
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 2     
-	  63 Input     32 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 1     
+	  31 Input     32 Bit       Adders := 1     
+	   2 Input     16 Bit       Adders := 1     
 +---XORs : 
-	   2 Input     32 Bit         XORs := 1     
+	   2 Input     16 Bit         XORs := 1     
 +---Registers : 
 	               32 Bit    Registers := 1     
+	               16 Bit    Registers := 4     
 	                4 Bit    Registers := 2     
 	                2 Bit    Registers := 2     
 	                1 Bit    Registers := 6     
++---RAMs : 
+	              25K Bit         RAMs := 1     
+	              24K Bit         RAMs := 2     
 +---Muxes : 
 	   4 Input     32 Bit        Muxes := 5     
 	   2 Input     32 Bit        Muxes := 5     
+	   2 Input     16 Bit        Muxes := 1     
 	   2 Input      1 Bit        Muxes := 5     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -244,6 +146,10 @@ Finished RTL Component Statistics
 Start RTL Hierarchical Component Statistics 
 ---------------------------------------------------------------------------------
 Hierarchical RTL Component report 
+Module customip_lab_v1_0 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
 Module customip_lab_v1_0_S00_AXI 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -259,15 +165,37 @@ Module xnor_sum
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     32 Bit       Adders := 1     
-	  63 Input     32 Bit       Adders := 1     
+	  31 Input     32 Bit       Adders := 1     
 +---XORs : 
-	   2 Input     32 Bit         XORs := 1     
+	   2 Input     16 Bit         XORs := 1     
 +---Muxes : 
 	   2 Input     32 Bit        Muxes := 1     
 Module vecmult 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 1     
+	   2 Input     16 Bit       Adders := 1     
+Module IO_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              24K Bit         RAMs := 1     
+Module output_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              24K Bit         RAMs := 1     
+Module weight_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              25K Bit         RAMs := 1     
+Module binarised_buffer 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -280,16 +208,36 @@ BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
+No constraint files found.
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-6014] Unused sequential element vecmult_inst/acc_inst/count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:51]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_awprot[2]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_awprot[1]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_awprot[0]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_arprot[2]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_arprot[1]
-WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_arprot[0]
+WARNING: [Synth 8-6014] Unused sequential element acc_inst/count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:53]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[31]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[30]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[29]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[28]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[27]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[26]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[25]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[24]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[23]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[22]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[21]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[20]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[19]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[18]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[17]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[16]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design customip_lab_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+WARNING: [Synth 8-6014] Unused sequential element output_ram_inst/do_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/Output_Store.vhd:33]
+WARNING: [Synth 8-6014] Unused sequential element output_ram_inst/ram_reg was removed. 
+WARNING: [Synth 8-5730] RAM output_ram_inst/ram_reg got removed due to cross hierarchy optimization. 
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (\customip_lab_v1_0_S00_AXI_inst/aw_en_reg )
 INFO: [Synth 8-3886] merging instance 'customip_lab_v1_0_S00_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'customip_lab_v1_0_S00_AXI_inst/axi_rresp_reg[1]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\customip_lab_v1_0_S00_AXI_inst/axi_rresp_reg[1] )
@@ -429,7 +377,7 @@ WARNING: [Synth 8-3332] Sequential element (customip_lab_v1_0_S00_AXI_inst/slv_r
 WARNING: [Synth 8-3332] Sequential element (customip_lab_v1_0_S00_AXI_inst/slv_reg3_reg[28]) is unused and will be removed from module customip_lab_v1_0.
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 501.590 ; gain = 269.512
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -437,17 +385,12 @@ Report RTL Partitions:
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
----------------------------------------------------------------------------------
-Start Applying XDC Timing Constraints
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 687.504 ; gain = 438.574
----------------------------------------------------------------------------------
+No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Timing Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 501.590 ; gain = 269.512
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -459,7 +402,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Technology Mapping : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -483,7 +426,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished IO Insertion : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -496,7 +439,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -508,64 +451,66 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
 ---------------------------------------------------------------------------------
 
 Report BlackBoxes: 
-+-+--------------+----------+
-| |BlackBox name |Instances |
-+-+--------------+----------+
-+-+--------------+----------+
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |control       |         1|
++------+--------------+----------+
 
 Report Cell Usage: 
-+------+-----+------+
-|      |Cell |Count |
-+------+-----+------+
-|1     |BUFG |     1|
-|2     |LUT1 |     1|
-|3     |LUT2 |     1|
-|4     |LUT3 |     2|
-|5     |LUT4 |     1|
-|6     |LUT6 |     1|
-|7     |FDRE |     5|
-|8     |IBUF |     7|
-|9     |OBUF |    41|
-+------+-----+------+
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |control |     1|
+|2     |BUFG    |     1|
+|3     |LUT1    |     1|
+|4     |LUT2    |     1|
+|5     |LUT3    |     2|
+|6     |LUT4    |     1|
+|7     |LUT6    |     1|
+|8     |FDRE    |     5|
+|9     |IBUF    |     7|
+|10    |OBUF    |    41|
++------+--------+------+
 
 Report Instance Areas: 
 +------+---------------------------------+--------------------------+------+
 |      |Instance                         |Module                    |Cells |
 +------+---------------------------------+--------------------------+------+
-|1     |top                              |                          |    60|
+|1     |top                              |                          |   141|
 |2     |  customip_lab_v1_0_S00_AXI_inst |customip_lab_v1_0_S00_AXI |    11|
 +------+---------------------------------+--------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 180 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 687.504 ; gain = 116.133
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 687.504 ; gain = 438.574
+Synthesis finished with 0 errors, 0 critical warnings and 244 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
+Synthesis Optimization Complete : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 511.297 ; gain = 279.219
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 7 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -574,9 +519,9 @@ INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-68 Infos, 223 Warnings, 2 Critical Warnings and 0 Errors encountered.
+77 Infos, 156 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 687.504 ; gain = 448.703
+synth_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 585.035 ; gain = 360.723
 INFO: [Common 17-1381] The checkpoint 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/customip_lab_v1_0.dcp' has been generated.
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 687.504 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Wed Apr 17 14:23:58 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 585.035 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 24 20:57:36 2019...
