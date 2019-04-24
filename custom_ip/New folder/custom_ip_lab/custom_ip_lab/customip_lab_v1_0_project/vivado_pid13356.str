@@ -1,0 +1,832 @@
+/*
+
+Vivado v2017.2 (64-bit)
+SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+
+Process ID: 13356
+License: Customer
+
+Current time: 	4/24/19 7:54:02 PM AEST
+Time zone: 	Australian Eastern Standard Time (New South Wales) (Australia/Sydney)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 1280x720
+Screen resolution (DPI): 96
+Available screens: 1
+Available disk space: 63 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_112 64-bit
+Java home: 	C:/Xilinx/Vivado/2017.2/tps/win64/jre
+JVM executable location: 	C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin/java.exe
+Java library paths: C:/Xilinx/Vivado/2017.2/bin/unwrapped/win64.o;C:/WINDOWS/Sun/Java/bin;C:/WINDOWS/system32;C:/WINDOWS;C:/Xilinx/Vivado/2017.2/bin;C:/Xilinx/Vivado/2017.2/lib/win64.o;C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin/server;C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin;C:/Xilinx/SDK/2017.2/bin;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64;C:/Xilinx/Vivado_HLS/2017.2/bin;C:/Program Files (x86)/Intel/iCLS Client/;C:/Program Files/Intel/iCLS Client/;C:/Windows/system32;C:/Windows;C:/Windows/System32/Wbem;C:/Windows/System32/WindowsPowerShell/v1.0/;C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL;C:/Program Files/Intel/Intel(R) Management Engine Components/DAL;C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT;C:/Program Files/Intel/Intel(R) Management Engine Components/IPT;C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common;%SystemRoot%/system32;%SystemRoot%;%SystemRoot%/System32/Wbem;%SYSTEMROOT%/System32/WindowsPowerShell/v1.0/;%SYSTEMROOT%/System32/OpenSSH/;C:/Users/X4/AppData/Local/Microsoft/WindowsApps;C:/Users/X4/AppData/Local/GitHubDesktop/bin;C:/Users/X4/AppData/Local/Programs/Python/Python36;C:/Users/X4/AppData/Local/Programs/Python/Python36/Scripts;;C:/Xilinx/Vivado/2017.2/tps/mingw/6.2.0/win64.o/nt/bin;C:/Xilinx/Vivado/2017.2/tps/mingw/6.2.0/win64.o/nt/libexec/gcc/x86_64-w64-mingw32/6.2.0;.
+
+User name: 	X4
+User home directory: C:/Users/X4
+User working directory: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2017.2
+RDI_DATADIR: C:/Xilinx/Vivado/2017.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2017.2/bin
+
+User preferences location: C:/Users/X4/AppData/Roaming/Xilinx/Vivado
+Vivado preferences directory: C:/Users/X4/AppData/Roaming/Xilinx/Vivado/2017.2/vivado.xml
+Vivado layouts directory: C:/Users/X4/AppData/Roaming/Xilinx/Vivado/2017.2/layouts
+PlanAhead jar location: 	C:/Xilinx/Vivado/2017.2/lib/classes/planAhead.jar
+Vivado Look & Feel: 	[Synthetica - the extended Synth Look and Feel. - ui.g.i.H]
+Engine tmp dir: 	C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/.Xil/Vivado-13356-DESKTOP-LSTE79J
+
+GUI allocated memory:	176 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 568 MB
+
+*/
+
+// TclEventType: START_GUI
+// TclEventType: PROJECT_OPEN_DIALOG
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// [GUI Memory]: 49 MB (+48505kb) [00:00:05]
+// [Engine Memory]: 466 MB (+337025kb) [00:00:05]
+// Opening Vivado Project: C:\Users\X4\Documents\GitHub\valjean-nnet\custom_ip\New folder\custom_ip_lab\custom_ip_lab\customip_lab_v1_0_project\customip_lab_v1_0_project.xpr. Version: Vivado v2017.2 
+// bs:g (cg:JFrame):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_CURRENT
+// Tcl Message: open_project {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.xpr} 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project' 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [Engine Memory]: 531 MB (+43706kb) [00:00:07]
+// [GUI Memory]: 56 MB (+5401kb) [00:00:08]
+// [Engine Memory]: 558 MB (+845kb) [00:00:09]
+// [GUI Memory]: 60 MB (+930kb) [00:00:09]
+// Tcl Message: open_project {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.xpr} 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project' 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0'. INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'. 
+// Project name: customip_lab_v1_0_project; location: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project; part: xc7z020clg484-1
+// HMemoryUtils.trashcanNow. Engine heap size: 581 MB. GUI used memory: 38 MB. Current time: 4/24/19 7:54:03 PM AEST
+dismissDialog("Open Project"); // bs:g (cg:JFrame)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // B:JideButton (f:CommandBar, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c:g (cg:JFrame): Add Sources: addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// [Engine Memory]: 591 MB (+4935kb) [00:00:15]
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a:JButton (C:JPanel, c:g)
+// HMemoryUtils.trashcanNow. Engine heap size: 611 MB. GUI used memory: 39 MB. Current time: 4/24/19 7:54:43 PM AEST
+// Elapsed time: 52 seconds
+String[] filenames31467 = {"C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/IO_RAM.vhd", "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/Output_Store.vhd", "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/binarised_buffer.vhd", "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/rams_dist.vhd"};
+setFileChooser(filenames31467);
+// Elapsed time: 17 seconds
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+// 'h' command handler elapsed time: 74 seconds
+dismissDialog("Add Sources"); // c:g (cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// c:g (cg:JFrame): Add Sources: addNotify
+// bs:g (c:g):  Add Sources  : addNotify
+// TclEventType: FILE_SET_CHANGE
+dismissDialog("Add Sources"); // bs:g (c:g)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// [GUI Memory]: 65 MB (+1918kb) [00:01:34]
+// RDIResource.RDIViews_PROPERTIES: Properties: close view
+// Elapsed time: 10 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd)]", 2); // B:i (D:JPanel, cg:JFrame)
+// [GUI Memory]: 69 MB (+516kb) [00:01:43]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd)]", 2, true, false, false, false, true, false); // B:i (D:JPanel, cg:JFrame) - Popup Trigger - Node
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// as:g (cg:JFrame): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a:JButton (JPanel:JComponent, as:g)
+dismissDialog("Remove Sources"); // as:g (cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd), fifo_i : fifo (fifo.bd)]", 3, true, true, false, false, false, false); // B:i (D:JPanel, cg:JFrame) - Shift Key - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd), fifo_i : fifo (fifo.bd), fifo(STRUCTURE) (fifo.vhd)]", 4, true, true, false, false, false, false); // B:i (D:JPanel, cg:JFrame) - Shift Key - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd), fifo_i : fifo (fifo.bd), fifo(STRUCTURE) (fifo.vhd), fifo_generator_0 : fifo_fifo_generator_0_0 (fifo_fifo_generator_0_0.xci)]", 5, false, true, false, false, false, false); // B:i (D:JPanel, cg:JFrame) - Shift Key
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, fifo_wrapper(STRUCTURE) (fifo_wrapper.vhd)]", 2, true, false, false, false, true, false); // B:i (D:JPanel, cg:JFrame) - Popup Trigger - Node
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// as:g (cg:JFrame): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, as:g)
+// TclEventType: RUN_MODIFY
+dismissDialog("Remove Sources"); // as:g (cg:JFrame)
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// [Engine Memory]: 622 MB (+2052kb) [00:02:02]
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_DELETE
+// as:g (cg:JFrame): Remove Sources: addNotify
+// bs:g (as:g):  Remove Sources : addNotify
+// TclEventType: RUN_DELETE
+// Tcl Message: remove_files  {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/fifo/hdl/fifo_wrapper.vhd} {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/fifo/fifo.bd}} 
+// TclEventType: RUN_DELETE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_DELETE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: PROJ_DESIGN_MODE_SET
+// Tcl Message: file delete -force {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.ip_user_files/bd/fifo} 
+dismissDialog("Remove Sources"); // bs:g (as:g)
+// [GUI Memory]: 83 MB (+11287kb) [00:02:04]
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// HMemoryUtils.trashcanNow. Engine heap size: 646 MB. GUI used memory: 44 MB. Current time: 4/24/19 7:55:58 PM AEST
+// TclEventType: DG_GRAPH_GENERATED
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), customip_lab_v1_0_S00_AXI(arch_imp) (customip_lab_v1_0_S00_AXI.vhd)]", 2, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1, true); // B:i (D:JPanel, cg:JFrame) - Node
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // B:JideButton (f:CommandBar, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c:g (cg:JFrame): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a:JButton (C:JPanel, c:g)
+// Elapsed time: 15 seconds
+setFileChooser("C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl");
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+// 'h' command handler elapsed time: 21 seconds
+dismissDialog("Add Sources"); // c:g (cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// c:g (cg:JFrame): Add Sources: addNotify
+// bs:g (c:g):  Add Sources  : addNotify
+// Tcl Message: add_files -norecurse -scan_for_includes {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl}} 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: import_files -norecurse {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl}} 
+dismissDialog("Add Sources"); // bs:g (c:g)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false, false, false, false, true, false); // B:i (D:JPanel, cg:JFrame) - Popup Trigger
+selectMenuItem(PAResourceQtoS.SrcMenu_OPEN_SELECTED_SOURCE_FILES, "Open File"); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+// Elapsed time: 13 seconds
+selectCodeEditor("axi_tb.vhdl", 34, 27); // bI:J (JPanel:JComponent, cg:JFrame)
+// k:x (cg:JFrame): Text Changed: addNotify
+// Elapsed time: 14 seconds
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // A:b (k:TdiGroup, cg:JFrame)
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_CANCEL, "Cancel"); // a:JButton (JPanel:JComponent, k:x)
+dismissDialog("Text Changed"); // k:x (cg:JFrame)
+// Elapsed time: 36 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources]", 11); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false, false, false, false, true, false); // B:i (D:JPanel, cg:JFrame) - Popup Trigger
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+// [Engine Memory]: 659 MB (+5290kb) [00:04:20]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, axi_tb(Behavioral) (axi_tb.vhdl)]", 7, false, false, false, false, true, false); // B:i (D:JPanel, cg:JFrame) - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Remove File from Project..."); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// as:g (cg:JFrame): Remove Sources: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, as:g)
+// k:x (cg:JFrame): Text Changed: addNotify
+// TclEventType: DG_GRAPH_STALE
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // A:b (k:TdiGroup, cg:JFrame)
+dismissDialog("Remove Sources"); // as:g (cg:JFrame)
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: remove_files  {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/axi_tb.vhdl}} 
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_NO, "No"); // a:JButton (JPanel:JComponent, k:x)
+dismissDialog("Text Changed"); // k:x (cg:JFrame)
+// TclEventType: DG_GRAPH_GENERATED
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // B:JideButton (f:CommandBar, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c:g (cg:JFrame): Add Sources: addNotify
+selectRadioButton(PAResourceAtoD.AddSrcWizard_SPECIFY_SIMULATION_SPECIFIC_HDL_FILES, "Add or create simulation sources"); // a:JRadioButton (JPanel:JComponent, c:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files"); // a:JButton (C:JPanel, c:g)
+// [GUI Memory]: 87 MB (+172kb) [00:05:22]
+// Elapsed time: 46 seconds
+setFileChooser("C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl");
+// Elapsed time: 32 seconds
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_SCAN_AND_ADD_RTL_INCLUDE_FILES_INTO, "Scan and add RTL include files into project", false); // g:JCheckBox (JPanel:JComponent, c:g): FALSE
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_SCAN_AND_ADD_RTL_INCLUDE_FILES_INTO, "Scan and add RTL include files into project", true); // g:JCheckBox (JPanel:JComponent, c:g): TRUE
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+// 'h' command handler elapsed time: 97 seconds
+dismissDialog("Add Sources"); // c:g (cg:JFrame)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: set_property SOURCE_SET sources_1 [get_filesets sim_1] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: add_files -fileset sim_1 -norecurse -scan_for_includes {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl}} 
+// c:g (cg:JFrame): Add Sources: addNotify
+// bs:g (c:g):  Add Simulation Sources  : addNotify
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: import_files -fileset sim_1 -norecurse {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/axi_tb.vhdl}} 
+dismissDialog("Add Simulation Sources"); // bs:g (c:g)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1]", 11); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, axi_tb(Behavioral) (axi_tb.vhdl)]", 14, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, axi_tb(Behavioral) (axi_tb.vhdl)]", 14, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, axi_tb(Behavioral) (axi_tb.vhdl)]", 14, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+selectCodeEditor("axi_tb.vhdl", 34, 25); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 264 seconds
+typeControlKey(null, null, 'z');
+// Elapsed time: 51 seconds
+selectCodeEditor("axi_tb.vhdl", 32, 129); // bI:J (JPanel:JComponent, cg:JFrame)
+// [GUI Memory]: 94 MB (+2492kb) [00:11:45]
+// [GUI Memory]: 99 MB (+140kb) [00:13:00]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// [GUI Memory]: 107 MB (+3046kb) [00:13:51]
+// Elapsed time: 127 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), customip_lab_v1_0_S00_AXI(arch_imp) (customip_lab_v1_0_S00_AXI.vhd)]", 2, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1, true); // B:i (D:JPanel, cg:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1, true, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click - Node
+// Elapsed time: 21 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, output_RAM(syn) (Output_Store.vhd)]", 2, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, output_RAM(syn) (Output_Store.vhd)]", 2, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, output_RAM(syn) (Output_Store.vhd)]", 2, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+// Elapsed time: 36 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// Elapsed time: 11 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 139, 112); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 139, 112, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Output_Store.vhd", 3); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// [GUI Memory]: 112 MB (+519kb) [00:15:23]
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 155, 113); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 155, 113, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Output_Store.vhd", 3); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// Elapsed time: 52 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 116, 146); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 22 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 192, 179); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 10 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 193, 183); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 11 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 197, 195); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 12 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 190, 211); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 60 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 224, 229); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 69 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 92, 129); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 50, 123); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 50, 123, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+// Elapsed time: 38 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 49, 148); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 31 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 91, 144); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 245, 184); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 18 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 411, 27); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 25, 27, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 192, 178); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 261, 236); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 65 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 126, 75); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 77, 77); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 130, 94); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 76, 93); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 49 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 313, 163); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 313, 163, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 313, 163, false, false, false, true, false); // bI:J (JPanel:JComponent, cg:JFrame) - Popup Trigger
+// [GUI Memory]: 120 MB (+2257kb) [00:23:22]
+// Elapsed time: 13 seconds
+selectMenuItem(RDIResource.HInputHandler_DUPLICATE_SELECTION, "Duplicate Selection"); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+typeControlKey(null, null, 'z');
+selectCodeEditor("customip_lab_v1_0.vhd", 320, 158); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 320, 158, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 320, 159, false, false, false, true, false); // bI:J (JPanel:JComponent, cg:JFrame) - Popup Trigger
+selectMenuItem(RDIResource.HInputHandler_REPLACE_TEXT, "Replace..."); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+// Elapsed time: 34 seconds
+selectComboBox("FindAndReplaceDialog:StandardDialog_Replace with:", "load_input_en", -1); // JComboBox:JComponent (JPanel:JComponent, FindAndReplaceDialog:StandardDialog)
+selectButton("FindAndReplaceDialog:StandardDialog_Find", "Find"); // JButton:AbstractButton (ButtonPanel:JPanel, FindAndReplaceDialog:StandardDialog)
+selectCodeEditor("customip_lab_v1_0.vhd", 287, 201); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 287, 201, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 158, 79); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 158, 79, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 126, 76); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 126, 76, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 126, 76); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 16 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 370, 127); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 347, 145); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 55 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Output_Store.vhd", 3); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// Elapsed time: 23 seconds
+selectCodeEditor("Output_Store.vhd", 89, 167); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 90, 183); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 61, 195); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 63, 231); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 88, 245); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 59, 262); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 90, 181); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 61, 195); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 61, 213); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 16 seconds
+selectCodeEditor("Output_Store.vhd", 27, 251); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("Output_Store.vhd", 1, 94); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Elapsed time: 21 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 27 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 199, 147); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 199, 147, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 188, 131); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 188, 131, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 29 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 110, 213); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 110, 213, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 92, 213); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 11 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 208, 180); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 32 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 433, 96); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 29 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), binarised_buffer_inst : binarised_buffer(Behavioral) (binarised_buffer.vhd)]", 7, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), binarised_buffer_inst : binarised_buffer(Behavioral) (binarised_buffer.vhd)]", 7, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 216, 128); // bI:J (JPanel:JComponent, cg:JFrame)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "binarised_buffer.vhd", 4); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+// [GUI Memory]: 127 MB (+685kb) [00:30:29]
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+typeControlKey(null, null, 'z');
+selectCodeEditor("customip_lab_v1_0.vhd", 214, 129); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "binarised_buffer.vhd", 4); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectCodeEditor("binarised_buffer.vhd", 75, 75); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "binarised_buffer.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Output_Store.vhd", 3); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 269, 132); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 431, 160); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 37 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 252, 113); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 12 seconds
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey(null, null, 'z');
+// HMemoryUtils.trashcanNow. Engine heap size: 662 MB. GUI used memory: 46 MB. Current time: 4/24/19 8:25:58 PM AEST
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 34 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), vecmult_inst : vecmult(Behavioral) (vecmult.vhd)]", 3, true); // B:i (D:JPanel, cg:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), vecmult_inst : vecmult(Behavioral) (vecmult.vhd)]", 3, true, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click - Node
+// Elapsed time: 17 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), vecmult_inst : vecmult(Behavioral) (vecmult.vhd), acc_inst : accumulator(Behavioral) (accumulator.vhd)]", 5, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), vecmult_inst : vecmult(Behavioral) (vecmult.vhd), acc_inst : accumulator(Behavioral) (accumulator.vhd)]", 5, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), vecmult_inst : vecmult(Behavioral) (vecmult.vhd), acc_inst : accumulator(Behavioral) (accumulator.vhd)]", 5, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+// Elapsed time: 46 seconds
+selectCodeEditor("accumulator.vhd", 150, 61); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 232, 96); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 24 seconds
+selectCodeEditor("accumulator.vhd", 48, 161); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 159, 143); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 124, 95); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 233, 145); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 11 seconds
+selectCodeEditor("accumulator.vhd", 234, 149); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 80, 178); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("accumulator.vhd", 284, 177); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 56 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "binarised_buffer.vhd", 4); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Output_Store.vhd", 3); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // A:b
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // A:b
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "customip_lab_v1_0.vhd", 2); // k:TdiGroup (j:CodeEditorDocumentPane, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI(arch_imp) (customip_lab_v1_0_S00_AXI.vhd)]", 2, false); // B:i (D:JPanel, cg:JFrame)
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // B:JideButton (f:CommandBar, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c:g (cg:JFrame): Add Sources: addNotify
+selectRadioButton(PAResourceAtoD.AddSrcWizard_SPECIFY_OR_CREATE_CONSTRAINT_FILES, "Add or create constraints"); // a:JRadioButton (JPanel:JComponent, c:g)
+selectRadioButton(PAResourceAtoD.AddSrcWizard_SPECIFY_HDL_NETLIST_BLOCK_DESIGN, "Add or create design sources"); // a:JRadioButton (JPanel:JComponent, c:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a:JButton (C:JPanel, c:g)
+// F:p (c:g): Create Source File: addNotify
+// Elapsed time: 13 seconds
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "control"); // X:JTextField (JPanel:JComponent, F:p)
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "control.vhd"); // X:JTextField (JPanel:JComponent, F:p)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, F:p)
+dismissDialog("Create Source File"); // F:p (c:g)
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, c:g)
+// 'h' command handler elapsed time: 32 seconds
+dismissDialog("Add Sources"); // c:g (cg:JFrame)
+// Tcl Message: close [ open {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd} w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd}} 
+// I:p (cg:JFrame): Define Module: addNotify
+// Elapsed time: 95 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, I:p)
+// TclEventType: FILE_SET_CHANGE
+selectButton("PAResourceAtoD.DefineModulesDialog_YOU_HAVE_MADE_CHANGES_TO_MODULE_Yes", "Yes"); // JButton:AbstractButton (JPanel:JComponent, H:JDialog)
+dismissDialog("Define Module"); // I:p (cg:JFrame)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 16 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 51, 197); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 45 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 48, 129); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 13 seconds
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 204, 199); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 98, 179); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 181, 177); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 147, 200); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 187, 197, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 155, 213); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 152, 214, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 180, 217); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 159, 229); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 159, 229, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 176, 229); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 147, 249); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 173, 245, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("customip_lab_v1_0.vhd", 354, 193); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 27 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 53, 60); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 228, 108, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 191, 161); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 93, 185); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 187, 181); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 55, 182); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 227, 176); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 153, 195); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 159, 211); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 167, 233); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 151, 210); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 54, 213, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 72, 225); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 72, 225, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 55, 146); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 14 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 201, 197, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 309, 163); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 95, 180); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 153, 192); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 57, 195, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 159, 215); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 57, 211, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 167, 231); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 57, 227, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 149, 233); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 18 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 405, 143); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 403, 127, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 117, 193); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 117, 193, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 109, 217); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 109, 217, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 109, 232); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 109, 232, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 105, 246); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 105, 246, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 101, 230); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 100, 230, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 157, 144); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 12 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 255, 77); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 255, 77, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 267, 164); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 50 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 131, 125, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 76, 161); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 156, 157); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 109, 177); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 123, 179); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 123, 179, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("customip_lab_v1_0.vhd", 138, 195); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 10 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 283, 177); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 10 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 261, 197); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 414, 197, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+// Elapsed time: 17 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 277, 214); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 14 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 379, 231); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 243, 234, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("customip_lab_v1_0.vhd", 383, 250); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 251, 247, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+// Elapsed time: 15 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 419, 211); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 263, 215, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+// Elapsed time: 32 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 371, 148); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 259, 145, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 321, 249); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 440, 211); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 271, 216, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 366, 201); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 237, 195, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 375, 179); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 243, 181, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 369, 145); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 230, 147, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 377, 124); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 14 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 391, 161); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 243, 162, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 311, 175); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 215, 197, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 11 seconds
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 10 seconds
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 98, 232); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 313, 246); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 12 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 137, 162); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 39 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 143, 215); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 1, 41, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 12 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 25, 39); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 191, 197, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+typeControlKey((HResource) null, "customip_lab_v1_0.vhd", 'c'); // bI:J (JPanel:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1); // B:i (D:JPanel, cg:JFrame)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1); // B:i (D:JPanel, cg:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd)]", 1); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), control_module : control(Behavioral) (control.vhd)]", 8, false); // B:i (D:JPanel, cg:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, customip_lab_v1_0(arch_imp) (customip_lab_v1_0.vhd), control_module : control(Behavioral) (control.vhd)]", 8, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+selectCodeEditor("control.vhd", 113, 123); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "control.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("control.vhd", 4, 177, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("control.vhd", 162, 92); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("control.vhd", 58, 76); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("control.vhd", 194, 178, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("control.vhd", 299, 181, true, false, false, false, false); // bI:J (JPanel:JComponent, cg:JFrame) - Shift Key
+selectCodeEditor("control.vhd", 96, 117, false, false, false, true, false); // bI:J (JPanel:JComponent, cg:JFrame) - Popup Trigger
+selectMenuItem(RDIResource.HInputHandler_UNINDENT_SELECTION, "Unindent Selection"); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+selectCodeEditor("control.vhd", 154, 221, false, false, false, true, false); // bI:J (JPanel:JComponent, cg:JFrame) - Popup Trigger
+selectMenu(RDIResource.HCodeEditor_BLANK_OPERATIONS, "Blank Operations"); // U:JideMenu (ai:JPopupMenu, Popup:JWindow)
+selectMenuItem(RDIResource.HInputHandler_UNINDENT_SELECTION, "Unindent Selection"); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+selectCodeEditor("control.vhd", 264, 199); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 507 seconds
+selectCodeEditor("control.vhd", 494, 107); // bI:J (JPanel:JComponent, cg:JFrame)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u:M (JViewport:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, RTL Analysis]", 3); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f:p (cg:JFrame): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, f:p)
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f:p (cg:JFrame)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Wed Apr 24 20:54:09 2019] Launched synth_1... Run output will be captured here: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 4 seconds
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// TclEventType: RUN_FAILED
+// ah:x (cg:JFrame): Synthesis Failed: addNotify
+// Elapsed time: 21 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, ah:x)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ah:x (cg:JFrame)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-690] width mismatch in assignment; target has 16 bits, source has 32 bits [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:79]. ]", 1, false); // ah:i (JViewport:JComponent, cg:JFrame)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-690] width mismatch in assignment; target has 16 bits, source has 32 bits [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:79]. ]", 1, false, false, false, false, false, true); // ah:i (JViewport:JComponent, cg:JFrame) - Double Click
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-690] width mismatch in assignment; target has 16 bits, source has 32 bits [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:79]. ]", 1, false); // ah:i (JViewport:JComponent, cg:JFrame)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\X4\Documents\GitHub\valjean-nnet\custom_ip\New folder\custom_ip_lab\custom_ip_lab\customip_lab_v1_0_project\customip_lab_v1_0_project.srcs\sources_1\new\vecmult.vhd;-;;-;16;-;line;-;79;-;;-;16;-;"); // ah:i (JViewport:JComponent, cg:JFrame)
+selectCodeEditor("vecmult.vhd", 398, 196); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 32 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u:M (JViewport:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis]", 4); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f:p (cg:JFrame): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, f:p)
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f:p (cg:JFrame)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Wed Apr 24 20:55:18 2019] Launched synth_1... Run output will be captured here: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 3 seconds
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// TclEventType: RUN_FAILED
+// ah:x (cg:JFrame): Synthesis Failed: addNotify
+// Elapsed time: 19 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, ah:x)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ah:x (cg:JFrame)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-549] port width mismatch for port 'output': port width = 16, actual width = 32 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:99]. ]", 1, false); // ah:i (JViewport:JComponent, cg:JFrame)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\X4\Documents\GitHub\valjean-nnet\custom_ip\New folder\ip_repo\customip_lab_1.0\hdl\customip_lab_v1_0.vhd;-;;-;16;-;line;-;99;-;;-;16;-;"); // ah:i (JViewport:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 308, 73); // bI:J (JPanel:JComponent, cg:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 662 MB. GUI used memory: 45 MB. Current time: 4/24/19 8:55:58 PM AEST
+// Elapsed time: 19 seconds
+selectCodeEditor("customip_lab_v1_0.vhd", 327, 231); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 18 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u:M (JViewport:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug]", 6); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f:p (cg:JFrame): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, f:p)
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f:p (cg:JFrame)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Wed Apr 24 20:56:28 2019] Launched synth_1... Run output will be captured here: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 3 seconds
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// TclEventType: RUN_FAILED
+// ah:x (cg:JFrame): Synthesis Failed: addNotify
+// Elapsed time: 16 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, ah:x)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ah:x (cg:JFrame)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-549] port width mismatch for port 'bits': port width = 16, actual width = 32 [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:250]. ]", 1, false); // ah:i (JViewport:JComponent, cg:JFrame)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\X4\Documents\GitHub\valjean-nnet\custom_ip\New folder\ip_repo\customip_lab_1.0\hdl\customip_lab_v1_0.vhd;-;;-;16;-;line;-;250;-;;-;16;-;"); // ah:i (JViewport:JComponent, cg:JFrame)
+selectCodeEditor("customip_lab_v1_0.vhd", 158, 180); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// WARNING: HTimer (FileMgr Design Graph Update Timer) is taking too long to process. Increasing delay to 3000 ms.
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 18 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 15, false); // u:M (JViewport:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f:p (cg:JFrame): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, f:p)
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+dismissDialog("Launch Runs"); // f:p (cg:JFrame)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 4 
+// Tcl Message: [Wed Apr 24 20:57:14 2019] Launched synth_1... Run output will be captured here: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/runme.log 
+// 'k' command handler elapsed time: 3 seconds
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// TclEventType: RUN_COMPLETED
+// ah:x (cg:JFrame): Synthesis Completed: addNotify
+// Elapsed time: 28 seconds
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a:JButton (JPanel:JComponent, ah:x)
+dismissDialog("Synthesis Completed"); // ah:x (cg:JFrame)

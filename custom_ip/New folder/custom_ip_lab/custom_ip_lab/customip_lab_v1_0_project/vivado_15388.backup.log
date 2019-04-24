@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Wed Apr 24 19:50:10 2019
+# Process ID: 15388
+# Current directory: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent4720 C:\Users\X4\Documents\GitHub\valjean-nnet\custom_ip\New folder\custom_ip_lab\custom_ip_lab\customip_lab_v1_0_project\customip_lab_v1_0_project.xpr
+# Log file: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/vivado.log
+# Journal file: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.xpr}
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project'
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 24 19:50:42 2019...
+): peak = 842.578 ; gain = 122.723
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 24 19:52:48 2019...
