@@ -84,19 +84,50 @@ void matrix_mult(
     BNN_bin input[BIN_VEC_SIZE], BNN_real output[NODE_MAX], BNNS inp_size, BNNS out_size,
     BNN_bin weights[NODE_MAX][BIN_VEC_SIZE], BNNS last_trunc, BNN_real bias[NODE_MAX]
 ) {
-    BNNS k, j;
-    for ( j = 0; j < out_size; j++ ) { // for each output node
-        for ( k = 0; k < inp_size-1; k++ ) { // for each input node
-            output[j] += xnor_bin_sum(input[k], weights[j][k]);
-        }
-        if (last_trunc == 0) {
-            output[j] += xnor_bin_sum(input[k], weights[j][k]);
-        }
-        else {
-            output[j] += partial_xnor_bin_sum(input[k], weights[j][k], last_trunc);
-        }
-        output[j] += bias[j];
-        
+	// Control Signals
+	int RESET = 0;
+	int SENDING_WEIGHT = 1;
+	int SENDING_INPUT = 2;
+	int CALCULATE = 3;
+	int OUTPUT_READY = 4;	
+
+
+	// Initialize Axi Lite Communication
+	volatile uint32_t* a;
+	int fd;
+	fd = open("/dev/mem", O_RDWR);
+	a = mmap(NULL, 0x1000, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0x43C00000);
+
+
+	// For each output node
+    	for (BNNS node = 0; node < out_size; node++ ) {
+
+		// Set control to sending weights
+		a[0] = SENDING_WEIGHT;
+
+		// Send all weights to Controller
+		for(BNNS i = 0; i < BIN_VEC_SIZE; i++) {
+			a[1] = weights[node][i];
+		}
+
+		// Set control signal to sending inputs
+		a[0] = SENDING_INPUT
+
+		// Send all inputs to Controller
+		for(BNNS i = 0; i < BIN_VEC_SIZE; i++) {
+			a[1] = weights[i];
+		}
+
+		// Send calculate signal
+		a[0] = CALCULATE;
+
+		while (a[0] != OUTPUT READY) {};
+
+		output[node] = a[1] + bias[node];
+
+		a[0] = RESET;
+	}	
+
     }
 }
 
