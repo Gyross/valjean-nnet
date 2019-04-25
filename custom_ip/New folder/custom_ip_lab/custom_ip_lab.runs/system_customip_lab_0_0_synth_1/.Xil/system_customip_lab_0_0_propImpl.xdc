@@ -1,5 +1,0 @@
-set_property SRC_FILE_INFO {cfile:{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab.runs/system_customip_lab_0_0_synth_1/dont_touch.xdc} rfile:../dont_touch.xdc id:1} [current_design]
-set_property src_info {type:XDC file:1 line:8 export:INPUT save:INPUT read:READ} [current_design]
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==fifo_fifo_generator_0_0 || ORIG_REF_NAME==fifo_fifo_generator_0_0}]
-set_property src_info {type:XDC file:1 line:11 export:INPUT save:INPUT read:READ} [current_design]
-set_property DONT_TOUCH TRUE [get_cells [split [join [get_cells -hier -filter {REF_NAME==fifo_fifo_generator_0_0 || ORIG_REF_NAME==fifo_fifo_generator_0_0}] {/U0 }]/U0 ]]
