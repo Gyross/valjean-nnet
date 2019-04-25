@@ -3,10 +3,10 @@
 <!--                                                         -->
 <!-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="20" Path="/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.tmp/bnn_v1_0_project/bnn_v1_0_project.xpr">
+<Project Version="7" Minor="20" Path="/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_ip/bnn_ip.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="957fb3979f0e4e2080e106a426cdf44e"/>
+    <Option Name="Id" Val="bcf26c696a5f47adb43fb0cbc4da36a3"/>
     <Option Name="Part" Val="xc7z020clg484-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -21,8 +21,7 @@
     <Option Name="BoardPart" Val="em.avnet.com:zed:part0:1.3"/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
-    <Option Name="IPRepoPath" Val="$PPRDIR/../../../ip_repo/bnn_1.0"/>
-    <Option Name="IPOutputRepo" Val="$PCACHEDIR/ip"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/bnn_1.0"/>
     <Option Name="IPCachePermission" Val="read"/>
     <Option Name="IPCachePermission" Val="write"/>
     <Option Name="EnableCoreContainer" Val="FALSE"/>
@@ -55,25 +54,25 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PPRDIR/../../../ip_repo/bnn_1.0/hdl/bnn_v1_0_S00_AXI.vhd">
+      <File Path="$PPRDIR/../ip_repo/bnn_1.0/hdl/bnn_v1_0_S00_AXI.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../ip_repo/bnn_1.0/hdl/bnn_v1_0.vhd">
+      <File Path="$PPRDIR/../ip_repo/bnn_1.0/hdl/bnn_v1_0.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../ip_repo/bnn_1.0/component.xml">
+      <File Path="$PPRDIR/../ip_repo/bnn_1.0/component.xml">
         <FileInfo SFType="IPXACT"/>
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="bnn_v1_0"/>
-        <Option Name="TopRTLFile" Val="$PPRDIR/../../../ip_repo/bnn_1.0/hdl/bnn_v1_0.vhd"/>
+        <Option Name="TopRTLFile" Val="$PPRDIR/../ip_repo/bnn_1.0/hdl/bnn_v1_0.vhd"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
