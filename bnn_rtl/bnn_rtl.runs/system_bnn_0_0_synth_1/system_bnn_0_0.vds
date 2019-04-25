@@ -1,0 +1,481 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:10 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Apr 25 12:40:36 2019
+# Process ID: 2846
+# Current directory: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_bnn_0_0_synth_1
+# Command line: vivado -log system_bnn_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_bnn_0_0.tcl
+# Log file: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_bnn_0_0_synth_1/system_bnn_0_0.vds
+# Journal file: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_bnn_0_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source system_bnn_0_0.tcl -notrace
+Command: synth_design -top system_bnn_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020-clg484'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 2887 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1149.527 ; gain = 48.996 ; free physical = 45780 ; free virtual = 57825
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'system_bnn_0_0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_bnn_0_0/synth/system_bnn_0_0.vhd:82]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'bnn_v1_0' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:5' bound to instance 'U0' of component 'bnn_v1_0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_bnn_0_0/synth/system_bnn_0_0.vhd:141]
+INFO: [Synth 8-638] synthesizing module 'bnn_v1_0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:49]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'bnn_v1_0_S00_AXI' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:5' bound to instance 'bnn_v1_0_S00_AXI_inst' of component 'bnn_v1_0_S00_AXI' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:199]
+INFO: [Synth 8-638] synthesizing module 'bnn_v1_0_S00_AXI' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:86]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:223]
+INFO: [Synth 8-226] default block is never used [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:353]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:221]
+WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:352]
+INFO: [Synth 8-256] done synthesizing module 'bnn_v1_0_S00_AXI' (1#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0_S00_AXI.vhd:86]
+	Parameter bit_width bound to: 16 - type: integer 
+	Parameter output_width bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'vecmult' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/vecmult.vhd:34' bound to instance 'vecmult_inst' of component 'vecmult' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:229]
+INFO: [Synth 8-638] synthesizing module 'vecmult' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/vecmult.vhd:47]
+	Parameter bit_width bound to: 16 - type: integer 
+	Parameter output_width bound to: 16 - type: integer 
+	Parameter bit_width bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'xnor_sum' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/xnor_sum.vhd:34' bound to instance 'xnor_sum_inst' of component 'xnor_sum' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/vecmult.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'xnor_sum' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/xnor_sum.vhd:44]
+	Parameter bit_width bound to: 16 - type: integer 
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/xnor_sum.vhd:54]
+INFO: [Synth 8-256] done synthesizing module 'xnor_sum' (2#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/xnor_sum.vhd:44]
+INFO: [Synth 8-3491] module 'accumulator' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/accumulator.vhd:34' bound to instance 'acc_inst' of component 'accumulator' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/vecmult.vhd:76]
+INFO: [Synth 8-638] synthesizing module 'accumulator' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/accumulator.vhd:42]
+INFO: [Synth 8-256] done synthesizing module 'accumulator' (3#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/accumulator.vhd:42]
+INFO: [Synth 8-256] done synthesizing module 'vecmult' (4#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/vecmult.vhd:47]
+INFO: [Synth 8-3491] module 'IO_RAM' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/IO_RAM.vhd:7' bound to instance 'io_ram_inst' of component 'IO_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:246]
+INFO: [Synth 8-638] synthesizing module 'IO_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/IO_RAM.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'IO_RAM' (5#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/IO_RAM.vhd:20]
+INFO: [Synth 8-3491] module 'output_RAM' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/Output_Store.vhd:7' bound to instance 'output_ram_inst' of component 'output_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:257]
+INFO: [Synth 8-638] synthesizing module 'output_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/Output_Store.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'output_RAM' (6#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/Output_Store.vhd:20]
+INFO: [Synth 8-3491] module 'weight_RAM' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/rams_dist.vhd:7' bound to instance 'weight_ram_inst' of component 'weight_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:268]
+INFO: [Synth 8-638] synthesizing module 'weight_RAM' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/rams_dist.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'weight_RAM' (7#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/rams_dist.vhd:20]
+INFO: [Synth 8-3491] module 'binarised_buffer' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/binarised_buffer.vhd:34' bound to instance 'binarised_buffer_inst' of component 'binarised_buffer' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:279]
+INFO: [Synth 8-638] synthesizing module 'binarised_buffer' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/binarised_buffer.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'binarised_buffer' (8#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/binarised_buffer.vhd:41]
+INFO: [Synth 8-3491] module 'control' declared at '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/control.vhd:34' bound to instance 'control_module' of component 'control' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:287]
+INFO: [Synth 8-638] synthesizing module 'control' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/control.vhd:56]
+INFO: [Synth 8-256] done synthesizing module 'control' (9#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/control.vhd:56]
+INFO: [Synth 8-256] done synthesizing module 'bnn_v1_0' (10#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/bnn_v1_0.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'system_bnn_0_0' (11#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_bnn_0_0/synth/system_bnn_0_0.vhd:82]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[31]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[30]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[29]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[28]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[27]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[26]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[25]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[24]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[23]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[22]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[21]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[20]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[19]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[18]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[17]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[16]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1191.027 ; gain = 90.496 ; free physical = 45748 ; free virtual = 57794
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1191.027 ; gain = 90.496 ; free physical = 45742 ; free virtual = 57788
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1604.152 ; gain = 1.000 ; free physical = 45087 ; free virtual = 57152
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:52 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 45215 ; free virtual = 57260
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:52 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 45215 ; free virtual = 57260
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:52 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 45217 ; free virtual = 57262
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/accumulator.vhd:53]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:52 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 45206 ; free virtual = 57251
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	  31 Input     32 Bit       Adders := 1     
+	   2 Input     16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 5     
+	               16 Bit    Registers := 4     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---RAMs : 
+	              25K Bit         RAMs := 1     
+	              24K Bit         RAMs := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 5     
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module bnn_v1_0_S00_AXI 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 5     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   4 Input     32 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 5     
+Module xnor_sum 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	  31 Input     32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+Module vecmult 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     16 Bit       Adders := 1     
+Module IO_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              24K Bit         RAMs := 1     
+Module output_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              24K Bit         RAMs := 1     
+Module weight_RAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---RAMs : 
+	              25K Bit         RAMs := 1     
+Module binarised_buffer 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
+Module bnn_v1_0 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6014] Unused sequential element acc_inst/count_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/accumulator.vhd:53]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[31]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[30]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[29]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[28]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[27]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[26]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[25]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[24]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[23]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[22]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[21]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[20]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[19]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[18]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[17]
+WARNING: [Synth 8-3331] design vecmult has unconnected port bias[16]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design bnn_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+WARNING: [Synth 8-6014] Unused sequential element U0/output_ram_inst/do_reg was removed.  [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/2afb/hdl/Output_Store.vhd:33]
+WARNING: [Synth 8-6014] Unused sequential element U0/output_ram_inst/ram_reg was removed. 
+WARNING: [Synth 8-5730] RAM U0/output_ram_inst/ram_reg got removed due to cross hierarchy optimization. 
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\U0/bnn_v1_0_S00_AXI_inst/aw_en_reg )
+INFO: [Synth 8-3886] merging instance 'U0/bnn_v1_0_S00_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'U0/bnn_v1_0_S00_AXI_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/bnn_v1_0_S00_AXI_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'U0/bnn_v1_0_S00_AXI_inst/axi_bresp_reg[0]' (FDRE) to 'U0/bnn_v1_0_S00_AXI_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/bnn_v1_0_S00_AXI_inst/axi_bresp_reg[1] )
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/aw_en_reg) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_bresp_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_araddr_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_araddr_reg[0]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_awaddr_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_awaddr_reg[0]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/bnn_v1_0_S00_AXI_inst/axi_rresp_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[0]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[2]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[3]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[4]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[5]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[6]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[7]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[8]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[9]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[10]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[11]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[12]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[13]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[14]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[15]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[16]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[17]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[18]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[19]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[20]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[21]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[22]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[23]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[24]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[25]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[26]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[27]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[28]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[29]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[30]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/vecmult_inst/acc_inst/count_reg[31]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[15]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[14]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[13]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[12]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[11]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[10]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[9]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[8]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[7]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[6]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[5]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[4]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[3]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[2]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[1]) is unused and will be removed from module system_bnn_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/binarised_buffer_inst/dataout_reg[0]) is unused and will be removed from module system_bnn_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:52 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 45207 ; free virtual = 57252
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44845 ; free virtual = 56920
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44836 ; free virtual = 56911
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44838 ; free virtual = 56913
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44847 ; free virtual = 56922
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44849 ; free virtual = 56925
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44860 ; free virtual = 56936
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44862 ; free virtual = 56937
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44867 ; free virtual = 56943
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44871 ; free virtual = 56946
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |control       |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |control |     1|
+|2     |LUT1    |     1|
+|3     |LUT2    |     1|
+|4     |LUT3    |     3|
+|5     |LUT4    |    20|
+|6     |LUT5    |     2|
+|7     |LUT6    |    33|
+|8     |FDRE    |   167|
+|9     |FDSE    |     2|
++------+--------+------+
+
+Report Instance Areas: 
++------+--------------------------+-----------------+------+
+|      |Instance                  |Module           |Cells |
++------+--------------------------+-----------------+------+
+|1     |top                       |                 |   310|
+|2     |  U0                      |bnn_v1_0         |   310|
+|3     |    bnn_v1_0_S00_AXI_inst |bnn_v1_0_S00_AXI |   229|
++------+--------------------------+-----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44873 ; free virtual = 56949
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 27 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1604.152 ; gain = 90.496 ; free physical = 44947 ; free virtual = 57022
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1604.152 ; gain = 503.621 ; free physical = 44947 ; free virtual = 57022
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+102 Infos, 52 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:19 ; elapsed = 00:00:59 . Memory (MB): peak = 1604.152 ; gain = 516.207 ; free physical = 44879 ; free virtual = 56955
+INFO: [Common 17-1381] The checkpoint '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_bnn_0_0_synth_1/system_bnn_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1482] Added synthesis output to IP cache for IP /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_bnn_0_0/system_bnn_0_0.xci
+INFO: [Coretcl 2-1174] Renamed 3 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_bnn_0_0_synth_1/system_bnn_0_0.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.10 . Memory (MB): peak = 1628.164 ; gain = 0.000 ; free physical = 44824 ; free virtual = 56899
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 25 12:41:43 2019...

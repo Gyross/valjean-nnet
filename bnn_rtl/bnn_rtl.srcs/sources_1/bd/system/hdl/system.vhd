@@ -1,7 +1,7 @@
 --Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
---Date        : Thu Apr 25 12:01:29 2019
+--Date        : Thu Apr 25 12:40:25 2019
 --Host        : wmpmiles-ThinkPad-P52 running 64-bit Ubuntu 18.04.2 LTS
 --Command     : generate_target system.bd
 --Design      : system
@@ -691,6 +691,20 @@ architecture STRUCTURE of system is
     PS_PORB : inout STD_LOGIC
   );
   end component system_processing_system7_0_0;
+  component system_rst_ps7_0_100M_0 is
+  port (
+    slowest_sync_clk : in STD_LOGIC;
+    ext_reset_in : in STD_LOGIC;
+    aux_reset_in : in STD_LOGIC;
+    mb_debug_sys_rst : in STD_LOGIC;
+    dcm_locked : in STD_LOGIC;
+    mb_reset : out STD_LOGIC;
+    bus_struct_reset : out STD_LOGIC_VECTOR ( 0 to 0 );
+    peripheral_reset : out STD_LOGIC_VECTOR ( 0 to 0 );
+    interconnect_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
+    peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component system_rst_ps7_0_100M_0;
   component system_bnn_0_0 is
   port (
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -716,20 +730,6 @@ architecture STRUCTURE of system is
     s00_axi_aresetn : in STD_LOGIC
   );
   end component system_bnn_0_0;
-  component system_rst_ps7_0_100M_0 is
-  port (
-    slowest_sync_clk : in STD_LOGIC;
-    ext_reset_in : in STD_LOGIC;
-    aux_reset_in : in STD_LOGIC;
-    mb_debug_sys_rst : in STD_LOGIC;
-    dcm_locked : in STD_LOGIC;
-    mb_reset : out STD_LOGIC;
-    bus_struct_reset : out STD_LOGIC_VECTOR ( 0 to 0 );
-    peripheral_reset : out STD_LOGIC_VECTOR ( 0 to 0 );
-    interconnect_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
-    peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
-  );
-  end component system_rst_ps7_0_100M_0;
   signal processing_system7_0_DDR_ADDR : STD_LOGIC_VECTOR ( 14 downto 0 );
   signal processing_system7_0_DDR_BA : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal processing_system7_0_DDR_CAS_N : STD_LOGIC;

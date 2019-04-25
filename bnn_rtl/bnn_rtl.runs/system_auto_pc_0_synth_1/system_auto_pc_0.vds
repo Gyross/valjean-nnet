@@ -1,0 +1,110 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:10 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Apr 25 12:40:36 2019
+# Process ID: 2847
+# Current directory: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_auto_pc_0_synth_1
+# Command line: vivado -log system_auto_pc_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_auto_pc_0.tcl
+# Log file: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_auto_pc_0_synth_1/system_auto_pc_0.vds
+# Journal file: /home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.runs/system_auto_pc_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source system_auto_pc_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1156.523 ; gain = 55.996 ; free physical = 45736 ; free virtual = 57781
+INFO: [Synth 8-638] synthesizing module 'system_auto_pc_0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_auto_pc_0/synth/system_auto_pc_0.v:58]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_axi_protocol_converter' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4811]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4229]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_aw_channel' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3974]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_cmd_translator' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3467]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_incr_cmd' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3093]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_incr_cmd' (1#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3093]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_wrap_cmd' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2903]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_wrap_cmd' (2#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2903]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_cmd_translator' (3#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3467]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_wr_cmd_fsm' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3225]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_wr_cmd_fsm' (4#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3225]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_aw_channel' (5#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3974]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_b_channel' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3609]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo' (6#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized0' (6#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_b_channel' (7#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3609]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_ar_channel' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4085]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_rd_cmd_fsm' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3336]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_rd_cmd_fsm' (8#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3336]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_ar_channel' (9#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4085]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_r_channel' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3814]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized1' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized1' (9#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized2' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_simple_fifo__parameterized2' (9#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:2816]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s_r_channel' (10#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:3814]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axi_register_slice' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' (11#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice' (12#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized0' (12#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized1' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized1' (12#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized2' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized2' (12#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' (13#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axi_register_slice' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axi_register_slice__parameterized0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized3' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized3' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized4' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized4' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized5' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized5' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized6' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axic_register_slice__parameterized6' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_13_axi_register_slice__parameterized0' (14#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/55c0/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_b2s' (15#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4229]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_13_axi_protocol_converter' (16#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ipshared/f0ae/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4811]
+INFO: [Synth 8-256] done synthesizing module 'system_auto_pc_0' (17#1) [/home/wmpmiles/courses/comp4601/valjean-nnet/bnn_rtl/bnn_rtl.srcs/sources_1/bd/system/ip/system_auto_pc_0/synth/system_auto_pc_0.v:58]
+Finished RTL Elaboration : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1277.023 ; gain = 176.496 ; free physical = 45836 ; free virtual = 57883
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1277.023 ; gain = 176.496 ; free physical = 45826 ; free virtual = 57873
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1627.422 ; gain = 0.000 ; free physical = 45597 ; free virtual = 57693
+Finished Constraint Validation : Time (s): cpu = 00:00:26 ; elapsed = 00:01:07 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46274 ; free virtual = 58337
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:26 ; elapsed = 00:01:07 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46274 ; free virtual = 58337
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:01:07 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46276 ; free virtual = 58338
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:01:07 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46263 ; free virtual = 58325
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46204 ; free virtual = 58285
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:01:12 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46159 ; free virtual = 58221
+Finished Timing Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:01:13 . Memory (MB): peak = 1627.422 ; gain = 526.895 ; free physical = 46147 ; free virtual = 58209
+Finished Technology Mapping : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46147 ; free virtual = 58210
+Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |CARRY4  |    18|
+|2     |LUT1    |    38|
+|3     |LUT2    |    18|
+|4     |LUT3    |   236|
+|5     |LUT4    |    48|
+|6     |LUT5    |    73|
+|7     |LUT6    |   103|
+|8     |SRL16E  |    18|
+|9     |SRLC32E |    47|
+|10    |FDRE    |   550|
+|11    |FDSE    |    48|
++------+--------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:01:14 . Memory (MB): peak = 1628.023 ; gain = 527.496 ; free physical = 46148 ; free virtual = 58210
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:01:15 . Memory (MB): peak = 1660.039 ; gain = 572.098 ; free physical = 46198 ; free virtual = 58260
