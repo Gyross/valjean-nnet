@@ -16,7 +16,20 @@ entity customip_lab_v1_0 is
 	);
 	port (
 		-- Users to add ports here
-
+        vecmult_input : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        vecmult_weight : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        vecmult_output : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        input_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
+        weight_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
+        buffer_out : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        buffer_addr : out std_logic_vector(3 downto 0) := (OTHERS => '0');
+        output_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
+        output_written : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        load_input_en_port : out std_logic := '0';
+        weight_RAM_datain_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+        acc_en_port : out std_logic := '0';
+        acc_reset_port : out std_logic := '0';
+        AXI_ready_port : out std_logic := '0';
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -118,7 +131,8 @@ architecture arch_imp of customip_lab_v1_0 is
         en : in std_logic;
         we : in std_logic;
         rst : in std_logic;
-        addr : in std_logic_vector(10 downto 0);
+        i_addr : in std_logic_vector(10 downto 0);
+        o_addr : in std_logic_vector(10 downto 0);
         di : in std_logic_vector(15 downto 0);
         do : out std_logic_vector(15 downto 0)
         );
@@ -144,12 +158,15 @@ architecture arch_imp of customip_lab_v1_0 is
             end component;
     
     component control is
-            port (  clk : in STD_LOGIC;
+            port ( 
+                clk : in STD_LOGIC;
+                reset : in STD_LOGIC;
+                AXI_valid : in STD_LOGIC;
+                AXI_ready : out STD_LOGIC;
                 weight_RAM_enable : out STD_LOGIC;
                 weight_RAM_w_enable : out STD_LOGIC;
                 weight_RAM_rst : out STD_LOGIC;
                 weight_RAM_addr : out STD_LOGIC_VECTOR(10 downto 0);
-                weight_RAM_datain : out STD_LOGIC_VECTOR(15 downto 0);
                 bb_addr : out STD_LOGIC_VECTOR(3 downto 0);
                 output_RAM_enable : out STD_LOGIC;
                 output_RAM_w_enable : out STD_LOGIC;
@@ -158,48 +175,51 @@ architecture arch_imp of customip_lab_v1_0 is
                 IO_RAM_enable : out STD_LOGIC;
                 IO_RAM_w_enable : out STD_LOGIC;
                 IO_RAM_rst : out STD_LOGIC;
-                IO_RAM_addr : out STD_LOGIC_VECTOR(10 downto 0);
-                b_input_init : out STD_LOGIC_VECTOR(15 downto 0);
+                IO_RAM_addr_in : out STD_LOGIC_VECTOR(10 downto 0);
+                IO_RAM_addr_out : out STD_LOGIC_VECTOR(10 downto 0);
                 load_input_en : out STD_LOGIC;
                 acc_reset : out STD_LOGIC;
                 acc_en : out STD_LOGIC);
             end component;
 
 	
-    signal datain0, datain1, datain2, datain3       : std_logic_vector(31 downto 0);
-    signal dataout0, dataout1, dataout2, dataout3   : std_logic_vector(31 downto 0);
+    signal datain0, datain1, datain2, datain3       : std_logic_vector(31 downto 0) := (OTHERS => '0');
+    signal dataout0, dataout1, dataout2, dataout3   : std_logic_vector(31 downto 0) := (OTHERS => '0');
     
     --Signals for data input multiplexer for IO_RAM
-    signal bb_dataout : std_logic_vector(15 downto 0);
-    signal IO_RAM_datain : std_logic_vector(15 downto 0);
+    signal bb_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal IO_RAM_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
     signal load_input_en : std_logic := '0';
     
     --IO_RAM signals
-    signal IO_RAM_addr : std_logic_vector(10 downto 0);
-    signal IO_RAM_dataout : std_logic_vector(15 downto 0);
-    signal IO_RAM_enable, IO_RAM_w_enable, IO_RAM_rst :std_logic;
+    signal IO_RAM_addr_in : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal IO_RAM_addr_out : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal IO_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal IO_RAM_enable, IO_RAM_w_enable, IO_RAM_rst :std_logic := '0';
     
     --Weight Ram Signals
-    signal weight_RAM_addr : std_logic_vector(10 downto 0);
-    signal weight_RAM_datain : std_logic_vector(15 downto 0);
-    signal weight_RAM_dataout : std_logic_vector(15 downto 0);
-    signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic;
+    signal weight_RAM_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal weight_RAM_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal weight_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic := '0';
     
     --Output Ram Signals
-    signal output_RAM_addr : std_logic_vector(10 downto 0);
-    signal output_RAM_dataout : std_logic_vector(15 downto 0);
-    signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic;
+    signal output_RAM_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal output_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic := '0';
     
     --Vecmult unit signals
-    signal vecmult_dataout : std_logic_vector(15 downto 0);
-    signal acc_en : std_logic;
-    signal acc_reset : std_logic;
+    signal vecmult_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal acc_en : std_logic := '0';
+    signal acc_reset : std_logic := '0';
     
     --Binarised buffer signals
-    signal bb_addr : std_logic_vector(3 downto 0);
+    signal bb_addr : std_logic_vector(3 downto 0) := (OTHERS => '0');
     
     --Data Load signals
-    signal b_input_init : std_logic_vector(15 downto 0);
+    signal b_input_init : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    
+    signal AXI_ready : STD_LOGIC := '0';
     
 
 begin                   
@@ -255,7 +275,8 @@ vecmult_inst : vecmult
         output => vecmult_dataout
     );
      
-         
+b_input_init <= X"aaaa";
+
 --Multiplexer for the data input of the IO RAM
 IO_RAM_datain <= b_input_init when load_input_en = '1' else
                 bb_dataout when load_input_en = '0';
@@ -266,7 +287,8 @@ IO_RAM_datain <= b_input_init when load_input_en = '1' else
         en => IO_RAM_enable,
         we => IO_RAM_w_enable,
         rst => IO_RAM_rst,
-        addr => IO_RAM_addr,
+        i_addr => IO_RAM_addr_out,
+        o_addr => IO_RAM_addr_in,
         di => IO_RAM_datain,
         do => IO_RAM_dataout
     );
@@ -282,6 +304,7 @@ output_ram_inst : output_RAM
         do => output_RAM_dataout
     );
     
+weight_RAM_datain <= dataout0(31 downto 16);
 weight_ram_inst : weight_RAM
  port map(
        clk => s00_axi_aclk,
@@ -304,11 +327,13 @@ weight_ram_inst : weight_RAM
   control_module : control
     port map(
         clk => s00_axi_aclk,
+        reset => '0',
+        AXI_valid => '1',
+        AXI_ready => AXI_ready,
         weight_RAM_enable => weight_RAM_enable,
         weight_RAM_w_enable => weight_RAM_w_enable,
         weight_RAM_rst => weight_RAM_rst,
         weight_RAM_addr => weight_RAM_addr,
-        weight_RAM_datain => weight_RAM_datain,
         bb_addr => bb_addr,
         output_RAM_enable => output_RAM_enable,
         output_RAM_w_enable => output_RAM_w_enable,
@@ -317,13 +342,31 @@ weight_ram_inst : weight_RAM
         IO_RAM_enable => IO_RAM_enable,
         IO_RAM_w_enable => IO_RAM_w_enable,
         IO_RAM_rst => IO_RAM_rst,
-        IO_RAM_addr => IO_RAM_addr,
-        b_input_init => b_input_init,
+        IO_RAM_addr_in => IO_RAM_addr_in,
+        IO_RAM_addr_out => IO_RAM_addr_out,
         load_input_en => load_input_en,
         acc_reset => acc_reset,
         acc_en => acc_en
     );
         
-        
+    vecmult_input <= IO_RAM_dataout;
+    vecmult_weight <= weight_RAM_dataout;
+    vecmult_output <= vecmult_dataout;
+    input_addr <= IO_RAM_addr_out;
+    weight_addr <= weight_RAM_addr;
+    buffer_out <= bb_dataout;
+    buffer_addr <= bb_addr;
+    output_addr <= IO_RAM_addr_in;
+    output_written <= IO_RAM_datain;
+    load_input_en_port <= load_input_en;
+    weight_RAM_datain_port <= weight_RAM_datain;
+    acc_en_port <= acc_en;
+    acc_reset_port <= acc_reset;
+    AXI_ready_port <= AXI_ready;
+    
+    datain0 <= X"deadbeef";
+    datain1 <= X"deadbead";
+    datain2 <= X"beefdead";
+    datain3 <= X"deafbeef";
 
 end arch_imp;

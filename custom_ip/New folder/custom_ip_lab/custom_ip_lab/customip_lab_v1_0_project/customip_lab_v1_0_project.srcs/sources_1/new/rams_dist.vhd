@@ -19,7 +19,7 @@ end weight_RAM;
 
 architecture syn of weight_RAM is
      type ram_type is array (1652 downto 0) of std_logic_vector(15 downto 0);
-     signal ram : ram_type;
+     signal ram : ram_type := (OTHERS => (OTHERS => '0'));
 begin
      process(clk)
          begin

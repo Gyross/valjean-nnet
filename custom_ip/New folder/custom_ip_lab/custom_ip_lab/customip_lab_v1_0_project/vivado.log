@@ -46,3 +46,5 @@ reset_run synth_1
 launch_runs synth_1 -jobs 4
 [Wed Apr 24 20:57:14 2019] Launched synth_1...
 Run output will be captured here: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/runme.log
+close [ open {C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/counter.vhd} w ]
+add_files {{C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/counter.vhd}}

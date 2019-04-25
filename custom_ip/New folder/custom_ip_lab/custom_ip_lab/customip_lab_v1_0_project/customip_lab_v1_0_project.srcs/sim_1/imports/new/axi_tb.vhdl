@@ -9,13 +9,27 @@ architecture Behavioral of axi_tb is
     constant CLOCK_PERIOD   : Time := 10 ns; -- 100MHz
     constant AXI_DATA_WIDTH : integer := 32;
     constant AXI_ADDR_WIDTH : integer := 4; 
-    component lab0_ip_v1_0 is
+    component customip_lab_v1_0 is
         generic (
             -- Parameters of Axi Slave Bus Interface S00_AXI
             C_S00_AXI_DATA_WIDTH : integer    := 32;
             C_S00_AXI_ADDR_WIDTH : integer    := 4
         );
         port (
+            vecmult_input : out std_logic_vector(15 downto 0);
+            vecmult_weight : out std_logic_vector(15 downto 0);
+            vecmult_output : out std_logic_vector(15 downto 0);
+            input_addr : out std_logic_vector(10 downto 0);
+            weight_addr : out std_logic_vector(10 downto 0);
+            buffer_out : out std_logic_vector(15 downto 0);
+            buffer_addr : out std_logic_vector(3 downto 0);
+            output_addr : out std_logic_vector(10 downto 0);
+            output_written : out std_logic_vector(15 downto 0);
+            load_input_en_port : out std_logic := '0';
+            weight_RAM_datain_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+            acc_en_port : out std_logic := '0';
+            acc_reset_port : out std_logic := '0';
+            AXI_ready_port : out std_logic := '0';
             -- Ports of Axi Slave Bus Interface S00_AXI
             s00_axi_aclk    : in  std_logic;
             s00_axi_aresetn : in  std_logic;
@@ -39,7 +53,7 @@ architecture Behavioral of axi_tb is
             s00_axi_rvalid  : out std_logic;
             s00_axi_rready  : in  std_logic
         );
-    end component lab0_ip_v1_0;
+    end component;
 
     signal s00_axi_aclk    : std_logic;
     signal s00_axi_aresetn : std_logic;
@@ -59,17 +73,46 @@ architecture Behavioral of axi_tb is
     signal s00_axi_rresp   : std_logic_vector(1 downto 0);
     signal s00_axi_rvalid  : std_logic;
     signal s00_axi_rready  : std_logic;
+    
+    signal vecmult_input : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal vecmult_weight : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal vecmult_output :  std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal input_addr :  std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal weight_addr :  std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal buffer_out :  std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal buffer_addr :  std_logic_vector(3 downto 0) := (OTHERS => '0');
+    signal output_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    signal output_written :  std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal load_input_en_port :  std_logic := '0';
+    signal weight_RAM_datain_port :  std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal acc_en_port :  std_logic := '0';
+    signal acc_reset_port :  std_logic := '0';
+    signal AXI_ready_port :  std_logic := '0';
 
 begin
     -- Instantiate our AXI peripheral
-    axi0: component lab0_ip_v1_0
+    axi0: component customip_lab_v1_0
         generic map (
             -- Parameters of Axi Slave Bus Interface S00_AXI
             C_S00_AXI_DATA_WIDTH => AXI_DATA_WIDTH,
             C_S00_AXI_ADDR_WIDTH => AXI_ADDR_WIDTH
-        ),
+        )
 
         port map (
+            vecmult_input => vecmult_input,
+            vecmult_weight => vecmult_weight,
+            vecmult_output => vecmult_output ,
+            input_addr => input_addr,
+            weight_addr => weight_addr,
+            buffer_out => buffer_out ,
+            buffer_addr => buffer_addr ,
+            output_addr => output_addr ,
+            output_written => output_written,
+            load_input_en_port => load_input_en_port,
+            weight_RAM_datain_port => weight_RAM_datain_port,
+            acc_en_port => acc_en_port,
+            acc_reset_port => acc_reset_port ,
+            AXI_ready_port => AXI_ready_port,
             s00_axi_aclk    => s00_axi_aclk,
             s00_axi_aresetn => s00_axi_aresetn,
             s00_axi_awaddr  => s00_axi_awaddr(AXI_ADDR_WIDTH-1 downto 0),
@@ -86,114 +129,113 @@ begin
             s00_axi_araddr  => s00_axi_araddr(AXI_ADDR_WIDTH-1 downto 0),
             s00_axi_arprot  => "001",
             s00_axi_arvalid => s00_axi_arvalid,
-  91             s00_axi_arready => s00_axi_arready,
-  92             s00_axi_rdata   => s00_axi_rdata,
-  93             s00_axi_rresp   => s00_axi_rresp,
-  94             s00_axi_rvalid  => s00_axi_rvalid,
-  95             s00_axi_rready  => s00_axi_rready
-  96         );
-  97 
-  98     -- Create a process for the clock signal
-  99     AXI_CLK: process
- 100     begin
- 101         s00_axi_aclk <= '0';
- 102         wait for CLOCK_PERIOD / 2;
- 103         s00_axi_aclk <= '1';
- 104         wait for CLOCK_PERIOD / 2;
- 105     end process AXI_CLK;
- 106 
- 107 
- 108     TEST: process
- 109         -- Waits for 'cycles' number of clock cycles
- 110         procedure axi_clock(constant cycles: natural) is
- 111         begin
- 112             for i in 1 to cycles loop
- 113                 wait until s00_axi_aclk = '0';
- 114                 wait until s00_axi_aclk = '1';        
- 115             end loop;
- 116         end procedure;
- 117 
- 118         -- Initialise the AXI slave bus
- 119         procedure axi_init is
- 120         begin
- 121             -- Hold in reset state
- 122             s00_axi_aresetn <= '0';
- 123             axi_clock(1); -- Reset is synchronous
- 124             -- Initial key AXI signals
- 125             s00_axi_awaddr  <= X"deadbeef";
- 126             s00_axi_araddr  <= X"deadbeef";
- 127             s00_axi_wdata   <= X"deadbeef";
- 128             s00_axi_wvalid  <= '0';
- 129             s00_axi_awvalid <= '0';
- 130             s00_axi_arvalid <= '0';
- 131             s00_axi_bready  <= '1';
- 132             s00_axi_rready  <= '1';
- 133             -- Release the reset
- 134             s00_axi_aresetn <= '1';
- 135             axi_clock(1); -- Reset is synchronous
- 136         end procedure;
- 137 
- 138         -- Deinitialise the AXI slave bus
- 139         procedure axi_deinit is
- 140         begin
- 141             -- Hold in reset state
- 142             s00_axi_aresetn <= '0';
- 143             axi_clock(1); -- Reset is synchronous
- 144         end procedure;
- 145 
- 146         -- Write 'd' to the axi bus at address 'a'
- 147         procedure axi_writel(constant a : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
- 148                              constant d : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0)) is
- 149         begin
- 150             s00_axi_wdata    <= d;
- 151             s00_axi_wvalid   <= '1';
- 152             axi_clock(1);                       -- CLK 1
- 153             axi_clock(1);                       -- CLK 2
- 154             s00_axi_awaddr   <= a;
- 155             s00_axi_awvalid  <= '1';
- 156             axi_clock(1);                       -- CLK 3
- 157             axi_clock(1);                       -- CLK 4
- 158             ASSERT(s00_axi_awready = '1')  REPORT "AXI protocol error awready not 1" SEVERITY error;
- 159             ASSERT(s00_axi_wready = '1')   REPORT "AXI protocol error wready not 1" SEVERITY error;
- 160             s00_axi_awvalid  <= '0';
- 161             s00_axi_wvalid   <= '0';
- 162             s00_axi_awaddr   <= X"deadbeef";
- 163             axi_clock(1);                       -- CLK 5
- 164             ASSERT(s00_axi_awready = '0')  REPORT "AXI protocol error awready not 0" SEVERITY error;
- 165             ASSERT(s00_axi_wready = '0')   REPORT "AXI protocol error wready not 0" SEVERITY error;
- 166             ASSERT(s00_axi_bvalid = '1')   REPORT "AXI protocol error bvalid not 1" SEVERITY error;
- 167             s00_axi_bready   <= '0';
- 168             axi_clock(1);                       -- CLK 6
- 169             ASSERT(s00_axi_bvalid = '0')   REPORT "AXI protocol error bvalid not 0" SEVERITY error;
- 170             s00_axi_bready   <= '1';
- 171             axi_clock(11);                      -- Relax
- 172         end procedure;
- 173         
- 174         -- Read from the AXI bus at address 'a' and return the result
- 175         procedure axi_readl(constant a : in  std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
- 176                             variable d : out std_logic_vector(AXI_DATA_WIDTH-1 downto 0)) is
- 177         begin            
- 178             s00_axi_araddr   <= a;
- 179             s00_axi_arvalid  <= '1';
- 180             axi_clock(1);                         -- CLK 1
- 181             axi_clock(1);                         -- CLK 2
- 182             ASSERT(s00_axi_arready = '1') REPORT "AXI protocol error arready should be set" SEVERITY error;
- 183             s00_axi_araddr   <= X"deadbeef";            
- 184             s00_axi_arvalid  <= '0';
- 185             axi_clock(1);                         -- CLK 3
- 186             ASSERT(s00_axi_arready = '0') REPORT "AXI protocol error arready should be clear" SEVERITY error;
- 187             ASSERT(s00_axi_rvalid = '1')  REPORT "AXI protocol error rvalid should be set" SEVERITY error;
- 188             d := s00_axi_rdata;
- 189             axi_clock(1);                         -- CLK 3
- 190             ASSERT(s00_axi_rvalid = '0')  REPORT "AXI protocol error rvalid should be clear" SEVERITY error;
- 191             -- At some point we should have got the read value back...
- 192             axi_clock(10);                        -- Relax
- 193         end procedure;
- 194 
- 195         -- Read from address 'a' over the AXI bus and assert that the data read is 'd'
- 196         procedure axi_readlc(constant a : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
- 197                              constant d : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
- 198                              constant s : string) is
+            s00_axi_arready => s00_axi_arready,
+            s00_axi_rdata   => s00_axi_rdata,
+            s00_axi_rresp   => s00_axi_rresp,
+            s00_axi_rvalid  => s00_axi_rvalid,
+            s00_axi_rready  => s00_axi_rready
+        );
+
+    -- Create a process for the clock signal
+    AXI_CLK: process
+    begin
+        s00_axi_aclk <= '0';
+        wait for CLOCK_PERIOD / 2;
+        s00_axi_aclk <= '1';
+        wait for CLOCK_PERIOD / 2;
+    end process AXI_CLK;
+
+
+    TEST: process
+        -- Waits for 'cycles' number of clock cycles
+        procedure axi_clock(constant cycles: natural) is
+        begin
+            for i in 1 to cycles loop
+                wait until s00_axi_aclk = '0';
+                wait until s00_axi_aclk = '1';        
+            end loop;
+        end procedure;
+
+        -- Initialise the AXI slave bus
+        procedure axi_init is
+        begin
+            -- Hold in reset state
+            s00_axi_aresetn <= '0';
+            axi_clock(1); -- Reset is synchronous
+            -- Initial key AXI signals
+            s00_axi_awaddr  <= X"deadbeef";
+            s00_axi_araddr  <= X"deadbeef";
+            s00_axi_wdata   <= X"deadbeef";
+            s00_axi_wvalid  <= '0';
+            s00_axi_awvalid <= '0';
+            s00_axi_arvalid <= '0';
+            s00_axi_bready  <= '1';
+            s00_axi_rready  <= '1';
+            -- Release the reset
+            s00_axi_aresetn <= '1';
+            axi_clock(1); -- Reset is synchronous
+        end procedure;
+
+        -- Deinitialise the AXI slave bus
+        procedure axi_deinit is
+        begin
+            -- Hold in reset state
+            s00_axi_aresetn <= '0';
+            axi_clock(1); -- Reset is synchronous
+        end procedure;
+
+        -- Write 'd' to the axi bus at address 'a'
+        procedure axi_writel(constant a : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                             constant d : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0)) is
+        begin
+            s00_axi_wdata    <= d;
+            s00_axi_wvalid   <= '1';
+            axi_clock(1);                       -- CLK 1
+            axi_clock(1);                       -- CLK 2
+            s00_axi_awaddr   <= a;
+            s00_axi_awvalid  <= '1';
+            axi_clock(1);                       -- CLK 3
+            axi_clock(1);                       -- CLK 4
+            ASSERT(s00_axi_awready = '1')  REPORT "AXI protocol error awready not 1" SEVERITY error;
+            ASSERT(s00_axi_wready = '1')   REPORT "AXI protocol error wready not 1" SEVERITY error;
+            s00_axi_awvalid  <= '0';
+            s00_axi_wvalid   <= '0';
+            s00_axi_awaddr   <= X"deadbeef";
+            axi_clock(1);                       -- CLK 5
+            ASSERT(s00_axi_awready = '0')  REPORT "AXI protocol error awready not 0" SEVERITY error;
+            ASSERT(s00_axi_wready = '0')   REPORT "AXI protocol error wready not 0" SEVERITY error;            ASSERT(s00_axi_bvalid = '1')   REPORT "AXI protocol error bvalid not 1" SEVERITY error;
+            s00_axi_bready   <= '0';
+            axi_clock(1);                       -- CLK 6
+            ASSERT(s00_axi_bvalid = '0')   REPORT "AXI protocol error bvalid not 0" SEVERITY error;
+            s00_axi_bready   <= '1';
+            axi_clock(11);                      -- Relax
+        end procedure;
+        
+        -- Read from the AXI bus at address 'a' and return the result
+        procedure axi_readl(constant a : in  std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                            variable d : out std_logic_vector(AXI_DATA_WIDTH-1 downto 0)) is
+        begin            
+            s00_axi_araddr   <= a;
+            s00_axi_arvalid  <= '1';
+            axi_clock(1);                         -- CLK 1
+            axi_clock(1);                         -- CLK 2
+            ASSERT(s00_axi_arready = '1') REPORT "AXI protocol error arready should be set" SEVERITY error;
+            s00_axi_araddr   <= X"deadbeef";            
+            s00_axi_arvalid  <= '0';
+            axi_clock(1);                         -- CLK 3
+            ASSERT(s00_axi_arready = '0') REPORT "AXI protocol error arready should be clear" SEVERITY error;
+            ASSERT(s00_axi_rvalid = '1')  REPORT "AXI protocol error rvalid should be set" SEVERITY error;
+            d := s00_axi_rdata;
+            axi_clock(1);                         -- CLK 3
+            ASSERT(s00_axi_rvalid = '0')  REPORT "AXI protocol error rvalid should be clear" SEVERITY error;
+            -- At some point we should have got the read value back...
+            axi_clock(10);                        -- Relax
+        end procedure;
+
+        -- Read from address 'a' over the AXI bus and assert that the data read is 'd'
+        procedure axi_readlc(constant a : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                             constant d : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                             constant s : string) is
             variable real_data : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
         begin
             axi_readl(a, real_data);
@@ -224,6 +266,25 @@ begin
             axi_readlc(X"00000000", X"deadbeef", "Ignore this error; it is a demonstration of failure");
         end procedure;
         
+        procedure test_run is
+        begin
+            axi_writel(X"00000000", X"abcddcba");
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+            axi_clock(1);
+        end procedure;
+        
         
     begin
         axi_init;
@@ -232,6 +293,7 @@ begin
         -- Start tests
         test_memory;
         test_failure;
+        test_run;
 
         -- All tests complete
         REPORT "############# AXI test complete ##############";

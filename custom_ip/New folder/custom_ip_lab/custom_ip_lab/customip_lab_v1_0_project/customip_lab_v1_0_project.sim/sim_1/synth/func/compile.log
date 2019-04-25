@@ -1,0 +1,13 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.sim/sim_1/synth/func/timer_sim_func_synth.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity customip_lab_v1_0_S00_AXI
+INFO: [VRFC 10-307] analyzing entity customip_lab_v1_0
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/timer_sim.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity vecmult_sim
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity axi_tb
+ERROR: [VRFC 10-91] lab0_ip_v1_0 is not declared [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl:42]
+ERROR: [VRFC 10-1412] syntax error near , [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl:70]
+ERROR: [VRFC 10-1412] syntax error near ; [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl:94]
+ERROR: [VRFC 10-91] axi_write1 is not declared [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl:228]
+ERROR: [VRFC 10-1504] unit behavioral ignored due to previous errors [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl:8]
+INFO: [VRFC 10-240] VHDL file C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl ignored due to errors

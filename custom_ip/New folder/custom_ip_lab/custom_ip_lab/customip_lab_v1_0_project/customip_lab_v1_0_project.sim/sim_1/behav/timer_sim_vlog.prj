@@ -1,8 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  "../../../customip_lab_v1_0_project.ip_user_files/bd/fifo/ip/fifo_fifo_generator_0_0/sim/fifo_fifo_generator_0_0.v"
-
-# compile glbl module
-verilog xil_defaultlib "glbl.v"
-
-# Do not sort compile order
-nosort

@@ -10,7 +10,8 @@ entity IO_RAM is
     en : in std_logic;
     we : in std_logic;
     rst : in std_logic;
-    addr : in std_logic_vector(10 downto 0);
+    i_addr : in std_logic_vector(10 downto 0);
+    o_addr : in std_logic_vector(10 downto 0);
     di : in std_logic_vector(15 downto 0);
     do : out std_logic_vector(15 downto 0)
     );
@@ -19,20 +20,20 @@ end IO_RAM;
 
 architecture syn of IO_RAM is
      type ram_type is array (1568 downto 0) of std_logic_vector(15 downto 0);
-     signal ram : ram_type;
+     signal ram : ram_type  := (OTHERS => (OTHERS => '0'));
 begin
      process(clk)
          begin
          if clk'event and clk = '1' then
              if en = '1' then -- optional enable
              if we = '1' then -- write enable
-             ram(conv_integer(addr)) <= di;
+             ram(conv_integer(i_addr)) <= di;
          end if;
          
          if rst = '1' then -- optional reset
              do <= (others => '0');
          else
-             do <= ram(conv_integer(addr));
+             do <= ram(conv_integer(o_addr));
          end if;
          end if;
          end if;

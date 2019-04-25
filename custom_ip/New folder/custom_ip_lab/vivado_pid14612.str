@@ -111,3 +111,12 @@ dismissDialog("Open Block Design"); // bs:g (cg:JFrame)
 // [GUI Memory]: 84 MB (+1567kb) [00:37:03]
 // [GUI Memory]: 89 MB (+627kb) [00:48:58]
 // HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 39 MB. Current time: 4/24/19 8:41:28 PM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 39 MB. Current time: 4/24/19 11:59:59 PM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 40 MB. Current time: 4/25/19 3:01:47 AM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 38 MB. Current time: 4/25/19 9:40:18 AM AEST
+// WARNING: HSwingWorker (Update Runs Swing Worker) is taking too long to process. Increasing delay to 4000 ms.
+// [GUI Memory]: 94 MB (+312kb) [14:05:25]
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 39 MB. Current time: 4/25/19 10:10:39 AM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 38 MB. Current time: 4/25/19 10:52:06 AM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 39 MB. Current time: 4/25/19 11:22:06 AM AEST
+// HMemoryUtils.trashcanNow. Engine heap size: 696 MB. GUI used memory: 39 MB. Current time: 4/25/19 11:52:11 AM AEST

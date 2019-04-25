@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "timer_sim_func_synth.vhd"
+vhdl xil_defaultlib  "../../../../../../../ip_repo/customip_lab_1.0/hdl/timer_sim.vhd"
+vhdl xil_defaultlib  "../../../../customip_lab_v1_0_project.srcs/sim_1/imports/new/axi_tb.vhdl"
+
+# Do not sort compile order
+nosort

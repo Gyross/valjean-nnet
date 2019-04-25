@@ -35,19 +35,17 @@ entity binarised_buffer is
     Port ( clk : in STD_LOGIC;
            addr : in std_logic_vector(3 downto 0);
            sign : in std_logic;
-           dataout : out STD_LOGIC_vector(15 downto 0));
+           dataout : out STD_LOGIC_vector(15 downto 0) := (OTHERS => '0'));
 end binarised_buffer;
 
 architecture Behavioral of binarised_buffer is
-
-signal binary_reg : std_logic_vector(15 downto 0) := x"0000";
 
 begin
 
     process(clk)
     begin
         if rising_edge(clk) then
-            dataout(to_integer(unsigned(addr))) <= sign;
+            dataout(to_integer(unsigned(addr))) <= not sign;
         end if;      
     end process;
 
