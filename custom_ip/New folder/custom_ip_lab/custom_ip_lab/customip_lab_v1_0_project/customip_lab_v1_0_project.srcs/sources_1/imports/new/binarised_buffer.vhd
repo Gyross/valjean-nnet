@@ -46,7 +46,7 @@ begin
     begin
         if rising_edge(clk) then
             dataout(to_integer(unsigned(addr))) <= not sign;
-        end if;      
+        end if; 
     end process;
 
 end Behavioral;

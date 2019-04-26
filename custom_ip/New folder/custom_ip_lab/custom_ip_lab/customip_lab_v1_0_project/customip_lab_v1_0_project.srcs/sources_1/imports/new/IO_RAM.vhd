@@ -19,7 +19,7 @@ end IO_RAM;
 
 
 architecture syn of IO_RAM is
-     type ram_type is array (1568 downto 0) of std_logic_vector(15 downto 0);
+     type ram_type is array (54 downto 0) of std_logic_vector(15 downto 0);
      signal ram : ram_type  := (OTHERS => (OTHERS => '0'));
 begin
      process(clk)

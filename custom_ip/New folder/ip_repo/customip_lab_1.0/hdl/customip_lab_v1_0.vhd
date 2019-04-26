@@ -30,6 +30,8 @@ entity customip_lab_v1_0 is
         acc_en_port : out std_logic := '0';
         acc_reset_port : out std_logic := '0';
         AXI_ready_port : out std_logic := '0';
+        output_RAM_dataout_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+		output_RAM_addr_port : out std_logic_vector(10 downto 0) := (OTHERS => '0');
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -363,6 +365,8 @@ weight_ram_inst : weight_RAM
     acc_en_port <= acc_en;
     acc_reset_port <= acc_reset;
     AXI_ready_port <= AXI_ready;
+    output_RAM_addr_port <= output_RAM_addr;
+    output_RAM_dataout_port <= output_RAM_dataout;
     
     datain0 <= X"deadbeef";
     datain1 <= X"deadbead";

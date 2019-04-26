@@ -30,6 +30,9 @@ architecture Behavioral of axi_tb is
             acc_en_port : out std_logic := '0';
             acc_reset_port : out std_logic := '0';
             AXI_ready_port : out std_logic := '0';
+            output_RAM_dataout_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
+            output_RAM_addr_port : out std_logic_vector(10 downto 0) := (OTHERS => '0');
+            
             -- Ports of Axi Slave Bus Interface S00_AXI
             s00_axi_aclk    : in  std_logic;
             s00_axi_aresetn : in  std_logic;
@@ -88,7 +91,9 @@ architecture Behavioral of axi_tb is
     signal acc_en_port :  std_logic := '0';
     signal acc_reset_port :  std_logic := '0';
     signal AXI_ready_port :  std_logic := '0';
-
+    signal output_RAM_dataout_port : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal output_RAM_addr_port : std_logic_vector(10 downto 0) := (OTHERS => '0');
+    
 begin
     -- Instantiate our AXI peripheral
     axi0: component customip_lab_v1_0
@@ -113,6 +118,8 @@ begin
             acc_en_port => acc_en_port,
             acc_reset_port => acc_reset_port ,
             AXI_ready_port => AXI_ready_port,
+            output_RAM_dataout_port => output_RAM_dataout_port,
+            output_RAM_addr_port => output_RAM_addr_port,
             s00_axi_aclk    => s00_axi_aclk,
             s00_axi_aresetn => s00_axi_aresetn,
             s00_axi_awaddr  => s00_axi_awaddr(AXI_ADDR_WIDTH-1 downto 0),
