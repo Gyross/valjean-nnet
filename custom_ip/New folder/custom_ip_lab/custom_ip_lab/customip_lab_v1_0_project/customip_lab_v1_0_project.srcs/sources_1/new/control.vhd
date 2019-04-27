@@ -52,7 +52,8 @@ entity control is
             IO_RAM_addr_out : out STD_LOGIC_VECTOR(10 downto 0);
             load_input_en : out STD_LOGIC;
             acc_reset : out STD_LOGIC;
-            acc_en : out STD_LOGIC);
+            acc_en : out STD_LOGIC;
+            forward_output : out STD_LOGIC);
 end control;
 
 architecture Behavioral of control is
@@ -116,7 +117,7 @@ begin
                    output => i_addr );
     
     weight_counter : counter
-        generic map ( count_limit => 1651 )
+        generic map ( count_limit => 1655 )
         port map (clk => clk,
                   restart => w_count_reset,
                   enable => w_count_enable,
@@ -189,7 +190,10 @@ begin
         
         acc_en <= '0';
         acc_reset <= '1';
-   
+        
+        forward_output <= '0';
+        
+        AXI_ready <= '0';
         
         if (state = Idle) then
             weight_RAM_rst <= '1';
@@ -217,56 +221,70 @@ begin
                 state_next <= Calculate;
                 o_count_in <= 49;
                 o_count_reset <= '1';
+                acc_en <= '1';
+                acc_reset <= '0';
+                w_count_enable <= '1';
+                i_count_enable <= '1';
             end if;
         elsif (state = Calculate) then -- state = Calculate
             acc_en <= '1';
             acc_reset <= '0';
             w_count_enable <= '1';
             i_count_enable <= '1';
-            if (layer = 0 and i_addr = 48) or (layer = 1 and i_addr = 50)
-            or (layer = 2 and i_addr = 52) then
-                b_count_enable <= '1';
-                acc_reset <= '1';
-                i_count_reset <= '1';
-                -- increment bb addr and reset acc and don't enable it
-                if layer = 2 then
-                    output_RAM_w_enable <= '1';
-                    nbo_count_enable <= '1';
-                    if w_addr = 1651 then
-                        state_next <= Idle;
-                    end if;
-                end if;
-            end if;
-            if b_addr = 0 and b_count_enable = '1' then
-                IO_RAM_w_enable <= '1';
-                o_count_enable <= '1';
-                b_count_reset <= '1';
-            end if;
-            if (layer = 0 and w_addr = 1567) then
+            
+            if w_addr < 1567 then
+                i_count_in <= 0;
+            elsif w_addr < 1631 then
                 i_count_in <= 49;
-            end if;
-            if (layer = 1 and w_addr = 1631) then
+            else
                 i_count_in <= 51;
             end if;
-            if (layer = 2 and w_addr = 1651) then
+            
+            if (layer = 0 and i_addr = 48) or (layer = 1 and i_addr = 50)
+            or (layer = 2 and i_addr = 52) then
+                i_count_reset <= '1';
+            end if;
+            if i_addr = 1 or i_addr = 50 or i_addr = 52 then
+                if w_addr > 1 then
+                    b_count_enable <= '1';
+                end if;
+                acc_reset <= '1';
+                -- increment bb addr and reset acc and don't enable it
+                if b_addr = 15 then
+                    IO_RAM_w_enable <= '1';
+                    o_count_enable <= '1';
+                    b_count_reset <= '1';
+                    if i_addr = o_addr then
+                        forward_output <= '1';
+                    end if;
+                end if;
+                if layer = 2 and w_addr > 1633 then
+                    output_RAM_w_enable <= '1';
+                    nbo_count_enable <= '1';
+                end if;
+            end if;
+
+            if (layer = 2 and w_addr = 1653) then
                 state_next <= Done;
                 nbo_count_reset <= '1';
             end if;
+            
         else -- state = Done
             if (nbo_addr < 9) then
                 nbo_count_enable <= '1';
             end if;
         end if;
-        IO_RAM_addr_in <= std_logic_vector(to_unsigned(o_addr, 11));
-        IO_RAM_addr_out <= std_logic_vector(to_unsigned(i_addr, 11));
-        weight_RAM_addr <= std_logic_vector(to_unsigned(w_addr, 11));
-        output_RAM_addr <= std_logic_vector(to_unsigned(nbo_addr, 11));
         
     end process;
     
     layer <= 0 when w_addr < 1568 else
              1 when 1568 <= w_addr and w_addr < 1632  else
              2;
-            
+    
+    IO_RAM_addr_in <= std_logic_vector(to_unsigned(o_addr, 11));
+    IO_RAM_addr_out <= std_logic_vector(to_unsigned(i_addr, 11));
+    weight_RAM_addr <= std_logic_vector(to_unsigned(w_addr, 11)) when w_addr <= 1651 else
+                       std_logic_vector(to_unsigned(0, 11));
+    output_RAM_addr <= std_logic_vector(to_unsigned(nbo_addr, 11));        
 
 end Behavioral;

@@ -181,7 +181,8 @@ architecture arch_imp of customip_lab_v1_0 is
                 IO_RAM_addr_out : out STD_LOGIC_VECTOR(10 downto 0);
                 load_input_en : out STD_LOGIC;
                 acc_reset : out STD_LOGIC;
-                acc_en : out STD_LOGIC);
+                acc_en : out STD_LOGIC;
+                forward_output : out STD_LOGIC);
             end component;
 
 	
@@ -211,6 +212,7 @@ architecture arch_imp of customip_lab_v1_0 is
     signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic := '0';
     
     --Vecmult unit signals
+    signal vecmult_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
     signal vecmult_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
     signal acc_en : std_logic := '0';
     signal acc_reset : std_logic := '0';
@@ -222,6 +224,8 @@ architecture arch_imp of customip_lab_v1_0 is
     signal b_input_init : std_logic_vector(15 downto 0) := (OTHERS => '0');
     
     signal AXI_ready : STD_LOGIC := '0';
+    
+    signal forward_output : STD_LOGIC := '0';
     
 
 begin                   
@@ -264,10 +268,13 @@ customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI
 		dataout2      => dataout2,
 		dataout3      => dataout3
 	);
-	
+
+vecmult_datain <= bb_dataout when forward_output = '1' else
+                  IO_RAM_dataout;
+
 vecmult_inst : vecmult
     port map (
-        input => IO_RAM_dataout,
+        input => vecmult_datain,
         weight => weight_RAM_dataout,
         bits => X"ffff",
         bias => 0,
@@ -289,8 +296,8 @@ IO_RAM_datain <= b_input_init when load_input_en = '1' else
         en => IO_RAM_enable,
         we => IO_RAM_w_enable,
         rst => IO_RAM_rst,
-        i_addr => IO_RAM_addr_out,
-        o_addr => IO_RAM_addr_in,
+        i_addr => IO_RAM_addr_in,
+        o_addr => IO_RAM_addr_out,
         di => IO_RAM_datain,
         do => IO_RAM_dataout
     );
@@ -306,7 +313,8 @@ output_ram_inst : output_RAM
         do => output_RAM_dataout
     );
     
-weight_RAM_datain <= dataout0(31 downto 16);
+weight_RAM_datain <= X"aaaa" when weight_RAM_addr = "00000100101" else
+                     X"1111";
 weight_ram_inst : weight_RAM
  port map(
        clk => s00_axi_aclk,
@@ -348,7 +356,8 @@ weight_ram_inst : weight_RAM
         IO_RAM_addr_out => IO_RAM_addr_out,
         load_input_en => load_input_en,
         acc_reset => acc_reset,
-        acc_en => acc_en
+        acc_en => acc_en,
+        forward_output => forward_output
     );
         
     vecmult_input <= IO_RAM_dataout;

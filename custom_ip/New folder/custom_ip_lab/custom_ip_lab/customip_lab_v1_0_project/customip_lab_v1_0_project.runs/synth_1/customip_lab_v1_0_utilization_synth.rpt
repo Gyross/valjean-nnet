@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
-| Date         : Fri Apr 26 18:24:56 2019
+| Date         : Sat Apr 27 17:21:35 2019
 | Host         : DESKTOP-LSTE79J running 64-bit major release  (build 9200)
 | Command      : report_utilization -file customip_lab_v1_0_utilization_synth.rpt -pb customip_lab_v1_0_utilization_synth.pb
 | Design       : customip_lab_v1_0
@@ -30,11 +30,11 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             |  220 |     0 |     53200 |  0.41 |
-|   LUT as Logic          |  220 |     0 |     53200 |  0.41 |
+| Slice LUTs*             |  228 |     0 |     53200 |  0.43 |
+|   LUT as Logic          |  228 |     0 |     53200 |  0.43 |
 |   LUT as Memory         |    0 |     0 |     17400 |  0.00 |
-| Slice Registers         |   96 |     0 |    106400 |  0.09 |
-|   Register as Flip Flop |   96 |     0 |    106400 |  0.09 |
+| Slice Registers         |   77 |     0 |    106400 |  0.07 |
+|   Register as Flip Flop |   77 |     0 |    106400 |  0.07 |
 |   Register as Latch     |    0 |     0 |    106400 |  0.00 |
 | F7 Muxes                |    0 |     0 |     26600 |  0.00 |
 | F8 Muxes                |    0 |     0 |     13300 |  0.00 |
@@ -57,7 +57,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 2     |          Yes |         Set |            - |
-| 94    |          Yes |       Reset |            - |
+| 75    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -92,7 +92,7 @@ Table of Contents
 +-----------------------------+------+-------+-----------+--------+
 |          Site Type          | Used | Fixed | Available |  Util% |
 +-----------------------------+------+-------+-----------+--------+
-| Bonded IOB                  |  234 |     0 |       200 | 117.00 |
+| Bonded IOB                  |  214 |     0 |       200 | 107.00 |
 | Bonded IPADs                |    0 |     0 |         2 |   0.00 |
 | Bonded IOPADs               |    0 |     0 |       130 |   0.00 |
 | PHY_CONTROL                 |    0 |     0 |         4 |   0.00 |
@@ -149,15 +149,15 @@ Table of Contents
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | OBUF     |  205 |                  IO |
-| LUT6     |   99 |                 LUT |
-| FDRE     |   94 |        Flop & Latch |
-| LUT4     |   59 |                 LUT |
-| LUT3     |   44 |                 LUT |
-| LUT5     |   30 |                 LUT |
-| IBUF     |   29 |                  IO |
-| CARRY4   |   25 |          CarryLogic |
-| LUT2     |   21 |                 LUT |
-| LUT1     |    7 |                 LUT |
+| LUT6     |   90 |                 LUT |
+| LUT4     |   77 |                 LUT |
+| FDRE     |   75 |        Flop & Latch |
+| LUT5     |   57 |                 LUT |
+| LUT3     |   47 |                 LUT |
+| CARRY4   |   24 |          CarryLogic |
+| LUT2     |   16 |                 LUT |
+| IBUF     |    9 |                  IO |
+| LUT1     |    6 |                 LUT |
 | RAMB36E1 |    2 |        Block Memory |
 | FDSE     |    2 |        Flop & Latch |
 | RAMB18E1 |    1 |        Block Memory |
