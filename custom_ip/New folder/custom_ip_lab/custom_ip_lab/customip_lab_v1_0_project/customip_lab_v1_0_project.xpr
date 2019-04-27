@@ -32,7 +32,7 @@
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="zed"/>
     <Option Name="DSANumComputeUnits" Val="16"/>
-    <Option Name="WTXSimLaunchSim" Val="52"/>
+    <Option Name="WTXSimLaunchSim" Val="54"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -175,6 +175,12 @@
       </File>
       <File Path="$PPRDIR/axi_tb_behav3.wcfg">
         <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../../../axi_tb_behav4.wcfg">
+        <FileInfo>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -189,6 +195,7 @@
         <Option Name="XSimWcfgFile" Val="$PPRDIR/axi_tb_behav1.wcfg"/>
         <Option Name="XSimWcfgFile" Val="$PPRDIR/axi_tb_behav2.wcfg"/>
         <Option Name="XSimWcfgFile" Val="$PPRDIR/axi_tb_behav3.wcfg"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/../../../../../axi_tb_behav4.wcfg"/>
         <Option Name="xsim.simulate.runtime" Val="33540 ns"/>
         <Option Name="xsim.simulate.log_all_signals" Val="true"/>
       </Config>

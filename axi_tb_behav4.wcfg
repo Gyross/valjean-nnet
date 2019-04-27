@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="axi_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="33298051000fs"></ZoomStartTime>
+      <ZoomEndTime time="33880051004fs"></ZoomEndTime>
+      <Cursor1Time time="33345000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="242"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="92" />
+   <wvobject fp_name="/axi_tb/s00_axi_aclk" type="logic">
+      <obj_property name="ElementShortName">s00_axi_aclk</obj_property>
+      <obj_property name="ObjectShortName">s00_axi_aclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/S_AXI_RVALID" type="logic">
+      <obj_property name="ElementShortName">S_AXI_RVALID</obj_property>
+      <obj_property name="ObjectShortName">S_AXI_RVALID</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/S_AXI_RREADY" type="logic">
+      <obj_property name="ElementShortName">S_AXI_RREADY</obj_property>
+      <obj_property name="ObjectShortName">S_AXI_RREADY</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain0" type="array">
+      <obj_property name="ElementShortName">datain0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain1" type="array">
+      <obj_property name="ElementShortName">datain1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain2" type="array">
+      <obj_property name="ElementShortName">datain2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain3" type="array">
+      <obj_property name="ElementShortName">datain3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">datain3[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout0" type="array">
+      <obj_property name="ElementShortName">dataout0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout1" type="array">
+      <obj_property name="ElementShortName">dataout1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout2" type="array">
+      <obj_property name="ElementShortName">dataout2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout3" type="array">
+      <obj_property name="ElementShortName">dataout3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout3[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1162">
+      <obj_property name="label">VECMULT:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/input" type="array">
+      <obj_property name="ElementShortName">input[15:0]</obj_property>
+      <obj_property name="ObjectShortName">input[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/weight" type="array">
+      <obj_property name="ElementShortName">weight[15:0]</obj_property>
+      <obj_property name="ObjectShortName">weight[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/enable" type="logic">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/output" type="array">
+      <obj_property name="ElementShortName">output[15:0]</obj_property>
+      <obj_property name="ObjectShortName">output[15:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/xnor_output" type="other">
+      <obj_property name="ElementShortName">xnor_output</obj_property>
+      <obj_property name="ObjectShortName">xnor_output</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/vecmult_inst/acc_output" type="other">
+      <obj_property name="ElementShortName">acc_output</obj_property>
+      <obj_property name="ObjectShortName">acc_output</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1097">
+      <obj_property name="label">IO_RAM:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/i_addr" type="array">
+      <obj_property name="ElementShortName">i_addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">i_addr[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/o_addr" type="array">
+      <obj_property name="ElementShortName">o_addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">o_addr[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/di" type="array">
+      <obj_property name="ElementShortName">di[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/do" type="array">
+      <obj_property name="ElementShortName">do[15:0]</obj_property>
+      <obj_property name="ObjectShortName">do[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/ram" type="array">
+      <obj_property name="ElementShortName">ram[54:0][15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram[54:0][15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/en" type="logic">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/we" type="logic">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/io_ram_inst/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1098">
+      <obj_property name="label">OUT_RAM:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/en" type="logic">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/we" type="logic">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/addr" type="array">
+      <obj_property name="ElementShortName">addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/di" type="array">
+      <obj_property name="ElementShortName">di[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di[15:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/do" type="array">
+      <obj_property name="ElementShortName">do[15:0]</obj_property>
+      <obj_property name="ObjectShortName">do[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/output_ram_inst/ram" type="array">
+      <obj_property name="ElementShortName">ram[1568:0][15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram[1568:0][15:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1106">
+      <obj_property name="label">weight_RAM:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/en" type="logic">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/we" type="logic">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr" type="array">
+      <obj_property name="ElementShortName">addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/di" type="array">
+      <obj_property name="ElementShortName">di[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/do" type="array">
+      <obj_property name="ElementShortName">do[15:0]</obj_property>
+      <obj_property name="ObjectShortName">do[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/ram" type="array">
+      <obj_property name="ElementShortName">ram[1652:0][15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram[1652:0][15:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1114">
+      <obj_property name="label">Bin_buffer:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/binarised_buffer_inst/addr" type="array">
+      <obj_property name="ElementShortName">addr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/binarised_buffer_inst/sign" type="logic">
+      <obj_property name="ElementShortName">sign</obj_property>
+      <obj_property name="ObjectShortName">sign</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/binarised_buffer_inst/dataout" type="array">
+      <obj_property name="ElementShortName">dataout[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dataout[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider1118">
+      <obj_property name="label">Control:</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/AXI_valid" type="logic">
+      <obj_property name="ElementShortName">AXI_valid</obj_property>
+      <obj_property name="ObjectShortName">AXI_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/AXI_ready" type="logic">
+      <obj_property name="ElementShortName">AXI_ready</obj_property>
+      <obj_property name="ObjectShortName">AXI_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_enable" type="logic">
+      <obj_property name="ElementShortName">weight_RAM_enable</obj_property>
+      <obj_property name="ObjectShortName">weight_RAM_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_w_enable" type="logic">
+      <obj_property name="ElementShortName">weight_RAM_w_enable</obj_property>
+      <obj_property name="ObjectShortName">weight_RAM_w_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_rst" type="logic">
+      <obj_property name="ElementShortName">weight_RAM_rst</obj_property>
+      <obj_property name="ObjectShortName">weight_RAM_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_addr" type="array">
+      <obj_property name="ElementShortName">weight_RAM_addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">weight_RAM_addr[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/bb_addr" type="array">
+      <obj_property name="ElementShortName">bb_addr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">bb_addr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/output_RAM_enable" type="logic">
+      <obj_property name="ElementShortName">output_RAM_enable</obj_property>
+      <obj_property name="ObjectShortName">output_RAM_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/output_RAM_w_enable" type="logic">
+      <obj_property name="ElementShortName">output_RAM_w_enable</obj_property>
+      <obj_property name="ObjectShortName">output_RAM_w_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/output_RAM_rst" type="logic">
+      <obj_property name="ElementShortName">output_RAM_rst</obj_property>
+      <obj_property name="ObjectShortName">output_RAM_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/output_RAM_addr" type="array">
+      <obj_property name="ElementShortName">output_RAM_addr[10:0]</obj_property>
+      <obj_property name="ObjectShortName">output_RAM_addr[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/IO_RAM_enable" type="logic">
+      <obj_property name="ElementShortName">IO_RAM_enable</obj_property>
+      <obj_property name="ObjectShortName">IO_RAM_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/IO_RAM_w_enable" type="logic">
+      <obj_property name="ElementShortName">IO_RAM_w_enable</obj_property>
+      <obj_property name="ObjectShortName">IO_RAM_w_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/IO_RAM_rst" type="logic">
+      <obj_property name="ElementShortName">IO_RAM_rst</obj_property>
+      <obj_property name="ObjectShortName">IO_RAM_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/IO_RAM_addr_in" type="array">
+      <obj_property name="ElementShortName">IO_RAM_addr_in[10:0]</obj_property>
+      <obj_property name="ObjectShortName">IO_RAM_addr_in[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/IO_RAM_addr_out" type="array">
+      <obj_property name="ElementShortName">IO_RAM_addr_out[10:0]</obj_property>
+      <obj_property name="ObjectShortName">IO_RAM_addr_out[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/load_input_en" type="logic">
+      <obj_property name="ElementShortName">load_input_en</obj_property>
+      <obj_property name="ObjectShortName">load_input_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/acc_reset" type="logic">
+      <obj_property name="ElementShortName">acc_reset</obj_property>
+      <obj_property name="ObjectShortName">acc_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/acc_en" type="logic">
+      <obj_property name="ElementShortName">acc_en</obj_property>
+      <obj_property name="ObjectShortName">acc_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/state_next" type="other">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/w_count_enable" type="logic">
+      <obj_property name="ElementShortName">w_count_enable</obj_property>
+      <obj_property name="ObjectShortName">w_count_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/w_count_reset" type="logic">
+      <obj_property name="ElementShortName">w_count_reset</obj_property>
+      <obj_property name="ObjectShortName">w_count_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/w_addr" type="other">
+      <obj_property name="ElementShortName">w_addr</obj_property>
+      <obj_property name="ObjectShortName">w_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/w_count_in" type="other">
+      <obj_property name="ElementShortName">w_count_in</obj_property>
+      <obj_property name="ObjectShortName">w_count_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/i_count_enable" type="logic">
+      <obj_property name="ElementShortName">i_count_enable</obj_property>
+      <obj_property name="ObjectShortName">i_count_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/i_count_reset" type="logic">
+      <obj_property name="ElementShortName">i_count_reset</obj_property>
+      <obj_property name="ObjectShortName">i_count_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/i_addr" type="other">
+      <obj_property name="ElementShortName">i_addr</obj_property>
+      <obj_property name="ObjectShortName">i_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/i_count_in" type="other">
+      <obj_property name="ElementShortName">i_count_in</obj_property>
+      <obj_property name="ObjectShortName">i_count_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/o_count_enable" type="logic">
+      <obj_property name="ElementShortName">o_count_enable</obj_property>
+      <obj_property name="ObjectShortName">o_count_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/o_count_reset" type="logic">
+      <obj_property name="ElementShortName">o_count_reset</obj_property>
+      <obj_property name="ObjectShortName">o_count_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/o_addr" type="other">
+      <obj_property name="ElementShortName">o_addr</obj_property>
+      <obj_property name="ObjectShortName">o_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/o_count_in" type="other">
+      <obj_property name="ElementShortName">o_count_in</obj_property>
+      <obj_property name="ObjectShortName">o_count_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/nbo_count_enable" type="logic">
+      <obj_property name="ElementShortName">nbo_count_enable</obj_property>
+      <obj_property name="ObjectShortName">nbo_count_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/nbo_count_reset" type="logic">
+      <obj_property name="ElementShortName">nbo_count_reset</obj_property>
+      <obj_property name="ObjectShortName">nbo_count_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/nbo_addr" type="other">
+      <obj_property name="ElementShortName">nbo_addr</obj_property>
+      <obj_property name="ObjectShortName">nbo_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/nbo_count_in" type="other">
+      <obj_property name="ElementShortName">nbo_count_in</obj_property>
+      <obj_property name="ObjectShortName">nbo_count_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/b_count_enable" type="logic">
+      <obj_property name="ElementShortName">b_count_enable</obj_property>
+      <obj_property name="ObjectShortName">b_count_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/b_count_reset" type="logic">
+      <obj_property name="ElementShortName">b_count_reset</obj_property>
+      <obj_property name="ObjectShortName">b_count_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/b_addr" type="other">
+      <obj_property name="ElementShortName">b_addr</obj_property>
+      <obj_property name="ObjectShortName">b_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/b_count_in" type="other">
+      <obj_property name="ElementShortName">b_count_in</obj_property>
+      <obj_property name="ObjectShortName">b_count_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/control_module/layer" type="other">
+      <obj_property name="ElementShortName">layer</obj_property>
+      <obj_property name="ObjectShortName">layer</obj_property>
+   </wvobject>
+</wave_config>

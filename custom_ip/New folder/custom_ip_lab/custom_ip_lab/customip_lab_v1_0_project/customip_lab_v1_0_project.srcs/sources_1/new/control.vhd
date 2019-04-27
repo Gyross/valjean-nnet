@@ -85,6 +85,7 @@ signal b_count_enable : STD_LOGIC := '0';
 signal b_count_reset : STD_LOGIC := '0';
 signal b_addr : natural range 0 to 15 := 0;
 signal b_count_in : natural range 0 to 15 := 0;
+signal forward_output_delay : STD_LOGIC := '0';
 
 signal layer : natural range 0 to 2 := 0;
 
@@ -103,8 +104,14 @@ begin
     begin
         if (reset = '1') then -- go to state zero if reset
             state <= Idle;
+            forward_output <= '0';
         elsif (rising_edge(clk)) then -- otherwise update the states
             state <= state_next;
+            if forward_output_delay = '1' then
+                forward_output <= '1';
+            else
+                forward_output <= '0';
+            end if;
         end if; 
     end process;
     
@@ -191,7 +198,7 @@ begin
         acc_en <= '0';
         acc_reset <= '1';
         
-        forward_output <= '0';
+        forward_output_delay <= '0';
         
         AXI_ready <= '0';
         
@@ -255,7 +262,7 @@ begin
                     o_count_enable <= '1';
                     b_count_reset <= '1';
                     if i_addr = o_addr then
-                        forward_output <= '1';
+                        forward_output_delay <= '1';
                     end if;
                 end if;
                 if layer = 2 and w_addr > 1633 then
