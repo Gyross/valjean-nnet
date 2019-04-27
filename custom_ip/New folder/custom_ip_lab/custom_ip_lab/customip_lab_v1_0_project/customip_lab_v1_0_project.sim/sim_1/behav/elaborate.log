@@ -22,7 +22,7 @@ Compiling architecture syn of entity xil_defaultlib.output_RAM [output_ram_defau
 Compiling architecture syn of entity xil_defaultlib.weight_RAM [weight_ram_default]
 Compiling architecture behavioral of entity xil_defaultlib.binarised_buffer [binarised_buffer_default]
 Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=54)\]
-Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=1655)\]
+Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=1653)\]
 Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=9)\]
 Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=15)\]
 Compiling architecture behavioral of entity xil_defaultlib.control [control_default]

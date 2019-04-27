@@ -32,10 +32,13 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity binarised_buffer is
+    generic(
+        buffer_size : integer := 16;
+        buffer_addr_size : integer := 4);
     Port ( clk : in STD_LOGIC;
-           addr : in std_logic_vector(3 downto 0);
-           sign : in std_logic;
-           dataout : out STD_LOGIC_vector(15 downto 0) := (OTHERS => '0'));
+       addr : in std_logic_vector(buffer_addr_size-1 downto 0);
+       sign : in std_logic;
+       dataout : out STD_LOGIC_vector(buffer_size-1 downto 0));
 end binarised_buffer;
 
 architecture Behavioral of binarised_buffer is

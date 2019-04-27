@@ -5,7 +5,16 @@ use ieee.numeric_std.all;
 entity customip_lab_v1_0 is
 	generic (
 		-- Users to add parameters here
-
+        bit_width : integer := 16;
+        output_width : integer := 16;
+        io_ram_size : integer := 55;
+        weight_ram_size : integer := 1652;
+        output_ram_size : integer := 10;
+        io_addr_size : integer := 6;
+        output_addr_size : integer := 4;
+        buffer_addr_size : integer := 4;
+        weight_addr_size : integer := 11;
+        buffer_size : integer := 16;
 		-- User parameters ends
 		-- Do not modify the parameters beyond this line
 
@@ -16,22 +25,7 @@ entity customip_lab_v1_0 is
 	);
 	port (
 		-- Users to add ports here
-        vecmult_input : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        vecmult_weight : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        vecmult_output : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        input_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
-        weight_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
-        buffer_out : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        buffer_addr : out std_logic_vector(3 downto 0) := (OTHERS => '0');
-        output_addr : out std_logic_vector(10 downto 0) := (OTHERS => '0');
-        output_written : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        load_input_en_port : out std_logic := '0';
-        weight_RAM_datain_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-        acc_en_port : out std_logic := '0';
-        acc_reset_port : out std_logic := '0';
-        AXI_ready_port : out std_logic := '0';
-        output_RAM_dataout_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-		output_RAM_addr_port : out std_logic_vector(10 downto 0) := (OTHERS => '0');
+
 		-- User ports ends
 		-- Do not modify the ports beyond this line
 
@@ -116,50 +110,76 @@ architecture arch_imp of customip_lab_v1_0 is
     end component;
     
     component weight_RAM is
+        generic(
+            weight_ram_size : integer := 1652;
+            weight_addr_size : integer := 11;
+            bit_width : integer := 16);
         port(
-        clk : in std_logic;
-        en : in std_logic;
-        we : in std_logic;
-        rst : in std_logic;
-        addr : in std_logic_vector(10 downto 0);
-        di : in std_logic_vector(15 downto 0);
-        do : out std_logic_vector(15 downto 0)
-        );
-    end component;
-    
-    component IO_RAM is
-        port(
-        clk : in std_logic;
-        en : in std_logic;
-        we : in std_logic;
-        rst : in std_logic;
-        i_addr : in std_logic_vector(10 downto 0);
-        o_addr : in std_logic_vector(10 downto 0);
-        di : in std_logic_vector(15 downto 0);
-        do : out std_logic_vector(15 downto 0)
-        );
-    end component;
-    
-    component output_RAM is
-            port(
             clk : in std_logic;
             en : in std_logic;
             we : in std_logic;
             rst : in std_logic;
-            addr : in std_logic_vector(10 downto 0);
-            di : in std_logic_vector(15 downto 0);
-            do : out std_logic_vector(15 downto 0)
+            addr : in std_logic_vector(weight_addr_size-1 downto 0);
+            di : in std_logic_vector(bit_width-1 downto 0);
+            do : out std_logic_vector(bit_width-1 downto 0)
+        );
+    end component;
+    
+    component IO_RAM is
+        generic(
+            io_ram_size : integer := 55;
+            io_addr_size : integer := 6;
+            bit_width : integer := 16);
+        port(
+            clk : in std_logic;
+            en : in std_logic;
+            we : in std_logic;
+            rst : in std_logic;
+            i_addr : in std_logic_vector(io_addr_size-1 downto 0);
+            o_addr : in std_logic_vector(io_addr_size-1 downto 0);
+            di : in std_logic_vector(bit_width-1 downto 0);
+            do : out std_logic_vector(bit_width-1 downto 0)
+        );
+    end component;
+    
+    component output_RAM is
+            generic(
+                output_ram_size : integer := 10;
+                output_addr_size : integer := 4;
+                output_width : integer := 16);
+            port(
+                clk : in std_logic;
+                en : in std_logic;
+                we : in std_logic;
+                rst : in std_logic;
+                addr : in std_logic_vector(output_addr_size-1 downto 0);
+                di : in std_logic_vector(output_width-1 downto 0);
+                do : out std_logic_vector(output_width-1 downto 0)
             );
         end component;
         
     component binarised_buffer is
+            generic(
+                buffer_size : integer := 16;
+                buffer_addr_size : integer := 4);
             Port ( clk : in STD_LOGIC;
-               addr : in std_logic_vector(3 downto 0);
+               addr : in std_logic_vector(buffer_addr_size-1 downto 0);
                sign : in std_logic;
-               dataout : out STD_LOGIC_vector(15 downto 0));
+               dataout : out STD_LOGIC_vector(buffer_size-1 downto 0));
             end component;
     
     component control is
+            generic (
+                bit_width : integer := 16;
+                output_width : integer := 16;
+                io_ram_size : integer := 55;
+                weight_ram_size : integer := 1652;
+                output_ram_size : integer := 10;
+                io_addr_size : integer := 6;
+                output_addr_size : integer := 4;
+                buffer_addr_size : integer := 4;
+                weight_addr_size : integer := 11;
+                buffer_size : integer := 16);
             port ( 
                 clk : in STD_LOGIC;
                 reset : in STD_LOGIC;
@@ -168,17 +188,17 @@ architecture arch_imp of customip_lab_v1_0 is
                 weight_RAM_enable : out STD_LOGIC;
                 weight_RAM_w_enable : out STD_LOGIC;
                 weight_RAM_rst : out STD_LOGIC;
-                weight_RAM_addr : out STD_LOGIC_VECTOR(10 downto 0);
-                bb_addr : out STD_LOGIC_VECTOR(3 downto 0);
+                weight_RAM_addr : out STD_LOGIC_VECTOR(weight_addr_size-1 downto 0);
+                bb_addr : out STD_LOGIC_VECTOR(buffer_addr_size-1 downto 0);
                 output_RAM_enable : out STD_LOGIC;
                 output_RAM_w_enable : out STD_LOGIC;
                 output_RAM_rst : out STD_LOGIC;
-                output_RAM_addr : out STD_LOGIC_VECTOR(10 downto 0);
+                output_RAM_addr : out STD_LOGIC_VECTOR(output_addr_size-1 downto 0);
                 IO_RAM_enable : out STD_LOGIC;
                 IO_RAM_w_enable : out STD_LOGIC;
                 IO_RAM_rst : out STD_LOGIC;
-                IO_RAM_addr_in : out STD_LOGIC_VECTOR(10 downto 0);
-                IO_RAM_addr_out : out STD_LOGIC_VECTOR(10 downto 0);
+                IO_RAM_addr_in : out STD_LOGIC_VECTOR(io_addr_size-1 downto 0);
+                IO_RAM_addr_out : out STD_LOGIC_VECTOR(io_addr_size-1 downto 0);
                 load_input_en : out STD_LOGIC;
                 acc_reset : out STD_LOGIC;
                 acc_en : out STD_LOGIC;
@@ -190,38 +210,38 @@ architecture arch_imp of customip_lab_v1_0 is
     signal dataout0, dataout1, dataout2, dataout3   : std_logic_vector(31 downto 0) := (OTHERS => '0');
     
     --Signals for data input multiplexer for IO_RAM
-    signal bb_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal IO_RAM_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal bb_dataout : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
+    signal IO_RAM_datain : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
     signal load_input_en : std_logic := '0';
     
     --IO_RAM signals
-    signal IO_RAM_addr_in : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal IO_RAM_addr_out : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal IO_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal IO_RAM_addr_in : std_logic_vector(io_addr_size-1 downto 0) := (OTHERS => '0');
+    signal IO_RAM_addr_out : std_logic_vector(io_addr_size-1 downto 0) := (OTHERS => '0');
+    signal IO_RAM_dataout : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
     signal IO_RAM_enable, IO_RAM_w_enable, IO_RAM_rst :std_logic := '0';
     
     --Weight Ram Signals
-    signal weight_RAM_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal weight_RAM_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal weight_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal weight_RAM_addr : std_logic_vector(weight_addr_size-1 downto 0) := (OTHERS => '0');
+    signal weight_RAM_datain : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
+    signal weight_RAM_dataout : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
     signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic := '0';
     
     --Output Ram Signals
-    signal output_RAM_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal output_RAM_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal output_RAM_addr : std_logic_vector(output_addr_size-1 downto 0) := (OTHERS => '0');
+    signal output_RAM_dataout : std_logic_vector(output_width-1 downto 0) := (OTHERS => '0');
     signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic := '0';
     
     --Vecmult unit signals
-    signal vecmult_datain : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal vecmult_dataout : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal vecmult_datain : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
+    signal vecmult_dataout : std_logic_vector(output_width-1 downto 0) := (OTHERS => '0');
     signal acc_en : std_logic := '0';
     signal acc_reset : std_logic := '0';
     
     --Binarised buffer signals
-    signal bb_addr : std_logic_vector(3 downto 0) := (OTHERS => '0');
+    signal bb_addr : std_logic_vector(buffer_addr_size-1 downto 0) := (OTHERS => '0');
     
     --Data Load signals
-    signal b_input_init : std_logic_vector(15 downto 0) := (OTHERS => '0');
+    signal b_input_init : std_logic_vector(buffer_size-1 downto 0) := (OTHERS => '0');
     
     signal AXI_ready : STD_LOGIC := '0';
     
@@ -273,10 +293,14 @@ vecmult_datain <= bb_dataout when forward_output = '1' else
                   IO_RAM_dataout;
 
 vecmult_inst : vecmult
+    generic map (
+        bit_width => bit_width,
+        output_width => output_width
+    )
     port map (
         input => vecmult_datain,
         weight => weight_RAM_dataout,
-        bits => X"ffff",
+        bits => (OTHERS => '1'),
         bias => 0,
         clk => s00_axi_aclk,
         reset =>  acc_reset,
@@ -284,13 +308,18 @@ vecmult_inst : vecmult
         output => vecmult_dataout
     );
      
-b_input_init <= X"aaaa";
+b_input_init <= (OTHERS => '1');
 
 --Multiplexer for the data input of the IO RAM
 IO_RAM_datain <= b_input_init when load_input_en = '1' else
                 bb_dataout when load_input_en = '0';
                      
  io_ram_inst : IO_RAM
+    generic map (
+        io_ram_size => io_ram_size,
+        io_addr_size => io_addr_size,
+        bit_width => bit_width
+    )
     port map (
         clk => s00_axi_aclk,
         en => IO_RAM_enable,
@@ -303,6 +332,11 @@ IO_RAM_datain <= b_input_init when load_input_en = '1' else
     );
     
 output_ram_inst : output_RAM
+    generic map (
+        output_ram_size => output_ram_size,
+        output_addr_size => output_addr_size,
+        output_width => output_width
+    )
     port map (
         clk => s00_axi_aclk,
         en => output_RAM_enable,
@@ -313,10 +347,16 @@ output_ram_inst : output_RAM
         do => output_RAM_dataout
     );
     
-weight_RAM_datain <= X"aaaa" when weight_RAM_addr = "00000100101" else
-                     X"1111";
+weight_RAM_datain <= (OTHERS => '0') when weight_RAM_addr = std_logic_vector(to_unsigned(25, weight_addr_size)) else
+                     (OTHERS => '1');
+
 weight_ram_inst : weight_RAM
- port map(
+    generic map (
+        weight_ram_size => weight_ram_size,
+        weight_addr_size => weight_addr_size,
+        bit_width => bit_width
+    )
+    port map(
        clk => s00_axi_aclk,
        en => weight_RAM_enable,
        we => weight_RAM_w_enable,
@@ -327,6 +367,10 @@ weight_ram_inst : weight_RAM
   );
   
   binarised_buffer_inst : binarised_buffer
+    generic map (
+        buffer_size => buffer_size,
+        buffer_addr_size => buffer_addr_size
+    )
     port map(
         clk => s00_axi_aclk,
         addr => bb_addr,
@@ -335,6 +379,18 @@ weight_ram_inst : weight_RAM
     );
     
   control_module : control
+    generic map (
+        bit_width => bit_width,
+        output_width => output_width,
+        io_ram_size => io_ram_size,
+        weight_ram_size => weight_ram_size,
+        output_ram_size => output_ram_size,
+        io_addr_size => io_addr_size,
+        output_addr_size => output_addr_size,
+        buffer_addr_size => buffer_addr_size,
+        weight_addr_size => weight_addr_size,
+        buffer_size => buffer_size
+    )
     port map(
         clk => s00_axi_aclk,
         reset => '0',
@@ -359,23 +415,7 @@ weight_ram_inst : weight_RAM
         acc_en => acc_en,
         forward_output => forward_output
     );
-        
-    vecmult_input <= IO_RAM_dataout;
-    vecmult_weight <= weight_RAM_dataout;
-    vecmult_output <= vecmult_dataout;
-    input_addr <= IO_RAM_addr_out;
-    weight_addr <= weight_RAM_addr;
-    buffer_out <= bb_dataout;
-    buffer_addr <= bb_addr;
-    output_addr <= IO_RAM_addr_in;
-    output_written <= IO_RAM_datain;
-    load_input_en_port <= load_input_en;
-    weight_RAM_datain_port <= weight_RAM_datain;
-    acc_en_port <= acc_en;
-    acc_reset_port <= acc_reset;
-    AXI_ready_port <= AXI_ready;
-    output_RAM_addr_port <= output_RAM_addr;
-    output_RAM_dataout_port <= output_RAM_dataout;
+
     
     datain0 <= X"deadbeef";
     datain1 <= X"deadbead";

@@ -5,7 +5,6 @@ use ieee.numeric_std.all;
 entity customip_lab_v1_0_S00_AXI is
 	generic (
 		-- Users to add parameters here
-
 		-- User parameters ends
 		-- Do not modify the parameters beyond this line
 

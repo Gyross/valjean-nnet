@@ -11,27 +11,21 @@ architecture Behavioral of axi_tb is
     constant AXI_ADDR_WIDTH : integer := 4; 
     component customip_lab_v1_0 is
         generic (
+            bit_width : integer := 16;
+            output_width : integer := 16;
+            io_ram_size : integer := 55;
+            weight_ram_size : integer := 1652;
+            output_ram_size : integer := 10;
+            io_addr_size : integer := 6;
+            output_addr_size : integer := 4;
+            buffer_addr_size : integer := 4;
+            weight_addr_size : integer := 11;
+            buffer_size : integer := 16;
             -- Parameters of Axi Slave Bus Interface S00_AXI
             C_S00_AXI_DATA_WIDTH : integer    := 32;
             C_S00_AXI_ADDR_WIDTH : integer    := 4
         );
         port (
-            vecmult_input : out std_logic_vector(15 downto 0);
-            vecmult_weight : out std_logic_vector(15 downto 0);
-            vecmult_output : out std_logic_vector(15 downto 0);
-            input_addr : out std_logic_vector(10 downto 0);
-            weight_addr : out std_logic_vector(10 downto 0);
-            buffer_out : out std_logic_vector(15 downto 0);
-            buffer_addr : out std_logic_vector(3 downto 0);
-            output_addr : out std_logic_vector(10 downto 0);
-            output_written : out std_logic_vector(15 downto 0);
-            load_input_en_port : out std_logic := '0';
-            weight_RAM_datain_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-            acc_en_port : out std_logic := '0';
-            acc_reset_port : out std_logic := '0';
-            AXI_ready_port : out std_logic := '0';
-            output_RAM_dataout_port : out std_logic_vector(15 downto 0) := (OTHERS => '0');
-            output_RAM_addr_port : out std_logic_vector(10 downto 0) := (OTHERS => '0');
             
             -- Ports of Axi Slave Bus Interface S00_AXI
             s00_axi_aclk    : in  std_logic;
@@ -77,23 +71,6 @@ architecture Behavioral of axi_tb is
     signal s00_axi_rvalid  : std_logic;
     signal s00_axi_rready  : std_logic;
     
-    signal vecmult_input : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal vecmult_weight : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal vecmult_output :  std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal input_addr :  std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal weight_addr :  std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal buffer_out :  std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal buffer_addr :  std_logic_vector(3 downto 0) := (OTHERS => '0');
-    signal output_addr : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    signal output_written :  std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal load_input_en_port :  std_logic := '0';
-    signal weight_RAM_datain_port :  std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal acc_en_port :  std_logic := '0';
-    signal acc_reset_port :  std_logic := '0';
-    signal AXI_ready_port :  std_logic := '0';
-    signal output_RAM_dataout_port : std_logic_vector(15 downto 0) := (OTHERS => '0');
-    signal output_RAM_addr_port : std_logic_vector(10 downto 0) := (OTHERS => '0');
-    
 begin
     -- Instantiate our AXI peripheral
     axi0: component customip_lab_v1_0
@@ -104,22 +81,6 @@ begin
         )
 
         port map (
-            vecmult_input => vecmult_input,
-            vecmult_weight => vecmult_weight,
-            vecmult_output => vecmult_output ,
-            input_addr => input_addr,
-            weight_addr => weight_addr,
-            buffer_out => buffer_out ,
-            buffer_addr => buffer_addr ,
-            output_addr => output_addr ,
-            output_written => output_written,
-            load_input_en_port => load_input_en_port,
-            weight_RAM_datain_port => weight_RAM_datain_port,
-            acc_en_port => acc_en_port,
-            acc_reset_port => acc_reset_port ,
-            AXI_ready_port => AXI_ready_port,
-            output_RAM_dataout_port => output_RAM_dataout_port,
-            output_RAM_addr_port => output_RAM_addr_port,
             s00_axi_aclk    => s00_axi_aclk,
             s00_axi_aresetn => s00_axi_aresetn,
             s00_axi_awaddr  => s00_axi_awaddr(AXI_ADDR_WIDTH-1 downto 0),

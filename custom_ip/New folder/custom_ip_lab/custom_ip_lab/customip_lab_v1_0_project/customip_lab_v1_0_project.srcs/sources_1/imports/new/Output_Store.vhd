@@ -5,20 +5,24 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
 entity output_RAM is
+    generic(
+        output_ram_size : integer := 10;
+        output_addr_size : integer := 4;
+        output_width : integer := 16);
     port(
-    clk : in std_logic;
-    en : in std_logic;
-    we : in std_logic;
-    rst : in std_logic;
-    addr : in std_logic_vector(10 downto 0);
-    di : in std_logic_vector(15 downto 0);
-    do : out std_logic_vector(15 downto 0)
+        clk : in std_logic;
+        en : in std_logic;
+        we : in std_logic;
+        rst : in std_logic;
+        addr : in std_logic_vector(output_addr_size-1 downto 0);
+        di : in std_logic_vector(output_width-1 downto 0);
+        do : out std_logic_vector(output_width-1 downto 0)
     );
 end output_RAM;
 
 
 architecture syn of output_RAM is
-     type ram_type is array (1568 downto 0) of std_logic_vector(15 downto 0);
+     type ram_type is array (output_ram_size-1 downto 0) of std_logic_vector(output_width-1 downto 0);
      signal ram : ram_type;
 begin
     process(clk)
