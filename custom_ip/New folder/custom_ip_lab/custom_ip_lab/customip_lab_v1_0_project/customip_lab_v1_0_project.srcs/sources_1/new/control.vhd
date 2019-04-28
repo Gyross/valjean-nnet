@@ -25,25 +25,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-
+use work.data_types.ALL;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
 entity control is
-    generic (
-        bit_width : integer := 16;
-        output_width : integer := 16;
-        io_ram_size : integer := 55;
-        weight_ram_size : integer := 1652;
-        output_ram_size : integer := 10;
-        io_addr_size : integer := 6;
-        output_addr_size : integer := 4;
-        buffer_addr_size : integer := 4;
-        weight_addr_size : integer := 11;
-        buffer_size : integer := 16
-    );
+
     port ( 
         clk : in STD_LOGIC;
         reset : in STD_LOGIC;
@@ -52,7 +41,7 @@ entity control is
         weight_RAM_enable : out STD_LOGIC;
         weight_RAM_w_enable : out STD_LOGIC;
         weight_RAM_rst : out STD_LOGIC;
-        weight_RAM_addr : out STD_LOGIC_VECTOR(weight_addr_size-1 downto 0);
+        weight_RAM_addr : out w_addr_array;
         bb_addr : out STD_LOGIC_VECTOR(buffer_addr_size-1 downto 0);
         output_RAM_enable : out STD_LOGIC;
         output_RAM_w_enable : out STD_LOGIC;
@@ -73,14 +62,6 @@ architecture Behavioral of control is
 
 TYPE State_type IS (Idle, Load_weights, Load_input, Calculate, Done);  -- Define the states
 	SIGNAL state, state_next : State_Type;
-
-TYPE LAYER_INFO is ARRAY(0 to 3) of
-    integer range 0 to 1700;
-constant LAYER_SIZES : LAYER_INFO := (784, 32, 32, 10);
-constant LAYER_LAST_IDX : LAYER_INFO := (48, 50, 52, 54);
-constant LAYER_FIRST_IDX : LAYER_INFO := (0, 49, 51, 53);
-constant WEIGHT_LAST_IDX : LAYER_INFO := (1567, 1631, 1651, 0);
-constant WEIGHT_FIRST_IDX : LAYER_INFO := (0, 1568, 1632, 0);
 
 signal w_count_enable : STD_LOGIC := '0';
 signal w_count_reset : STD_LOGIC := '0';
@@ -109,6 +90,8 @@ signal b_count_in : natural range 0 to buffer_size-1 := 0;
 signal forward_output_delay : STD_LOGIC := '0';
 
 signal layer : natural range 0 to 2 := 0;
+signal w_incr : natural range 1 to weight_ram_size := 1;
+signal nbo_incr : natural range 1 to output_ram_size := 1;
 
 component counter is
     Generic (count_limit : natural range 0 to 2000);
@@ -116,7 +99,8 @@ component counter is
             restart  : in STD_LOGIC;
             enable : in STD_LOGIC;
             input  : in natural range 0 to count_limit;
-            output : out natural range 0 to count_limit);
+            output : out natural range 0 to count_limit;
+            increment : in natural range 1 to weight_ram_size := 1);
 end component;
 	
 begin
@@ -150,7 +134,8 @@ begin
                   restart => w_count_reset,
                   enable => w_count_enable,
                   input => w_count_in,
-                  output => w_addr );
+                  output => w_addr,
+                  increment => w_incr );
                   
     output_counter : counter
       generic map ( count_limit => io_ram_size-1 )
@@ -166,7 +151,8 @@ begin
                   restart => nbo_count_reset,
                   enable => nbo_count_enable,
                   input => nbo_count_in,
-                  output => nbo_addr );
+                  output => nbo_addr,
+                  increment => nbo_incr );
                  
     bb_counter : counter
      generic map ( count_limit => buffer_size-1 )
@@ -174,7 +160,8 @@ begin
                 restart => b_count_reset,
                 enable => b_count_enable,
                 input => b_count_in,
-                output => b_addr );
+                output => b_addr,
+                increment => num_units );
     
     bb_addr <= std_logic_vector(to_unsigned(b_addr, buffer_addr_size));
     
@@ -220,6 +207,8 @@ begin
         acc_reset <= '1';
         
         forward_output_delay <= '0';
+        w_incr <= 1;
+        nbo_incr <= num_units;
         
         AXI_ready <= '0';
         
@@ -260,9 +249,9 @@ begin
             w_count_enable <= '1';
             i_count_enable <= '1';
             
-            if w_addr < WEIGHT_LAST_IDX(0) then
+            if w_addr < WEIGHT_LAST_IDX(0)- num_units * LAYER_HWS(0) then
                 i_count_in <= LAYER_FIRST_IDX(0);
-            elsif w_addr < WEIGHT_LAST_IDX(1) then
+            elsif w_addr < WEIGHT_LAST_IDX(1)- num_units * LAYER_HWS(1) then
                 i_count_in <= LAYER_FIRST_IDX(1);
             else
                 i_count_in <= LAYER_FIRST_IDX(2);
@@ -270,6 +259,7 @@ begin
             
             if ( i_addr = LAYER_LAST_IDX(layer)) then
                 i_count_reset <= '1';
+                w_incr <= (num_units-1) * LAYER_HWS(layer)+1;
             end if;
             if i_addr = LAYER_FIRST_IDX(layer)+1  then
                 if w_addr > WEIGHT_FIRST_IDX(0)+1 then
@@ -277,7 +267,7 @@ begin
                 end if;
                 acc_reset <= '1';
                 -- increment bb addr and reset acc and don't enable it
-                if b_addr = bit_width-1 then
+                if b_addr = buffer_size - num_units then
                     IO_RAM_w_enable <= '1';
                     o_count_enable <= '1';
                     b_count_reset <= '1';
@@ -285,23 +275,32 @@ begin
                         forward_output_delay <= '1';
                     end if;
                 end if;
-                if layer = 2 and w_addr > WEIGHT_FIRST_IDX(2)+1 then
+                if layer = 2 and w_addr > WEIGHT_FIRST_IDX(layer)+1 then
                     output_RAM_w_enable <= '1';
                     nbo_count_enable <= '1';
                 end if;
             end if;
 
-            if (layer = 2 and w_addr = WEIGHT_LAST_IDX(2)+2) then
-                state_next <= Done;
-                nbo_count_reset <= '1';
-            end if;
-            
+            for i in 0 to num_units-1 loop
+                if (layer = 2 and nbo_addr >= output_ram_size) then
+                    state_next <= Done;
+                    nbo_count_reset <= '1';
+                end if;
+            end loop;
         else -- state = Done
+            nbo_incr <= 1;
             if (nbo_addr < output_ram_size-1) then
                 nbo_count_enable <= '1';
             end if;
         end if;
         
+        for i in 0 to num_units-1 loop
+            if w_addr+i*LAYER_HWS(layer) <=  WEIGHT_LAST_IDX(layer) then
+                weight_RAM_addr(i) <= std_logic_vector(to_unsigned(w_addr+i*LAYER_HWS(layer), weight_addr_size));
+            else
+                weight_RAM_addr(i) <= std_logic_vector(to_unsigned(0, weight_addr_size));
+            end if;
+        end loop;
     end process;
     
     layer <= 0 when w_addr <= WEIGHT_LAST_IDX(0) else
@@ -310,8 +309,7 @@ begin
     
     IO_RAM_addr_in <= std_logic_vector(to_unsigned(o_addr, io_addr_size));
     IO_RAM_addr_out <= std_logic_vector(to_unsigned(i_addr, io_addr_size));
-    weight_RAM_addr <= std_logic_vector(to_unsigned(w_addr, weight_addr_size)) when w_addr <= weight_ram_size-1 else
-                       std_logic_vector(to_unsigned(0, weight_addr_size));
-    output_RAM_addr <= std_logic_vector(to_unsigned(nbo_addr, output_addr_size));        
+    output_RAM_addr <= std_logic_vector(to_unsigned(nbo_addr, output_addr_size)) when nbo_addr < output_ram_size else
+                       std_logic_vector(to_unsigned(0, output_addr_size));        
 
 end Behavioral;

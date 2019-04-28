@@ -21,6 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use work.data_types.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -32,8 +33,6 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity vecmult is
-    Generic ( bit_width : integer := 16;
-            output_width : integer := 16);
     Port ( input : in STD_LOGIC_VECTOR (bit_width-1 downto 0) := (OTHERS => '0');
            weight : in STD_LOGIC_VECTOR (bit_width-1 downto 0) := (OTHERS => '0');
            bits : in STD_LOGIC_VECTOR (bit_width-1 downto 0) := (OTHERS => '0');

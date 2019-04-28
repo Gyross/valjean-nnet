@@ -3,12 +3,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use work.data_types.all;
 
 entity IO_RAM is
-    generic(
-        io_ram_size : integer := 55;
-        io_addr_size : integer := 6;
-        bit_width : integer := 16);
     port(
         clk : in std_logic;
         en : in std_logic;
@@ -30,16 +27,20 @@ begin
          begin
          if clk'event and clk = '1' then
              if en = '1' then -- optional enable
-             if we = '1' then -- write enable
-             ram(conv_integer(i_addr)) <= di;
-         end if;
+                if we = '1' then -- write enable
+                    ram(conv_integer(i_addr)) <= di;
+                end if;
          
-         if rst = '1' then -- optional reset
-             do <= (others => '0');
-         else
-             do <= ram(conv_integer(o_addr));
-         end if;
-         end if;
+                if rst = '1' then -- optional reset
+                    do <= (others => '0');
+                else
+                    if we = '1' and o_addr = i_addr then
+                        do <= di;
+                    else
+                        do <= ram(conv_integer(o_addr));
+                    end if;
+                end if;
+            end if;
          end if;
      end process;
     end syn;

@@ -25,6 +25,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
+use work.data_types.all;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -32,12 +33,9 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity binarised_buffer is
-    generic(
-        buffer_size : integer := 16;
-        buffer_addr_size : integer := 4);
     Port ( clk : in STD_LOGIC;
        addr : in std_logic_vector(buffer_addr_size-1 downto 0);
-       sign : in std_logic;
+       sign : in std_logic_vector(num_units-1 downto 0);
        dataout : out STD_LOGIC_vector(buffer_size-1 downto 0));
 end binarised_buffer;
 
@@ -48,7 +46,9 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            dataout(to_integer(unsigned(addr))) <= not sign;
+            for i in 0 to num_units-1 loop
+                dataout(to_integer(unsigned(addr))+i) <= not sign(i);
+            end loop;
         end if; 
     end process;
 

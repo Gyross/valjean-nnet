@@ -11,14 +11,15 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
+Compiling package xil_defaultlib.data_types
 Compiling package ieee.std_logic_arith
 Compiling package ieee.std_logic_unsigned
-Compiling architecture arch_imp of entity xil_defaultlib.customip_lab_v1_0_S00_AXI [customip_lab_v1_0_s00_axi_defaul...]
 Compiling architecture behavioral of entity xil_defaultlib.xnor_sum [\xnor_sum(bit_width=16)\]
 Compiling architecture behavioral of entity xil_defaultlib.accumulator [accumulator_default]
 Compiling architecture behavioral of entity xil_defaultlib.vecmult [vecmult_default]
+Compiling architecture arch_imp of entity xil_defaultlib.customip_lab_v1_0_S00_AXI [customip_lab_v1_0_s00_axi_defaul...]
 Compiling architecture syn of entity xil_defaultlib.IO_RAM [io_ram_default]
-Compiling architecture syn of entity xil_defaultlib.output_RAM [output_ram_default]
+Compiling architecture behavioral of entity xil_defaultlib.out_registers [out_registers_default]
 Compiling architecture syn of entity xil_defaultlib.weight_RAM [weight_ram_default]
 Compiling architecture behavioral of entity xil_defaultlib.binarised_buffer [binarised_buffer_default]
 Compiling architecture behavioral of entity xil_defaultlib.counter [\counter(count_limit=54)\]

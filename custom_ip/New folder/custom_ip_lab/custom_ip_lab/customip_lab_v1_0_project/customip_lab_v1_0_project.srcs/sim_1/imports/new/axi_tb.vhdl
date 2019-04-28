@@ -11,16 +11,6 @@ architecture Behavioral of axi_tb is
     constant AXI_ADDR_WIDTH : integer := 4; 
     component customip_lab_v1_0 is
         generic (
-            bit_width : integer := 16;
-            output_width : integer := 16;
-            io_ram_size : integer := 55;
-            weight_ram_size : integer := 1652;
-            output_ram_size : integer := 10;
-            io_addr_size : integer := 6;
-            output_addr_size : integer := 4;
-            buffer_addr_size : integer := 4;
-            weight_addr_size : integer := 11;
-            buffer_size : integer := 16;
             -- Parameters of Axi Slave Bus Interface S00_AXI
             C_S00_AXI_DATA_WIDTH : integer    := 32;
             C_S00_AXI_ADDR_WIDTH : integer    := 4

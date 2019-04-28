@@ -3,12 +3,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use work.data_types.all;
 
 entity output_RAM is
-    generic(
-        output_ram_size : integer := 10;
-        output_addr_size : integer := 4;
-        output_width : integer := 16);
     port(
         clk : in std_logic;
         en : in std_logic;

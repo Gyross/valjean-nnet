@@ -21,7 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use work.data_types.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -37,7 +37,8 @@ entity counter is
             restart  : in STD_LOGIC;
             enable : in STD_LOGIC;
             input  : in natural range 0 to count_limit;
-            output : out natural range 0 to count_limit);
+            output : out natural range 0 to count_limit;
+            increment : in natural range 1 to weight_ram_size := 1);
 end counter;
 
 architecture Behavioral of counter is
@@ -51,7 +52,7 @@ begin
         if restart = '1' then
             count := input;
         elsif enable = '1' then
-            count := count + 1;
+            count := count + increment;
         else
             count := count;
         end if;
