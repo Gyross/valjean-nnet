@@ -15,6 +15,31 @@ int main( int argc, char* argv[]) {
     dataset ds = dataset_create(argv[1], argv[2]);
     printf("\nInputs: %d, Outputs: %d\n", dataset_num_inputs(ds), dataset_num_outputs(ds));
     printf("Num Cases: %d\n\n", dataset_num_cases(ds));
+
+    for ( int i = 0; i < 8; i++ ) {
+        dataset_read(ds, input_vec, &label);
+    }
+
+
+    printf("\nTesting mark/rewind\n");
+    dataset_mark(ds);
+
+    for ( int i = 0; i < 8; i++ ) {
+        dataset_read(ds, input_vec, &label);
+        for ( int i = 0; i < dataset_num_inputs(ds); i++ ) {
+            printf("%5d ", input_vec[i]);
+        }
+
+        printf(" --> %3d\n", label);
+
+        dataset_mark_rewind(ds);
+    }
+
+    printf("\n");
+
+    dataset_rewind(ds);
+
+    printf("\nTesting regular operation\n");
     
     int count = 0;
     while ( dataset_read(ds, input_vec, &label) ) {

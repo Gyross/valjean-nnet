@@ -8,11 +8,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "bnn.h"
 #include "xorgens.h"
 #include "energy.h"
 
 #define ANNEAL_PRINT_DEBUG
+
+#define ITERATIONS_PER_AUTOSAVE 1000
 
 struct perturb_list* perturb_list_create() {
     struct perturb_list* new_perturb = malloc( sizeof(struct perturb_list) );
@@ -146,12 +149,21 @@ void anneal_init( BNN bnn, struct anneal_state* state, dataset ds ) {
 
     state->temperature = 0.1;
 
-    state->energy = compute_energy(bnn, ds, 0);
+    state->energy = INFINITY;
 
     state->cooling_factor = 0.99999;
     state->end_temperature = 0.001;
 
     state->iteration = 1;
+
+    // Number of input cases per annealing step
+    state->batch_size = 1000;
+
+    // Prevent retardation
+    if ( state->batch_size > dataset_num_cases(ds) ) {
+        state->batch_size = dataset_num_cases(ds);
+    }
+
 
     // We will need to know the total number of weights and biases
     // so that we can select which parameters to perturb
@@ -174,12 +186,10 @@ enum anneal_decision anneal_decide( struct anneal_state* state, double new_energ
     #endif
 
     if ( new_energy <= state->energy ) {
-        state->energy = new_energy;
         return DECISION_ACCEPT;
     } else {
         boltzmann = exp((state->energy - new_energy) / state->temperature);
         if ( xor4096r(0) < boltzmann ) {
-            state->energy = new_energy;
             return DECISION_ACCEPT;
         }
     }
@@ -209,45 +219,83 @@ void anneal( BNN bnn, dataset ds ) {
     struct anneal_state _state;
     struct anneal_state* state = &_state;
     struct perturb_list *perturbation = NULL;
-    enum anneal_decision decision = DECISION_NONE;
+    enum anneal_decision decision = DECISION_ACCEPT;
+
+    double frac_correct_old = 0;
+    double frac_correct_new = 0;
 
     double energy;
+
+    uint32_t autosave_counter = 0;
+    char autosave_filename[FILENAME_LENGTH];
+    strcpy(autosave_filename, bnn_filename);
+    strcat(autosave_filename, ".autosave");
 
     anneal_init( bnn, state, ds );
 
     // TODO potentially implement annealing resets
 
     while ( !anneal_end(state) ) {
+        ++state->iteration;
+        ++autosave_counter;
+
         #ifdef ANNEAL_PRINT_DEBUG
-            printf("\n\n\nIteration: %u\n", state->iteration);
+            printf("\nIteration: %u\n", state->iteration);
         #endif
 
+        if ( decision == DECISION_ACCEPT ) {
+            // Compute the energy for the current batch
+            dataset_mark(ds);
+            state->energy = compute_energy(bnn, ds, state->batch_size, 
+                                           &frac_correct_old, 0);
+            dataset_mark_rewind(ds);
+        }
 
+        // Select a perturbation, compute it's energy, then decide 
+        // whether to accept it
         perturbation = anneal_perturb( bnn, state );
 
-        // Do a forward pass
-        energy = compute_energy(bnn, ds, 0);
-
-        decision = anneal_decide( state, energy );
+        energy = compute_energy(bnn, ds, state->batch_size, &frac_correct_new, 0);
 
         #ifdef ANNEAL_PRINT_DEBUG
+        #endif   
+
+        decision = anneal_decide(state, energy);
+
+        #ifdef ANNEAL_PRINT_DEBUG
+            printf("Old: %5.2f%%\n", 100*frac_correct_old);
+            printf("New: %5.2f%%\n", 100*frac_correct_new);
             printf( "New state %s\n", 
                     (decision == DECISION_ACCEPT)?"accepted":"rejected" );
         #endif
         
-        if ( decision != DECISION_ACCEPT ) {
+        if ( decision == DECISION_REJECT ) {
+            // Revert back to the old network
+            // and rewind to the start of the batch
             anneal_revert( bnn, perturbation );
+            dataset_mark_rewind(ds);
         }
 
-        // Free the perturb_list allocated by anneal_perturb
         perturb_list_free(perturbation);
 
         anneal_cool(state);
 
-        ++state->iteration;
+        // Periodically autosave the bnn
+        if ( autosave_counter >= ITERATIONS_PER_AUTOSAVE ) {
+            autosave_counter = 0;
+            bnn_write(bnn, autosave_filename);
+        }
     }
 
-    energy = compute_energy(bnn, ds, 1);
+
+    // Final autosave
+    bnn_write(bnn, autosave_filename);
+
+    // Final energy runs on the full dataset
+    energy = compute_energy(bnn, ds, dataset_num_cases(ds), &frac_correct_new, 1);
+    printf("Correct: %3.2f%%\n", 100*frac_correct_new);
 }
+
+
 
 

@@ -53,6 +53,18 @@ void dataset_rewind(dataset ds);
 
 
 /*
+ * Mark a point in the dataset
+ */
+void dataset_mark(dataset ds);
+
+
+/*
+ * Rewind to the point marked
+ */
+void dataset_mark_rewind(dataset ds);
+
+
+/*
  * Returns the number of inputs specified by the input file
  */
 BNNS dataset_num_inputs(dataset ds);

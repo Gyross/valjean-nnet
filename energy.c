@@ -151,7 +151,8 @@ LBLT find_output_label( BNN_real* output_vec, BNNS vec_size ) {
 
 // An initial implementation is to do a full pass on the data set
 // for every calculation of energy
-double compute_energy( BNN bnn, dataset ds, int print_outputs ) {
+double compute_energy( BNN bnn, dataset ds, uint32_t batch_size, 
+                       double* frac_correct, int print_outputs ) {
     MSG("Beginning energy computation\n");
 
     INPT input_vec[NODE_MAX];
@@ -174,11 +175,18 @@ double compute_energy( BNN bnn, dataset ds, int print_outputs ) {
     CHECK(dataset_num_inputs(ds)  != n_inputs, "Incorrect number of inputs!", 1);
     CHECK(dataset_num_outputs(ds) != n_outputs, "Incorrect number of outputs!", 1);
 
-    // Ensure we are at the start of the dataset
-    dataset_rewind(ds);
+    // Loop until we reach the end of the batch
+    while(n_cases < batch_size) {
 
-    // Loop until we reach the end of the file
-    while(1 == (read_code = dataset_read(ds, input_vec, &label))) {
+        read_code = dataset_read(ds, input_vec, &label);
+
+        if ( read_code == 0 ) {
+            // EOF, go to start of dataset and read again
+            dataset_rewind(ds);
+            read_code = dataset_read(ds, input_vec, &label);
+        } 
+
+        CHECK((-1 == read_code), "Dataset read error!", 1);
 
         fp_wrapper(bnn, input_vec, output_vec);
 
@@ -205,11 +213,9 @@ double compute_energy( BNN bnn, dataset ds, int print_outputs ) {
         #endif
     }
 
-    CHECK( read_code != 0, "Read failed!", 1 );
-
-    #ifdef ENERGY_PRINT_DEBUG
-        printf("%f%% correct\n", 100 * n_correct/(double)n_cases);
-    #endif
+    if ( frac_correct != NULL ) {
+        *frac_correct = n_correct/(double)n_cases;
+    }
 
     return energy_sum/n_cases;
 

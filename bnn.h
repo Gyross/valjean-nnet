@@ -18,6 +18,10 @@
 
 #define BIN_VEC_SIZE CEIL_DIV(NODE_MAX, SIZE(BNN_bin))
 
+
+#define FILENAME_LENGTH 256
+extern char bnn_filename[FILENAME_LENGTH];
+
 typedef enum op_t {
     TEST,
     TRAIN,

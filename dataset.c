@@ -30,6 +30,9 @@ struct dataset {
     BNNS num_inputs;  // Should always be valid
     BNNS num_outputs; // Not valid if dataset is unlabelled
     int num_cases;    
+
+    fpos_t input_mark;
+    fpos_t label_mark;
 };
 
 
@@ -119,6 +122,10 @@ dataset dataset_create(const char* input_filename, const char* label_filename) {
 
     // Rewind to beginning of data files
     dataset_rewind(ds);
+
+    // Set the mark start at the beginning of the data file
+    // (needed since fpos_t are non-pointers and so can't be NULL)
+    dataset_mark(ds);
 
     return ds;
 }
@@ -252,5 +259,35 @@ void dataset_rewind(dataset ds) {
     if ( ds->fp_label != NULL ) {
         // Seek to just past the num_outputs field in the label file
         fseek( ds->fp_label, sizeof(ds->num_outputs), SEEK_SET );
+    }
+}
+
+void dataset_mark(dataset ds) {
+    if ( ds->fp_input != NULL ) {
+        fgetpos(ds->fp_input, &(ds->input_mark));
+    } else {
+        fprintf( 
+            stderr, 
+            "Function dataset_mark called on dataset with NULL fp_input!" 
+        );
+    }
+
+    if ( ds->fp_label != NULL ) {
+        fgetpos(ds->fp_label, &(ds->label_mark));
+    }
+}
+
+void dataset_mark_rewind(dataset ds) {
+    if ( ds->fp_input != NULL ) {
+        fsetpos(ds->fp_input, &(ds->input_mark));
+    } else {
+        fprintf( 
+            stderr, 
+            "Function dataset_mark_rewind called on dataset with NULL fp_input!" 
+        );
+    }
+
+    if ( ds->fp_label != NULL ) {
+        fsetpos(ds->fp_label, &(ds->label_mark));
     }
 }

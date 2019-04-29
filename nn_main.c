@@ -20,6 +20,8 @@ Usage:\n \
 // GLOBAL VARIABLES
 bnn_alloc _bnn;
 
+char bnn_filename[FILENAME_LENGTH]; // name of the bnn file, needed for autosaving
+
 
 // PROTOTYPES
 static void initPRNG(void);
@@ -42,6 +44,8 @@ int main( int argc, char* argv[] ) {
     }
 
     CHECK(argc < 3, "Invalid arguments." USAGE, 1);
+
+    strcpy(bnn_filename, argv[2]);
 
     if ( strcmp(argv[1], "new") == 0 ) {
         // If we are at this point we are guaranteed that argc > 3, so this
