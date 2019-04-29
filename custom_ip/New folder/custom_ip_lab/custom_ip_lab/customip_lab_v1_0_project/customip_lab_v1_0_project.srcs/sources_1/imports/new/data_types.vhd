@@ -34,6 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 package data_types is
     constant bit_width : integer := 16;
     constant output_width : integer := 16;
+    constant input_width : integer := 32;
     constant io_ram_size : integer := 55;
     constant weight_ram_size : integer := 1652;
     constant output_ram_size : integer := 10;
@@ -59,4 +60,6 @@ package data_types is
     constant LAYER_FIRST_IDX : LAYER_INFO := (0, 49, 51, 53);
     constant WEIGHT_LAST_IDX : LAYER_INFO := (1567, 1631, 1651, 0);
     constant WEIGHT_FIRST_IDX : LAYER_INFO := (0, 1568, 1632, 0);
+    
+    type AXI_state is (NOP, BIO, CALC, READ);
 end data_types;
