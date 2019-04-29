@@ -200,6 +200,6 @@ begin
             end if;
         end if;
     end process;
-    OREG_addr <= oreg_count;
+    OREG_addr <= oreg_count when oreg_count >= 0 and oreg_count < 10 else 0;
 
 end Behavioral;
