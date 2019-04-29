@@ -2,8 +2,8 @@
 # Vivado v2017.2 (64-bit)
 # SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
 # IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
-# Start of session at: Tue Apr 30 04:32:24 2019
-# Process ID: 14272
+# Start of session at: Tue Apr 30 04:40:39 2019
+# Process ID: 6464
 # Current directory: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1
 # Command line: vivado.exe -log customip_lab_v1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source customip_lab_v1_0.tcl
 # Log file: C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/customip_lab_v1_0.vds
@@ -15,18 +15,19 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020-clg484'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020-clg484'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 4300 
+INFO: Helper process launched with PID 4820 
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 310.770 ; gain = 78.551
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 310.832 ; gain = 78.098
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'customip_lab_v1_0' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:50]
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'AXI_CTRL' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:34' bound to instance 'axi_ctrl_inst' of component 'AXI_CTRL' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:283]
 INFO: [Synth 8-638] synthesizing module 'AXI_CTRL' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:74]
 INFO: [Synth 8-4471] merging register 'reg_wready_reg' into 'WREADY_reg' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:181]
 WARNING: [Synth 8-6014] Unused sequential element reg_wready_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:181]
 INFO: [Synth 8-256] done synthesizing module 'AXI_CTRL' (1#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:74]
-INFO: [Synth 8-3491] module 'vecmult' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:35' bound to instance 'vecmult_inst' of component 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:314]
+INFO: [Synth 8-3491] module 'vecmult' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:35' bound to instance 'vecmult_inst' of component 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:354]
 INFO: [Synth 8-638] synthesizing module 'vecmult' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:46]
 	Parameter bit_width bound to: 16 - type: integer 
 INFO: [Synth 8-3491] module 'xnor_sum' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/xnor_sum.vhd:34' bound to instance 'xnor_sum_inst' of component 'xnor_sum' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:71]
@@ -38,19 +39,19 @@ INFO: [Synth 8-3491] module 'accumulator' declared at 'C:/Users/X4/Documents/Git
 INFO: [Synth 8-638] synthesizing module 'accumulator' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:42]
 INFO: [Synth 8-256] done synthesizing module 'accumulator' (3#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:42]
 INFO: [Synth 8-256] done synthesizing module 'vecmult' (4#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/vecmult.vhd:46]
-INFO: [Synth 8-3491] module 'IO_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:8' bound to instance 'io_ram_inst' of component 'IO_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:333]
+INFO: [Synth 8-3491] module 'IO_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:8' bound to instance 'io_ram_inst' of component 'IO_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:373]
 INFO: [Synth 8-638] synthesizing module 'IO_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:22]
 INFO: [Synth 8-256] done synthesizing module 'IO_RAM' (5#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/IO_RAM.vhd:22]
-INFO: [Synth 8-3491] module 'out_registers' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/register.vhd:35' bound to instance 'output_regs' of component 'out_registers' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:361]
+INFO: [Synth 8-3491] module 'out_registers' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/register.vhd:35' bound to instance 'output_regs' of component 'out_registers' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:401]
 INFO: [Synth 8-638] synthesizing module 'out_registers' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/register.vhd:45]
 INFO: [Synth 8-256] done synthesizing module 'out_registers' (6#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/register.vhd:45]
-INFO: [Synth 8-3491] module 'weight_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:10' bound to instance 'weight_ram_inst' of component 'weight_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:372]
+INFO: [Synth 8-3491] module 'weight_RAM' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:10' bound to instance 'weight_ram_inst' of component 'weight_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:412]
 INFO: [Synth 8-638] synthesizing module 'weight_RAM' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:24]
 INFO: [Synth 8-256] done synthesizing module 'weight_RAM' (7#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/rams_dist.vhd:24]
-INFO: [Synth 8-3491] module 'binarised_buffer' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:35' bound to instance 'binarised_buffer_inst' of component 'binarised_buffer' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:384]
+INFO: [Synth 8-3491] module 'binarised_buffer' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:35' bound to instance 'binarised_buffer_inst' of component 'binarised_buffer' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:424]
 INFO: [Synth 8-638] synthesizing module 'binarised_buffer' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:42]
 INFO: [Synth 8-256] done synthesizing module 'binarised_buffer' (8#1) [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/imports/new/binarised_buffer.vhd:42]
-INFO: [Synth 8-3491] module 'control' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:34' bound to instance 'control_module' of component 'control' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:392]
+INFO: [Synth 8-3491] module 'control' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:34' bound to instance 'control_module' of component 'control' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0.vhd:432]
 INFO: [Synth 8-638] synthesizing module 'control' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:62]
 	Parameter count_limit bound to: 54 - type: integer 
 INFO: [Synth 8-3491] module 'counter' declared at 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/counter.vhd:34' bound to instance 'input_counter' of component 'counter' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/control.vhd:118]
@@ -179,17 +180,17 @@ WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_ar
 WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_arprot[1]
 WARNING: [Synth 8-3331] design customip_lab_v1_0 has unconnected port s00_axi_arprot[0]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 351.098 ; gain = 118.879
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.910 ; gain = 118.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 351.098 ; gain = 118.879
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.910 ; gain = 118.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 351.098 ; gain = 118.879
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 350.910 ; gain = 118.176
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: [Synth 8-4471] merging register 'AWREADY_reg' into 'WREADY_reg' [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.srcs/sources_1/new/AXI.vhd:111]
@@ -228,7 +229,7 @@ INFO: [Synth 8-5544] ROM "WEIGHT_FIRST_IDX[0]" won't be mapped to Block RAM beca
 INFO: [Synth 8-5544] ROM "WEIGHT_LAST_IDX[0]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/ip_repo/customip_lab_1.0/hdl/accumulator.vhd:53]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 372.609 ; gain = 140.391
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 372.676 ; gain = 139.941
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -407,55 +408,55 @@ WARNING: [Synth 8-3331] design vecmult has unconnected port bias[29]
 WARNING: [Synth 8-3331] design vecmult has unconnected port bias[28]
 WARNING: [Synth 8-3331] design vecmult has unconnected port bias[27]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[11]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[12]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[13]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[14]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[15]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[16]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[17]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[18]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[19]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[20]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[21]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[22]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[23]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[24]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[25]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[26]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[27]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[28]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[29]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[30]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/wram_count_reg[31]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[4]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[5]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[6]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[7]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[8]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[9]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[10]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[11]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[12]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[13]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[14]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[15]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[16]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[17]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[18]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[19]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[20]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[21]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[22]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[23]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[24]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[25]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[26]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[27]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[28]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[29]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[30]) is unused and will be removed from module customip_lab_v1_0.
-WARNING: [Synth 8-3332] Sequential element (axi_ctrl/oreg_count_reg[31]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[11]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[12]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[13]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[14]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[15]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[16]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[17]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[18]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[19]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[20]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[21]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[22]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[23]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[24]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[25]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[26]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[27]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[28]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[29]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[30]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/wram_count_reg[31]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[4]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[5]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[6]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[7]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[8]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[9]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[10]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[11]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[12]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[13]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[14]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[15]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[16]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[17]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[18]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[19]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[20]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[21]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[22]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[23]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[24]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[25]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[26]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[27]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[28]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[29]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[30]) is unused and will be removed from module customip_lab_v1_0.
+WARNING: [Synth 8-3332] Sequential element (axi_ctrl_inst/oreg_count_reg[31]) is unused and will be removed from module customip_lab_v1_0.
 WARNING: [Synth 8-3332] Sequential element (control_module/R_reg) is unused and will be removed from module customip_lab_v1_0.
 WARNING: [Synth 8-3332] Sequential element (GEN_VM_UNIT[0].vecmult_inst/acc_inst/count_reg[16]) is unused and will be removed from module customip_lab_v1_0.
 WARNING: [Synth 8-3332] Sequential element (GEN_VM_UNIT[0].vecmult_inst/acc_inst/count_reg[17]) is unused and will be removed from module customip_lab_v1_0.
@@ -474,7 +475,7 @@ WARNING: [Synth 8-3332] Sequential element (GEN_VM_UNIT[0].vecmult_inst/acc_inst
 WARNING: [Synth 8-3332] Sequential element (GEN_VM_UNIT[0].vecmult_inst/acc_inst/count_reg[30]) is unused and will be removed from module customip_lab_v1_0.
 WARNING: [Synth 8-3332] Sequential element (GEN_VM_UNIT[0].vecmult_inst/acc_inst/count_reg[31]) is unused and will be removed from module customip_lab_v1_0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -511,7 +512,7 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -524,7 +525,7 @@ Start Technology Mapping
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-4480] The timing for the instance weight_ram_inst/ram_reg (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Technology Mapping : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -548,7 +549,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished IO Insertion : Time (s): cpu = 00:00:10 ; elapsed = 00:00:09 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -561,7 +562,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:10 ; elapsed = 00:00:09 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -573,25 +574,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -631,7 +632,7 @@ Report Instance Areas:
 |2     |  \GEN_VM_UNIT[0].vecmult_inst   |vecmult                 |   102|
 |3     |    acc_inst                     |accumulator             |    16|
 |4     |    xnor_sum_inst                |xnor_sum                |    86|
-|5     |  axi_ctrl                       |AXI_CTRL                |   102|
+|5     |  axi_ctrl_inst                  |AXI_CTRL                |   102|
 |6     |  binarised_buffer_inst          |binarised_buffer        |    68|
 |7     |  control_module                 |control                 |   174|
 |8     |    bb_counter                   |counter__parameterized6 |    27|
@@ -644,11 +645,11 @@ Report Instance Areas:
 |15    |  weight_ram_inst                |weight_RAM              |    40|
 +------+---------------------------------+------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 262 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
-Synthesis Optimization Complete : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.695 ; gain = 294.477
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
+Synthesis Optimization Complete : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.824 ; gain = 294.090
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 74 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -658,9 +659,9 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   RAM64M => RAM64M (RAMD64E, RAMD64E, RAMD64E, RAMD64E): 6 instances
 
-79 Infos, 191 Warnings, 0 Critical Warnings and 0 Errors encountered.
+80 Infos, 191 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 595.359 ; gain = 370.906
+synth_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 593.480 ; gain = 369.012
 INFO: [Common 17-1381] The checkpoint 'C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1/customip_lab_v1_0.dcp' has been generated.
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 595.359 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Tue Apr 30 04:32:42 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 593.480 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 30 04:40:57 2019...

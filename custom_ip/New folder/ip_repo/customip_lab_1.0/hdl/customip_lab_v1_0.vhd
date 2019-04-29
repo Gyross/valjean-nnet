@@ -184,6 +184,46 @@ architecture arch_imp of customip_lab_v1_0 is
                 v : in std_logic
                 );
             end component;
+            
+    component AXI_CTRL is
+            
+              Port (
+                    clk         : in std_logic;
+                    reset       : in std_logic;
+              
+                    --wram Ports
+                    wram_addr : out integer;
+                    wram_data : out std_logic_vector(output_width-1 downto 0);
+                    wram_en   : out std_logic;
+                    
+                    --OReg Ports
+                    OREG_addr : out integer;
+                    OREG_data : in std_logic_vector(output_width-1 downto 0);
+                    
+                    --CTRL_Unit Ports
+                    ctrl_OV          : in std_logic;
+                    ctrl_State       : out AXI_state;
+                    ctrl_R           : in std_logic;
+                    ctrl_V           : out std_logic;
+                    ctrl_data        : out std_logic_vector(output_width-1 downto 0);
+                    
+                    --AXI ports
+                    WDATA            : in std_logic_vector(input_width-1 downto 0);
+                    WVALID           : in std_logic;
+                    AWADDR           : in integer;
+                    ARADDR           : in integer;
+                    AWVALID          : in std_logic;
+                    ARVALID          : in std_logic;
+                    RDATA            : out std_logic_vector(input_width-1 downto 0);
+                    RVALID           : out std_logic;
+                    WREADY           : out std_logic;
+                    AWREADY          : out std_logic;
+                    RREADY           : in std_logic;
+                    ARREADY          : out std_logic;
+                    BVALID           : out std_logic
+                    --TODO
+                    );
+          end component;
     
     signal datain0, datain1, datain2, datain3       : std_logic_vector(31 downto 0) := (OTHERS => '0');
     signal dataout0, dataout1, dataout2, dataout3   : std_logic_vector(31 downto 0) := (OTHERS => '0');
@@ -240,7 +280,7 @@ architecture arch_imp of customip_lab_v1_0 is
 begin                   
     reset <= not s00_axi_aresetn;
     
-    axi_ctrl : entity work.AXI_CTRL
+    axi_ctrl_inst :  AXI_CTRL
         port map (
             clk => s00_axi_aclk,
             reset => reset,
