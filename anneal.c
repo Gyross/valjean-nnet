@@ -40,14 +40,12 @@ void perturb_list_free( struct perturb_list* list ) {
     }
 }
 
-struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as ) {
+struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* as, 
+                                     uint32_t n_perturb_weights, 
+                                     uint32_t n_perturb_biases ) {
     struct perturb_list* list = NULL;
     struct perturb_list* p  = NULL;
 
-
-    // Set these to one, later we might want to base these on temperature.
-    uint32_t n_perturb_weights = 1;
-    uint32_t n_perturb_biases  = 0;
     uint32_t n_perturb_total   = n_perturb_weights + n_perturb_biases;
 
     uint32_t rand_result;
@@ -253,7 +251,7 @@ void anneal( BNN bnn, dataset ds ) {
 
         // Select a perturbation, compute it's energy, then decide 
         // whether to accept it
-        perturbation = anneal_perturb( bnn, state );
+        perturbation = anneal_perturb( bnn, state, 1, 1 );
 
         energy = compute_energy(bnn, ds, state->batch_size, &frac_correct_new, 0);
 
