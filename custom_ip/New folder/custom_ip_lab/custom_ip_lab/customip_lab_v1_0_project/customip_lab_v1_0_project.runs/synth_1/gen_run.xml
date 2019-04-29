@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1556561018">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1556562742">
   <File Type="RDS-PROPCONSTRS" Name="customip_lab_v1_0_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="customip_lab_v1_0.tcl"/>
   <File Type="RDS-RDS" Name="customip_lab_v1_0.vds"/>
@@ -20,6 +20,7 @@
     </File>
     <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd">
       <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>

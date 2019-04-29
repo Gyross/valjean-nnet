@@ -39,7 +39,7 @@ entity AXI_CTRL is
   
         --wram Ports
         wram_addr : out integer;
-        wram_data : out std_logic_vector(output_width-1 downto 0);
+        wram_data : out std_logic_vector(input_width-1 downto 0);
         wram_en   : out std_logic;
         
         --OReg Ports
@@ -156,7 +156,7 @@ begin
     end process;
 
     wram_addr <= wram_count;
-    wram_data <= WDATA(output_width-1 downto 0);
+    wram_data <= WDATA;
     sig_wram_en   <= '1' when (AWADDR = 0) and (AWVALID = '1') and (WVALID = '1') else '0';
     wram_en <= sig_wram_en;
     

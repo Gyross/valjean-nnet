@@ -102,17 +102,16 @@ architecture arch_imp of customip_lab_v1_0 is
     end component;
     
     component weight_RAM is
-        port(
-            clkA  : in  std_logic;
-            clkB  : in  std_logic;
-            enA   : in  std_logic;
-            enB   : in  std_logic;
-            weB   : in  std_logic;
-            addrA : in  w_addr_array;
-            addrB : in  integer;
-            diB   : in  std_logic_vector(WIDTHB - 1 downto 0);
-            doA   : out data_array
-        );
+    port(
+    clk : in std_logic;
+    en : in std_logic;
+    we : in std_logic;
+    rst : in std_logic;
+    addri : in integer;
+    addro : in w_addr_array;
+    di : in std_logic_vector(bit_width-1 downto 0);
+    do : out data_array
+    );
     end component;
     
     component IO_RAM is
@@ -203,7 +202,7 @@ architecture arch_imp of customip_lab_v1_0 is
     --Weight Ram Signals
     signal weight_RAM_addr : w_addr_array := (OTHERS => (OTHERS => '0'));
     signal weight_RAM_addr_write : integer := 0;
-    signal weight_RAM_datain : std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0) := (OTHERS => '0');
+    signal weight_RAM_datain : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
     signal weight_RAM_dataout : data_array := (OTHERS => (OTHERS => '0'));
     signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic := '0';
     
@@ -372,15 +371,14 @@ output_regs : out_registers
 
 weight_ram_inst : weight_RAM -- A is read, B is write
     port map(
-        clkA => s00_axi_aclk,
-        clkB => s00_axi_aclk,
-        enA  => weight_RAM_enable,
-        enB  => weight_RAM_w_enable,
-        weB  => weight_RAM_w_enable,
-        addrA=> weight_RAM_addr,
-        addrB=> weight_RAM_addr_write,
-        diB  => weight_RAM_datain,
-        doA  => weight_RAM_dataout
+        clk => s00_axi_aclk,
+        en => weight_RAM_enable,
+        we  => weight_RAM_w_enable,
+        rst => weight_RAM_rst,
+        addri=> weight_RAM_addr_write,
+        addro=> weight_RAM_addr,
+        di  => weight_RAM_datain,
+        do  => weight_RAM_dataout
   );
   
   binarised_buffer_inst : binarised_buffer

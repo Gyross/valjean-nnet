@@ -32,7 +32,7 @@
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="zed"/>
     <Option Name="DSANumComputeUnits" Val="16"/>
-    <Option Name="WTXSimLaunchSim" Val="64"/>
+    <Option Name="WTXSimLaunchSim" Val="69"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -65,6 +65,7 @@
       </File>
       <File Path="$PPRDIR/../../../ip_repo/customip_lab_1.0/hdl/customip_lab_v1_0_S00_AXI.vhd">
         <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -201,6 +202,103 @@
       </File>
       <File Path="$PPRDIR/../../../../../axi_tb_behav4.wcfg">
         <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/counter.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/counter.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/IO_RAM.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/IO_RAM.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/control.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/control.vhd"/>
+          <Attr Name="ImportTime" Val="1556560189"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/axi_tb.vhdl">
+        <FileInfo RelPath="axi_tb.vhdl">
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/vecmult.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/vecmult.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/AXI.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/AXI.vhd"/>
+          <Attr Name="ImportTime" Val="1556559375"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/register.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/register.vhd"/>
+          <Attr Name="ImportTime" Val="1556559375"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/binarised_buffer.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/binarised_buffer.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/rams_dist.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/rams_dist.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/data_types.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/data_types.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/new/Output_Store.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Output_Store.vhd"/>
+          <Attr Name="ImportTime" Val="1556547738"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
