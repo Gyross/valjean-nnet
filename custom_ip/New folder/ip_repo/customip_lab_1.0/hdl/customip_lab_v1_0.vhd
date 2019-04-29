@@ -182,8 +182,7 @@ architecture arch_imp of customip_lab_v1_0 is
                 ov : out std_logic;
                 state_input : in axi_state;
                 R : out std_logic;
-                v : in std_logic;
-                axi_data_out : out std_logic_vector(output_width-1 downto 0)
+                v : in std_logic
                 );
             end component;
     
@@ -419,8 +418,7 @@ weight_ram_inst : weight_RAM -- A is read, B is write
         ov => OV,
         state_input => state,
         R => sig_R,
-        v => sig_V,
-        axi_data_out => b_input_init    
+        v => sig_V
     );
     
     datain0 <= X"deadbeef";

@@ -56,8 +56,7 @@ entity control is
         ov : out std_logic;
         state_input : in axi_state;
         R : out std_logic;
-        v : in std_logic;
-        axi_data_out : out std_logic_vector(output_width-1 downto 0));
+        v : in std_logic);
 end control;
 
 architecture Behavioral of control is

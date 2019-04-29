@@ -10,7 +10,7 @@ use ieee.std_logic_arith.all;
 use work.data_types.all;
 use ieee.numeric_std.all;
 
-entity asym_ram_sdp_write_wider is
+entity weight_RAM is
 	port(
 		clkA  : in  std_logic;
 		clkB  : in  std_logic;
@@ -23,9 +23,9 @@ entity asym_ram_sdp_write_wider is
 		doA   : out data_array
 	);
 
-end asym_ram_sdp_write_wider;
+end weight_RAM;
 
-architecture behavioral of asym_ram_sdp_write_wider is
+architecture behavioral of weight_RAM is
 	function max(L, R : INTEGER) return INTEGER is
 	begin
 		if L > R then
@@ -64,7 +64,7 @@ architecture behavioral of asym_ram_sdp_write_wider is
 	-- An asymmetric RAM is modeled in a similar way as a symmetric RAM, with an
 	-- array of array object. Its aspect ratio corresponds to the port with the
 	-- lower data width (larger depth)
-	type ramType is array (0 to maxSIZE - 1) of std_logic_vector(minWIDTH - 1 downto 0);
+	type ramType is array (maxSIZE - 1 downto 0) of std_logic_vector(minWIDTH - 1 downto 0);
 
 	signal my_ram : ramType := (others => (others => '0'));
 
