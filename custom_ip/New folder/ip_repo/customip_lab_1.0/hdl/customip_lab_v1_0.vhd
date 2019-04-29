@@ -327,7 +327,6 @@ begin
         sign_output(i) <= vecmult_dataout(i)(15);
     end generate GEN_VM_UNIT;
      
-b_input_init <= (OTHERS => '1');
 
 --Multiplexer for the data input of the IO RAM
 IO_RAM_datain <= b_input_init when load_input_en = '1' else
@@ -371,10 +370,6 @@ output_regs : out_registers
         di => vecmult_dataout,
         do => output_RAM_data_read
     );
-    
-weight_RAM_datain <= (OTHERS => '0') when weight_RAM_addr(0) = std_logic_vector(to_unsigned(25, weight_addr_size)) else
-                     (OTHERS => '0') when to_integer(unsigned(weight_RAM_addr(0))) < 392 and to_integer(unsigned(weight_RAM_addr(0))) >= 196 else
-                     (OTHERS => '1');
 
 weight_ram_inst : weight_RAM -- A is read, B is write
     port map(
