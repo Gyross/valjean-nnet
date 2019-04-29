@@ -89,7 +89,7 @@ architecture Behavioral of AXI_CTRL is
         SIGNAL state, state_next : AXI_state;
 begin
     
-    process(clk, reset)
+    process(clk)
     begin
         if rising_edge(clk) then -- go to state NOP if reset. 
             if reset = '1' then
@@ -116,6 +116,7 @@ begin
     
     process(state, AWVALID, AWADDR, WVALID, ARADDR, ARVALID, ctrl_OV)
     begin
+        state_next <= state;
         case state is
         when NOP =>
             if AWADDR = 1 and AWVALID = '1' then
@@ -164,10 +165,11 @@ begin
     
     --CHECK THIS!!!! WE ARE ONLY SENDING 16 BITS OF THE 32 to CTRL UNIT and WDATA IS 32 BITS
     --ctrl_data  <= WDATA(output_width-1 downto 0)?
-    ctrl_data  <= WDATA;
+    ctrl_data  <= WDATA(output_width-1 downto 0);
     ctrl_state <= state;
 
-    sig_RDATA  <= OREG_data;
+    sig_RDATA(output_width-1 downto 0)  <= OREG_data;
+    sig_RDATA(input_width-1 downto output_width) <= (OTHERS => '0');
     sig_RVALID <= '1' when state = READ else '0'; 
     sig_WREADY <= '1' when (state = NOP and sig_wram_en = '1') or (state = BIO and sig_ctrl_V = '1') else '0';
     sig_AWREADY<= sig_WREADY;

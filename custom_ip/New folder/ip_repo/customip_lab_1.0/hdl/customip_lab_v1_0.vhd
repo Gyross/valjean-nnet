@@ -103,13 +103,15 @@ architecture arch_imp of customip_lab_v1_0 is
     
     component weight_RAM is
         port(
-        clk : in std_logic;
-        en : in std_logic;
-        we : in std_logic;
-        rst : in std_logic;
-        addr : in w_addr_array;
-        di : in std_logic_vector(bit_width-1 downto 0);
-        do : out data_array
+            clkA  : in  std_logic;
+            clkB  : in  std_logic;
+            enA   : in  std_logic;
+            enB   : in  std_logic;
+            weB   : in  std_logic;
+            addrA : in  w_addr_array;
+            addrB : in  integer;
+            diB   : in  std_logic_vector(WIDTHB - 1 downto 0);
+            doA   : out data_array
         );
     end component;
     
@@ -130,7 +132,8 @@ architecture arch_imp of customip_lab_v1_0 is
         Port ( clk : in STD_LOGIC;
                reset : in STD_LOGIC := '0';
                load : in STD_LOGIC := '0';
-               addr : in STD_LOGIC_VECTOR (output_addr_size-1 downto 0);
+               addri : in STD_LOGIC_VECTOR (output_addr_size-1 downto 0);
+               addro : in integer;
                di : in output_array;
                do : out STD_LOGIC_VECTOR (output_width-1 downto 0));
     end component;
@@ -159,10 +162,7 @@ architecture arch_imp of customip_lab_v1_0 is
             port ( 
                 clk : in STD_LOGIC;
                 reset : in STD_LOGIC;
-                AXI_valid : in STD_LOGIC;
-                AXI_ready : out STD_LOGIC;
                 weight_RAM_enable : out STD_LOGIC;
-                weight_RAM_w_enable : out STD_LOGIC;
                 weight_RAM_rst : out STD_LOGIC;
                 weight_RAM_addr : out w_addr_array;
                 bb_addr : out STD_LOGIC_VECTOR(buffer_addr_size-1 downto 0);
@@ -182,7 +182,7 @@ architecture arch_imp of customip_lab_v1_0 is
                 ov : out std_logic;
                 state_input : in axi_state;
                 R : out std_logic;
-                v : out std_logic;
+                v : in std_logic;
                 axi_data_out : out std_logic_vector(output_width-1 downto 0)
                 );
             end component;
@@ -256,7 +256,7 @@ begin
             ctrl_R    => sig_R,
             ctrl_V    => sig_V,
             ctrl_data => b_input_init,
-            WDATA     => s00_axi_awaddr,
+            WDATA     => s00_axi_wdata,
             WVALID    => s00_axi_wvalid,
             AWADDR    => to_integer(unsigned(s00_axi_awaddr)),
             ARADDR    => to_integer(unsigned(s00_axi_araddr)),
@@ -366,7 +366,8 @@ output_regs : out_registers
         clk => s00_axi_aclk,
         reset => output_RAM_rst,
         load => output_RAM_w_enable,
-        addr => output_RAM_addr,
+        addri => output_RAM_addr,
+        addro => output_RAM_addr_read,
         di => vecmult_dataout,
         do => output_RAM_data_read
     );
@@ -375,15 +376,17 @@ weight_RAM_datain <= (OTHERS => '0') when weight_RAM_addr(0) = std_logic_vector(
                      (OTHERS => '0') when to_integer(unsigned(weight_RAM_addr(0))) < 392 and to_integer(unsigned(weight_RAM_addr(0))) >= 196 else
                      (OTHERS => '1');
 
-weight_ram_inst : weight_RAM
+weight_ram_inst : weight_RAM -- A is read, B is write
     port map(
-       clk => s00_axi_aclk,
-       en => weight_RAM_enable,
-       we => weight_RAM_w_enable,
-       rst => weight_RAM_rst,
-       addr => weight_RAM_addr,
-       di => weight_RAM_datain,
-       do => weight_RAM_dataout
+        clkA => s00_axi_aclk,
+        clkB => s00_axi_aclk,
+        enA  => weight_RAM_enable,
+        enB  => weight_RAM_w_enable,
+        weB  => weight_RAM_w_enable,
+        addrA=> weight_RAM_addr,
+        addrB=> weight_RAM_addr_write,
+        diB  => weight_RAM_datain,
+        doA  => weight_RAM_dataout
   );
   
   binarised_buffer_inst : binarised_buffer
@@ -398,18 +401,11 @@ weight_ram_inst : weight_RAM
     port map(
         clk => s00_axi_aclk,
         reset => '0',
-        AXI_valid => '1',
-        AXI_ready => AXI_ready,
         
         --NOT CONNECTED TO WEIGHT RAM, JUST LEAVE OPEN FOR NOW
-        --weight_RAM_enable => weight_RAM_enable,
-        --weight_RAM_w_enable => weight_RAM_w_enable,
-        --weight_RAM_rst => weight_RAM_rst,
-        --weight_RAM_addr => weight_RAM_addr,        
-        weight_RAM_enable => open,        
-        weight_RAM_w_enable => open,
-        weight_RAM_rst => open,
-        weight_RAM_addr => open,
+        weight_RAM_enable => weight_RAM_enable,
+        weight_RAM_rst => weight_RAM_rst,
+        weight_RAM_addr => weight_RAM_addr,
         
         bb_addr => bb_addr,
         output_RAM_enable => output_RAM_enable,
@@ -431,7 +427,6 @@ weight_ram_inst : weight_RAM
         v => sig_V,
         axi_data_out => b_input_init    
     );
-
     
     datain0 <= X"deadbeef";
     datain1 <= X"deadbead";

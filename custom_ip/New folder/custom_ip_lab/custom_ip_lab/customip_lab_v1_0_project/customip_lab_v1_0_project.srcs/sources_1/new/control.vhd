@@ -36,10 +36,7 @@ entity control is
     port ( 
         clk : in STD_LOGIC;
         reset : in STD_LOGIC;
-        AXI_valid : in STD_LOGIC;
-        AXI_ready : out STD_LOGIC;
         weight_RAM_enable : out STD_LOGIC;
-        weight_RAM_w_enable : out STD_LOGIC;
         weight_RAM_rst : out STD_LOGIC;
         weight_RAM_addr : out w_addr_array;
         bb_addr : out STD_LOGIC_VECTOR(buffer_addr_size-1 downto 0);
@@ -59,14 +56,11 @@ entity control is
         ov : out std_logic;
         state_input : in axi_state;
         R : out std_logic;
-        v : out std_logic;
+        v : in std_logic;
         axi_data_out : out std_logic_vector(output_width-1 downto 0));
 end control;
 
 architecture Behavioral of control is
-
-TYPE State_type IS (Idle, Load_weights, Load_input, Calculate, Done);  -- Define the states
-	SIGNAL state, state_next : State_Type;
 
 signal w_count_enable : STD_LOGIC := '0';
 signal w_count_reset : STD_LOGIC := '0';
@@ -97,6 +91,7 @@ signal forward_output_delay : STD_LOGIC := '0';
 signal layer : natural range 0 to 2 := 0;
 signal w_incr : natural range 1 to weight_ram_size := 1;
 signal nbo_incr : natural range 1 to output_ram_size := 1;
+signal ready_delay : std_logic := '0';
 
 component counter is
     Generic (count_limit : natural range 0 to 2000);
@@ -113,15 +108,11 @@ begin
     process(clk, reset)
     begin
         if (reset = '1') then -- go to state zero if reset
-            state <= Idle;
             forward_output <= '0';
+            R <= '0';
         elsif (rising_edge(clk)) then -- otherwise update the states
-            state <= state_next;
-            if forward_output_delay = '1' then
-                forward_output <= '1';
-            else
-                forward_output <= '0';
-            end if;
+            forward_output <= forward_output_delay;
+            R <= ready_delay;
         end if; 
     end process;
     
@@ -170,9 +161,8 @@ begin
     
     bb_addr <= std_logic_vector(to_unsigned(b_addr, buffer_addr_size));
     
-    process(state, i_addr, w_addr, b_addr, o_addr, nbo_addr, AXI_valid, layer)
+    process(state_input, i_addr, w_addr, b_addr, o_addr, nbo_addr, layer, v)
     begin
-        state_next <= state;
         
         IO_RAM_rst <= '0';
         IO_RAM_enable <= '1';
@@ -180,7 +170,6 @@ begin
         
         weight_RAM_rst <= '0';
         weight_RAM_enable <= '1';
-        weight_RAM_w_enable <= '0';
                 
         output_RAM_rst <= '0';
         output_RAM_enable <= '1';
@@ -215,40 +204,24 @@ begin
         w_incr <= 1;
         nbo_incr <= num_units;
         
-        AXI_ready <= '0';
+        ready_delay <= '0';
+        ov <= '0';
         
-        if (state = Idle) then
+        if (state_input = NOP) then
             weight_RAM_rst <= '1';
             IO_RAM_rst <= '1';
             output_RAM_rst <= '1';
-            AXI_ready <= '1';
-            if AXI_valid = '1' then
-                state_next <= Load_weights;
-            end if;
-        elsif (state = Load_weights) then
-            AXI_ready <= '1';
-            weight_RAM_w_enable <= '1';
-            w_count_enable <= '1';
-            if w_addr = WEIGHT_LAST_IDX(2) then
-                state_next <= Load_input;
-                w_count_reset <= '1';
-            end if;
-        elsif (state = Load_input) then
-            AXI_ready <= '1';
+        elsif (state_input = BIO) then
             
-            IO_RAM_w_enable <= '1';
+            IO_RAM_w_enable <= v;
+            ready_delay <= v;
             o_count_enable <= '1';
             load_input_en <= '1';
             if o_addr = LAYER_LAST_IDX(0) then
-                state_next <= Calculate;
                 o_count_in <= LAYER_FIRST_IDX(1);
                 o_count_reset <= '1';
-                acc_en <= '1';
-                acc_reset <= '0';
-                w_count_enable <= '1';
-                i_count_enable <= '1';
             end if;
-        elsif (state = Calculate) then -- state = Calculate
+        elsif (state_input = CALC) then
             acc_en <= '1';
             acc_reset <= '0';
             w_count_enable <= '1';
@@ -288,15 +261,11 @@ begin
 
             for i in 0 to num_units-1 loop
                 if (layer = 2 and nbo_addr >= output_ram_size) then
-                    state_next <= Done;
-                    nbo_count_reset <= '1';
+                    ov <= '1';
                 end if;
             end loop;
         else -- state = Done
-            nbo_incr <= 1;
-            if (nbo_addr < output_ram_size-1) then
-                nbo_count_enable <= '1';
-            end if;
+            
         end if;
         
         for i in 0 to num_units-1 loop

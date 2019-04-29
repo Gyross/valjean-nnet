@@ -43,7 +43,7 @@ package data_types is
     constant buffer_addr_size : integer := 4;
     constant weight_addr_size : integer := 11;
     constant buffer_size : integer := 16; -- must equal bit_width
-    constant num_units : integer := 4; -- must be a multiple of buffer_size
+    constant num_units : integer := 1; -- must be a multiple of buffer_size
     
     type data_array is array (natural range 0 to num_units-1) of std_logic_vector(bit_width-1 downto 0);
     type output_array is array (natural range 0 to num_units-1) of std_logic_vector(output_width-1 downto 0);
@@ -62,4 +62,11 @@ package data_types is
     constant WEIGHT_FIRST_IDX : LAYER_INFO := (0, 1568, 1632, 0);
     
     type AXI_state is (NOP, BIO, CALC, READ);
+    
+    constant WIDTHA     : integer := 16;
+    constant SIZEA      : integer := 1652;
+    constant ADDRWIDTHA : integer := 11;
+    constant WIDTHB     : integer := 32;
+    constant SIZEB      : integer := 826;
+    constant ADDRWIDTHB : integer := 10;
 end data_types;

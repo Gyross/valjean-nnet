@@ -11,9 +11,9 @@ echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executi
 exit
 
 if [ -z "$PATH" ]; then
-  PATH=D:/Programs2/Xilinx/SDK/2017.2/bin;D:/Programs2/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;D:/Programs2/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64:D:/Programs2/Xilinx/Vivado/2017.2/bin
+  PATH=C:/Xilinx/SDK/2017.2/bin;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64:C:/Xilinx/Vivado/2017.2/bin
 else
-  PATH=D:/Programs2/Xilinx/SDK/2017.2/bin;D:/Programs2/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;D:/Programs2/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64:D:/Programs2/Xilinx/Vivado/2017.2/bin:$PATH
+  PATH=C:/Xilinx/SDK/2017.2/bin;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64:C:/Xilinx/Vivado/2017.2/bin:$PATH
 fi
 export PATH
 
@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/James/Documents/RTL/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1'
+HD_PWD='C:/Users/X4/Documents/GitHub/valjean-nnet/custom_ip/New folder/custom_ip_lab/custom_ip_lab/customip_lab_v1_0_project/customip_lab_v1_0_project.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
