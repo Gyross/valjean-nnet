@@ -8,11 +8,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "bnn.h"
 #include "xorgens.h"
 #include "energy.h"
 
 #define ANNEAL_PRINT_DEBUG
+
+#define ITERATIONS_PER_AUTOSAVE 1000
 
 struct perturb_list* perturb_list_create() {
     struct perturb_list* new_perturb = malloc( sizeof(struct perturb_list) );
@@ -223,12 +226,18 @@ void anneal( BNN bnn, dataset ds ) {
 
     double energy;
 
+    uint32_t autosave_counter = 0;
+    char autosave_filename[FILENAME_LENGTH];
+    strcpy(autosave_filename, bnn_filename);
+    strcat(autosave_filename, ".autosave");
+
     anneal_init( bnn, state, ds );
 
     // TODO potentially implement annealing resets
 
     while ( !anneal_end(state) ) {
         ++state->iteration;
+        ++autosave_counter;
 
         #ifdef ANNEAL_PRINT_DEBUG
             printf("\nIteration: %u\n", state->iteration);
@@ -270,7 +279,17 @@ void anneal( BNN bnn, dataset ds ) {
         perturb_list_free(perturbation);
 
         anneal_cool(state);
+
+        // Periodically autosave the bnn
+        if ( autosave_counter >= ITERATIONS_PER_AUTOSAVE ) {
+            autosave_counter = 0;
+            bnn_write(bnn, autosave_filename);
+        }
     }
+
+
+    // Final autosave
+    bnn_write(bnn, autosave_filename);
 
     // Final energy runs on the full dataset
     energy = compute_energy(bnn, ds, dataset_num_cases(ds), &frac_correct_new, 1);
