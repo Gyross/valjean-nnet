@@ -180,7 +180,7 @@ architecture arch_imp of customip_lab_v1_0 is
                 acc_en : out STD_LOGIC;
                 forward_output : out STD_LOGIC;
                 ov : out std_logic;
-                state : in axi_state;
+                state_input : in axi_state;
                 R : out std_logic;
                 v : out std_logic;
                 axi_data_out : out std_logic_vector(output_width-1 downto 0)
@@ -231,6 +231,7 @@ architecture arch_imp of customip_lab_v1_0 is
     signal forward_output : STD_LOGIC := '0';
     
     signal sign_output : std_logic_vector(num_units-1 downto 0) := (OTHERS => '0');
+    
     
     signal reset : std_logic;
     signal OV: std_logic := '0';
@@ -399,10 +400,17 @@ weight_ram_inst : weight_RAM
         reset => '0',
         AXI_valid => '1',
         AXI_ready => AXI_ready,
-        weight_RAM_enable => weight_RAM_enable,
-        weight_RAM_w_enable => weight_RAM_w_enable,
-        weight_RAM_rst => weight_RAM_rst,
-        weight_RAM_addr => weight_RAM_addr,
+        
+        --NOT CONNECTED TO WEIGHT RAM, JUST LEAVE OPEN FOR NOW
+        --weight_RAM_enable => weight_RAM_enable,
+        --weight_RAM_w_enable => weight_RAM_w_enable,
+        --weight_RAM_rst => weight_RAM_rst,
+        --weight_RAM_addr => weight_RAM_addr,        
+        weight_RAM_enable => open,        
+        weight_RAM_w_enable => open,
+        weight_RAM_rst => open,
+        weight_RAM_addr => open,
+        
         bb_addr => bb_addr,
         output_RAM_enable => output_RAM_enable,
         output_RAM_w_enable => output_RAM_w_enable,
@@ -416,9 +424,9 @@ weight_ram_inst : weight_RAM
         load_input_en => load_input_en,
         acc_reset => acc_reset,
         acc_en => acc_en,
-        forward_output => forward_output
+        forward_output => forward_output,
         ov => OV,
-        state => state,
+        state_input => state,
         R => sig_R,
         v => sig_V,
         axi_data_out => b_input_init    

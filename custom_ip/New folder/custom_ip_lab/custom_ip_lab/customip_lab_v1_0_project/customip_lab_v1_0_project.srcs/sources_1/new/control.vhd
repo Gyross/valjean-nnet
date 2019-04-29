@@ -57,7 +57,7 @@ entity control is
         acc_en : out STD_LOGIC;
         forward_output : out STD_LOGIC;
         ov : out std_logic;
-        state : in axi_state;
+        state_input : in axi_state;
         R : out std_logic;
         v : out std_logic;
         axi_data_out : out std_logic_vector(output_width-1 downto 0));
