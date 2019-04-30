@@ -55,12 +55,7 @@ entity control is
         load_input_en : out STD_LOGIC;
         acc_reset : out STD_LOGIC;
         acc_en : out STD_LOGIC;
-        forward_output : out STD_LOGIC;
-        ov : out std_logic;
-        state : in axi_state;
-        R : out std_logic;
-        v : out std_logic;
-        axi_data_out : out std_logic_vector(output_width-1 downto 0));
+        forward_output : out STD_LOGIC);
 end control;
 
 architecture Behavioral of control is

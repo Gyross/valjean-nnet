@@ -49,46 +49,44 @@ end customip_lab_v1_0;
 
 architecture arch_imp of customip_lab_v1_0 is
 
-    
-    
---	-- component declaration
---	component customip_lab_v1_0_S00_AXI is
---		generic (
---		C_S_AXI_DATA_WIDTH	: integer	:= 32;
---		C_S_AXI_ADDR_WIDTH	: integer	:= 4
---		);
---		port (
---		S_AXI_ACLK	: in std_logic;
---		S_AXI_ARESETN	: in std_logic;
---		S_AXI_AWADDR	: in std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
---		S_AXI_AWPROT	: in std_logic_vector(2 downto 0);
---		S_AXI_AWVALID	: in std_logic;
---		S_AXI_AWREADY	: out std_logic;
---		S_AXI_WDATA	: in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---		S_AXI_WSTRB	: in std_logic_vector((C_S_AXI_DATA_WIDTH/8)-1 downto 0);
---		S_AXI_WVALID	: in std_logic;
---		S_AXI_WREADY	: out std_logic;
---		S_AXI_BRESP	: out std_logic_vector(1 downto 0);
---		S_AXI_BVALID	: out std_logic;
---		S_AXI_BREADY	: in std_logic;
---		S_AXI_ARADDR	: in std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
---		S_AXI_ARPROT	: in std_logic_vector(2 downto 0);
---		S_AXI_ARVALID	: in std_logic;
---		S_AXI_ARREADY	: out std_logic;
---		S_AXI_RDATA	: out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---		S_AXI_RRESP	: out std_logic_vector(1 downto 0);
---		S_AXI_RVALID	: out std_logic;
---		S_AXI_RREADY	: in std_logic;
---		datain0   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        datain1   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        datain2   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        datain3   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        dataout0   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        dataout1   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        dataout2   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
---        dataout3   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0)
---		);
---	end component customip_lab_v1_0_S00_AXI;
+	-- component declaration
+	component customip_lab_v1_0_S00_AXI is
+		generic (
+		C_S_AXI_DATA_WIDTH	: integer	:= 32;
+		C_S_AXI_ADDR_WIDTH	: integer	:= 4
+		);
+		port (
+		S_AXI_ACLK	: in std_logic;
+		S_AXI_ARESETN	: in std_logic;
+		S_AXI_AWADDR	: in std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
+		S_AXI_AWPROT	: in std_logic_vector(2 downto 0);
+		S_AXI_AWVALID	: in std_logic;
+		S_AXI_AWREADY	: out std_logic;
+		S_AXI_WDATA	: in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+		S_AXI_WSTRB	: in std_logic_vector((C_S_AXI_DATA_WIDTH/8)-1 downto 0);
+		S_AXI_WVALID	: in std_logic;
+		S_AXI_WREADY	: out std_logic;
+		S_AXI_BRESP	: out std_logic_vector(1 downto 0);
+		S_AXI_BVALID	: out std_logic;
+		S_AXI_BREADY	: in std_logic;
+		S_AXI_ARADDR	: in std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
+		S_AXI_ARPROT	: in std_logic_vector(2 downto 0);
+		S_AXI_ARVALID	: in std_logic;
+		S_AXI_ARREADY	: out std_logic;
+		S_AXI_RDATA	: out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+		S_AXI_RRESP	: out std_logic_vector(1 downto 0);
+		S_AXI_RVALID	: out std_logic;
+		S_AXI_RREADY	: in std_logic;
+		datain0   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        datain1   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        datain2   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        datain3   :   in std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        dataout0   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        dataout1   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        dataout2   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
+        dataout3   :   out std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0)
+		);
+	end component customip_lab_v1_0_S00_AXI;
 	
 	component vecmult is
         Port ( input : in STD_LOGIC_VECTOR (bit_width-1 downto 0);
@@ -178,13 +176,7 @@ architecture arch_imp of customip_lab_v1_0 is
                 load_input_en : out STD_LOGIC;
                 acc_reset : out STD_LOGIC;
                 acc_en : out STD_LOGIC;
-                forward_output : out STD_LOGIC;
-                ov : out std_logic;
-                state : in axi_state;
-                R : out std_logic;
-                v : out std_logic;
-                axi_data_out : out std_logic_vector(output_width-1 downto 0)
-                );
+                forward_output : out STD_LOGIC);
             end component;
     
     signal datain0, datain1, datain2, datain3       : std_logic_vector(31 downto 0) := (OTHERS => '0');
@@ -203,15 +195,13 @@ architecture arch_imp of customip_lab_v1_0 is
     
     --Weight Ram Signals
     signal weight_RAM_addr : w_addr_array := (OTHERS => (OTHERS => '0'));
-    signal weight_RAM_addr_write : integer := 0;
-    signal weight_RAM_datain : std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0) := (OTHERS => '0');
+    signal weight_RAM_datain : std_logic_vector(bit_width-1 downto 0) := (OTHERS => '0');
     signal weight_RAM_dataout : data_array := (OTHERS => (OTHERS => '0'));
     signal weight_RAM_enable, weight_RAM_w_enable, weight_RAM_rst :std_logic := '0';
     
     --Output Ram Signals
     signal output_RAM_addr : std_logic_vector(output_addr_size-1 downto 0) := (OTHERS => '0');
-    signal output_RAM_addr_read : integer := 0;
-    signal output_RAM_data_read : std_logic_vector(output_width-1 downto 0) := (OTHERS => '0');
+    signal output_RAM_dataout : std_logic_vector(output_width-1 downto 0) := (OTHERS => '0');
     signal output_RAM_enable, output_RAM_w_enable, output_RAM_rst :std_logic := '0';
     
     --Vecmult unit signals
@@ -232,81 +222,48 @@ architecture arch_imp of customip_lab_v1_0 is
     
     signal sign_output : std_logic_vector(num_units-1 downto 0) := (OTHERS => '0');
     
-    signal reset : std_logic;
-    signal OV: std_logic := '0';
-    signal state: AXI_state;
-    signal sig_R: std_logic;
-    signal sig_V: std_logic;
+    
 
 begin                   
-    reset <= not s00_axi_aresetn;
-    
-    axi_ctrl : entity work.AXI_CTRL
-        port map (
-            clk => s00_axi_aclk,
-            reset => reset,
-            wram_addr => weight_RAM_addr_write,
-            wram_data => weight_RAM_datain,
-            wram_en   => weight_RAM_w_enable,
-            OREG_addr => output_RAM_addr_read,
-            OREG_data => output_RAM_data_read,
-            ctrl_OV   => OV,
-            ctrl_State=> state,
-            ctrl_R    => sig_R,
-            ctrl_V    => sig_V,
-            ctrl_data => b_input_init,
-            WDATA     => s00_axi_awaddr,
-            WVALID    => s00_axi_wvalid,
-            AWADDR    => to_integer(unsigned(s00_axi_awaddr)),
-            ARADDR    => to_integer(unsigned(s00_axi_araddr)),
-            AWVALID   => s00_axi_awvalid,
-            ARVALID   => s00_axi_arvalid,
-            RDATA     => s00_axi_rdata,
-            RVALID    => s00_axi_rvalid,
-            WREADY    => s00_axi_wready,
-            AWREADY   => s00_axi_awready,
-            RREADY    => s00_axi_rready,
-            ARREADY   => s00_axi_arready,
-            BVALID    => s00_axi_bvalid
-        );                
----- Instantiation of Axi Bus Interface S00_AXI
---customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI
---	generic map (
---		C_S_AXI_DATA_WIDTH	=> C_S00_AXI_DATA_WIDTH,
---		C_S_AXI_ADDR_WIDTH	=> C_S00_AXI_ADDR_WIDTH
---	)
---	port map (
---		S_AXI_ACLK	=> s00_axi_aclk,
---		S_AXI_ARESETN	=> s00_axi_aresetn,
---		S_AXI_AWADDR	=> s00_axi_awaddr,
---		S_AXI_AWPROT	=> s00_axi_awprot,
---		S_AXI_AWVALID	=> s00_axi_awvalid,
---		S_AXI_AWREADY	=> s00_axi_awready,
---		S_AXI_WDATA	=> s00_axi_wdata,
---		S_AXI_WSTRB	=> s00_axi_wstrb,
---		S_AXI_WVALID	=> s00_axi_wvalid,
---		S_AXI_WREADY	=> s00_axi_wready,
---		S_AXI_BRESP	=> s00_axi_bresp,
---		S_AXI_BVALID	=> s00_axi_bvalid,
---		S_AXI_BREADY	=> s00_axi_bready,
---		S_AXI_ARADDR	=> s00_axi_araddr,
---		S_AXI_ARPROT	=> s00_axi_arprot,
---		S_AXI_ARVALID	=> s00_axi_arvalid,
---		S_AXI_ARREADY	=> s00_axi_arready,
---		S_AXI_RDATA	=> s00_axi_rdata,
---		S_AXI_RRESP	=> s00_axi_rresp,
---		S_AXI_RVALID	=> s00_axi_rvalid,
---		S_AXI_RREADY	=> s00_axi_rready,
---		datain0       => datain0,
---		datain1       => datain1,
---		datain2       => datain2,
---		datain3       => datain3,
+                    
+-- Instantiation of Axi Bus Interface S00_AXI
+customip_lab_v1_0_S00_AXI_inst : customip_lab_v1_0_S00_AXI
+	generic map (
+		C_S_AXI_DATA_WIDTH	=> C_S00_AXI_DATA_WIDTH,
+		C_S_AXI_ADDR_WIDTH	=> C_S00_AXI_ADDR_WIDTH
+	)
+	port map (
+		S_AXI_ACLK	=> s00_axi_aclk,
+		S_AXI_ARESETN	=> s00_axi_aresetn,
+		S_AXI_AWADDR	=> s00_axi_awaddr,
+		S_AXI_AWPROT	=> s00_axi_awprot,
+		S_AXI_AWVALID	=> s00_axi_awvalid,
+		S_AXI_AWREADY	=> s00_axi_awready,
+		S_AXI_WDATA	=> s00_axi_wdata,
+		S_AXI_WSTRB	=> s00_axi_wstrb,
+		S_AXI_WVALID	=> s00_axi_wvalid,
+		S_AXI_WREADY	=> s00_axi_wready,
+		S_AXI_BRESP	=> s00_axi_bresp,
+		S_AXI_BVALID	=> s00_axi_bvalid,
+		S_AXI_BREADY	=> s00_axi_bready,
+		S_AXI_ARADDR	=> s00_axi_araddr,
+		S_AXI_ARPROT	=> s00_axi_arprot,
+		S_AXI_ARVALID	=> s00_axi_arvalid,
+		S_AXI_ARREADY	=> s00_axi_arready,
+		S_AXI_RDATA	=> s00_axi_rdata,
+		S_AXI_RRESP	=> s00_axi_rresp,
+		S_AXI_RVALID	=> s00_axi_rvalid,
+		S_AXI_RREADY	=> s00_axi_rready,
+		datain0       => datain0,
+		datain1       => datain1,
+		datain2       => datain2,
+		datain3       => datain3,
 		
---		dataout0      => dataout0,
---		dataout1      => dataout1,
---		dataout2      => dataout2,
---		dataout3      => dataout3
---	);
+		dataout0      => dataout0,
+		dataout1      => dataout1,
+		dataout2      => dataout2,
+		dataout3      => dataout3
+	);
 
 
 	GEN_VM_UNIT: for i in 0 to num_units-1 generate
@@ -367,7 +324,7 @@ output_regs : out_registers
         load => output_RAM_w_enable,
         addr => output_RAM_addr,
         di => vecmult_dataout,
-        do => output_RAM_data_read
+        do => output_RAM_dataout
     );
     
 weight_RAM_datain <= (OTHERS => '0') when weight_RAM_addr(0) = std_logic_vector(to_unsigned(25, weight_addr_size)) else
@@ -417,11 +374,6 @@ weight_ram_inst : weight_RAM
         acc_reset => acc_reset,
         acc_en => acc_en,
         forward_output => forward_output
-        ov => OV,
-        state => state,
-        R => sig_R,
-        v => sig_V,
-        axi_data_out => b_input_init    
     );
 
     
