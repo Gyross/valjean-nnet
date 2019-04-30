@@ -39,7 +39,7 @@ entity AXI_CTRL is
   
         --wram Ports
         wram_addr : out integer;
-        wram_data : out std_logic_vector(input_width-1 downto 0);
+        wram_data : out std_logic_vector(output_width-1 downto 0);
         wram_en   : out std_logic;
         
         --OReg Ports
@@ -91,14 +91,10 @@ begin
     
     process(clk, reset)
     begin
-        if rising_edge(clk) then -- go to state NOP if reset. 
-            if reset = '1' then
-                state <= NOP; 
-            else
-                state <= state_next; 
-            end if;          
-       
-            
+        if (rising_edge(clk) and reset = '1') then -- go to state NOP if reset. 
+            state <= NOP;            
+        elsif (rising_edge(clk)) then -- otherwise update the states
+            state <= state_next;
         end if; 
     end process;
 
@@ -114,7 +110,7 @@ begin
         end if;
     end process;
     
-    process(state, AWVALID, AWADDR, WVALID, ARADDR, ARVALID, ctrl_OV)
+    process(state, AWVALID, AWADDR, WVALID, ARADDR, ARVALID)
     begin
         case state is
         when NOP =>
@@ -161,9 +157,6 @@ begin
     
     sig_ctrl_V     <= '1' when AWADDR = 1 and AWVALID = '1' and WVALID = '1' else '0';
     ctrl_V <= sig_ctrl_V;
-    
-    --CHECK THIS!!!! WE ARE ONLY SENDING 16 BITS OF THE 32 to CTRL UNIT and WDATA IS 32 BITS
-    --ctrl_data  <= WDATA(output_width-1 downto 0)?
     ctrl_data  <= WDATA;
     ctrl_state <= state;
 
