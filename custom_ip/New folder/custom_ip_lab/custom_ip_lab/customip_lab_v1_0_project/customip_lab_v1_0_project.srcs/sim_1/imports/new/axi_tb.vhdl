@@ -220,27 +220,47 @@ begin
         -- Demonstrates a failing test 
         procedure test_failure is
         begin
-            -- axi_writel(X"00000000", X"deadbeef");
+            axi_writel(X"00000000", X"deadbeef");
             axi_readlc(X"00000000", X"deadbeef", "Ignore this error; it is a demonstration of failure");
         end procedure;
         
         procedure test_run is
         begin
-            axi_writel(X"00000000", X"abcddcba");
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
-            axi_clock(1);
+            for i in 0 to 299 loop
+                axi_writel(X"00000000", X"abcddcba");
+            end loop;
+            for i in 300 to 599 loop
+                axi_writel(X"00000000", X"abcd0131");
+            end loop;
+            for i in 600 to 999 loop
+                axi_writel(X"00000000", X"abcd9999");
+            end loop;
+            for i in 1000 to 1249 loop
+                axi_writel(X"00000000", X"abcdffff");
+            end loop;
+            for i in 1250 to 1651 loop
+                axi_writel(X"00000000", X"39571398");
+            end loop;
+            for i in 0 to 23 loop
+                axi_writel(X"00000001", X"a462c040");
+            end loop;
+            axi_writel(X"00000001", X"00009352");
+            axi_writel(X"00000001", X"0000b412");
+            axi_writel(X"00000001", X"0000058c");
+            for i in 27 to 48 loop
+                axi_writel(X"00000001", X"0000aaff");
+            end loop;
+            
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
+            axi_readlc(X"00000002", X"00000000", "ignore error");
         end procedure;
         
         
@@ -249,8 +269,8 @@ begin
         REPORT "############# AXI test started ##############";
         
         -- Start tests
-        test_memory;
-        test_failure;
+        --test_memory;
+        --test_failure;
         test_run;
 
         -- All tests complete

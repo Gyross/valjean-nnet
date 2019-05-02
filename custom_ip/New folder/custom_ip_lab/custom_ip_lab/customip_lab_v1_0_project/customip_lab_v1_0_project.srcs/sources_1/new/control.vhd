@@ -36,8 +36,9 @@ entity control is
     port ( 
         clk : in STD_LOGIC;
         reset : in STD_LOGIC;
-        AXI_valid : in STD_LOGIC;
-        AXI_ready : out STD_LOGIC;
+        wram_en : in STD_LOGIC;
+        bioram_en : in STD_LOGIC;
+        ctrl_state : in AXI_state;
         weight_RAM_enable : out STD_LOGIC;
         weight_RAM_w_enable : out STD_LOGIC;
         weight_RAM_rst : out STD_LOGIC;
@@ -55,13 +56,11 @@ entity control is
         load_input_en : out STD_LOGIC;
         acc_reset : out STD_LOGIC;
         acc_en : out STD_LOGIC;
-        forward_output : out STD_LOGIC);
+        forward_output : out STD_LOGIC;
+        OREG_done : out STD_LOGIC);
 end control;
 
 architecture Behavioral of control is
-
-TYPE State_type IS (Idle, Load_weights, Load_input, Calculate, Done);  -- Define the states
-	SIGNAL state, state_next : State_Type;
 
 signal w_count_enable : STD_LOGIC := '0';
 signal w_count_reset : STD_LOGIC := '0';
@@ -107,11 +106,9 @@ begin
 
     process(clk, reset)
     begin
-        if (reset = '1') then -- go to state zero if reset
-            state <= Idle;
+        if (reset = '1') then 
             forward_output <= '0';
-        elsif (rising_edge(clk)) then -- otherwise update the states
-            state <= state_next;
+        elsif (rising_edge(clk)) then
             if forward_output_delay = '1' then
                 forward_output <= '1';
             else
@@ -164,23 +161,20 @@ begin
                 increment => num_units );
     
     bb_addr <= std_logic_vector(to_unsigned(b_addr, buffer_addr_size));
+    weight_RAM_w_enable <= wram_en;
+    weight_RAM_rst <= '0';
+    weight_RAM_enable <= '1';
+    IO_RAM_rst <= '0';
+    IO_RAM_enable <= '1';
+    output_RAM_rst <= '0';
+    output_RAM_enable <= '1';
+    nbo_incr <= num_units;
     
-    process(state, i_addr, w_addr, b_addr, o_addr, nbo_addr, AXI_valid, layer)
+    process(ctrl_state, i_addr, w_addr, b_addr, o_addr, nbo_addr, layer, bioram_en)
     begin
-        state_next <= state;
         
-        IO_RAM_rst <= '0';
-        IO_RAM_enable <= '1';
         IO_RAM_w_enable <= '0';
-        
-        weight_RAM_rst <= '0';
-        weight_RAM_enable <= '1';
-        weight_RAM_w_enable <= '0';
-                
-        output_RAM_rst <= '0';
-        output_RAM_enable <= '1';
         output_RAM_w_enable <= '0';
-        
         load_input_en <= '0';
         
         w_count_enable <= '0';
@@ -208,34 +202,19 @@ begin
         
         forward_output_delay <= '0';
         w_incr <= 1;
-        nbo_incr <= num_units;
+        OREG_done <= '0';
         
-        AXI_ready <= '0';
-        
-        if (state = Idle) then
-            weight_RAM_rst <= '1';
-            IO_RAM_rst <= '1';
-            output_RAM_rst <= '1';
-            AXI_ready <= '1';
-            if AXI_valid = '1' then
-                state_next <= Load_weights;
-            end if;
-        elsif (state = Load_weights) then
-            AXI_ready <= '1';
-            weight_RAM_w_enable <= '1';
-            w_count_enable <= '1';
-            if w_addr = WEIGHT_LAST_IDX(2) then
-                state_next <= Load_input;
-                w_count_reset <= '1';
-            end if;
-        elsif (state = Load_input) then
-            AXI_ready <= '1';
-            
-            IO_RAM_w_enable <= '1';
+        if (ctrl_state = NOP) then
+            w_count_reset <= '1';
+            i_count_reset <= '1';
+            o_count_reset <= '1';
+            nbo_count_reset <= '1';
+            b_count_reset <= '1';
+        elsif (ctrl_state = BIO) then
+            IO_RAM_w_enable <= bioram_en;
             o_count_enable <= '1';
             load_input_en <= '1';
             if o_addr = LAYER_LAST_IDX(0) then
-                state_next <= Calculate;
                 o_count_in <= LAYER_FIRST_IDX(1);
                 o_count_reset <= '1';
                 acc_en <= '1';
@@ -243,7 +222,7 @@ begin
                 w_count_enable <= '1';
                 i_count_enable <= '1';
             end if;
-        elsif (state = Calculate) then -- state = Calculate
+        elsif (ctrl_state = Calc) then
             acc_en <= '1';
             acc_reset <= '0';
             w_count_enable <= '1';
@@ -280,18 +259,16 @@ begin
                     nbo_count_enable <= '1';
                 end if;
             end if;
-
-            for i in 0 to num_units-1 loop
-                if (layer = 2 and nbo_addr >= output_ram_size) then
-                    state_next <= Done;
-                    nbo_count_reset <= '1';
-                end if;
-            end loop;
-        else -- state = Done
-            nbo_incr <= 1;
-            if (nbo_addr < output_ram_size-1) then
-                nbo_count_enable <= '1';
+            if (layer = 2 and nbo_addr >= output_ram_size) then
+                nbo_count_reset <= '1';
+                OREG_done <= '1';
             end if;
+        else -- state = Read
+            w_count_reset <= '1';
+            i_count_reset <= '1';
+            o_count_reset <= '1';
+            nbo_count_reset <= '1';
+            b_count_reset <= '1';
         end if;
         
         for i in 0 to num_units-1 loop

@@ -36,7 +36,8 @@ entity out_registers is
     Port ( clk : in STD_LOGIC;
            reset : in STD_LOGIC := '0';
            load : in STD_LOGIC := '0';
-           addr : in STD_LOGIC_VECTOR(output_addr_size-1 downto 0);
+           addri : in STD_LOGIC_VECTOR(output_addr_size-1 downto 0);
+           addro : in STD_LOGIC_VECTOR(output_addr_size-1 downto 0);
            di : in output_array;
            do : out STD_LOGIC_VECTOR (output_width-1 downto 0));
 end out_registers;
@@ -56,7 +57,7 @@ begin
                     Q := (OTHERS => '0');
                 elsif load = '1' then
                     for j in 0 to num_units-1 loop
-                        if (conv_integer(addr)+j = i) then 
+                        if (conv_integer(addri)+j = i) then 
                             Q := di(j);
                         end if;
                     end loop;
@@ -66,5 +67,5 @@ begin
         end process;
     end generate REG_FILE;
     
-    do <= registers_out(conv_integer(addr));
+    do <= registers_out(conv_integer(addro));
 end Behavioral;

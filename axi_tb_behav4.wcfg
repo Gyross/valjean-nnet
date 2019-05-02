@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="21072564261fs"></ZoomStartTime>
-      <ZoomEndTime time="21312564262fs"></ZoomEndTime>
-      <Cursor1Time time="21122364000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="139600001fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="226"></NameColumnWidth>
+      <NameColumnWidth column_width="222"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="88" />
+   <WVObjectSize size="77" />
    <wvobject fp_name="/axi_tb/s00_axi_aclk" type="logic">
       <obj_property name="ElementShortName">s00_axi_aclk</obj_property>
       <obj_property name="ObjectShortName">s00_axi_aclk</obj_property>
@@ -32,50 +32,18 @@
       <obj_property name="ElementShortName">S_AXI_RREADY</obj_property>
       <obj_property name="ObjectShortName">S_AXI_RREADY</obj_property>
    </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain0" type="array">
-      <obj_property name="ElementShortName">datain0[31:0]</obj_property>
-      <obj_property name="ObjectShortName">datain0[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain1" type="array">
-      <obj_property name="ElementShortName">datain1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">datain1[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain2" type="array">
-      <obj_property name="ElementShortName">datain2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">datain2[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/datain3" type="array">
-      <obj_property name="ElementShortName">datain3[31:0]</obj_property>
-      <obj_property name="ObjectShortName">datain3[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout0" type="array">
-      <obj_property name="ElementShortName">dataout0[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataout0[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout1" type="array">
-      <obj_property name="ElementShortName">dataout1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataout1[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout2" type="array">
-      <obj_property name="ElementShortName">dataout2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataout2[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/customip_lab_v1_0_S00_AXI_inst/dataout3" type="array">
-      <obj_property name="ElementShortName">dataout3[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataout3[31:0]</obj_property>
-   </wvobject>
    <wvobject type="divider" fp_name="divider1162">
       <obj_property name="label">VECMULT:</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/vecmult_datain" type="array">
-      <obj_property name="ElementShortName">vecmult_datain[0:3][15:0]</obj_property>
-      <obj_property name="ObjectShortName">vecmult_datain[0:3][15:0]</obj_property>
+      <obj_property name="ElementShortName">vecmult_datain[0:7][15:0]</obj_property>
+      <obj_property name="ObjectShortName">vecmult_datain[0:7][15:0]</obj_property>
       <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/vecmult_dataout" type="array">
-      <obj_property name="ElementShortName">vecmult_dataout[0:3][15:0]</obj_property>
-      <obj_property name="ObjectShortName">vecmult_dataout[0:3][15:0]</obj_property>
+      <obj_property name="ElementShortName">vecmult_dataout[0:7][15:0]</obj_property>
+      <obj_property name="ObjectShortName">vecmult_dataout[0:7][15:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[0]" type="array">
@@ -113,6 +81,38 @@
       <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[3]" type="array">
          <obj_property name="ElementShortName">[3][15:0]</obj_property>
          <obj_property name="ObjectShortName">[3][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[0]" type="array">
+         <obj_property name="ElementShortName">[0][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[1]" type="array">
+         <obj_property name="ElementShortName">[1][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[2]" type="array">
+         <obj_property name="ElementShortName">[2][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[3]" type="array">
+         <obj_property name="ElementShortName">[3][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[3][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[4]" type="array">
+         <obj_property name="ElementShortName">[4][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[4][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[5]" type="array">
+         <obj_property name="ElementShortName">[5][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[5][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[6]" type="array">
+         <obj_property name="ElementShortName">[6][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[6][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_tb/axi0/vecmult_dataout[7]" type="array">
+         <obj_property name="ElementShortName">[7][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[7][15:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/acc_en" type="logic">
@@ -207,56 +207,21 @@
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr" type="array">
-      <obj_property name="ElementShortName">addr[0:3][10:0]</obj_property>
-      <obj_property name="ObjectShortName">addr[0:3][10:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[0]" type="array">
-         <obj_property name="ElementShortName">[0][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[0][10:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[1]" type="array">
-         <obj_property name="ElementShortName">[1][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[1][10:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[2]" type="array">
-         <obj_property name="ElementShortName">[2][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[2][10:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[3]" type="array">
-         <obj_property name="ElementShortName">[3][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[3][10:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[0]" type="array">
-         <obj_property name="ElementShortName">[0][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[0][10:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[1]" type="array">
-         <obj_property name="ElementShortName">[1][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[1][10:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[2]" type="array">
-         <obj_property name="ElementShortName">[2][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[2][10:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addr[3]" type="array">
-         <obj_property name="ElementShortName">[3][10:0]</obj_property>
-         <obj_property name="ObjectShortName">[3][10:0]</obj_property>
-      </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addri" type="array">
+      <obj_property name="ElementShortName">addri[10:0]</obj_property>
+      <obj_property name="ObjectShortName">addri[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/addro" type="array">
+      <obj_property name="ElementShortName">addro[0:7][10:0]</obj_property>
+      <obj_property name="ObjectShortName">addro[0:7][10:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/di" type="array">
       <obj_property name="ElementShortName">di[15:0]</obj_property>
       <obj_property name="ObjectShortName">di[15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/do" type="array">
-      <obj_property name="ElementShortName">do[0:3][15:0]</obj_property>
-      <obj_property name="ObjectShortName">do[0:3][15:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
+      <obj_property name="ElementShortName">do[0:7][15:0]</obj_property>
+      <obj_property name="ObjectShortName">do[0:7][15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/weight_ram_inst/ram" type="array">
       <obj_property name="ElementShortName">ram[1651:0][15:0]</obj_property>
@@ -271,8 +236,8 @@
       <obj_property name="ObjectShortName">addr[3:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/binarised_buffer_inst/sign" type="array">
-      <obj_property name="ElementShortName">sign[3:0]</obj_property>
-      <obj_property name="ObjectShortName">sign[3:0]</obj_property>
+      <obj_property name="ElementShortName">sign[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sign[7:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/binarised_buffer_inst/dataout" type="array">
       <obj_property name="ElementShortName">dataout[15:0]</obj_property>
@@ -287,14 +252,6 @@
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/control_module/AXI_valid" type="logic">
-      <obj_property name="ElementShortName">AXI_valid</obj_property>
-      <obj_property name="ObjectShortName">AXI_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/control_module/AXI_ready" type="logic">
-      <obj_property name="ElementShortName">AXI_ready</obj_property>
-      <obj_property name="ObjectShortName">AXI_ready</obj_property>
-   </wvobject>
    <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_enable" type="logic">
       <obj_property name="ElementShortName">weight_RAM_enable</obj_property>
       <obj_property name="ObjectShortName">weight_RAM_enable</obj_property>
@@ -308,8 +265,8 @@
       <obj_property name="ObjectShortName">weight_RAM_rst</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/control_module/weight_RAM_addr" type="array">
-      <obj_property name="ElementShortName">weight_RAM_addr[0:3][10:0]</obj_property>
-      <obj_property name="ObjectShortName">weight_RAM_addr[0:3][10:0]</obj_property>
+      <obj_property name="ElementShortName">weight_RAM_addr[0:7][10:0]</obj_property>
+      <obj_property name="ObjectShortName">weight_RAM_addr[0:7][10:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/control_module/bb_addr" type="array">
       <obj_property name="ElementShortName">bb_addr[3:0]</obj_property>
@@ -364,14 +321,6 @@
    <wvobject fp_name="/axi_tb/axi0/control_module/acc_en" type="logic">
       <obj_property name="ElementShortName">acc_en</obj_property>
       <obj_property name="ObjectShortName">acc_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/control_module/state" type="other">
-      <obj_property name="ElementShortName">state</obj_property>
-      <obj_property name="ObjectShortName">state</obj_property>
-   </wvobject>
-   <wvobject fp_name="/axi_tb/axi0/control_module/state_next" type="other">
-      <obj_property name="ElementShortName">state_next</obj_property>
-      <obj_property name="ObjectShortName">state_next</obj_property>
    </wvobject>
    <wvobject fp_name="/axi_tb/axi0/control_module/w_count_enable" type="logic">
       <obj_property name="ElementShortName">w_count_enable</obj_property>
