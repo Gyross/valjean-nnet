@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
-| Date         : Thu May  2 21:54:52 2019
+| Date         : Fri May  3 21:57:21 2019
 | Host         : DESKTOP-LSTE79J running 64-bit major release  (build 9200)
 | Command      : report_utilization -file customip_lab_v1_0_utilization_synth.rpt -pb customip_lab_v1_0_utilization_synth.pb
 | Design       : customip_lab_v1_0
@@ -30,13 +30,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                | 7783 |     0 |     53200 | 14.63 |
-|   LUT as Logic             | 3183 |     0 |     53200 |  5.98 |
+| Slice LUTs*                | 7778 |     0 |     53200 | 14.62 |
+|   LUT as Logic             | 3178 |     0 |     53200 |  5.97 |
 |   LUT as Memory            | 4600 |     0 |     17400 | 26.44 |
 |     LUT as Distributed RAM | 4600 |     0 |           |       |
 |     LUT as Shift Register  |    0 |     0 |           |       |
-| Slice Registers            |  621 |     0 |    106400 |  0.58 |
-|   Register as Flip Flop    |  621 |     0 |    106400 |  0.58 |
+| Slice Registers            |  622 |     0 |    106400 |  0.58 |
+|   Register as Flip Flop    |  622 |     0 |    106400 |  0.58 |
 |   Register as Latch        |    0 |     0 |    106400 |  0.00 |
 | F7 Muxes                   |  384 |     0 |     26600 |  1.44 |
 | F8 Muxes                   |    0 |     0 |     13300 |  0.00 |
@@ -59,7 +59,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 621   |          Yes |       Reset |            - |
+| 622   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -149,15 +149,15 @@ Table of Contents
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | RAMD64E  | 4600 |  Distributed Memory |
-| LUT6     | 1976 |                 LUT |
-| FDRE     |  621 |        Flop & Latch |
-| LUT2     |  388 |                 LUT |
+| LUT6     | 1827 |                 LUT |
+| FDRE     |  622 |        Flop & Latch |
+| LUT4     |  472 |                 LUT |
+| LUT2     |  395 |                 LUT |
 | MUXF7    |  384 |               MuxFx |
-| LUT4     |  361 |                 LUT |
 | CARRY4   |  310 |          CarryLogic |
-| LUT3     |  289 |                 LUT |
-| LUT5     |  228 |                 LUT |
-| LUT1     |  169 |                 LUT |
+| LUT3     |  307 |                 LUT |
+| LUT5     |  246 |                 LUT |
+| LUT1     |  168 |                 LUT |
 | OBUF     |   41 |                  IO |
 | IBUF     |   31 |                  IO |
 | BUFG     |    1 |               Clock |

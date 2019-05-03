@@ -212,15 +212,11 @@ begin
             b_count_reset <= '1';
         elsif (ctrl_state = BIO) then
             IO_RAM_w_enable <= bioram_en;
-            o_count_enable <= '1';
+            o_count_enable <= bioram_en;
             load_input_en <= '1';
             if o_addr = LAYER_LAST_IDX(0) then
                 o_count_in <= LAYER_FIRST_IDX(1);
                 o_count_reset <= '1';
-                acc_en <= '1';
-                acc_reset <= '0';
-                w_count_enable <= '1';
-                i_count_enable <= '1';
             end if;
         elsif (ctrl_state = Calc) then
             acc_en <= '1';

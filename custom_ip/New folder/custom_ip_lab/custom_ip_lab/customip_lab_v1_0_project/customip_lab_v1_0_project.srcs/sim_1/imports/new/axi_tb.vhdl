@@ -148,25 +148,17 @@ begin
         begin
             s00_axi_wdata    <= d;
             s00_axi_wvalid   <= '1';
-            axi_clock(1);                       -- CLK 1
-            axi_clock(1);                       -- CLK 2
             s00_axi_awaddr   <= a;
             s00_axi_awvalid  <= '1';
-            axi_clock(1);                       -- CLK 3
-            axi_clock(1);                       -- CLK 4
+            --while (s00_axi_awready = '0' or s00_axi_wready = '0') loop
+                axi_clock(1);
+            --end loop;
             ASSERT(s00_axi_awready = '1')  REPORT "AXI protocol error awready not 1" SEVERITY error;
             ASSERT(s00_axi_wready = '1')   REPORT "AXI protocol error wready not 1" SEVERITY error;
-            s00_axi_awvalid  <= '0';
-            s00_axi_wvalid   <= '0';
-            s00_axi_awaddr   <= X"deadbeef";
-            axi_clock(1);                       -- CLK 5
-            ASSERT(s00_axi_awready = '0')  REPORT "AXI protocol error awready not 0" SEVERITY error;
-            ASSERT(s00_axi_wready = '0')   REPORT "AXI protocol error wready not 0" SEVERITY error;            ASSERT(s00_axi_bvalid = '1')   REPORT "AXI protocol error bvalid not 1" SEVERITY error;
-            s00_axi_bready   <= '0';
-            axi_clock(1);                       -- CLK 6
-            ASSERT(s00_axi_bvalid = '0')   REPORT "AXI protocol error bvalid not 0" SEVERITY error;
-            s00_axi_bready   <= '1';
-            axi_clock(11);                      -- Relax
+--            s00_axi_awvalid  <= '0';
+--            s00_axi_wvalid   <= '0';
+--            s00_axi_awaddr   <= X"deadbeef";
+--            axi_clock(1);
         end procedure;
         
         -- Read from the AXI bus at address 'a' and return the result
@@ -175,19 +167,46 @@ begin
         begin            
             s00_axi_araddr   <= a;
             s00_axi_arvalid  <= '1';
-            axi_clock(1);                         -- CLK 1
-            axi_clock(1);                         -- CLK 2
+            while s00_axi_arready = '0' loop
+                axi_clock(1);                         -- CLK 1
+            end loop;
             ASSERT(s00_axi_arready = '1') REPORT "AXI protocol error arready should be set" SEVERITY error;
             s00_axi_araddr   <= X"deadbeef";            
             s00_axi_arvalid  <= '0';
             axi_clock(1);                         -- CLK 3
             ASSERT(s00_axi_arready = '0') REPORT "AXI protocol error arready should be clear" SEVERITY error;
-            ASSERT(s00_axi_rvalid = '1')  REPORT "AXI protocol error rvalid should be set" SEVERITY error;
+            while (s00_axi_rvalid = '0') loop
+                axi_clock(1);
+            end loop;      
+            ASSERT(s00_axi_rvalid = '1') REPORT "AXI protocol error rvalid should be set"   SEVERITY error;   
             d := s00_axi_rdata;
             axi_clock(1);                         -- CLK 3
             ASSERT(s00_axi_rvalid = '0')  REPORT "AXI protocol error rvalid should be clear" SEVERITY error;
-            -- At some point we should have got the read value back...
-            axi_clock(10);                        -- Relax
+
+        end procedure;
+        
+        -- Read from the AXI bus at address 'a' and return the result
+        procedure axi_readlnonblock(constant a : in  std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                            variable d : out std_logic_vector(AXI_DATA_WIDTH-1 downto 0)) is
+        begin            
+            s00_axi_araddr   <= a;
+            s00_axi_arvalid  <= '1';
+            while s00_axi_arready = '0' loop
+                axi_clock(1);                         -- CLK 1
+            end loop;
+            ASSERT(s00_axi_arready = '1') REPORT "AXI protocol error arready should be set" SEVERITY error;
+            s00_axi_araddr   <= X"deadbeef";            
+            s00_axi_arvalid  <= '0';
+            axi_clock(1);                         -- CLK 3
+            ASSERT(s00_axi_arready = '0') REPORT "AXI protocol error arready should be clear" SEVERITY error;
+            --while (s00_axi_rvalid = '0') loop
+            --    axi_clock(1);
+            --end loop;      
+            ASSERT(s00_axi_rvalid = '1') REPORT "AXI protocol error rvalid should be set"   SEVERITY error;   
+            d := s00_axi_rdata;
+            axi_clock(1);                         -- CLK 3
+            ASSERT(s00_axi_rvalid = '0')  REPORT "AXI protocol error rvalid should be clear" SEVERITY error;
+
         end procedure;
 
         -- Read from address 'a' over the AXI bus and assert that the data read is 'd'
@@ -197,6 +216,16 @@ begin
             variable real_data : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
         begin
             axi_readl(a, real_data);
+            ASSERT(real_data = d)  REPORT "AXI data error: " & s SEVERITY error;
+        end procedure;
+        
+        -- Read from address 'a' over the AXI bus and assert that the data read is 'd' non-blocking
+        procedure axi_readld(constant a : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                             constant d : in std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+                             constant s : string) is
+            variable real_data : std_logic_vector(AXI_DATA_WIDTH-1 downto 0);
+        begin
+            axi_readlnonblock(a, real_data);
             ASSERT(real_data = d)  REPORT "AXI data error: " & s SEVERITY error;
         end procedure;
 
@@ -226,6 +255,7 @@ begin
         
         procedure test_run is
         begin
+        axi_clock(1);
             for i in 0 to 299 loop
                 axi_writel(X"00000000", X"abcddcba");
             end loop;
@@ -250,7 +280,8 @@ begin
             for i in 27 to 48 loop
                 axi_writel(X"00000001", X"0000aaff");
             end loop;
-            
+            axi_readld(X"00000002", X"00000000", "ignore error");
+            axi_clock(200);
             axi_readlc(X"00000002", X"00000000", "ignore error");
             axi_readlc(X"00000002", X"00000000", "ignore error");
             axi_readlc(X"00000002", X"00000000", "ignore error");

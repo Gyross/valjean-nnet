@@ -132,6 +132,7 @@ architecture arch_imp of customip_lab_v1_0_S00_AXI is
 	signal wram_count : integer := 0;
     signal sig_wram_en : std_logic := '0';
     signal sig_bioram_en : std_logic := '0';
+    signal sig_wram_en_delay : std_logic := '0';
     
     signal oreg_rd_en : std_logic;
 
@@ -254,7 +255,7 @@ begin
 	      axi_arready <= '0';
 	      axi_araddr  <= (others => '1');
 	    else
-	      if (axi_arready = '0' and S_AXI_ARVALID = '1') then
+	      if (axi_arready = '0' and S_AXI_ARVALID = '1' and state = READ) then
 	        -- indicates that the slave has acceped the valid read address
 	        axi_arready <= '1';
 	        -- Read Address latching 
@@ -281,7 +282,7 @@ begin
 	      axi_rvalid <= '0';
 	      axi_rresp  <= "00";
 	    else
-	      if (axi_arready = '1' and S_AXI_ARVALID = '1' and axi_rvalid = '0') then
+	      if (axi_arready = '1' and S_AXI_ARVALID = '1' and axi_rvalid = '0' and state = READ) then
 	        -- Valid read data is available at the read data bus
 	        axi_rvalid <= '1';
 	        axi_rresp  <= "00"; -- 'OKAY' response
@@ -335,22 +336,22 @@ begin
         end case;
     end process;
     
-    ctrl_state <= state;
+    ctrl_state <= state_next;
     
 wram_addr_counter : process (S_AXI_ACLK)
     begin
        if rising_edge(S_AXI_ACLK) then
-           if S_AXI_ARESETN = '0' or state /= NOP then
+           if S_AXI_ARESETN = '0' or state_next /= NOP then
                wram_count <= 0;
-           elsif sig_wram_en = '1' then
+           elsif sig_wram_en_delay = '1' then
                wram_count <= wram_count + 1;
            end if;
        end if;
     end process;
     
     wram_addr <= std_logic_vector(to_unsigned(wram_count, weight_addr_size));
-    wram_en <= sig_wram_en;
     sig_wram_en <= '1' when to_integer(unsigned(S_AXI_AWADDR)) = 0 and S_AXI_AWVALID = '1' and S_AXI_WVALID = '1' else '0'; 
+    wram_en <= sig_wram_en_delay;
     
     bioram_en <= sig_bioram_en;
     sig_bioram_en <= '1' when to_integer(unsigned(S_AXI_AWADDR)) = 1 and S_AXI_AWVALID = '1' and S_AXI_WVALID = '1' else '0';
@@ -358,24 +359,27 @@ wram_addr_counter : process (S_AXI_ACLK)
     process (S_AXI_ACLK)
     --    variable loc_addr :std_logic_vector(OPT_MEM_ADDR_BITS downto 0); 
         begin
-            if rising_edge(S_AXI_ACLK) then 
+            if rising_edge(S_AXI_ACLK) then
+                sig_wram_en_delay <= '0';
                 if S_AXI_ARESETN = '0' then
                 wram_data <= (others => '0');
                 bioram_data <= (others => '0');
                 elsif sig_wram_en = '1' then
                     wram_data <= S_AXI_WDATA(bit_width-1 downto 0);
+                    sig_wram_en_delay <= sig_wram_en;
                 elsif sig_bioram_en = '1' then
                     bioram_data <= S_AXI_WDATA(bit_width-1 downto 0);
                 end if;
             end if;                
-    end process; 
+    end process;
+    
 
 oreg_counter : process (S_AXI_ACLK)
     begin
         if rising_edge(S_AXI_ACLK) then
             if S_AXI_ARESETN = '0' or OREG_done = '1' then
                 oreg_count <= 0;
-            elsif oreg_rd_en = '1' then
+            elsif oreg_rd_en = '1' and state = READ then
                 oreg_count <= oreg_count + 1;
             end if;
         end if;
@@ -394,7 +398,7 @@ oreg_counter : process (S_AXI_ACLK)
         if ( S_AXI_ARESETN = '0' ) then
           axi_rdata  <= (others => '0');
         else
-          if (oreg_rd_en = '1') then
+          if (oreg_rd_en = '1') and state = READ then
             -- When there is a valid read address (S_AXI_ARVALID) with 
             -- acceptance of read address by the slave (axi_arready), 
             -- output the read dada 

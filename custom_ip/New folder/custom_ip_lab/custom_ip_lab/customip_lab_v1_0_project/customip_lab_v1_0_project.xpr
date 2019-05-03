@@ -32,7 +32,7 @@
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="zed"/>
     <Option Name="DSANumComputeUnits" Val="16"/>
-    <Option Name="WTXSimLaunchSim" Val="74"/>
+    <Option Name="WTXSimLaunchSim" Val="93"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -225,6 +225,7 @@
         <Option Name="XSimWcfgFile" Val="$PPRDIR/../../../../../axi_tb_behav4.wcfg"/>
         <Option Name="xsim.simulate.runtime" Val="33540 ns"/>
         <Option Name="xsim.simulate.log_all_signals" Val="true"/>
+        <Option Name="xsim.simulate.xsim.more_options" Val="-maxdeltaid 100000"/>
       </Config>
     </FileSet>
   </FileSets>
