@@ -7,6 +7,7 @@
 #include "anneal.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include <string.h>
 #include "bnn.h"
@@ -16,6 +17,8 @@
 #define ANNEAL_PRINT_DEBUG
 
 #define ITERATIONS_PER_AUTOSAVE 1000
+
+#define ITERATIONS_UNTIL_GIVE_UP 100
 
 struct perturb_list* perturb_list_create() {
     struct perturb_list* new_perturb = malloc( sizeof(struct perturb_list) );
@@ -145,7 +148,7 @@ void anneal_revert( BNN bnn, struct perturb_list* p ) {
 
 void anneal_init( BNN bnn, struct anneal_state* state, dataset ds ) {
 
-    state->temperature = 0.1;
+    state->temperature = 0.001;
 
     state->energy = INFINITY;
 
@@ -155,7 +158,7 @@ void anneal_init( BNN bnn, struct anneal_state* state, dataset ds ) {
     state->iteration = 1;
 
     // Number of input cases per annealing step
-    state->batch_size = 2000;
+    state->batch_size = 5000;
 
     // Prevent retardation
     if ( state->batch_size > dataset_num_cases(ds) ) {
@@ -226,6 +229,8 @@ void anneal( BNN bnn, dataset ds ) {
 
     double energy;
 
+    int give_up_counter = 0;
+
     uint32_t autosave_counter = 0;
     char autosave_filename[FILENAME_LENGTH];
     strcpy(autosave_filename, bnn_filename);
@@ -239,13 +244,15 @@ void anneal( BNN bnn, dataset ds ) {
     while ( !anneal_end(state) ) {
         ++state->iteration;
         ++autosave_counter;
+        ++give_up_counter;
 
         #ifdef ANNEAL_PRINT_DEBUG
             printf("\nIteration: %u\n", state->iteration);
         #endif
 
-        if ( decision == DECISION_ACCEPT ) {
+        if ( decision == DECISION_ACCEPT || give_up_counter >= ITERATIONS_UNTIL_GIVE_UP ) {
             // Compute the energy for the current batch
+            give_up_counter = 0;
             dataset_mark(ds);
             state->energy = compute_energy(bnn, ds, state->batch_size, 
                                            &frac_correct_old, 0);
