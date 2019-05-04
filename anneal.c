@@ -149,13 +149,13 @@ void anneal_init( BNN bnn, struct anneal_state* state, dataset ds ) {
 
     state->energy = INFINITY;
 
-    state->cooling_factor = 0.99999;
-    state->end_temperature = 0.001;
+    state->cooling_factor = 0.9999;
+    state->end_temperature = 0.00000000001;
 
     state->iteration = 1;
 
     // Number of input cases per annealing step
-    state->batch_size = 1000;
+    state->batch_size = 2000;
 
     // Prevent retardation
     if ( state->batch_size > dataset_num_cases(ds) ) {
@@ -219,6 +219,8 @@ void anneal( BNN bnn, dataset ds ) {
     struct perturb_list *perturbation = NULL;
     enum anneal_decision decision = DECISION_ACCEPT;
 
+    enum anneal_param param_to_perturb = PARAM_WEIGHT;
+
     double frac_correct_old = 0;
     double frac_correct_new = 0;
 
@@ -230,6 +232,7 @@ void anneal( BNN bnn, dataset ds ) {
     strcat(autosave_filename, ".autosave");
 
     anneal_init( bnn, state, ds );
+
 
     // TODO potentially implement annealing resets
 
@@ -251,7 +254,11 @@ void anneal( BNN bnn, dataset ds ) {
 
         // Select a perturbation, compute it's energy, then decide 
         // whether to accept it
-        perturbation = anneal_perturb( bnn, state, 1, 1 );
+        if ( param_to_perturb == PARAM_BIAS ) {
+            perturbation = anneal_perturb( bnn, state, 0, 1 );
+        } else {
+            perturbation = anneal_perturb( bnn, state, 1, 0 );
+        }
 
         energy = compute_energy(bnn, ds, state->batch_size, &frac_correct_new, 0);
 
@@ -277,6 +284,13 @@ void anneal( BNN bnn, dataset ds ) {
         perturb_list_free(perturbation);
 
         anneal_cool(state);
+
+        // Alternate the parameter to perturb
+        if ( param_to_perturb == PARAM_WEIGHT ) {
+            param_to_perturb = PARAM_BIAS;
+        } else {
+            param_to_perturb = PARAM_WEIGHT;
+        }
 
         // Periodically autosave the bnn
         if ( autosave_counter >= ITERATIONS_PER_AUTOSAVE ) {
