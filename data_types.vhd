@@ -15,6 +15,8 @@ package data_types is
     constant buffer_size      : integer := 16; -- must equal bit_width
     constant num_units        : integer := 8; -- must be a multiple of buffer_size
     constant num_layers       : natural := 4;
+    constant ram_width        : natural := weight_ram_size/num_units;
+
     
     subtype word is std_logic_vector(bit_width-1 downto 0);
     subtype out_word is std_logic_vector(output_width-1 downto 0);

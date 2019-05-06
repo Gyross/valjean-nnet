@@ -51,6 +51,7 @@ architecture arch_imp of bnn_ip is
     --Weight Ram Signals
     signal wram_we : std_logic; 
     signal wram_ai : natural;
+    signal wram_ri : natural;
     signal wram_ao : natural;
     signal wram_di : word;
     signal wram_do : data_array;
@@ -131,6 +132,7 @@ begin
         clk => s00_axi_aclk,
         we  => wram_we,
         ai  => wram_ai,
+        ri  => wram_ri,
         ao  => wram_ao,
         di  => wram_di,
         do  => wram_do
@@ -173,6 +175,7 @@ begin
         S_AXI_RVALID  => s00_axi_rvalid,
         S_AXI_RREADY  => s00_axi_rready,
         wram_addr     => wram_ai,
+        wram_ram      => wram_ri,
         wram_data     => wram_di,
         wram_en       => wram_we,
         oreg_addr     => oreg_ao,

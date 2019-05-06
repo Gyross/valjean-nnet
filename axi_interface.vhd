@@ -74,6 +74,7 @@ entity axi_interface is
         
         -- WRAM ports
         wram_addr : out natural;
+        wram_ram  : out natural;
         wram_data : out word;
         wram_en   : out std_logic;
         
@@ -120,6 +121,7 @@ architecture arch_imp of axi_interface is
     signal state, state_next : AXI_state;
     signal oreg_count        : natural := 0;
     signal wram_count        : natural := 0;
+    signal wram_ram_count    : natural := 0;
 
     signal axi_write_valid : std_logic;
 
@@ -139,6 +141,8 @@ begin
     axi_araddr <= to_integer(unsigned(S_AXI_ARADDR));
 
     axi_write_valid <= '1' when S_AXI_AWVALID = '1' and S_AXI_WVALID = '1';
+
+    wram_ram <= wram_ram_count;
 
     -- Implement axi_awready generation
     -- axi_awready is asserted for one S_AXI_ACLK clock cycle when both
@@ -303,8 +307,14 @@ begin
        if rising_edge(S_AXI_ACLK) then
            if S_AXI_ARESETN = '0' or state /= NOP then
                wram_count <= 0;
+               wram_ram_count <= 0;
            elsif axi_wready = '1' and axi_awaddr = 0 then
-               wram_count <= wram_count + 1;
+               if wram_count = ram_width -1 then
+                   wram_count <= 0;
+                   wram_ram_count <= wram_ram_count + 1;
+               else
+                   wram_count <= wram_count + 1;
+               end if;
            end if;
        end if;
     end process;
