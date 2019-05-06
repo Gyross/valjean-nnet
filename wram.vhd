@@ -16,16 +16,20 @@ end wram;
 
 architecture syn of wram is
 
-     type ram_type is array (0 to weight_ram_size-1) of word;
-     signal ram : ram_type := (OTHERS => (OTHERS => '0'));
+    constant ram_width : natural := weight_ram_size/num_units;
+
+    type ram_unit is array (0 to ram_width-1) of word;
+    type ram_t is array (0 to num_units-1) of ram_unit;
+
+    signal ram : ram_t := (others => (others => (others => '0')));
 
 begin
 
     process(clk)
     begin
-        if clk'event and clk = '1' then
+        if rising_edge(clk) then
             if we = '1' then -- write enable
-                ram(ai) <= di;
+                ram(ai/ram_width)(ai%ram_width) <= di;
             end if;
         end if;
     end process;
@@ -33,7 +37,7 @@ begin
     process (ram, ao)
     begin
         for i in 0 to num_units-1 loop
-            do(i) <= ram(ao(i));
+            do(i) <= ram(i)(ao);
         end loop;
     end process;
      
