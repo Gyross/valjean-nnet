@@ -7,7 +7,7 @@ entity wram is
         clk : in  std_logic;
         we  : in  std_logic;
         ai  : in  natural;
-        ao  : in  w_addr_array;
+        ao  : in  natural;
         di  : in  word;
         do  : out data_array
     );
@@ -16,7 +16,7 @@ end wram;
 
 architecture syn of wram is
 
-    constant ram_width : natural := weight_ram_size/num_units;
+    constant ram_width : natural := (weight_ram_size+num_units-1)/num_units;
 
     type ram_unit is array (0 to ram_width-1) of word;
     type ram_t is array (0 to num_units-1) of ram_unit;
@@ -29,7 +29,7 @@ begin
     begin
         if rising_edge(clk) then
             if we = '1' then -- write enable
-                ram(ai/ram_width)(ai%ram_width) <= di;
+                ram(ai/ram_width)(ai mod ram_width) <= di;
             end if;
         end if;
     end process;

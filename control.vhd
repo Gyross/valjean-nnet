@@ -8,7 +8,7 @@ entity control is
         clk        : in  std_logic;
         reset      : in  std_logic;
         ctrl_state : in  AXI_state;
-        wram_ao    : out w_addr_array;
+        wram_ao    : out natural;
         bb_ai      : out natural; -- done
         oreg_we    : out std_logic; -- done
         oreg_ai    : out natural; -- done
@@ -30,6 +30,7 @@ architecture Behavioral of control is
         step      : natural;
         layer     : natural;
         bb_ai     : natural;
+        bb_ai_reg : natural;
         oreg_ai   : natural;
         oreg_done : std_logic;
     end record;
@@ -39,6 +40,7 @@ architecture Behavioral of control is
                           step => 0,
                           layer => 0,
                           bb_ai => 0,
+                          bb_ai_reg => 0,
                           oreg_ai => 0,
                           oreg_done => '0');
 
@@ -67,8 +69,10 @@ begin
         bioram_ao <= r.bioram_ao;
         oreg_done <= r.oreg_done;
         oreg_ai <= r.oreg_ai;
-        bb_ai <= r.bb_ai;
+        bb_ai <= r.bb_ai_reg;
+        wram_ao <= r.step;
 
+        qv.bb_ai_reg := r.bb_ai;
 
         if (ctrl_state = NOP or ctrl_state = READ) then
 
@@ -88,14 +92,13 @@ begin
             acc_en <= '1';
             acc_reset <= '0';
             bioram_ai <= r.bioram_ai;
+            qv.step := r.step + 1;
             
             -- calculate next outputs from IORAM and weights:
             if r.bioram_ao = LAYER_LAST_IDX(r.layer) then
-                qv.step := r.step + (num_units-1) * LAYER_WORD_SIZES(r.layer)+1;
-                acc_reset <= '1';
                 -- we've either just finished an output, or
                 -- we've finished an entire layer
-                if qv.step =  LAYER_LAST_IDX(r.layer) then
+                if r.step =  LAYER_LAST_IDX(r.layer) then
                     qv.layer := r.layer+1;
                     if r.layer+1 < num_layers-1 then
                         qv.bioram_ao := LAYER_FIRST_IDX(r.layer + 1);
@@ -105,12 +108,12 @@ begin
                 end if;
             else
                 qv.bioram_ao := r.bioram_ao + 1;
-                qv.step := r.step + 1;
             end if;
             
             -- calculate the buffer and input to IO ram, and output:
             -- NOTE: buffer is one clock cycle behind.
             if r.bioram_ao = LAYER_FIRST_IDX(r.layer) and r.step > 0 then
+                acc_reset <= '1';
                 if r.bb_ai < buffer_size - num_units then
                     qv.bb_ai := r.bb_ai + num_units;
                 else
@@ -132,9 +135,6 @@ begin
         end if;
         
         q <= qv;
-        for i in 0 to num_units-1 loop
-            wram_ao(i) <= r.step + i * LAYER_WORD_SIZES(r.layer) ;
-        end loop;
     end process;
     
     
