@@ -98,7 +98,7 @@ begin
             if r.bioram_ao = LAYER_LAST_IDX(r.layer) then
                 -- we've either just finished an output, or
                 -- we've finished an entire layer
-                if r.step =  LAYER_LAST_IDX(r.layer) then
+                if r.step =  WEIGHT_LAST_IDX(r.layer) then
                     qv.layer := r.layer+1;
                     if r.layer+1 < num_layers-1 then
                         qv.bioram_ao := LAYER_FIRST_IDX(r.layer + 1);
