@@ -22,5 +22,8 @@ void matrix_mult(
 void binarise(BNN_bin input[BIN_VEC_SIZE], const BNN_real output[NODE_MAX], BNNS out_size);
 void clamp(BNN_real output[NODE_MAX], BNNS n_outputs, BNNS max);
 
+void send_weights(volatile uint32_t* a, BNN bnn);
+void send_inputs(volatile uint32_t* a, BNN_bin input[BIN_VEC_SIZE], BNNS input_size);
+void read_outputs(volatile uint32_t* a, BNN_real output[NODE_MAX], BNNS output_size);
 
 #endif //VALJEAN_NNET_BINARISED_FP_H
