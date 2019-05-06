@@ -284,9 +284,6 @@ begin
             s00_axi_awvalid  <= '0';
             s00_axi_wvalid   <= '0';
             s00_axi_awaddr   <= X"deadbeef";
-            axi_clock(1);
-            axi_readld(X"00000002", X"00000000", "ignore error");
-            axi_clock(200);
             axi_readlc(X"00000002", X"00000000", "ignore error");
             axi_readlc(X"00000002", X"00000000", "ignore error");
             axi_readlc(X"00000002", X"00000000", "ignore error");
