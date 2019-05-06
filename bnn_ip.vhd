@@ -51,7 +51,7 @@ architecture arch_imp of bnn_ip is
     --Weight Ram Signals
     signal wram_we : std_logic; 
     signal wram_ai : natural;
-    signal wram_ao : w_addr_array;
+    signal wram_ao : natural;
     signal wram_di : word;
     signal wram_do : data_array;
     
@@ -65,7 +65,7 @@ architecture arch_imp of bnn_ip is
     --Vecmult unit signals
     signal vm_do     : output_array;
     signal vm_input  : word;
-    signal vm_weight : word;
+    signal vm_weight : data_array;
     signal acc_en, acc_reset : std_logic;
     
     --Binarised buffer signals
@@ -90,14 +90,14 @@ begin
             reset  => acc_reset,
             enable => acc_en,
             input  => vm_input,
-            weight => vm_weight,
+            weight => vm_weight(i),
             bits   => (OTHERS => '1'),
             bias   => 0,
             output => vm_do(i)
         );
         -- input map
-        vm_weight <= wram_do(i);
-        vm_input  <= bioram_do;
+        vm_weight(i) <= wram_do(i);
+        vm_input     <= bioram_do;
         -- output map
         bb_di(i) <= vm_do(i)(15);
         oreg_di  <= vm_do;
