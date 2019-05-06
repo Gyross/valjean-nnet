@@ -6,7 +6,7 @@ package data_types is
     constant bit_width        : integer := 16;
     constant output_width     : integer := 16;
     constant io_ram_size      : integer := 55;
-    constant weight_ram_size  : integer := 1652;
+    constant weight_ram_size  : integer := 1664;
     constant output_ram_size  : integer := 10;
     constant io_addr_size     : integer := 6;
     constant output_addr_size : integer := 4;
@@ -30,10 +30,9 @@ package data_types is
 
     constant LAYER_SIZES      : LAYER_INFO := ( 784,   32,   32, 10);
     constant LAYER_WORD_SIZES        : LAYER_INFO := (  49,    2,    2,  1);
-    constant LAYER_LAST_IDX   : LAYER_INFO := (  48,   50,   52, 54);
+    constant LAYER_LAST_IDX   : LAYER_INFO := (  48,   50,   52, 53);
     constant LAYER_FIRST_IDX  : LAYER_INFO := (   0,   49,   51, 53);
-    constant WEIGHT_LAST_IDX  : LAYER_INFO := (1567, 1631, 1651,  0);
-    constant WEIGHT_FIRST_IDX : LAYER_INFO := (   0, 1568, 1632,  0);
+    constant WEIGHT_LAST_IDX  : LAYER_INFO := (195, 203, 207,  0);
     
     type AXI_state is (NOP, BIO, CALC, READ);
     
