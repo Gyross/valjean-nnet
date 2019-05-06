@@ -69,10 +69,10 @@ begin
         bioram_ao <= r.bioram_ao;
         oreg_done <= r.oreg_done;
         oreg_ai <= r.oreg_ai;
-        bb_ai <= r.bb_ai_reg;
+        bb_ai <= r.bb_ai;
         wram_ao <= r.step;
 
-        qv.bb_ai_reg := r.bb_ai;
+        --qv.bb_ai_reg := r.bb_ai;
 
         if (ctrl_state = NOP or ctrl_state = READ) then
 
@@ -92,7 +92,9 @@ begin
             acc_en <= '1';
             acc_reset <= '0';
             bioram_ai <= r.bioram_ai;
-            qv.step := r.step + 1;
+            if (r.step < WEIGHT_LAST_IDX(num_layers-2)) then
+                qv.step := r.step + 1;
+            end if;
             
             -- calculate next outputs from IORAM and weights:
             if r.bioram_ao = LAYER_LAST_IDX(r.layer) then
@@ -100,7 +102,7 @@ begin
                 -- we've finished an entire layer
                 if r.step =  WEIGHT_LAST_IDX(r.layer) then
                     qv.layer := r.layer+1;
-                    if r.layer+1 < num_layers-1 then
+                    if r.layer+1 < num_layers then
                         qv.bioram_ao := LAYER_FIRST_IDX(r.layer + 1);
                     end if;
                 else
@@ -121,17 +123,14 @@ begin
                     qv.bioram_ai := r.bioram_ai + 1;
                     bioram_we <= '1';
                 end if;
-                if r.layer = num_layers-2 then
+                if r.bioram_ai = LAYER_LAST_IDX(num_layers-1) then
                     oreg_we <= '1';
                     qv.oreg_ai := qv.bb_ai;
+                    if qv.layer = num_layers-1 then
+                        qv.oreg_done := '1';
+                    end if;
                 end if;
             end if;
-            
-            if qv.layer = num_layers-1 then
-                qv.oreg_done := '1';
-            end if;
-                
-            
         end if;
         
         q <= qv;
