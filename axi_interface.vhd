@@ -252,7 +252,7 @@ begin
                 axi_rvalid <= '0';
                 axi_rresp  <= "00";
             else
-                if (S_AXI_RREADY = '1' and axi_rvalid = '0' and state = READ) then
+                if (S_AXI_RREADY = '1' and state = READ and axi_arready = '1') then
                     -- Valid read data is available at the read data bus
                     axi_rvalid <= '1';
                     axi_rresp  <= "00"; -- 'OKAY' response
@@ -280,11 +280,11 @@ begin
         state_next <= state;
         case state is
         when NOP =>
-            if axi_awaddr = 1 and S_AXI_AWVALID = '1' then
+            if axi_awaddr = 4 and S_AXI_AWVALID = '1' then
                 state_next <= BIO;
             end if;
         when BIO =>
-            if axi_araddr = 2 and S_AXI_ARVALID = '1' then
+            if axi_araddr = 8 and S_AXI_ARVALID = '1' then
                 state_next <= CALC;
             end if;
         when CALC =>
@@ -294,7 +294,7 @@ begin
         when READ =>
             if  axi_awaddr = 0 and S_AXI_AWVALID = '1' then
                 state_next <= NOP;
-            elsif axi_awaddr = 1 and S_AXI_AWVALID = '1' then
+            elsif axi_awaddr = 4 and S_AXI_AWVALID = '1' then
                 state_next <= BIO;
             end if;
         end case;
@@ -323,7 +323,7 @@ begin
     wram_data <= S_AXI_WDATA(bit_width-1 downto 0);
     
     -- bioram
-    bioram_en   <= '1' when axi_wready = '1' and axi_awaddr = 1 else '0';
+    bioram_en   <= '1' when axi_wready = '1' and axi_awaddr = 4 else '0';
     bioram_data <= S_AXI_WDATA(bit_width-1 downto 0);
 
     -- oreg
