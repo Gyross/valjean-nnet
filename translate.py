@@ -4,7 +4,7 @@ import numpy as np
 import ctypes
 
 def main():
-    weights = np.load('weights.npz', allow_pickle=True)
+    weights = np.load('weights.p', allow_pickle=True)
 
     layers = ctypes.c_uint32(len(weights) + 1)
     sizes = (ctypes.c_uint32 * (len(weights) + 1))()
