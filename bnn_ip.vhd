@@ -99,7 +99,7 @@ begin
         vm_weight(i) <= wram_do(i);
         vm_input     <= bioram_do;
         -- output map
-        bb_di(i) <= vm_do(i)(15);
+        bb_di(i) <= not vm_do(i)(15);
         oreg_di  <= vm_do;
     end generate GEN_VM_UNIT;
      
