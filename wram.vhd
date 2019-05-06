@@ -17,7 +17,7 @@ end wram;
 architecture syn of wram is
 
      type ram_type is array (0 to weight_ram_size-1) of word;
-     signal ram : ram_type;
+     signal ram : ram_type := (OTHERS => (OTHERS => '0'));
 
 begin
 

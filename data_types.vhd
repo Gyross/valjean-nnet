@@ -14,6 +14,7 @@ package data_types is
     constant weight_addr_size : integer := 11;
     constant buffer_size      : integer := 16; -- must equal bit_width
     constant num_units        : integer := 8; -- must be a multiple of buffer_size
+    constant num_layers       : natural := 4;
     
     subtype word is std_logic_vector(bit_width-1 downto 0);
     subtype out_word is std_logic_vector(output_width-1 downto 0);
@@ -25,10 +26,10 @@ package data_types is
     
     type out_regs is array (0 to 15) of out_word;
     
-    TYPE LAYER_INFO is array (0 to 3) of integer range 0 to 1700;
+    TYPE LAYER_INFO is array (0 to num_layers-1) of integer range 0 to 1700;
 
     constant LAYER_SIZES      : LAYER_INFO := ( 784,   32,   32, 10);
-    constant LAYER_HWS        : LAYER_INFO := (  49,    2,    2,  1);
+    constant LAYER_WORD_SIZES        : LAYER_INFO := (  49,    2,    2,  1);
     constant LAYER_LAST_IDX   : LAYER_INFO := (  48,   50,   52, 54);
     constant LAYER_FIRST_IDX  : LAYER_INFO := (   0,   49,   51, 53);
     constant WEIGHT_LAST_IDX  : LAYER_INFO := (1567, 1631, 1651,  0);

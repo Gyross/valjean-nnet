@@ -76,9 +76,13 @@ architecture arch_imp of bnn_ip is
     -- CTRL unit ports
     signal oreg_done   : std_logic; -- alias ctrl_OV
     signal ctrl_state  : AXI_state;
+    
+    signal reset : std_logic := '0';
 
-begin                   
-                    
+begin           
+    
+    reset <= not s00_axi_aresetn;
+                        
     GEN_VM_UNIT: for i in 0 to num_units-1 generate
         vecmult_inst : entity work.vecmult
         port map (
@@ -182,7 +186,7 @@ begin
     control_module : entity work.control
     port map(
         clk        => s00_axi_aclk,
-        reset      => not s00_axi_aresetn,
+        reset      => reset,
         ctrl_state => ctrl_state,
         wram_ao    => wram_ao,
         bb_ai      => bb_ai,
