@@ -11,47 +11,62 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#define NUM_SEG 10
-#define NUM_UNIT 8
-#define FINAL_OUT_LAYER 10
-
-#define MMAP_LENGTH 0x1000
-
-volatile uint32_t* a;
-volatile int fd;
-
-void forward_pass_setup(BNN bnn) {
-    // Initialize AXI-lite communication
-    fd = open("/dev/mem", O_RDWR);
-    a = mmap(NULL, MMAP_LENGTH, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0x43C00000);
-
-    send_weights(a, bnn);
-}
-
-void forward_pass_cleanup(void) {
-    munmap(a, MMAP_LENGTH);
-    close(fd);
+BNNS packed_ls(BNN bnn, BNNS layer) {
+    return CEIL_DIV(bnn->layer_sizes[layer], SIZE(BNN_bin));
 }
 
 void forward_pass(BNN bnn) {
 
-    //clock_t begin = clock();
+    for ( BNNS i = 0; i < bnn->layers-1; i++ ) { // for each layer
+        BNNS inp_size = packed_ls(bnn, i);
+        BNNS out_size = bnn->layer_sizes[i+1];
 
-    send_inputs(a, bnn->b_activations[0], packed_ls(bnn, 0));
+        matrix_mult(
+            bnn->b_activations[i], bnn->activations_true[i+1], inp_size, out_size, bnn->weight[i],
+            bnn->layer_sizes[i] % SIZE(BNN_bin), bnn->bias[i]
+        );
 
-    read_outputs(a, bnn->activations_true[bnn->layers-1], bnn->layer_sizes[bnn->layers-1]);
+#ifdef DEBUG_FP
+        for (int j = 0; j < out_size; j++) {
+            printf("%f ", bnn->activations_true[i+1][j]);
+        }
+        printf("DONE\n");
+#endif
 
-    //clock_t end = clock();
-    //double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    //printf("Time: %lf\n", time_spent);
+        if (i != bnn->layers-2) {
+            binarise(bnn->b_activations[i+1], bnn->activations_true[i+1], out_size);
+        } else {
+            /*for(BNNS j = 0; j < bnn->layer_sizes[bnn->layers-2]; j++) {
+                printf("%f\n", bnn->activations_true[i+1][j]);
+            }*/
+            //clamp(bnn->activations_true[i+1], bnn->layer_sizes[bnn->layers-1], bnn->layer_sizes[bnn->layers-2]);
+        }
 
+#ifdef DEBUG_FP
+        printf("POST CLAMP/BINARISATION\n");
+        for (int j = 0; j < CEIL_DIV(out_size, SIZE(BNN_bin)); j++) {
+            printf("%f ", bnn->bias[i-1][j]);
+        }
+        printf("\n");
+#endif
+    }
 }
+
 
 void fp_wrapper( BNN bnn, INPT* input_vec, BNN_real* output_vec ) { 
 
+    // Clear activations fields
+    memset(bnn->activations_true, 0, NODE_MAX * LAYER_MAX * sizeof(BNN_real));
+    memset(bnn->b_activations, 0, BIN_VEC_SIZE * LAYER_MAX * sizeof(BNN_bin));
+    
     // Binarize inputs & put in b_activations
     binarise_input(input_vec, bnn->b_activations[0], bnn->bias[0], bnn->layer_sizes[0]);
     
+    // Copy raw inputs into activations_true
+    for(BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
+        bnn->activations_true[0][i] = (BNN_real)(input_vec[i]);
+    }
+
     #ifdef DEBUG_IPT
         printf("nbinput:\n");
         for (BNNS i = 0; i < bnn->layer_sizes[0]; i++) {
@@ -72,71 +87,11 @@ void fp_wrapper( BNN bnn, INPT* input_vec, BNN_real* output_vec ) {
            sizeof(BNN_real) * bnn->layer_sizes[bnn->layers-1]);
 }
 
-void send_weights(volatile uint32_t* a, BNN bnn) {
-    int count = 0;
-
-    int segments[NUM_SEG] = {0, 8, 16, 24, 0, 8, 16, 24, 0, 8};
-    int layers[NUM_SEG]   = {0, 0,  0,  0, 1, 1,  1,  1, 2, 2};
-
-    for (int unit = 0; unit < NUM_UNIT; unit++) {
-	for (int seg = 0; seg < NUM_SEG; seg++) {    
-    
-            BNNS input_size = packed_ls(bnn, layers[seg]);
-	    
-	    // send row of inputs at location 'seg'
-	    for (int in = 0; in < input_size; in++) {
-		BNN_bin weight;
-		if (layers[seg] == 2 && segments[seg]+unit >= FINAL_OUT_LAYER) {
-		    weight = 0;
-		} else {
-		    weight = bnn->weight[layers[seg]][segments[seg]+unit][in];
-		}
-
-		a[0] = weight & 0x0000FFFF;
-	        count++;
-		if (in != 24) {
-		    a[0] = (weight >> 16) & 0x0000FFFF;
-		    count++;
-		}
-	    }
-	}
-    }    
-    //printf("weight_count=%d\n", count);        
-}
-
-
-void send_inputs(volatile uint32_t* a, BNN_bin input[BIN_VEC_SIZE], BNNS input_size) {
-
-    for (int i = 0; i < input_size; i++) {
-        a[1] = input[i] & 0xFFFF;    
-        if (i < input_size-1)
-            a[1] = (input[i] >> 16) & 0xFFFF;    
-    }
-}
-
-
-void read_outputs(volatile uint32_t* a, BNN_real output[NODE_MAX], BNNS output_size) {
-        
-    for (int i = 0; i < output_size; i++) {
-        uint32_t out = a[2];        
-        if (out & 0x8000) out = out | 0xFFFF0000;
-        output[i] = *((int32_t *)(&out));
-    }
-
-}
-
-
-
-BNNS packed_ls(BNN bnn, BNNS layer) {
-    return CEIL_DIV(bnn->layer_sizes[layer], SIZE(BNN_bin));
-}
 
 void matrix_mult(
     BNN_bin input[BIN_VEC_SIZE], BNN_real output[NODE_MAX], BNNS inp_size, BNNS out_size,
     BNN_bin weights[NODE_MAX][BIN_VEC_SIZE], BNNS last_trunc, BNN_real bias[NODE_MAX]
 ) {
-
-
     
     BNNS k, j;
     for ( j = 0; j < out_size; j++ ) { // for each output node

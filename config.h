@@ -18,6 +18,7 @@
 //#define TESTING_BP 114
 //#define BIT_COUNT 3
 //#define DATASET_TEST 83
-//#define STOCHASTIC_BINARISE
+#define STOCHASTIC_BINARISE
+//#define HW_ACCELERATE
 
 #endif /* config_h */

@@ -7,6 +7,7 @@
 #include "xorgens.h"
 #include "bnn.h"
 #include "binarised_fp.h"
+#include "axi_fp.h"
 #include "binarised_bp.h"
 #include "error_handling.h"
 #include "mnist_int8_input.h"
@@ -189,18 +190,20 @@ void bnn_print(BNN bnn) {
 int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
     // Skip operation and go straight to annealing
-    // TODO clean up te implementation of this
     if ( op_type == ANNEAL ) {
-        forward_pass_setup(bnn);
         anneal(bnn, ds);
-        forward_pass_cleanup();
         return 0;
     }
 
-    MSG("Successfully completed operation.");
 
-    // Setup weights on board
-    forward_pass_setup(bnn);
+    #ifdef HW_ACCELERATE
+        if ( op_type == TEST ) {
+            axi_fp_setup(bnn);
+        }
+    #endif
+
+
+    MSG("Successfully completed operation.");
 
     int read_code;
     LBLT label = 0;
@@ -236,9 +239,24 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
         convert_label(label, expected_vec, n_outputs);
         
-        fp_wrapper( bnn, nb_input, out_activations );
+        #ifdef HW_ACCELERATE
+            if ( op_type == TEST ) {
+                axi_fp_wrapper( bnn, nb_input, out_activations );
+            } else {
+                fp_wrapper( bnn, nb_input, out_activations );
+            }
+        #else
+            fp_wrapper( bnn, nb_input, out_activations );
+        #endif
 
-        total_correct += print_output(expected_vec, out_activations, n_outputs);
+        if ( op_type == TRAIN ) {
+			// hard code learning rate to 0.001
+            back_pass(bnn, expected_vec, 0.001);
+            total_correct += print_output(expected_vec, out_activations, n_outputs);
+        }
+        else if ( op_type == TEST ) {
+            total_correct += print_output(expected_vec, out_activations, n_outputs);
+        }
 
         total_cost += cost_func( out_activations, 
                                  expected_vec, 
@@ -257,7 +275,12 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     print_statistics(total_cost, n_cases);
 
 error1:
-    forward_pass_cleanup();
+    #ifdef HW_ACCELERATE
+        if ( op_type == TEST ) {
+            axi_fp_cleanup();
+        }
+    #endif
+
     RETURN;
 }
 
