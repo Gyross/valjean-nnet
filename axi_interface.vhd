@@ -332,7 +332,7 @@ begin
         if rising_edge(S_AXI_ACLK) then
             if S_AXI_ARESETN = '0' or oreg_done = '1' then
                 oreg_count <= 0;
-            elsif axi_arready = '1' and state = READ then
+            elsif axi_rvalid = '1' and state = READ then
                 oreg_count <= oreg_count + 1;
             end if;
         end if;

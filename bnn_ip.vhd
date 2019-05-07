@@ -81,7 +81,7 @@ architecture arch_imp of bnn_ip is
     signal reset : std_logic := '0';
 
 begin           
-    
+
     reset <= not s00_axi_aresetn;
                         
     GEN_VM_UNIT: for i in 0 to num_units-1 generate
