@@ -15,15 +15,22 @@
 #define NUM_UNIT 8
 #define FINAL_OUT_LAYER 10
 
+#define MMAP_LENGTH 0x1000
+
 volatile uint32_t* a;
+volatile int fd;
 
 void forward_pass_setup(BNN bnn) {
     // Initialize AXI-lite communication
-    int fd;
     fd = open("/dev/mem", O_RDWR);
-    a = mmap(NULL, 0x1000, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0x43C00000);
+    a = mmap(NULL, MMAP_LENGTH, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0x43C00000);
 
     send_weights(a, bnn);
+}
+
+void forward_pass_cleanup(void) {
+    unmap(a, MMAP_LENGTH);
+    close(fd);
 }
 
 void forward_pass(BNN bnn) {

@@ -191,7 +191,9 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     // Skip operation and go straight to annealing
     // TODO clean up te implementation of this
     if ( op_type == ANNEAL ) {
+        forward_pass_setup(bnn);
         anneal(bnn, ds);
+        forward_pass_cleanup();
         return 0;
     }
 
@@ -255,6 +257,7 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
     print_statistics(total_cost, n_cases);
 
 error1:
+    forward_pass_cleanup();
     RETURN;
 }
 
