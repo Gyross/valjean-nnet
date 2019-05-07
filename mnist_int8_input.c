@@ -1,5 +1,6 @@
 #include "mnist_int8_input.h"
 #include "xorgens.h"
+#include "config.h"
 
 #define MIN -128
 #define MAX 127
