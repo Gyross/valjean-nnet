@@ -18,7 +18,11 @@
 //#define TESTING_BP 114
 //#define BIT_COUNT 3
 //#define DATASET_TEST 83
+
+// If set the inputs will be stochastically binarised
 #define STOCHASTIC_BINARISE
-//#define HW_ACCELERATE
+
+// If set, the test operation will use hardware forward pass
+#define HW_ACCELERATE
 
 #endif /* config_h */
