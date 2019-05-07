@@ -29,7 +29,7 @@ void forward_pass_setup(BNN bnn) {
 }
 
 void forward_pass_cleanup(void) {
-    unmap(a, MMAP_LENGTH);
+    munmap(a, MMAP_LENGTH);
     close(fd);
 }
 
