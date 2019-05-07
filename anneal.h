@@ -53,7 +53,9 @@ struct anneal_state {
 
 void anneal( BNN bnn, dataset ds );
 void anneal_init( BNN bnn, struct anneal_state* state, dataset ds );
-struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* state );
+struct perturb_list* anneal_perturb( BNN bnn, struct anneal_state* state,
+                                     uint32_t n_perturb_weights,
+                                     uint32_t n_perturb_biases );
 void anneal_revert( BNN bnn, struct perturb_list* p );
 enum anneal_decision anneal_decide( struct anneal_state* state, double new_energy );
 void anneal_cool( struct anneal_state* state );
