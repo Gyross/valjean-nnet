@@ -5,6 +5,7 @@
 #include "mnist_int8_input.h"
 
 void forward_pass(BNN bnn);
+void forward_pass_setup(BNN bnn);
 
 void fp_wrapper(BNN bnn, INPT* input_vec, BNN_real* output_vec);
 

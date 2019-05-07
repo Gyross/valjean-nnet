@@ -197,6 +197,9 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
     MSG("Successfully completed operation.");
 
+    // Setup weights on board
+    forward_pass_setup(bnn);
+
     int read_code;
     LBLT label = 0;
     BNN_real expected_vec[NODE_MAX];
@@ -227,25 +230,13 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
 
     // While there are input cases left in the dataset
     while( 1 == (read_code = dataset_read( ds, nb_input, &label )) ) {
+	//read_code = dataset_read( ds, nb_input, &label );
 
         convert_label(label, expected_vec, n_outputs);
         
-#ifdef DEBUG_OPT
-        printf("PRINTING EXPECTED OUTPUT\n");
-        for (BNNS i = 0; i < n_outputs; i++) {
-            printf("%f\n", expected_vec[i]);
-        }
-#endif
         fp_wrapper( bnn, nb_input, out_activations );
 
-        if ( op_type == TRAIN ) {
-			// hard code learning rate to 0.001
-            back_pass(bnn, expected_vec, 0.001);
-            total_correct += print_output(expected_vec, out_activations, n_outputs);
-        }
-        else if ( op_type == TEST ) {
-            total_correct += print_output(expected_vec, out_activations, n_outputs);
-        }
+        total_correct += print_output(expected_vec, out_activations, n_outputs);
 
         total_cost += cost_func( out_activations, 
                                  expected_vec, 
@@ -253,6 +244,7 @@ int bnn_op(BNN bnn, dataset ds, op_t op_type) {
                                  bnn->layer_sizes[bnn->layers-2] );
 
         n_cases++;
+
         printf("Running average: %f\n", 100 * total_correct/(float) n_cases);
     }
 
@@ -294,7 +286,7 @@ static float print_output(
         return (0.5);
     }
     printf("PREDICT: %d\n", predicted_cat);
-    printf("%d\n", predicted_cat==expected_category ? 1 : 0);
+    //printf("%d\n", predicted_cat==expected_category ? 1 : 0);
     return (predicted_cat==expected_category ? 1 : 0);
 
 }

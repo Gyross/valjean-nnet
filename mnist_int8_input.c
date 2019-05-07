@@ -18,9 +18,12 @@ void binarise_input(INPT input[NODE_MAX], BNN_bin output[BIN_VEC_SIZE], BNN_real
 }
 
 BNN_bin stochastic_binarise(int val) {
+/*
     int decider = (xor4096i(0) % (MAX - MIN)) + MIN;
     int ret = val >= decider ? 1 : 0;
     return (BNN_bin)ret;
+*/
+	return val >= 0 ? 1 : 0;
 }
 
 void convert_label( LBLT label, BNN_real expected[NODE_MAX], BNNS n_outputs ){
