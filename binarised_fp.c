@@ -92,10 +92,10 @@ void send_weights(volatile uint32_t* a, BNN bnn) {
 		    weight = bnn->weight[layers[seg]][segments[seg]+unit][in];
 		}
 
-		a[0] = weight & 0xFFFF;
+		a[0] = weight & 0x0000FFFF;
 	        count++;
 		if (in != 24) {
-		    a[0] = (weight >> 16) & 0xFFFF;
+		    a[0] = (weight >> 16) & 0x0000FFFF;
 		    count++;
 		}
 	    }
