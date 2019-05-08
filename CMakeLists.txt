@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.0)
 project(valjean_nnet)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -7,6 +7,13 @@ add_compile_options("-Wl,--stack,8388608" "-fstack-usage" "-Wall" "-Werror" "-O2
 # For profiling, add "-pg" to compile options and uncomment link option
 #add_link_options("-g")
 #add_compile_definitions("DEBUG")
+
+# Uncomment this option to enable stochastic binarisation of inputs to the network
+#add_compile_definitions("STOCHASTIC_BINARISE")
+
+# Uncomment this option to enable hardware acceleration of forward pass on the Zedboard
+# Hardware acceleration is only used in a "test" operation, it is unused for "train" and "anneal" operations
+#add_compile_definitions("HW_ACCELERATE")
 
 include_directories(.)
 
