@@ -21,6 +21,12 @@ Testing and training datasets & labels for the floating point network:
   * `mnist/test_image_float`
   * `mnist/test_label_float`
 
+You can view the images used for training and testing by running:
+
+`./view_train_images.sh`
+
+`./view_test_images.sh`
+
 ## Compilation Instructions
 
 To compile, run the following commands:
