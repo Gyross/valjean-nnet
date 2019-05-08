@@ -9,17 +9,17 @@ https://www.dropbox.com/s/ed90pf5v3mzzhb3/valjean-mnist.tar.gz?dl=0
 
 Testing and training datasets & labels for the binarised network:
 
-*`mnist/train_image_int8`
-*`mnist/train_label_int8`
-*`mnist/test_image_int8`
-*`mnist/test_label_int8`
+  * `mnist/train_image_int8`
+  * `mnist/train_label_int8`
+  * `mnist/test_image_int8`
+  * `mnist/test_label_int8`
 
 Testing and training datasets & labels for the floating point network:
 
-*`mnist/train_image_float`
-*`mnist/train_label_float`
-*`mnist/test_image_float`
-*`mnist/test_label_float`
+  * `mnist/train_image_float`
+  * `mnist/train_label_float`
+  * `mnist/test_image_float`
+  * `mnist/test_label_float`
 
 ## Compilation Instructions
 
