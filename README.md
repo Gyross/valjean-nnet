@@ -1,11 +1,23 @@
 # valjean-nnet
-Valjean Neural Network
+A binarised neural network with hardware acceleration support for Zedboard.
 
 ## Downloading instructions
 
 Clone the repository, then download the MNIST data files and extract so that the `mnist/` folder is in the top level project directory:
 
 https://www.dropbox.com/s/ed90pf5v3mzzhb3/valjean-mnist.tar.gz?dl=0
+
+Testing and training datasets & labels for the binarised network:
+*`mnist/train_image_int8`
+*`mnist/train_label_int8`
+*`mnist/test_image_int8`
+*`mnist/test_label_int8`
+
+Testing and training datasets & labels for the floating point network:
+*`mnist/train_image_float`
+*`mnist/train_label_float`
+*`mnist/test_image_float`
+*`mnist/test_label_float`
 
 ## Compilation Instructions
 
@@ -66,3 +78,20 @@ For MNIST use:
 `build/nn_main train <network name> mnist/train_image_int8 mnist/train_label_int8`
 
 `build/nn_main anneal <network name> mnist/train_image_int8 mnist/train_label_int8`
+
+
+## Compiling and Using the Floating Point Network
+
+A version of the software for floating point networks is also provided in `floatsrc/`.
+To compile, use:
+
+`(cd floatsrc; make)`
+
+Creating, training and testing networks is done in a similar way to the binarised version,
+but with `floatsrc/nnet` instead of `build/nn_main`:
+
+`floatsrc/nnet new <network name> 784 32 32 10`
+
+`floatsrc/nnet train <network name> mnist/train_image_float mnist/train_label_float`
+
+`floatsrc/nnet test <network name> mnist/test_image_float mnist/test_label_float`
