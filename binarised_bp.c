@@ -4,7 +4,6 @@
 #include <assert.h>
 #include <math.h>
 #include "binarised_bp.h"
-#include "nnet_math.h"
 #include "config.h"
 
 void back_pass(BNN bnn, BNN_real target[NODE_MAX], BNN_real l_r) {
