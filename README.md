@@ -1,59 +1,53 @@
 # valjean-nnet
 Valjean Neural Network
 
-# Instructions for MNIST
+## Downloading instructions
 
-Download the MNIST data files:
+Clone the repository, then download the MNIST data files and extract so that the `mnist/` folder is in the top level project directory:
 
 https://www.dropbox.com/s/ed90pf5v3mzzhb3/valjean-mnist.tar.gz?dl=0
 
-Use a network with 784 inputs and 10 outputs
+## Compilation Instructions
 
-To train:
+To compile, run the following commands:
+`mkdir build`
+`(cd build; cmake ..; make)`
 
-nnet train mynet mnist/train_image_float mnist/train_label_float
+If cmake gives an error like:
+`CMake 3.14 or higher is required.  You are running version 3.6`
+Simply change the version number in the top line of `CMakeLists.txt` to your cmake version.
 
-To test:
+To enable harware acceleration on the Zedboard, open `CMakeLists.txt` and uncomment the line:
+`add_compile_definitions("HW_ACCELERATE")`
 
-nnet test mynet mnist/test_image_float mnist/test_label_float
+To enable stochastic binarisation, open `CMakeLists.txt` and uncomment the line:
+`add_compile_definitions("STOCHASTIC_BINARISE")`
 
+## Creating a New Network
 
-# Instructions For Master Branch
+To create a network with arbitrary sizes, type:
+`build/nn_main new <network name> <input size> <hidden layer sizes>... <output size>`
 
-To compile:
+MNIST requires a network with 784 input nodes and 10 output nodes, so use:
+`build/nn_main new <network name> 784 <hidden layer sizes>... 10`
 
-gcc nnet.c nnet_math.c -lm -o nnet
+Hardware acceleration requires a network with layer sizes (784, 32, 32, 10), so use:
+`build/nn_main new <network name> 784 32 32 10`
 
-To create a neural network:
+## Forward pass on a network
 
-nnet new filename 4 4 4
+Use the command:
+`build/nn_main test <network name> <input data file> <data label file>`
 
-This will create a network with one hidden layer and 4 neurons in each layer
-and store it in the file.
+For MNIST, use:
+`build/nn_main test <network name> mnist/test_image_int8 mnist/test_label_int8`
 
-nnet train nnetfile inputfile
+## Training a Network
 
-Trains the network against the data in inputfile
+Use either:
+`build/nn_main train <network name> <input data file> <data label file>`
+`build/nn_main anneal <network name> <input data file> <data label file>`
 
-nnet test nnetfile inputfile
-
-Tests the network against inputfile
-
-Training set files are binary files with the format:
-- number of inputs (integer)
-- number of outputs (integer)
-- example1
-- example2
-- etc.
-
-where each example consists of the list of inputs (floats) followed by the
-list of expected outputs (floats).
-
-To generate the example training set:
-
-make generator
-
-./generator test_data
-
-then test_data will contain the testing data. Use a neural network
-with 2 inputs and 2 outputs to use this training set.
+For MNIST use:
+`build/nn_main train <network name> mnist/train_image_int8 mnist/train_label_int8`
+`build/nn_main anneal <network name> mnist/train_image_int8 mnist/train_label_int8`
