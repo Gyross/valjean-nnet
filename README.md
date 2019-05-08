@@ -67,6 +67,17 @@ For MNIST, use:
 
 `build/nn_main test <network name> mnist/test_image_int8 mnist/test_label_int8`
 
+## Using the Pre-Trained Network
+
+With `python3` and `numpy` installed, use the command:
+
+`python3 translate.py`
+
+Then the pre-trained network will be stored in `python_bnn`, compatible with MNIST and hardware acceleration.
+Test the network with:
+
+`build/nn_main test python_bnn mnist/test_image_int8 mnist/test_label_int8`
+
 ## Training a Network
 
 Use either:
