@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdint.h>
+#include <string.h>
 #include "mnist_int8_input.h"
 #include "dataset.h"
 
 int main( int argc, char* argv[] ) {
-    INPT image[784];
     dataset ds = NULL;
+    INPT image[784];
+    char gscale[] = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+
+    int gscale_len = strlen(gscale);
+
     assert(argc == 2);
     ds = dataset_create( argv[1], NULL );
 
@@ -16,16 +21,8 @@ int main( int argc, char* argv[] ) {
             if ( i % 28 == 0 ) {
                 printf("\n");
             }
-            
-            if ( image[i] >= 100 ) {
-                printf("#");
-            } else if ( image[i] >= 0 ) {
-                printf("x");
-            } else if ( image[i] >= -100 ) {
-                printf("~");
-            } else {
-                printf(" ");
-            }
+
+            printf("%c", gscale[(gscale_len * (image[i] + 128))/256]);
         }
     }
     
