@@ -49,6 +49,8 @@ To enable stochastic binarisation, open `CMakeLists.txt` and uncomment the line:
 
 `add_compile_definitions("STOCHASTIC_BINARISE")`
 
+After enabling or disabling these options the software must be recompiled.
+
 ## Creating a New Network
 
 To create a network with arbitrary sizes, type:
