@@ -75,6 +75,8 @@ For MNIST, use:
 
 ## Using the Pre-Trained Network
 
+The pretrained network was trained using PyTorch: https://github.com/X4vier/Simple-Binarized-MLP-for-MNIST
+
 With `python3` and `numpy` installed, use the command:
 
 `python3 translate.py`
